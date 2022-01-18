@@ -204,10 +204,10 @@ def calculate_ReferenceCoverage(sequenceDataDir, reference, BWA_path, samtoolsbi
 # reference = 'H1N1pdm_ref.fasta'
 # ## troubleshooting inputs end ##
 
-	print('ref: ',reference)
-	print('read1_filename: ',read1_filename)
-	print('read2_filename: ',read2_filename)
-	print('samplename: ',samplename)
+	# print('ref: ',reference)
+	# print('read1_filename: ',read1_filename)
+	# print('read2_filename: ',read2_filename)
+	# print('samplename: ',samplename)
 
 	## index reference
 	subprocess.run([
@@ -285,8 +285,6 @@ def summarize_ReferenceCoverage(samplename):
 	df_cov = df_cov.sort_values(['segment_count','segment_coverage_average','segment_average_read_depth'], ascending = [False,False,False])
 	df_cov['sample'] = samplename
 	df_cov.to_csv(pjoin('reference_coverage_{}.csv'.format(samplename)), index=False)
-
-	print(df_cov)
 
 
 def summarize_HACoverage(samplename):

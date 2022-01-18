@@ -32,28 +32,41 @@ def run_FluPipeline(args):
 	'''
 	'''
 
-	### INPUTS start ####
-	try:
-		shutil.rmtree('/home/agmcfarland/flu_project/test/test4')
-	except:
-		pass
+	baseDirectory = args.base_directory
+	sequenceDataDir = args.sequence_directory
+	force_base_directory = args.force_base_directory
+	referenceStrainsDir = pjoin(script_path,'references') #hardcoded default
+	softwareDir = os.getcwd()
+	threads = args.threads
+
+	if args.force == True:
+		force_overwrite = args.force
+	else:
+		force_overwrite = False
+
+	### INPUTS start ####'
+	if force_base_directory == True:
+		try:
+			shutil.rmtree(baseDirectory)
+		except:
+			pass
 	# input data
 	# sequenceDataDir = '/home/agmcfarland/flu_project/test/test_data' #'/home/ashley/Fastq' # sequencing data comes from this directory
-	sequenceDataDir = '/home/agmcfarland/flu_project/test/test_data' #'/home/ashley/Fastq' # sequencing data comes from this directory
-	baseDirectory = '/home/agmcfarland/flu_project/test/test4' # all data/directory tree will be saved in this directory
-	referenceStrainsDir = '/home/agmcfarland/flu_project/test/test_data' #directory reference strains to find the best match for a given readset
+	# sequenceDataDir = '/home/agmcfarland/flu_project/test/test_data' #'/home/ashley/Fastq' # sequencing data comes from this directory
+	# baseDirectory = '/home/agmcfarland/flu_project/test/test4' # all data/directory tree will be saved in this directory
+	# referenceStrainsDir = pjoin(script_path,'references') #'/home/agmcfarland/flu_project/test/test_data' #directory reference strains to find the best match for a given readset
 
 	# input scripts
 	Rscript = 'Rscript'#'/home/opt/R-3.4.0/bin/Rscript'
-	softwareDir = '/home/agmcfarland/flu_project/flu_pipeline'
+	# softwareDir = '/home/agmcfarland/flu_project/flu_pipeline'
 
 	#input other
 	pipeline_used = 'snp' #options: snp, phylo
 	process_method = 'bushman_artic_v2'
-	force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
-	BWA_path =  '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
-	samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
-	bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+	#force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
+	BWA_path = subprocess.Popen(['which','bwa'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n','')#'/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
+	samtoolsbin_path = os.path.dirname(subprocess.Popen(['which','samtools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))#'/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
+	bcftoolsbin_path = os.path.dirname(subprocess.Popen(['which','bcftools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))#'/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
 
 	### INPUTS end ####
 
@@ -84,9 +97,6 @@ def run_FluPipeline(args):
 		sample.get_DataFromReadPairs(read1_filename=f)
 		sample.get_SampleDirPath(directory=baseDirectory)
 		sample.check_ReadExistence(directory=sequenceDataDir)
-
-		# if sample.samplename.find('perfect') == -1:
-		# 	continue
 
 		# append sample run parameters to master run list
 		sample_submission.append([
@@ -124,11 +134,10 @@ def run_FluPipeline(args):
 
 
 	## run listed samples through specified worflow
-	with Pool(processes=10) as p:
+	with Pool(processes=threads) as p:
 		df_processed = pd.concat(p.starmap(flu_Pipeline, sample_submission))
 
 
-	print('time to make report!!!!!')
 	run_logger.add_Message('Making run report...')
 	## make run report
 	os.system('{} {}/report_runner.R --softwareDir {} --report_type {} --baseDir {}'.
@@ -141,8 +150,10 @@ def run_FluPipeline(args):
 			))
 	run_logger.add_Message('Finished making run report')
 
-	# gather sample reports
+	# gather sample reports and variant tables
 	[shutil.copy(report, pjoin(baseDirectory,'sampleResults')) for report in glob.glob(pjoin(baseDirectory,'sampleOutputs','*','*.pdf'))]
+	[shutil.copy(report, pjoin(baseDirectory,'sampleResults')) for report in glob.glob(pjoin(baseDirectory,'sampleOutputs','*','variantTable*'))]
+
 
 	## end data processing-------------------------------
 
@@ -165,7 +176,6 @@ def main(args = None):
 	if args is None:
 		args = sys.argv[1:]
 
-	print(args)
 	# create parser
 	# parser = argparse.ArgumentParser(prog='fluPipeline')
 	parser = argparse.ArgumentParser()
@@ -173,8 +183,9 @@ def main(args = None):
 	parser.add_argument('--base_directory',type=str ,default=None, help='directory that run samples will be saved in')
 	parser.add_argument('--reference_directory',type=str ,default=None, help='directory containing reference strain files (.gb format)')
 	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) ')
-	parser.add_argument('--force',type=int, default=False, help='overwrite existing files')
-	parser.add_argument('--threads',type=int, default=None, help='number of processors to use for multiprocessing')
+	parser.add_argument('--force', action='store_true', help='overwrite existing files')
+	parser.add_argument('--force_base_directory', action='store_true', help='overwrite existing directory')
+	parser.add_argument('--threads',type=int, default=4, help='number of processors to use for multiprocessing')
 
 	args = parser.parse_args()
 
