@@ -101,6 +101,20 @@ python fluPipeline.py \
 
 ```
 
+## Output files
+
+Three main folders within the specified base_directory are created and contain the following.
+
+1. sampleOutputs: Each sample read pair (from here on termed a sample) has a folder with the sample's name containing all files created during processing.
+
+2. sampleResults: Each sample report is copied here for quick access.
+
+3. sampleLogs: A record of how the run for each sample went.
+
+
+Each run will produce a **run_summary.pdf**  report summarizing read coverage/depth, strain used as reference per sample, and whether errors occurred and for which samples an error occurred. 
+
+Each run also will ouput a **runStats.csv** file.
 
 
 ## Usage

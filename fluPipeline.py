@@ -150,10 +150,8 @@ def run_FluPipeline(args):
 			))
 	run_logger.add_Message('Finished making run report')
 
-	# gather sample reports and variant tables
+	# gather sample reports
 	[shutil.copy(report, pjoin(baseDirectory,'sampleResults')) for report in glob.glob(pjoin(baseDirectory,'sampleOutputs','*','*.pdf'))]
-	[shutil.copy(report, pjoin(baseDirectory,'sampleResults')) for report in glob.glob(pjoin(baseDirectory,'sampleOutputs','*','variantTable*'))]
-
 
 	## end data processing-------------------------------
 
