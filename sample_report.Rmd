@@ -1,0 +1,210 @@
+---
+fontsize: 12pt
+geometry: margin=0.50in
+subparagraph: yes
+params: 
+    title:
+      value: x
+    date:
+      value: x
+    sampleDir:
+      value: x
+    samplename:
+      value: x
+
+title: "`r params$title`"
+date:  "`r params$date`"
+sampleDir: "`r params$sampleDir`"
+samplename: "`r params$samplename`"
+header-includes:
+   - \usepackage{pdflscape}
+   - \newcommand{\blandscape}{\begin{landscape}}
+   - \newcommand{\elandscape}{\end{landscape}}
+   - \usepackage{pdfpages}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{makecell}
+   - \usepackage{float}
+output:
+  pdf_document:
+    toc: false
+    keep_tex: no
+    latex_engine: xelatex
+---
+
+\vspace{0.5cm}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+library(stringr)
+library(dplyr)
+library(tidyverse)
+
+
+sampleDir <- params$sampleDir
+samplename <- params$samplename
+##test inputs start
+#sampleDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Victoria_Ref_perfect'
+#samplename <- 'IBV_Victoria_Ref_perfect'
+##test inputs end
+
+
+get_VarCounts <- function(tablename){
+  # get counts of variants per segment for a variantTable
+  # return a datafarame of segment id, segment, count, and arrange by segment number.
+  df <- read.csv(paste0(sampleDir,'/',tablename))%>%
+    dplyr::filter(!ALT%in%c('e','?'))%>%
+    dplyr::group_by(CHROM)%>%
+    dplyr::mutate(count_vars=length(POS))%>%
+    dplyr::ungroup()%>%
+    dplyr::mutate(segment=stringr::str_sub(CHROM,start=-1))%>%
+    dplyr::rename(segment_id=CHROM)%>%
+    dplyr::select(segment_id,segment,count_vars)%>%
+    unique()%>%
+    dplyr::arrange(segment)
+}
+
+# get variant counts
+
+opt$pileupData <- tryCatch({
+  read.table(paste0(t1, '.pileup'), sep = '\t', header = FALSE, quote = '')[,1:5]
+}, error = function(e) {
+  return(data.frame())
+})
+
+df_allvar <- tryCatch(
+    expr = {
+      get_VarCounts(tablename='variantTable.csv')
+    },
+    error = function(e){ 
+      return(data.frame('no variants'=NA))
+    }
+)
+
+df_majorvar <- tryCatch(
+    expr = {
+      get_VarCounts(tablename='variantTableMajor.csv')
+    },
+    error = function(e){ 
+      return(data.frame('no Major variants'=NA))
+    }
+)
+
+# get coverage calculations
+load(paste0(sampleDir,'/',samplename,'.Rdata'))
+df_cov <- merge(opt$refGenomePercentCovered,opt$refGenomePercentCovered_5reads,by='V1',all.x=TRUE,all.y=TRUE)
+df_cov <- df_cov%>%
+  dplyr::mutate(segment=stringr::str_sub(V1,start=-1))%>%
+  dplyr::rename(segment_id=V1)%>%
+  dplyr::select(segment_id,segment,perc_gt_1,perc_gt_5)%>%
+  dplyr::arrange(segment)
+
+# get reference genome
+reference_genome <- opt$refGenomeFasta
+
+# reference strain coverage summary
+df_ref <- read.csv(paste0(sampleDir,'/','reference_coverage_',samplename,'.csv'))%>%
+  select(-sample)%>%
+  mutate(segment_coverage_average=round(segment_coverage_average,2),
+         segment_average_read_depth=round(segment_average_read_depth,2),
+         reference=base::sub('\\.fasta.*', '', reference)) #capture everything before .fasta
+
+# per-segment coverage for each reference
+df_refstrains <- data.frame('segment'=character(),'average_coverage'=numeric(),'average_depth'=numeric(),'reference'=character())
+for (f in list.files(sampleDir, pattern='_coverage_stats.csv')){
+  df_refstrains <- rbind(df_refstrains,
+                         read.csv(paste(sampleDir,f,sep='/')))
+}
+df_refstrains <- df_refstrains%>%
+  mutate(average_coverage=round(segment_coverage,2),
+         average_depth=round(average_read_depth,2))%>%
+  select(-segment_coverage,-average_read_depth)%>%
+  pivot_wider(names_from=reference, values_from=c(average_coverage,average_depth))
+
+
+```
+
+```{r, echo=FALSE, results='asis'}
+# Prints the reference genome that is used 
+cat(paste('**Reference Genome: **',basename(opt$refGenomeFasta)))
+
+```
+
+# Coverage 
+\small
+Table 1: Percentage of read coverage per segment.
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_cov, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+```
+
+# Variants
+\small
+Table 2: Counts of all variants per segment.
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_allvar, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+
+```
+
+\small
+Table 3: Counts of major variants per segment (>=50% of reads contain variant).
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_majorvar, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+
+```
+\newpage
+
+# Reference strain selection
+\small
+Table 4: Summary of read coverage and depth for reference strain alignment using 2,000 random reads.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_ref, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5,latex_options="hold_position")
+
+```
+\small
+Table 5: Per-segment read coverage for reference strain alignment using 2,000 random reads.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_refstrains%>%
+       dplyr:: select(starts_with(c('segment','average_coverage')))%>%
+       dplyr::rename_with(~str_remove(., 'average_coverage_'))
+        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+
+```
+
+Table 6: Per-segment read depth for reference strain alignment using 2,000 random reads.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_refstrains%>%
+       dplyr:: select(starts_with(c('segment','average_depth')))%>%
+       dplyr::rename_with(~str_remove(., 'average_depth_'))
+        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+
+```
+\newpage
+
+# Software environment
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+kable(opt$softwareVersionTable, 'latex',longtable = T, booktabs = T,  linesep = '', align = 'l') %>% 
+  column_spec(1, width = "5cm") %>% 
+  kable_styling(latex_options =c("repeat_header"))
+```
+

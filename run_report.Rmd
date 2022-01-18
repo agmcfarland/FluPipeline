@@ -1,0 +1,159 @@
+---
+fontsize: 12pt
+geometry: margin=0.50in
+subparagraph: yes
+params: 
+    title:
+      value: x
+    date:
+      value: x
+    baseDir:
+      value: x
+
+title: "`r params$title`"
+date:  "`r params$date`"
+baseDir: "`r params$baseDir`"
+header-includes:
+   - \usepackage{pdflscape}
+   - \newcommand{\blandscape}{\begin{landscape}}
+   - \newcommand{\elandscape}{\end{landscape}}
+   - \usepackage{pdfpages}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{makecell}
+   - \usepackage{float}
+output:
+  pdf_document:
+    toc: false
+    keep_tex: no
+    latex_engine: xelatex
+---
+
+\vspace{0.5cm}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+library(stringr)
+library(dplyr)
+library(tidyverse)
+
+
+baseDir <- params$baseDir
+##test inputs start
+#baseDir <- '/home/agmcfarland/flu_project/test/test_6_samples'
+##test inputs end
+
+```
+
+```{r, echo=FALSE, results='asis'}
+# Prints the reference genome that is used 
+cat(paste0('**Run directory: **',as.character(baseDir)))
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+## Extract info about run outcome and strain variant
+df_runstats <- data.frame(sample=character(),reference=character(),errorCode=numeric(),errorMessage=character())
+
+for (sample_dir in list.files(paste(baseDir,'sampleOutputs',sep='/'))){
+  load(paste0(baseDir,'/sampleOutputs/',sample_dir,'/',sample_dir,'.Rdata'))
+  df_runstats <- rbind(df_runstats,
+                      data.frame(
+                        'sample'=sample_dir,
+                        'reference'=basename(opt$refGenomeFasta),
+                        'errorCode'=opt$errorCode,
+                        'errorMessage'=opt$errorMessage
+                      ))
+  }
+
+# summarize strain counts
+df_runstats_summarise_strain <- df_runstats%>%
+  filter(errorCode==0)%>%
+  group_by(reference)%>%
+  summarize(count=n())%>%
+  arrange(desc(count))
+
+# summarize error codes
+df_runstats_summarise_codes <- df_runstats%>%
+  group_by(errorCode,errorMessage)%>%
+  summarize(count=n())%>%
+  arrange(desc(count))
+
+## Extract percent coverage counts
+df_covsum = data.frame('sample'=character(), 'coverage'=numeric(0))
+for (sample_dir in list.files(paste(baseDir,'sampleOutputs',sep='/'))){
+  load(paste0(baseDir,'/sampleOutputs/',sample_dir,'/',sample_dir,'.Rdata'))
+  if (opt$errorCode != 0){
+    next
+  }
+  df_covsum <- rbind(df_covsum,
+                      data.frame(
+                        'sample'=sample_dir,
+                        'segment'=opt$refGenomePercentCovered_5reads$V1,
+                        'coverage'=opt$refGenomePercentCovered_5reads$perc_gt_5
+                      ))
+  }
+
+df_covsum <- df_covsum%>%
+  dplyr::mutate(segment=stringr::str_sub(segment,start=-1))%>%
+  dplyr::arrange(segment)%>%
+  dplyr::mutate(segment=paste0('seg',segment))%>%
+  dplyr::mutate(coverage=round(coverage,2))%>%
+  pivot_wider(names_from=segment, values_from=c(coverage))%>%
+  dplyr::rowwise()%>%
+  dplyr::mutate(average_cov=mean(c(seg1,seg2,seg3,seg4,seg5,seg6,seg7,seg8)))%>%
+  dplyr::arrange(desc(average_cov))
+
+
+```
+
+# Run outcomes summary
+\small
+Table 1: Counts of run outcomes by error code and error message. An errorCode of 0 indicates a successful run. 
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_runstats_summarise_codes, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+```
+
+# Strain assignment summary
+\small
+Table 2: Counts of run outcomes by error code and error message. An errorCode of 0 indicates a successful run. 
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_runstats_summarise_strain, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+```
+
+\newpage
+# Strain coverage
+\small
+Table 3: Per segment coverage stats for all strains and the average coverage listed in the last column.
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_covsum, 'latex', booktabs = T, longtable = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="repeat_header",
+                repeat_header_continued = "\\textit{(Continued on Next Page...)}")
+```
+
+\newpage
+# Run outcomes and strain assignment
+\small
+Table 4: List of all run outcomes with error message, error code, and their reference strain.
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_runstats%>%arrange(errorCode,reference), 'latex', booktabs = T, longtable = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="repeat_header",
+                repeat_header_continued = "\\textit{(Continued on Next Page...)}")
+```
+
+
+
+
