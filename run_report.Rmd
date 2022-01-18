@@ -122,7 +122,7 @@ kable(df_runstats_summarise_codes, 'latex', booktabs = T, linesep = '', align = 
 
 # Strain assignment summary
 \small
-Table 2: Counts of run outcomes by error code and error message. An errorCode of 0 indicates a successful run. 
+Table 2: Counts of samples assigned to strains, by strain.
 \normalsize
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 

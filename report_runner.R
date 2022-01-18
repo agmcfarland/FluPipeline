@@ -25,7 +25,7 @@ opt = parse_args(opt_parser)
 #troubleshooting inputs run start
 #opt$softwareDir <- '/home/agmcfarland/flu_project/flu_pipeline'
 #opt$report_type <- 'run'
-#opt$baseDir <- '/home/agmcfarland/flu_project/test/test_6_samples'
+#opt$baseDir <- '/home/agmcfarland/flu_project/test/test4'
 #troubleshooting inputs run end
 
 if (opt$report_type=='sample'){
@@ -36,16 +36,16 @@ if (opt$report_type=='sample'){
                       title = paste0('Influenza ', opt$samplename),
                       sampleDir=opt$sampleDir,
                       samplename=opt$samplename))
-  }
-
-if (opt$report_type=='run'){
-  rmarkdown::render(file.path(opt$softwareDir, 'run_report.Rmd'),
+  
+  } else if (opt$report_type=='run') {
+      rmarkdown::render(file.path(opt$softwareDir, 'run_report.Rmd'),
                     output_file = file.path(opt$baseDir, 'run_summary.pdf'),
                     params = list(
                       date  = format(Sys.time(), "%Y-%m-%d"),
                       title = paste0('Influenza Run Summary'),
-                      baseDir = opt$baseDir
-                      ))
+                      baseDir = opt$baseDir))
+    } else {
+  print('nothing')
 }
 
 

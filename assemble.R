@@ -55,13 +55,17 @@ opt = parse_args(opt_parser)
 #alex start:FOR TESTING MANUALLY assign opt vals
 #opt$softwareDir <- '/home/agmcfarland/flu_project/flu_pipeline'
 #opt$process_method <- 'bushman_artic_v2'
-#opt$outputFile <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Yamagata_Ref_snpindel/IBV_Yamagata_Ref_snpindel.Rdata'
-#opt$workDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Yamagata_Ref_snpindel'
-#opt$R1 <- '/home/agmcfarland/flu_project/test/test_data/IBV_Yamagata_Ref_snpindel_R1_001.fastq.gz'
-#opt$R2 <- '/home/agmcfarland/flu_project/test/test_data/IBV_Yamagata_Ref_snpindel_R2_001.fastq.gz'
-#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/test/test_data/IBV_Yamagata_Ref.fasta'
-#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/test/test_data/IBV_Yamagata_Ref.fasta' #alex comment:same as bwa.
-#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/test/test_data/IBV_Yamagata_Ref.gb'
+#opt$outputFile <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/H1N1pdm_ref_snp/H1N1pdm_ref_snp.Rdata'
+#opt$workDir <- '/home/agmcfarland/flu_project/test/test4/sampleOutputs/H1N1pdm_ref_snp'
+#opt$R1 <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref_snp_R1_001.fastq.gz'
+#opt$R2 <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref_snp_R2_001.fastq.gz'
+#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.fasta'
+#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.fasta' #alex comment:same as bwa.
+#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.gb'
+#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'
+#opt$samtoolsBin <- '/home/everett/ext/samtools/bin' #compare to
 #alex end:FOR TESTING MANUALLY assign opt vals
 
 #alex start:set working directory to workDir
@@ -241,9 +245,10 @@ system(paste0(opt$samtoolsBin, '/samtools index ', paste0(t1, '_genome.filt.qual
 
 
 # Determine the maximum read depth. Overlapping mates will count a position twice.
-system(paste0(opt$samtoolsBin, '/samtools depth -d 0 ', paste0(t1, '_genome.filt.qual.sorted.bam'), ' -o ', paste0(t1, '.depth'))) #alex comment:depth file shows all segments have per base depth reported
+#alex comment: changed the -o to > for the conda version of samtools. it is still v1.7 like John's version but it doesn't take -o for some reason.
+#system(paste0(opt$samtoolsBin, '/samtools depth -d 0 ', paste0(t1, '_genome.filt.qual.sorted.bam'), ' -o ', paste0(t1, '.depth'))) #alex comment:depth file shows all segments have per base depth reported
+system(paste0(opt$samtoolsBin, '/samtools depth -d 0 ', paste0(t1, '_genome.filt.qual.sorted.bam'), ' > ', paste0(t1, '.depth'))) #alex comment:depth file shows all segments have per base depth reported
 maxReadDepth <- max(read.table(paste0(t1, '.depth'), sep = '\t', header = FALSE)[,3])
-
 
 # Create pileup data file for determining depth at specific locations.
 # (!) mpileup will remove duplicate reads.
@@ -579,10 +584,10 @@ if(nrow(opt$pileupData) > 0){
 # BCFtools calls indels by the base preceding the modification.
 # Here we find deletion calls and increment the position by one to mark the first deleted base.
 i <- opt$variantTable$POS %in% opt$variantTable[grep('del', opt$variantTable$ALT),]$POS
-if(any(i)) opt$variantTable[i,]$POS <- opt$variantTable[i,]$POS + 1
+if(any(i)) opt$variantTable[i,]$POS <- opt$variantTable[i,]$POS+1
 
 i <- opt$variantTableMajor$POS %in% opt$variantTableMajor[grep('del', opt$variantTableMajor$ALT),]$POS
-if(any(i)) opt$variantTableMajor[i,]$POS <- opt$variantTableMajor[i,]$POS + 1
+if(any(i)) opt$variantTableMajor[i,]$POS <- opt$variantTableMajor[i,]$POS+1
 
 write.csv(opt$variantTable,'variantTable.csv',row.names=FALSE)
 write.csv(opt$variantTableMajor,'variantTableMajor.csv',row.names=FALSE)
