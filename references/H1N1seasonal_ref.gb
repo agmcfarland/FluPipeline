@@ -1,0 +1,853 @@
+LOCUS       CY261878                 865 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) nuclear export
+            protein (NEP) and nonstructural protein 1 (NS1) genes, complete
+            cds.
+ACCESSION   CY261878
+VERSION     CY261878.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 865)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 865)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: NS
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118197
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..865
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="8"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            15..852
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+     CDS             join(15..44,517..852)
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+                     /note="nonstructural protein 2"
+                     /codon_start=1
+                     /product="nuclear export protein"
+                     /protein_id="AUH29903.1"
+                     /translation="MESNTMSSFQDILMRMSKMQLGSSSEDLSGMVTRFESLKIYRDS
+                     LGEAVMRMGDLHYLQSRNEKWREQLGQKFEEIRWLIEEIRHRLKATENSFEQITFMQA
+                     LQLLLEVEQEIRAFSFQLI"
+     gene            15..674
+                     /gene="NS1"
+     CDS             15..674
+                     /gene="NS1"
+                     /codon_start=1
+                     /product="nonstructural protein 1"
+                     /protein_id="AUH29902.1"
+                     /translation="MESNTMSSFQVDCFLWHIRKRFADNGLGDAPFLDRLRRDQKSLK
+                     GRGNTLGLDIKTATLVGKQIVEWILKEESSETFRMTIASVPTSRYISDMTLEEMSRDW
+                     FMLMPRQKIIGPLCVRLDQAVMDKNIVLEANFSVIFNRLETLILLRAFTEEGAIVGEI
+                     SPLPSLPGHTYEDVKNAVGVLIGGLEWNGNTVRVSENIQRFAWRSCDENGRPSLPPEQ
+                     K"
+ORIGIN      
+        1 gtgacaaaaa cataatggaa tccaacacca tgtcaagctt tcaggtagac tgttttcttt
+       61 ggcatattcg caagcgattt gcagacaatg gattgggtga tgccccattc cttgatcggc
+      121 tacgccgaga tcaaaagtcc ttaaaaggaa gaggcaacac ccttggcctc gacatcaaaa
+      181 cagccactct tgttgggaaa caaattgtgg aatggatttt gaaagaggaa tccagcgaga
+      241 catttagaat gacaattgca tctgtaccta cttcgcgtta catttctgac atgaccctcg
+      301 aggaaatgtc acgagactgg ttcatgctta tgcctaggca aaagataata ggccctcttt
+      361 gcgtgcgatt ggaccaggcg gtcatggata agaacatagt actggaagca aacttcagtg
+      421 taatcttcaa ccgattagag accttgatac tactaagggc tttcactgag gagggagcga
+      481 tagttggaga aatttcacca ttaccttctc ttccaggaca tacttatgag gatgtcaaaa
+      541 atgcagttgg ggtcctcatc ggaggacttg agtggaatgg taacacggtt cgagtctctg
+      601 aaaatataca gagattcgct tggagaagct gtgatgagaa tgggagacct tcactacctc
+      661 cagagcagaa atgagaagtg gcgggaacaa ttgggacaga aatttgagga aataaggtgg
+      721 ttaattgaag aaatacgaca cagattgaaa gcgacagaga atagtttcga acaaataaca
+      781 tttatgcaag ccttacaact actgcttgaa gtagagcaag agataagagc tttctcgttt
+      841 cagcttattt aatgataaaa aacac
+//
+
+LOCUS       CY261877                1002 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) matrix protein 2
+            (M2) and matrix protein 1 (M1) genes, complete cds.
+ACCESSION   CY261877
+VERSION     CY261877.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1002)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1002)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: M
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118198
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..1002
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="7"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            14..995
+                     /gene="M2"
+     CDS             join(14..39,728..995)
+                     /gene="M2"
+                     /codon_start=1
+                     /product="matrix protein 2"
+                     /protein_id="AUH29901.1"
+                     /translation="MSLLTEVETPTRSEWECRCSGSSDPLVIAANIIGILHLILWITD
+                     RLFFKCIYRRFKYGLKRGPSTEGVPESMREEYQQEQQSAVDVDDGHFVNIELE"
+     gene            14..772
+                     /gene="M1"
+     CDS             14..772
+                     /gene="M1"
+                     /codon_start=1
+                     /product="matrix protein 1"
+                     /protein_id="AUH29900.1"
+                     /translation="MSLLTEVETYVLSIIPSGPLKAEIAQRLESVFAGKNTDLEALME
+                     WLKTRPILSPLTKGILGFVFTLTVPSERGLQRRRFIQNALNGNGDPNNMDRAVKLYKK
+                     LKREITFHGAKEVSLSYSTGALASCMGLIYNRMGTVTTEAAFGLVCATCEQIADSQHR
+                     SHRQMATTTNPLIRHENRMVLASTTAKAMEQVAGSSEQAAEAMEVANKTRQMVHAMRT
+                     IGTHPSSSAGLRDDLLENLQAYQKRMGVQMQRFK"
+ORIGIN      
+        1 tagatgttta aagatgagtc ttctaaccga ggtcgaaacg tacgttcttt ctatcatccc
+       61 gtcaggcccc ctcaaagccg agatcgcaca gagactggaa agtgtctttg caggaaagaa
+      121 cacagatctt gaggctctca tggaatggct aaagacaaga ccaatcttgt cacctctgac
+      181 taagggaatt ttaggatttg tgttcacgct caccgtgccc agtgagcgag gactgcagcg
+      241 tagacgcttt atccaaaatg ccctaaatgg aaatggggac ccgaacaaca tggatagagc
+      301 agttaaacta tacaagaagc tcaaaagaga aataacgttc catggggcca aggaggtgtc
+      361 actaagctat tcaactggtg cacttgcaag ttgcatgggc ctcatataca acaggatggg
+      421 aacagtgacc acagaagctg ctttcggtct agtttgtgcc acttgtgaac agattgctga
+      481 ttcacagcat cggtctcaca gacaaatggc taccaccaca aatccactaa tcaggcatga
+      541 aaacagaatg gtgctggcta gcactacggc aaaggctatg gaacaggtgg ctggatcgag
+      601 tgaacaggca gcggaggcca tggaggttgc taataagact aggcagatgg tacatgcaat
+      661 gagaactatt gggactcatc ctagctccag tgctggtctg agagatgacc ttcttgaaaa
+      721 tttgcaggcc taccagaagc gaatgggagt gcagatgcag cggttcaagt gatcctctcg
+      781 tcattgcagc aaacatcatt gggatcttgc acctgatatt gtggattacc gatcgtcttt
+      841 ttttcaaatg catttatcgt cgctttaaat acggtttgaa aagagggcct tctacggaag
+      901 gagtgcctga gtccatgagg gaagaatatc aacaggagca gcagagtgct gtggatgttg
+      961 acgatggtca ttttgtcaac atagagctag agtaaaaaac ta
+//
+
+LOCUS       CY261876                1433 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) neuraminidase (NA)
+            gene, complete cds.
+ACCESSION   CY261876
+VERSION     CY261876.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1433)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1433)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: NA
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118202
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..1433
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="6"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            9..1418
+                     /gene="NA"
+     CDS             9..1418
+                     /gene="NA"
+                     /codon_start=1
+                     /product="neuraminidase"
+                     /protein_id="AUH29899.1"
+                     /translation="MNPNQKIITIGSICMTIGMANLILQIGNIISIWVSHSIQIGNQS
+                     QIETCNQSVITYENNTWVNQTYVNISNTNFAARQSAASVKLAGNSSLCPVSGWAIYSK
+                     DNSVRIGSKGDVFVIREPFISCSPLECRTFFLTQGALLNDKHSNGTIKDRSPYRTLMS
+                     CPIGEVPSPYNSRFESVAWSASACHDGTNWLTIGISGPDSGAVAVLKYNGIITDTIKS
+                     WRNNILRTQESECACVNGSCFTIMTDGPSDGQASYKIFRIEKGKIIKSVEMKAPNYHY
+                     EECSCYPDSSEITCVCRDNWHGSNRPWVSFNQNLEYQMGYICSGVFGDNPRPNDKTGS
+                     CGPVSSNGANGVKGFSFKYGNGVWIGRTKSISSRKGFEMIWDPNGWTGTDNKFSIKQD
+                     IVGINEWSGYSGSFVQHPELTGLNCIRPCFWVELIRGRPEENTIWTSGSSISFCGVDS
+                     DTVGWSWPDGAELPFTIDK"
+ORIGIN      
+        1 agtttaaaat gaatccaaac caaaagataa taaccattgg ttcgatctgt atgacaattg
+       61 gaatggctaa cttaatatta caaattggaa acataatctc aatatgggtt agccactcaa
+      121 ttcaaattgg aaatcaaagc cagattgaaa catgcaatca aagcgtcatt acttatgaaa
+      181 acaacacttg ggtaaatcag acatatgtta acatcagcaa caccaacttt gctgctagac
+      241 agtcagcggc ttccgtgaaa ttagcgggca attcctctct ctgccctgtt agtggatggg
+      301 ctatatacag taaagacaac agtgtaagaa tcggttccaa gggggatgtg tttgtcataa
+      361 gggaaccatt catatcatgc tctcccttgg aatgcagaac cttcttcttg actcaagggg
+      421 ctttgctaaa tgacaaacat tccaatggaa ccattaaaga caggagccca tatcgaaccc
+      481 taatgagctg tcctattggt gaagttccct ctccatacaa ctcaagattt gagtcagtcg
+      541 cttggtcagc aagtgcttgt catgatggca ccaattggct aacaattgga atttctggcc
+      601 cagacagtgg ggcagtggct gtgttaaaat acaatggcat aataacagac actatcaaga
+      661 gttggaggaa caatatattg agaacacaag agtctgaatg tgcatgtgta aatggttctt
+      721 gctttaccat aatgaccgat ggaccaagtg atggacaggc ctcatacaaa atcttcagaa
+      781 tagaaaaggg aaagataatc aaatcagtcg aaatgaaagc ccctaattat cactatgagg
+      841 aatgctcctg ttaccctgat tctagtgaaa tcacatgtgt gtgcagggat aattggcatg
+      901 gctcgaatcg accgtgggtg tctttcaacc agaatctgga atatcagatg ggatacatat
+      961 gcagtggggt tttcggagac aatccacgcc ctaatgataa gacaggcagt tgtggtccag
+     1021 tatcgtctaa tggagcaaat ggagtaaaag gattttcatt caaatacggc aatggtgttt
+     1081 ggatagggag aactaagagc attagttcaa gaaaaggttt tgagatgatt tgggatccga
+     1141 atggatggac tgggactgac aataaattct caataaagca agatatcgta ggaataaatg
+     1201 agtggtcagg gtatagcggg agttttgttc agcatccaga actaacaggg ctgaattgta
+     1261 taagaccttg cttctgggtt gaactaataa gaggacgacc cgaagagaac acaatctgga
+     1321 ctagcgggag cagcatatcc ttttgtggtg tagacagtga cactgtgggt tggtcttggc
+     1381 cagacggtgc tgagttgcca tttaccattg acaagtaatt tgttcaaaaa act
+//
+
+LOCUS       CY261875                1540 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) nucleocapsid
+            protein (NP) gene, complete cds.
+ACCESSION   CY261875
+VERSION     CY261875.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1540)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1540)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: NP
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118196
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..1540
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="5"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            34..1530
+                     /gene="NP"
+     CDS             34..1530
+                     /gene="NP"
+                     /codon_start=1
+                     /product="nucleocapsid protein"
+                     /protein_id="AUH29898.1"
+                     /translation="MASQGTKRSYEQMETGGERQDTTEIRASVGRMIGGIGRFYIQMC
+                     TELKLSDYDGRLIQNSITIERMVLSAFDERRNKYLEEHPSAGKDPKKTGGPIYRRIDG
+                     KWTRELILYDKEEIRRVWRQANNGEDATAGLTHIMIWHSNLNDATYQRTRALVRTGMD
+                     PRMCSLMQGSTLPRRSGAAGAAVKGVGTIAMELIRMIKRGINDRNFWRGENGRRTRVA
+                     YERMCNILKGKFQTAAQRAMMDQVRESRNPGNAEIEDLIFLARSALILRGSVAHKSCL
+                     PACVYGLAVASGHDFEREGYSLVGIDPFKLLQNSQVVSLMRPNENPAHKSQLVWMACH
+                     SAAFEDLRVSSFIRGKKVIPRGKLSTRGVQIASNENVETMDSNTLELRSRYWAIRTRS
+                     GGNTNQQKASAGQISVQPTFSVQRNLPFERATVMAAFSGNNEGRTSDMRTEVIRMMES
+                     AKPEDLSFQGRGVFELSDEKATNPIVPSFDMSNEGSYFFGDNAEEYDN"
+ORIGIN      
+        1 gtagataatc actcaatgag tgacatcgaa gccatggcgt ctcaaggcac caaacgatca
+       61 tatgaacaaa tggagactgg tggggagcgc caggatacca cagaaatcag agcatctgtt
+      121 ggaagaatga ttggtggaat cgggagattc tacatccaaa tgtgcactga actaaaactc
+      181 agtgattatg atggacgact aatccagaat agcataacaa tagagaggat ggtgctttct
+      241 gcttttgatg agagaagaaa taaataccta gaagagcatc caagtgctgg gaaggaccct
+      301 aagaaaacag gaggacccat ctatagaaga atagacggaa aatggacgag agaactcatc
+      361 ctttatgaca aagaagaaat aaggagagtt tggcgccaag caaacaatgg cgaagatgca
+      421 acagcaggtc ttactcatat catgatttgg cattccaatc tgaatgatgc cacatatcag
+      481 aggacaagag cacttgttcg cactggaatg gatcccagaa tgtgctctct aatgcaaggt
+      541 tcaacacttc ccaggaggtc tggtgccgca ggtgctgcag taaaaggagt tggaacaata
+      601 gctatggagt taatcagaat gataaaacgt ggaatcaatg accgaaattt ctggaggggt
+      661 gaaaatggac gaaggacaag agttgcttat gaaagaatgt gcaatatcct caaaggaaaa
+      721 tttcaaacag ctgcccagag ggcaatgatg gatcaagtaa gagaaagtcg aaacccagga
+      781 aacgctgaga ttgaagacct cattttcctg gcacggtcag cactcattct gagaggatca
+      841 gttgcacata aatcctgcct gcctgcttgt gtgtatgggc ttgcagtagc aagtggccat
+      901 gactttgaaa gggaagggta ctcactggtc gggatagacc cattcaaatt actccaaaac
+      961 agtcaagtgg tcagcctgat gagaccaaat gaaaatccag ctcacaagag tcaattggta
+     1021 tggatggcat gccactctgc tgcatttgaa gatttaagag tatcaagttt cataagagga
+     1081 aagaaagtga tcccaagagg aaagctttcc acaagagggg ttcagattgc ttcaaatgag
+     1141 aatgtggaaa ccatggactc caataccctg gaactaagaa gcagatactg ggccataaga
+     1201 accaggagtg gaggaaatac caatcaacag aaggcatccg caggccagat cagtgtgcag
+     1261 cctacattct cagtgcagcg aaatctccct tttgaaagag caaccgttat ggcagcattc
+     1321 agcgggaaca atgaaggacg gacctccgac atgcgaacag aagttataag aatgatggaa
+     1381 agtgcaaagc cagaggattt gtccttccag gggcggggag tcttcgagct ctcggacgaa
+     1441 aaggcaacga acccgatcgt gccttccttt gacatgagta atgaagggtc ttatttcttc
+     1501 ggagacaatg cagaggagta tgacaattga agaaaaatac
+//
+
+LOCUS       CY261874                1752 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) hemagglutinin (HA)
+            gene, complete cds.
+ACCESSION   CY261874
+VERSION     CY261874.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1752)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1752)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: HA
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118203
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..1752
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="4"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            21..1721
+                     /gene="HA"
+     CDS             21..1721
+                     /gene="HA"
+                     /function="receptor binding and fusion protein"
+                     /codon_start=1
+                     /product="hemagglutinin"
+                     /protein_id="AUH29897.1"
+                     /translation="MKAILVVLLYTFTTANADTLCIGYHANNSTDTVDTVLEKNVTVT
+                     HSVNLLEDKHNGKLCKLRGVTPLHLGKCNIAGWILGNPECESLSTARSWSYIVETSNS
+                     DNGTCYPGDFINYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKS
+                     FYKNLIWLVKKGNSYPKLNQTYINDKGKEVLVLWGIHHPPTTADQQILYQNADAYVFV
+                     GTSRYSKKFKPEIATRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFTMER
+                     NAGSGIIISDTPVHDCNTTCQTPEGAINTSLPFQNVHPITIGKCPKYVKSTKLRLATG
+                     LRNVPSIQSRGLFGAIAGFIEGGWTGMVDGWYGYHHQNEQGSGYAADLKSTQNAIDKI
+                     TNKVNSVIEKMNTQFTAVGKEFNHLEKRIENLNKKVDDGFLDIWTYNAELLVLLENER
+                     TLDYHDSNVKNLYEKVRNQLKNNAKEIGNGCFEFYHKCDNTCMESVKNGTYDYPKYSE
+                     EAKLNREKIDGVKLESTRIYQILAIYSTVASSLVLVVSLGAISFWMCSNGSLQCRICI
+                     "
+     sig_peptide     21..71
+                     /gene="HA"
+     mat_peptide     72..1052
+                     /gene="HA"
+                     /product="HA1"
+     mat_peptide     1053..1718
+                     /gene="HA"
+                     /product="HA2"
+ORIGIN      
+        1 ggaaaacaaa agcaacaaaa atgaaggcaa tactagtagt tctgctgtat acatttacaa
+       61 ccgcaaatgc agacacatta tgtataggtt atcatgcgaa caattcaaca gacactgtag
+      121 acacagtact agaaaagaat gtaacagtaa cacactctgt taatcttctg gaagacaagc
+      181 ataacggaaa actatgcaaa ctaagagggg taaccccatt gcatttgggt aaatgtaaca
+      241 ttgctggctg gatcctggga aatccagagt gtgaatcact ctccacagca agatcatggt
+      301 cctacattgt ggaaacatct aattcagaca atggaacgtg ttacccagga gatttcatca
+      361 attatgagga gctaagagag caattgagct cagtgtcatc atttgaaagg tttgaaatat
+      421 tccccaagac aagttcatgg cctaatcatg actcgaacaa aggtgtaacg gcagcatgtc
+      481 ctcacgctgg agcaaaaagc ttctacaaaa acttgatatg gctagttaaa aaaggaaatt
+      541 catacccaaa gctcaaccaa acctacatta atgataaagg gaaagaagtc ctcgtgctgt
+      601 ggggcattca ccatccacct actactgctg accaacaaat tctctatcag aatgcagatg
+      661 catatgtttt tgtggggaca tcaagataca gcaagaagtt caagccggaa atagcaacaa
+      721 gacccaaagt gagggatcaa gaagggagaa tgaactatta ctggacacta gtagagccgg
+      781 gagacaaaat aacattcgaa gcaactggaa atctagtggt accgagatat gcattcacaa
+      841 tggaaagaaa tgctggatct ggtattatca tttcagatac accagtccac gattgcaata
+      901 caacttgtca gacacccgag ggtgctataa acaccagcct cccatttcag aatgtacatc
+      961 cgatcacaat tgggaaatgt ccaaagtatg taaaaagcac aaaattgaga ctggccacag
+     1021 gattgaggaa tgtcccgtct attcaatcta gaggcctatt cggggccatt gccggcttca
+     1081 ttgaaggggg gtggacaggg atggtagatg gatggtacgg ttatcaccat caaaatgagc
+     1141 aggggtcagg atatgccgcc gatctgaaga gcacacaaaa tgccattgat aagattacta
+     1201 acaaagtaaa ttctgttatt gaaaagatga atacacagtt cacagcagtg ggtaaagagt
+     1261 tcaaccacct tgaaaaaaga atagagaatc taaataaaaa agttgatgat ggtttcctgg
+     1321 acatttggac ttacaatgcc gaactgttgg ttctactgga aaacgaaaga actttggact
+     1381 atcacgattc aaatgtgaag aacttgtatg aaaaagtaag aaaccagtta aaaaacaatg
+     1441 ccaaggaaat tggaaacggc tgctttgaat tttaccacaa atgcgacaac acatgcatgg
+     1501 aaagtgtcaa gaatgggact tatgactacc caaaatactc agaggaagca aaattaaaca
+     1561 gagaaaaaat agatggagta aagctggaat caacaaggat ctaccagatt ttggcgatct
+     1621 attcaactgt cgccagttca ttggtactgg tagtctccct gggggcaatc agcttctgga
+     1681 tgtgctctaa tgggtctcta cagtgtagaa tatgtattta acattaggat ttcagaatca
+     1741 tgagaaaaac ac
+//
+
+LOCUS       CY261873                2208 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) polymerase PA (PA)
+            and PA-X protein (PA-X) genes, complete cds.
+ACCESSION   CY261873
+VERSION     CY261873.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2208)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2208)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: PA
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118199
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..2208
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="3"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            13..2163
+                     /gene="PA"
+     CDS             13..2163
+                     /gene="PA"
+                     /codon_start=1
+                     /product="polymerase PA"
+                     /protein_id="AUH29895.1"
+                     /translation="MEDFVRQCFNPMIVELAEKAMKEYGEDPKIETNKFAAICTHLEV
+                     CFMYSDFHFIDERGESIIVESGDPNALLKHRFEIIEGRDRIMAWTVVNSICNTTGIEK
+                     PKFLPDLYDYKENRFIEIGVTRREVHIYYLEKANKIKSEKTHIHIFSFTGEEMATKAD
+                     YTLDEESRARIKTRLFTIRQEMASRSLWDSFRQSERGEETIEEKFEITGTMRKLADQS
+                     LPPNFSSLENFRAYVDGFEPNGCIEGKLSQMSKEVNAKIEPFLRTTPRPLRLPDGPLC
+                     HQRSKFLLMDALKLSIEDPSHEGEGIPLYDAIKCMKTFFGWKEPKIVKPHEKGVNPNY
+                     LMAWKQVLAEIQDIENEEKIPRTKNMKKTSQLKWALGENMAPEKVDFDDCKDVGDLKQ
+                     YDSDEPEPRSLASWVQNEFNKACELTDSSWIELDEIGEDVAPIEHIASMRRNYFTAEV
+                     SHCRATEYIMKGVYINTALLNASCAAMDDFQLIPMISKCRTKEGRRKTNLYGFIIKGR
+                     SHLRNDTDVVNFVSMEFSLTDPRLEPHKWEKYCVLEIGDMLLRTAIGQVSRPMFLYMR
+                     TNGTSKIKMKWGMEMRRCLLQSLQQIESMIEAESSVKEKDMTKEFFENKSETWPIGES
+                     PRGVEEGSIGKICRTLLAKSVFNSLYASPQLEGFSAESRKLLLIVQALRDNLEPGTFD
+                     LGGLYEAVEECLINDPWVLLNASWFNSFLTHALK"
+     gene            13..712
+                     /gene="PA-X"
+     CDS             join(13..582,584..712)
+                     /gene="PA-X"
+                     /ribosomal_slippage
+                     /codon_start=1
+                     /product="PA-X protein"
+                     /protein_id="AUH29896.1"
+                     /translation="MEDFVRQCFNPMIVELAEKAMKEYGEDPKIETNKFAAICTHLEV
+                     CFMYSDFHFIDERGESIIVESGDPNALLKHRFEIIEGRDRIMAWTVVNSICNTTGIEK
+                     PKFLPDLYDYKENRFIEIGVTRREVHIYYLEKANKIKSEKTHIHIFSFTGEEMATKAD
+                     YTLDEESRARIKTRLFTIRQEMASRSLWDSFVSPKEAKKQLKKSLRLQELCASLPTKV
+                     SHQTSPALKTSEPM"
+ORIGIN      
+        1 tactgatcca aaatggaaga ctttgtgcga caatgcttca atccaatgat cgtcgagctt
+       61 gcggaaaagg caatgaaaga atatggggaa gaccccaaaa tcgaaactaa taagtttgct
+      121 gcaatttgca cacatttgga agtttgtttc atgtattcgg atttccattt cattgatgaa
+      181 cggggtgaat caataattgt agaatctggt gacccaaatg cactattgaa gcaccgattt
+      241 gagataattg aaggaagaga ccgaatcatg gcctggacag tggtgaacag tatatgtaac
+      301 acaacaggga tagagaagcc taaatttctc cctgatttgt atgattacaa agagaaccgg
+      361 ttcattgaaa ttggagtaac acggagagaa gtccacatat attacctaga gaaagccaac
+      421 aaaataaaat ctgagaagac acacattcac atcttttcat tcactggaga ggagatggcc
+      481 accaaagcgg actacaccct tgacgaagag agcagagcaa gaatcaaaac taggcttttc
+      541 actataagac aagaaatggc cagtaggagt ctatgggatt cctttcgtca gtccgaaaga
+      601 ggcgaagaaa caattgaaga aaagtttgag attacaggaa ctatgcgcaa gcttgccgac
+      661 caaagtctcc caccaaactt ctccagcctt gaaaacttca gagcctatgt agatggattt
+      721 gagccgaacg gctgcattga gggcaagctt tcccaaatgt caaaagaagt gaacgccaaa
+      781 attgaaccat tcctgaggac gacaccacgc cccctcagat tacctgatgg acctctttgc
+      841 catcagcggt caaagttcct gctgatggat gctctgaaat taagcattga agacccgagt
+      901 cacgaggggg aaggaatacc actatatgat gcaatcaaat gcatgaagac attctttggc
+      961 tggaaagagc ctaaaatagt caaaccacat gagaaaggcg taaatcccaa ttacctcatg
+     1021 gcttggaagc aggtgctagc agagatacag gacattgaaa atgaagagaa aatcccaagg
+     1081 acaaagaaca tgaagaaaac aagccaattg aagtgggcac tcggtgaaaa tatggcacca
+     1141 gaaaaagtgg actttgatga ctgtaaagat gttggagacc ttaaacagta tgacagtgat
+     1201 gaaccagagc ccagatctct agcaagctgg gtccaaaatg aattcaataa ggcatgtgaa
+     1261 ttgactgatt caagctggat agaacttgat gaaataggag aagatgttgc cccgattgaa
+     1321 catatagcaa gcatgaggag gaactatttt acagcagaag tgtcccactg cagggctact
+     1381 gaatacataa tgaagggagt gtacataaat acggccttgc tcaatgcatc ctgtgcagcc
+     1441 atggatgact ttcagctgat tccaatgata agcaaatgta ggaccaaaga aggaagacgg
+     1501 aaaacaaacc tgtatgggtt cattataaaa ggaaggtctc atttgagaaa tgatactgat
+     1561 gtagtgaact ttgtaagtat ggagttctca ctcactgatc caagactgga accacacaaa
+     1621 tgggaaaaat actgtgttct tgaaatagga gacatgctat tgaggactgc gataggtcaa
+     1681 gtgtcgaggc ccatgttcct atatatgaga accaatggaa cctccaagat caagatgaaa
+     1741 tggggcatgg aaatgaggcg ctgccttctt caatctcttc agcagattga gagcatgatt
+     1801 gaagccgagt cttctgtcaa agagaaagac atgaccaagg aattctttga aaacaaatcg
+     1861 gaaacatggc caatcggaga atcacccagg ggagtggagg aaggctctat tggaaaaata
+     1921 tgcagaacct tactggcaaa atctgtgttc aacagtctat atgcttctcc acaacttgag
+     1981 gggttttcgg ctgaatcaag aaaattgctt ctcattgttc aggcacttag ggacaacctg
+     2041 gaacctggaa cctttgatct tggggggcta tatgaagcag tcgaggagtg cttgattaat
+     2101 gatccctggg ttttgcttaa tgcatcttgg ttcaactcct tcctcacaca tgcactgaag
+     2161 tagttgtggc aatgctacta tttgctatcc atattgtcca aaaaagta
+//
+
+LOCUS       CY261872                2316 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) polymerase PB1
+            (PB1) gene, complete cds; and PB1-F2 gene, complete sequence.
+ACCESSION   CY261872
+VERSION     CY261872.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2316)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2316)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: PB1
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118201
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..2316
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="2"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            13..2286
+                     /gene="PB1"
+     CDS             13..2286
+                     /gene="PB1"
+                     /codon_start=1
+                     /product="polymerase PB1"
+                     /protein_id="AUH29894.1"
+                     /translation="MDVNPTLLFLKIPAQNAISTTFPYTGDPPYSHGTGTGYTMDTVN
+                     RTHQYSEKGKWTTNTETGAPQLNPIDGPLPEDNEPSGYAQTDCVLEAMAFLEESHPGI
+                     FENSCLETMEVVQQTRVDKLTQGRQTYDWTLNRNQPAATALANTIEVFRSNDLTANES
+                     GRLIDFLKDVMESMNKEEIEITTHFQRKRRVRDNMTKKMVTQRTIGKKKQRLNKRGYL
+                     IRALTLNTMTKDAERGKLKRRAIATPGMQIRGFVYFVETLARSICEKLEQSGLPVGGN
+                     EKKAKLANVVRKMMTNSQDTEISFTITGDNTKWNENQNPRMFLAMITYITRNQPEWFR
+                     NILSMAPIMFSNKMARLGKGYMFESKRMKIRTQIPAEMLASIDLKYFNESTKKKIEKI
+                     RPLLMDGTASLSPGMMMGMFNMLSTVLGVSILNLGQKKYTKTTYWWDGLQSSDDFALI
+                     VNAPNHEGIQAGVDRFYRTCKLVGINMSKKKSYINKTGTFEFTSFFYRYGFVANFSME
+                     LPSFGVSGVNESADMSIGVTVIKNNMINNDLGPATAQMALQLFIKDYRYTYRCHRGDT
+                     QIQTRRSFELKKLWDQTQSKVGLLVSDGGPNLYNIRNLHIPEVCLKWELMDDDYRGRL
+                     CNPLNPFVSHKEIDSVNNAVVMPAHGPAKSMEYDAVATTHSWIPKRNRSILNTSQRGI
+                     LEDEQMYQKCCNLFEKFFPSSSYRRPVGISSMVEAMVSRARIDARVDFESGRIKKEEF
+                     SEIMKICSTIEELRRQK"
+     gene            107..379
+                     /gene="PB1-F2"
+     misc_feature    107..379
+                     /gene="PB1-F2"
+                     /note="nonfunctional PB1-F2 protein due to mutation"
+ORIGIN      
+        1 caaaccattt gaatggatgt caatccgact ctacttttcc taaaaattcc agcacaaaat
+       61 gccataagca ccacattccc ttatactgga gatcctccat acagccatgg aacaggaaca
+      121 ggatacacca tggacacagt aaacagaaca caccaatact cagaaaaggg gaagtggaca
+      181 acaaacacag agactggtgc accccagctc aacccgattg acggaccact acctgaagat
+      241 aatgaaccaa gtgggtatgc acaaacagac tgtgttctag aggctatggc tttccttgaa
+      301 gaatcccatc caggaatatt tgagaattca tgccttgaaa caatggaagt tgttcaacaa
+      361 acaagggtag ataaactgac tcaaggtcgc cagacttatg attggacatt aaacagaaat
+      421 caaccggcag caactgcatt ggccaacacc atagaagttt tcagatcgaa tgacctaaca
+      481 gctaacgagt caggaaggct aatagatttc ttaaaggatg tgatggaatc aatgaacaaa
+      541 gaggaaatag agataacaac ccactttcaa agaaaaagga gagtaagaga caacatgacc
+      601 aagaagatgg tcacgcaaag aacaataggg aagaaaaaac agagactgaa taagagaggc
+      661 tatctaataa gagcactgac attaaatacg atgaccaaag atgcagagag aggcaagtta
+      721 aaaagaaggg ctatagcaac acctgggatg cagattagag gtttcgtata ctttgttgaa
+      781 actttagcta ggagcatttg cgaaaagctt gaacagtctg ggctcccagt agggggcaat
+      841 gaaaagaagg ccaaattggc aaatgttgtg agaaagatga tgactaattc acaagataca
+      901 gagatttctt tcacaatcac tggggacaac actaaatgga atgaaaatca aaatcctcga
+      961 atgttcctgg cgatgattac atatatcacc agaaatcaac ccgagtggtt tagaaacatc
+     1021 ctgagcatgg cacccataat gttctcaaat aaaatggcaa gactaggaaa agggtacatg
+     1081 ttcgagagta aaagaatgaa gattcgaaca caaataccag cagaaatgct agcaagcatt
+     1141 gatctaaagt atttcaatga atcaacaaag aagaaaattg agaagataag gcctctttta
+     1201 atggatggca cagcatcact gagtcctggg atgatgatgg gcatgttcaa catgctaagt
+     1261 acggtcttgg gagtctcgat actgaatctt ggacaaaaga aatacaccaa gacaacatac
+     1321 tggtgggatg ggctccaatc atccgacgat tttgctctca tagtgaatgc accgaaccat
+     1381 gaaggaatac aagcaggagt ggacagattc tacaggacct gcaagttagt gggaatcaac
+     1441 atgagcaaaa agaagtccta tataaataag acagggacat ttgaattcac aagctttttt
+     1501 tatcgctatg gatttgtggc taattttagc atggagctac ccagctttgg agtgtctgga
+     1561 gtaaatgaat cagctgacat gagtattgga gtaacagtga taaagaacaa catgataaac
+     1621 aatgaccttg gacctgcaac ggctcagatg gctcttcaat tgttcatcaa agactacaga
+     1681 tacacatata ggtgtcatag gggagacaca caaattcaga cgagaagatc atttgagttg
+     1741 aagaagctat gggatcaaac ccaatcaaag gtagggctat tagtatcaga tggaggacca
+     1801 aacttataca acatacggaa tcttcacatt cctgaagtct gcttaaaatg ggagctaatg
+     1861 gatgatgatt atcggggaag actttgtaat cccctgaatc cctttgtgag tcataaggag
+     1921 attgattctg taaacaatgc tgtggtaatg ccagcccatg gcccagccaa aagcatggaa
+     1981 tatgatgccg ttgctactac acattcctgg attcccaaga ggaatcgttc tattctcaac
+     2041 acaagccaaa ggggaattct tgaggatgaa cagatgtacc agaagtgttg caatttattc
+     2101 gagaaatttt tccctagcag ttcatatagg agaccggttg gaatttctag catggtggag
+     2161 gccatggtgt ctagggcccg gattgatgcc agagtcgact ttgagtctgg acggatcaag
+     2221 aaagaagaat tctctgagat catgaagatc tgttccacca ttgaagagct cagacggcaa
+     2281 aaataatgaa tttaacttgt ccttcatgaa aaaatg
+//
+
+LOCUS       CY261871                2316 bp    cRNA    linear   VRL 22-DEC-2017
+DEFINITION  Influenza A virus (A/California/116/2017(H1N1)) polymerase PB2
+            (PB2) gene, complete cds.
+ACCESSION   CY261871
+VERSION     CY261871.1
+DBLINK      BioProject: PRJNA37813
+KEYWORDS    .
+SOURCE      Influenza A virus (A/California/116/2017(H1N1))
+  ORGANISM  Influenza A virus (A/California/116/2017(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2316)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Influenza Sequencing Activity group
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2316)
+  AUTHORS   Jernigan,D., Wentworth,D., Katz,J., Barnes,J., Garten,R. and Xu,X.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (22-DEC-2017) WHO Collaborating Center for Surveillance,
+            Epidemiology and Control of Influenza, Influenza Division, Centers
+            for Disease Control and Prevention, 1600 Clifton Road, N.E.,
+            Atlanta, GA 30333, United States
+COMMENT     ##FluData-START##
+            EPI_ISOLATE_ID   :: EPI_ISL_287693
+            NAME             :: A/California/116/2017
+            TYPE             :: H1N1
+            Segment_name     :: PB2
+            HOST_AGE         :: 2
+            HOST_GENDER      :: M
+            PASSAGE          :: Original
+            LOCATION         :: United States / California
+            COLLECT_DATE     :: 03-Nov-2017
+            Lineage          :: A(H1N1)pdm09
+            SPECIMEN_ID      :: V17T05677-ORIGINAL
+            SENDER_LAB       :: California Department of Health Services
+            SEQLAB_SAMPLE_ID :: 3025631496
+            EPI_SEQUENCE_ID  :: EPI1118200
+            ##FluData-END##
+FEATURES             Location/Qualifiers
+     source          1..2316
+                     /organism="Influenza A virus
+                     (A/California/116/2017(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/California/116/2017"
+                     /serotype="H1N1"
+                     /host="Homo sapiens; gender M; age 2"
+                     /db_xref="taxon:2066157"
+                     /segment="1"
+                     /country="USA: California"
+                     /collection_date="03-Nov-2017"
+                     /note="passage details: Original"
+     gene            16..2295
+                     /gene="PB2"
+     CDS             16..2295
+                     /gene="PB2"
+                     /codon_start=1
+                     /product="polymerase PB2"
+                     /protein_id="AUH29893.1"
+                     /translation="MERIKELRDLMSQSRTREILTKTTVDHMAIIKKYTSGRQEKNPA
+                     LRMKWMMAMKYPITADKRIMDIIPERNEQGQTLWSKTNDAGSDRVMVSPLAVTWWNRN
+                     GPTTSTVHYPKVYKTYFEKVERLKHGTFGPVHFRNQVKIRRRVDTNPGHADLSAKEAQ
+                     DVIMEVVFPNEVGARILTSESQLAITKEKKEELQNCKIAPLMVAYMLERELVRKTRFL
+                     PVAGGTGSVYIEVLHLTQGTCWEQMYTPGGEVRNDDVDQSLIIAARNIVRRAAVSADP
+                     LASLLEMCHSTQIGGVKMVDILKQNPTEEQAVDICKAAIGLRISSSFSFGGFTFKRTS
+                     GSSVKKEEEMLTGNLQTLKLRVHEGYEEFTMVGRRATAILRKATRRLIQLIVSGRDEQ
+                     SIAEAIIVAMVFSQEDCMIKAVRGDLNFVNRANQRLNPMHQLLRHFQKDAKVLFQNWG
+                     IETIDNVMGMIGILPDMTPSTEMSLRGIRVSKMGVDEYSSTERVVVSIDRFLRVRDQR
+                     GNVLLSPEEVSETQGTEKLTITYSSSMMWEINGPESVLVNTYQWIIRNWEIVKIQWSQ
+                     DPTMLYNKMEFEPFQSLVPKATRSRYSGFVRTLFQQMRDVLGTFDTVQIIKLLPFAAA
+                     PPEQSRMQFSSLTVNVRGSGLRILIRGNSPVFNYNKATKRLTVLGKDAGALTEDPDEG
+                     TSGVESAVLRGFLILGKEDKRYGPALSINELSNLAKGEKANVLIGQGDIVLVMKRKRD
+                     SSILTDSQTATKRIRMAIN"
+ORIGIN      
+        1 tcaaatatat tcaatatgga gagaataaaa gagctgagag atctaatgtc gcagtcccgc
+       61 actcgcgaga tactcactaa gaccactgtg gaccatatgg ccatcatcaa aaagtacaca
+      121 tcgggaaggc aagagaagaa ccccgcactc agaatgaagt ggatgatggc aatgaaatac
+      181 ccaattacgg cagacaagag aataatggac ataatcccag agaggaatga acaaggacaa
+      241 accctctgga gcaaaacaaa cgatgctgga tcagaccgag tgatggtatc acctctggcc
+      301 gtaacatggt ggaataggaa tggcccaaca acaagtacag ttcattaccc taaggtatat
+      361 aaaacttatt tcgaaaaggt cgaaaggttg aaacatggta ccttcggccc tgtccacttc
+      421 agaaatcaag ttaaaataag gaggagagtt gatacaaacc ctggccatgc agatctcagt
+      481 gccaaggagg cacaggatgt gattatggaa gttgttttcc caaatgaagt gggggcaaga
+      541 atactgacat cagagtcaca gctggcaata acaaaagaga agaaagaaga gctccagaat
+      601 tgtaaaattg ctcccttgat ggtggcgtac atgctagaaa gagaattggt ccgtaaaaca
+      661 aggtttctcc cggtagccgg tgggacaggc agtgtttata ttgaggtgtt gcacttgacc
+      721 caagggacgt gctgggagca gatgtacact ccaggaggag aagtgagaaa tgatgatgtt
+      781 gaccaaagct tgattatcgc tgctagaaac atagtaagaa gagcagcagt gtcagcagac
+      841 ccattagcat ctctcttgga aatgtgccac agcacacaga ttggaggtgt gaagatggtg
+      901 gacatcctta aacagaatcc aactgaggag caagccgtag acatatgcaa ggcagcaata
+      961 gggttgagga tcagctcatc tttcagtttt ggtgggttca ctttcaaaag gacaagcgga
+     1021 tcatcagtca agaaagaaga agaaatgcta acgggcaacc tccaaacact gaaattaaga
+     1081 gtacatgaag ggtatgaaga attcacaatg gttgggagaa gagcaacagc tattctcaga
+     1141 aaggcaacca ggagattgat ccaattaata gtaagcggga gagacgagca gtcaatagct
+     1201 gaagcaataa ttgtggccat ggtattctca caagaggatt gcatgatcaa agcagttagg
+     1261 ggcgatctga actttgtcaa tagggcaaac cagagactga atcccatgca ccaactcttg
+     1321 aggcatttcc aaaaagatgc aaaagtgctt ttccagaact ggggaattga aaccatcgac
+     1381 aatgtgatgg gaatgatcgg aatactgccc gacatgaccc caagcacgga gatgtcactg
+     1441 agaggaataa gagtcagcaa gatgggagta gatgaatact ccagcacgga gagagtggta
+     1501 gtgagtattg accgattttt gagggttaga gatcaaagag gaaacgtact attgtctccc
+     1561 gaagaagtca gtgaaacgca aggaactgag aagttgacaa taacttattc gtcatcaatg
+     1621 atgtgggaga tcaacggccc tgagtcagtg ctagtcaaca cttatcaatg gataatcaga
+     1681 aactgggaaa ttgtgaaaat tcaatggtca caagacccca caatgttata caacaaaatg
+     1741 gaatttgaac catttcagtc tcttgtccct aaggcaacca gaagccgata cagtggattc
+     1801 gtaaggacac tgttccagca aatgagggat gtgcttggga catttgacac tgtccaaata
+     1861 ataaaacttc tcccctttgc tgctgctcca ccagaacaga gcaggatgca attttcttca
+     1921 ttgactgtga atgtgagagg atcagggtta aggatactga taagaggcaa ttctccagta
+     1981 ttcaattaca acaaggcaac caaacgactt acggttcttg gaaaggatgc aggtgcattg
+     2041 actgaagatc cagatgaagg cacatctggg gtggagtctg ctgtcctgag aggattcctc
+     2101 attttaggca aagaagacaa gagatatggc ccagcattaa gcatcaatga actgagcaat
+     2161 cttgcaaaag gagagaaagc taatgtgcta attgggcagg gggacatagt gttggtaatg
+     2221 aaacgaaaac gggactctag catacttact gacagccaga cagcgaccaa aagaattcgg
+     2281 atggccatca attagtgtcg aattgtttaa aaacga
+//
+

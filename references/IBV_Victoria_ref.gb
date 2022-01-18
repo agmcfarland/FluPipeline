@@ -1,0 +1,860 @@
+LOCUS       FJ766840                1878 bp    cRNA    linear   VRL 28-FEB-2009
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 4 hemagglutinin (HA)
+            gene, complete cds.
+ACCESSION   FJ766840
+VERSION     FJ766840.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1878)
+  AUTHORS   Komadina,N.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (12-FEB-2009) WHO CC for Reference and Research on
+            Influenza, Parkville, 45 Poplar Rd., Parkville, Victoria 3052,
+            Australia
+COMMENT     'Some of the information does not have GenBank feature identifiers
+            and is being provided in the comment section.'.
+            
+            ##EpifluData-START##
+            Isolate             :: B/Brisbane/60/2008e
+            Segment_name        :: HA
+            Host_gender         :: M
+            Host_age            :: 15
+            Passage_history     :: E4
+            Country             :: Australia
+            State/Province      :: Queensland
+            Localization_detail :: Gold Coast
+            Collection_day      :: 15
+            Collection_month    :: 8
+            Collection_year     :: 2008
+            EPI_accession       :: EPI173277
+            ##EpifluData-END##
+FEATURES             Location/Qualifiers
+     source          1..1878
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens; gender M; age 15"
+                     /db_xref="taxon:604436"
+                     /segment="4"
+                     /country="Australia: Queensland, Gold Coast"
+                     /collection_date="15-Aug-2008"
+     gene            34..1791
+                     /gene="HA"
+     CDS             34..1791
+                     /gene="HA"
+                     /codon_start=1
+                     /product="hemagglutinin"
+                     /protein_id="ACN29380.1"
+                     /translation="MKAIIVLLMVVTSNADRICTGITSSNSPHVVKTATQGEVNVTGV
+                     IPLTTTPTKSHFANLKGTETRGKLCPKCLNCTDLDVALGRPKCTGKIPSARVSILHEV
+                     RPVTSGCFPIMHDRTKIRQLPNLLRGYEHIRLSTHNVINAENAPGGPYKIGTSGSCPN
+                     ITNGNGFFATMAWAVPKNDKNKTATNPLTIEVPYICTEGEDQITVWGFHSDNETQMAK
+                     LYGDSKPQKFTSSANGVTTHYVSQIGGFPNQTEDGGLPQSGRIVVDYMVQKSGKTGTI
+                     TYQRGILLPQKVWCASGRSKVIKGSLPLIGEADCLHEKYGGLNKSKPYYTGEHAKAIG
+                     NCPIWVKTPLKLANGTKYRPPAKLLKERGFFGAIAGFLEGGWEGMIAGWHGYTSHGAH
+                     GVAVAADLKSTQEAINKITKNLNSLSELEVKNLQRLSGAMDELHNEILELDEKVDDLR
+                     ADTISSQIELAVLLSNEGIINSEDEHLLALERKLKKMLGPSAVEIGNGCFETKHKCNQ
+                     TCLDRIAAGTFDAGEFSLPTFDSLNITAASLNDDGLDNHTILLYYSTAASSLAVTLMI
+                     AIFVVYMVSRDNVSCSICL"
+ORIGIN      
+        1 agcagaagca gagcattttc taatatccac aaaatgaagg caataattgt actactcatg
+       61 gtagtaacat ccaatgcaga tcgaatctgc actggaataa catcgtcaaa ctcaccacat
+      121 gtcgtcaaaa ctgctactca aggggaggtc aatgtgactg gtgtaatacc actgacaaca
+      181 acacccacca aatctcattt tgcaaatctc aaaggaacag aaaccagggg gaaactatgc
+      241 ccaaaatgcc tcaactgcac agatctggac gtagccttgg gcagaccaaa atgcacgggg
+      301 aaaataccct cggcaagagt ttcaatactc catgaagtca gacctgttac atctgggtgc
+      361 tttcctataa tgcacgacag aacaaaaatt agacagctgc ctaaccttct ccgaggatac
+      421 gaacatatca ggttatcaac ccataacgtt atcaatgcag aaaatgcacc aggaggaccc
+      481 tacaaaattg gaacctcagg gtcttgccct aacattacca atggaaacgg atttttcgca
+      541 acaatggctt gggccgtccc aaaaaacgac aaaaacaaaa cagcaacaaa tccattaaca
+      601 atagaagtac catacatttg tacagaagga gaagaccaaa ttaccgtttg ggggttccac
+      661 tctgacaacg agacccaaat ggcaaagctc tatggggact caaagcccca gaagttcacc
+      721 tcatctgcca acggagtgac cacacattac gtttcacaga ttggtggctt cccaaatcaa
+      781 acagaagacg gaggactacc acaaagtggt agaattgttg ttgattacat ggtgcaaaaa
+      841 tctgggaaaa caggaacaat tacctatcaa aggggtattt tattgcctca aaaggtgtgg
+      901 tgcgcaagtg gcaggagcaa ggtaataaaa ggatccttgc ctttaattgg agaagcagat
+      961 tgcctccacg aaaaatacgg tggattaaac aaaagcaagc cttactacac aggggaacat
+     1021 gcaaaggcca taggaaattg cccaatatgg gtgaaaacac ccttgaagct ggccaatgga
+     1081 accaaatata gacctcctgc aaaactatta aaggaaaggg gtttcttcgg agctattgct
+     1141 ggtttcttag aaggaggatg ggaaggaatg attgcaggtt ggcacggata cacatcccat
+     1201 ggggcacatg gagtagcggt ggcagcagac cttaagagca ctcaagaggc cataaacaag
+     1261 ataacaaaaa atctcaactc tttgagtgag ctggaagtaa agaatcttca aagactaagc
+     1321 ggtgccatgg atgaactcca caacgaaata ctagaactag atgagaaagt ggatgatctc
+     1381 agagctgata caataagctc acaaatagaa ctcgcagtcc tgctttccaa tgaaggaata
+     1441 ataaacagtg aagatgaaca tctcttggcg cttgaaagaa agctgaagaa aatgctgggc
+     1501 ccctctgctg tagagatagg gaatggatgc tttgaaacca aacacaagtg caaccagacc
+     1561 tgtctcgaca gaatagctgc tggtaccttt gatgcaggag aattttctct ccccaccttt
+     1621 gattcactga atattactgc tgcatcttta aatgacgatg gattggataa tcatactata
+     1681 ctgctttact actcaactgc tgcctccagt ttggctgtaa cactgatgat agctatcttt
+     1741 gttgtttata tggtctccag agacaatgtt tcttgctcca tctgtctata aggaaagtta
+     1801 agccctgtat tttcctttat tgtagtgctt gtttacttgt tgtcattaca aaaaaacgtt
+     1861 attgaaaaat gctcttgt
+//
+
+LOCUS       KC866607                1189 bp    cRNA    linear   VRL 19-JUN-2013
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 7 matrix protein 1
+            (M1) and BM2 protein (BM2) genes, complete cds.
+ACCESSION   KC866607
+VERSION     KC866607.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1189)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D.G., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Strecker,T., Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C.,
+            Zaveri,J., Zhou,B., Becker,S., Donabedian,A., Mason,P.W.,
+            Glass,J.I., Rappuoli,R. and Venter,J.C.
+  TITLE     Synthetic generation of influenza vaccine viruses for rapid
+            response to pandemics
+  JOURNAL   Sci Transl Med 5 (185), 185RA68 (2013)
+   PUBMED   23677594
+REFERENCE   2  (bases 1 to 1189)
+  AUTHORS   Dormitzer,P. and Suphaphiphat,P.
+  TITLE     Synthetic influenza vaccine viruses for rapid pandemic response
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 1189)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C., Zaveri,J., Zhou,B.,
+            Becker,S., Donabedian,A., Mason,P.W., Glass,J.I., Rappuoli,R. and
+            Venter,J.C.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (01-APR-2013) Research, Novartis Vaccines & Diagnostics,
+            45 Sidney St., Cambridge, MA 02139, USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Sequencher v. 4.0
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1189
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:604436"
+                     /segment="7"
+                     /country="Australia: Brisbane"
+                     /collection_date="2008"
+                     /note="passage history: EX/CX"
+     gene            25..771
+                     /gene="M1"
+     CDS             25..771
+                     /gene="M1"
+                     /codon_start=1
+                     /product="matrix protein 1"
+                     /protein_id="AGK63067.1"
+                     /translation="MSLFGDTIAYLLSLTEDGEGKAELAEKLHCWFGGKEFDLDSALE
+                     WIKNKRCLTDIQKALIGASICFLKPKDQERKRRFITEPLSGMGTTATKKKGLILAERK
+                     MRRCVSFHEAFEIAEGHESSALLYCLMVMYLNPGNYSMQVKLGTLCALCEKQASHSHR
+                     AHSRAARSSVPGVRREMQMVSAMNTAKTMNGMGKGEDVQKLAEELQSNIGVLRSLGAS
+                     QKNGEGIAKDVMEVLKQSSMGNSALVKKYL"
+     gene            771..1100
+                     /gene="BM2"
+     CDS             771..1100
+                     /gene="BM2"
+                     /codon_start=1
+                     /product="BM2 protein"
+                     /protein_id="AGK63068.1"
+                     /translation="MLEPFQILTICSFILSALHFMAWTIGHLNQIKRGINMKIRIKGP
+                     NKETINREVSILRHSYQKEIQAKETMKEVLSDNMEVLNDHIIIEGLSAEEIIKMGETV
+                     LEIEELH"
+ORIGIN      
+        1 agcagaagca cgcactttct taaaatgtcg ctgtttggag acacaattgc ctacctgctt
+       61 tcattgacag aagatggaga aggcaaagca gaactagcag aaaaattaca ctgttggttt
+      121 ggtgggaaag aatttgacct agactctgcc ttggaatgga taaaaaacaa aagatgctta
+      181 actgatatac aaaaagcact aattggtgcc tctatatgct ttttaaaacc caaagaccag
+      241 gaaagaaaaa gaagattcat cacagagccc ttatcaggaa tgggaacaac agcaacaaaa
+      301 aagaaaggcc tgattctggc tgagagaaaa atgagaagat gtgtgagctt tcatgaagca
+      361 tttgaaatag cagaaggcca tgaaagctca gcgctactat actgtctcat ggtcatgtac
+      421 ctgaatcctg gaaattattc aatgcaagta aaactaggaa cgctctgtgc tttatgcgag
+      481 aaacaagcat cacattcaca cagggctcat agcagagcag cgagatcttc agtgcctgga
+      541 gtgagacgag aaatgcagat ggtctcagct atgaacacag caaaaacaat gaatggaatg
+      601 ggaaaaggag aagacgtcca aaagctggca gaagagttgc aaagcaacat tggagtgctg
+      661 agatctcttg gggcaagcca aaagaatggg gaagggattg caaaggatgt aatggaagtg
+      721 ctaaagcaga gctccatggg aaattcagct cttgtgaaga aatatctata atgctcgaac
+      781 catttcagat tcttacaatt tgttctttta tcttatcagc tctccatttc atggcttgga
+      841 caatagggca tttgaatcaa ataaaaagag gaataaacat gaaaatacga ataaaaggtc
+      901 caaacaaaga gacaataaac agagaggtat caattttgag acacagttac caaaaagaaa
+      961 tccaggccaa agaaacaatg aaggaagtac tctctgacaa catggaggta ttgaatgacc
+     1021 acataataat tgaggggctt tctgccgaag agataataaa aatgggtgaa acagttttgg
+     1081 agatagaaga attgcattaa attcaatttt actgtatttc ttactatgca tttaagcaaa
+     1141 ttgtaatcaa tgtcagcaaa taaactggaa aaagtgcgtt gtttctact
+//
+
+LOCUS       KC866606                1101 bp    cRNA    linear   VRL 19-JUN-2013
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 8 nuclear export
+            protein (NEP) and nonstructural protein 1 (NS1) genes, complete
+            cds.
+ACCESSION   KC866606
+VERSION     KC866606.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1101)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D.G., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Strecker,T., Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C.,
+            Zaveri,J., Zhou,B., Becker,S., Donabedian,A., Mason,P.W.,
+            Glass,J.I., Rappuoli,R. and Venter,J.C.
+  TITLE     Synthetic generation of influenza vaccine viruses for rapid
+            response to pandemics
+  JOURNAL   Sci Transl Med 5 (185), 185RA68 (2013)
+   PUBMED   23677594
+REFERENCE   2  (bases 1 to 1101)
+  AUTHORS   Dormitzer,P. and Suphaphiphat,P.
+  TITLE     Synthetic influenza vaccine viruses for rapid pandemic response
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 1101)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C., Zaveri,J., Zhou,B.,
+            Becker,S., Donabedian,A., Mason,P.W., Glass,J.I., Rappuoli,R. and
+            Venter,J.C.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (01-APR-2013) Research, Novartis Vaccines & Diagnostics,
+            45 Sidney St., Cambridge, MA 02139, USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Sequencher v. 4.0
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1101
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:604436"
+                     /segment="8"
+                     /country="Australia: Brisbane"
+                     /collection_date="2008"
+                     /note="passage history: EX/CX"
+     gene            45..1071
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+     CDS             join(45..80,736..1071)
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+                     /note="nonstructural protein 2"
+                     /codon_start=1
+                     /product="nuclear export protein"
+                     /protein_id="AGK63066.1"
+                     /translation="MANNNMTTTQIEWRMKKMAIGSSTHSSSVLMKDIQSQFEQLKLR
+                     WESYPNLVKSTDYHQKRETIRLVTEELYLLSKRIDDNILFHKTVIANSSIIADMVVSL
+                     SLLETLYEMKDVVEVYSRQCL"
+     gene            45..893
+                     /gene="NS1"
+     CDS             45..893
+                     /gene="NS1"
+                     /codon_start=1
+                     /product="nonstructural protein 1"
+                     /protein_id="AGK63065.1"
+                     /translation="MANNNMTTTQIEVGPGATNATINFEAGILECYERLSWQRALDYP
+                     GQDRLNRLKRKLESRIKTHNKSEPESKRMSLEERKAIGVKMMKVLLFMNPSAGIEGFE
+                     PYCMKSSSNSNCTKYNWTDYPSTPERCLDDIEEEPEDVDGPTEIVLRDMNNKDARQKI
+                     KEEVNTQKEGKFRLTIKRDMRNVLSLRVLVNGTFLKHPNGHKSLSTLHRLNAYDQSGR
+                     LVAKLVATDDLTVEDEEDGHRILNSLFERLNEGHSKPIRAAETAVGVLSQFGQEHRLS
+                     PEEGDN"
+ORIGIN      
+        1 agcagaagca gaggatttgt ttagtcactg gcaaacaggg aaaaatggcg aacaacaaca
+       61 tgaccacaac acaaattgag gtgggtccgg gagcaaccaa tgccaccata aactttgaag
+      121 caggaattct agagtgctat gaaaggcttt catggcaaag agcccttgac taccctggtc
+      181 aagaccgcct aaacagacta aagagaaaat tagagtcaag aataaagact cacaacaaaa
+      241 gtgagcctga aagtaaaagg atgtcccttg aagagagaaa agcaattgga gtaaaaatga
+      301 tgaaagtact cctatttatg aatccgtctg ctggaattga agggtttgag ccatactgta
+      361 tgaaaagttc ctcaaatagc aactgtacga aatacaattg gactgattac ccttcaacac
+      421 cagagaggtg ccttgatgac atagaggaag aaccagagga tgttgatggc ccaactgaaa
+      481 tagtattaag ggacatgaac aacaaagatg caaggcaaaa gataaaggag gaagtaaaca
+      541 ctcagaaaga agggaagttc cgtttgacaa taaaaaggga tatgcgtaat gtattgtcct
+      601 tgagagtgtt ggtaaacgga acattcctca aacaccccaa tggacacaag tccttatcaa
+      661 ctctgcatag attgaatgca tatgaccaga gtggaaggct tgttgctaaa cttgttgcca
+      721 ctgatgatct tacagtggag gatgaagaag atggccatcg gatcctcaac tcactcttcg
+      781 agcgtcttaa tgaaggacat tcaaagccaa ttcgagcagc tgaaactgcg gtgggagtct
+      841 tatcccaatt tggtcaagag caccgattat caccagaaga gggagacaat tagactggtc
+      901 acggaagaac tttatctttt aagtaaaaga attgatgata acatactatt ccacaaaaca
+      961 gtaatagcta acagctccat aatagctgac atggttgtat cattatcatt attagaaaca
+     1021 ttgtatgaaa tgaaggatgt ggttgaagtg tacagcaggc agtgcttgtg aatttaaaat
+     1081 aaaaatcctc ttgttactac t
+//
+
+LOCUS       KC866605                1844 bp    cRNA    linear   VRL 19-JUN-2013
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 5 nucleoprotein (NP)
+            gene, complete cds.
+ACCESSION   KC866605
+VERSION     KC866605.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1844)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D.G., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Strecker,T., Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C.,
+            Zaveri,J., Zhou,B., Becker,S., Donabedian,A., Mason,P.W.,
+            Glass,J.I., Rappuoli,R. and Venter,J.C.
+  TITLE     Synthetic generation of influenza vaccine viruses for rapid
+            response to pandemics
+  JOURNAL   Sci Transl Med 5 (185), 185RA68 (2013)
+   PUBMED   23677594
+REFERENCE   2  (bases 1 to 1844)
+  AUTHORS   Dormitzer,P. and Suphaphiphat,P.
+  TITLE     Synthetic influenza vaccine viruses for rapid pandemic response
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 1844)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C., Zaveri,J., Zhou,B.,
+            Becker,S., Donabedian,A., Mason,P.W., Glass,J.I., Rappuoli,R. and
+            Venter,J.C.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (01-APR-2013) Research, Novartis Vaccines & Diagnostics,
+            45 Sidney St., Cambridge, MA 02139, USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Sequencher v. 4.0
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..1844
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:604436"
+                     /segment="5"
+                     /country="Australia: Brisbane"
+                     /collection_date="2008"
+                     /note="passage history: EX/CX"
+     gene            61..1743
+                     /gene="NP"
+     CDS             61..1743
+                     /gene="NP"
+                     /codon_start=1
+                     /product="nucleoprotein"
+                     /protein_id="AGK63064.1"
+                     /translation="MSNMDIDGINTGTIDKTPEEITSGTSGTTRPIIRPATLAPPSNK
+                     RTRNPSPERATTSSEDDVGRKTQKKQTPTEIKKSVYNMVVKLGEFYNQMMVKAGLNDD
+                     MERNLIQNAHAVERILLAATDDKKTEFQKKKNARDVKEGKEEIDHNKTGGTFYKMVRD
+                     DKTIYFSPIRITFLKEEVKTMYKTTMGSDGFSGLNHIMIGHSQMNDVCFQRSKALKRV
+                     GLDPSLISTFAGSTVPRRSGATGVAIKGGGTLVAEAIRFIGRAMADRGLLRDIKAKTA
+                     YEKILLNLKNKCSAPQQKALVDQVIGSRNPGIADIEDLTLLARSMVVVRPSVASKVVL
+                     PISIYAKIPQLGFNVEEYSMVGYEAMALYNMATPVSILRMGDDAKDKSQLFFMSCFGA
+                     AYEDLRVLSALTGTEFKPRSALKCKGFHVPAKEQVEGMGAALMSIKLQFWAPMTRSGG
+                     NEVGGDGGSGQISCSPVFAVERPIALSKQAVRRMLSMNIEGRDADVKGNLLKMMNDSM
+                     AKKTSGNAFIGKKMFQISDKNKTNPIEIPIKQTIPNFFFGRDTAEDYDDLDY"
+ORIGIN      
+        1 agcagaagca cagcattttc ttgtgaactt caagcaccag taaaagaact gaaaatcaaa
+       61 atgtccaaca tggatattga cggtataaac actgggacaa ttgacaaaac accggaagaa
+      121 ataacttctg gaaccagtgg gacaaccaga ccaatcatta gaccagcaac ccttgcccca
+      181 ccaagcaaca aacgaacccg taacccatcc ccggaaagag caaccacaag cagtgaagat
+      241 gatgtcggaa ggaaaaccca aaagaaacag accccgacag agataaagaa gagcgtctac
+      301 aacatggtgg tgaaactggg cgaattctat aaccagatga tggtcaaagc tggactcaat
+      361 gatgacatgg agagaaatct aatccaaaat gcgcatgccg tggaaagaat tctattggct
+      421 gccactgatg acaagaaaac cgagttccag aagaaaaaga atgccagaga tgtcaaagaa
+      481 gggaaagaag aaatagatca caacaaaaca ggaggcacct tttacaagat ggtaagagat
+      541 gataaaacca tctacttcag ccctataaga attacctttt taaaagaaga ggtgaaaaca
+      601 atgtacaaaa ccaccatggg gagtgatggc ttcagtggac taaatcacat aatgattggg
+      661 cattcacaga tgaatgatgt ctgtttccaa agatcaaagg cactaaaaag agttggactt
+      721 gatccttcat taatcagtac ctttgcggga agcacagtcc ccagaagatc aggtgcgact
+      781 ggtgttgcaa tcaaaggagg tggaacctta gtggctgaag ccattcgatt tataggaaga
+      841 gcaatggcag acagagggct attgagagac atcaaagcca agactgccta tgaaaagatt
+      901 cttctgaatc taaaaaacaa atgctctgcg ccccaacaaa aggctctagt tgatcaagtg
+      961 atcggaagca gaaatccggg gattgcagac attgaagatc taaccctgct tgctcgtagt
+     1021 atggtcgttg ttaggccctc tgtggcaagc aaagtggtgc ttcccataag catttacgcc
+     1081 aaaatacctc aactagggtt caatgttgaa gagtactcta tggttgggta cgaagccatg
+     1141 gctctttaca atatggcaac acctgtgtcc atattaagaa tgggagatga tgcaaaagat
+     1201 aaatcgcaat tattcttcat gtcttgcttc ggagctgcct atgaagacct gagagttttg
+     1261 tctgcattaa caggcacaga attcaagcct agatcagcat taaaatgcaa gggtttccat
+     1321 gttccagcaa aggaacaggt agaaggaatg ggagcagctc tgatgtccat caagctccag
+     1381 ttttgggctc cgatgaccag atctgggggg aacgaagtag gtggagacgg agggtctggc
+     1441 caaataagct gcagcccagt gtttgcagtg gaaagaccta ttgctctaag caagcaagct
+     1501 gtaagaagaa tgctgtcaat gaatattgag ggacgtgatg cagatgtcaa aggaaatcta
+     1561 ctcaagatga tgaatgactc aatggctaag aaaaccagtg gaaatgcttt cattgggaag
+     1621 aaaatgtttc aaatatcaga caaaaacaaa accaatccca ttgaaattcc aattaagcag
+     1681 accatcccca atttcttctt tgggagggac acagcagagg attatgatga cctcgattat
+     1741 taaggcaaca aaatagacac tatgactgtg attgtttcaa tacgtttgga atgtgggtgt
+     1801 ttattcttat taaaataaat ataaaaaatg ctgttgtttc tact
+//
+
+LOCUS       KC866604                2396 bp    cRNA    linear   VRL 19-JUN-2013
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 2 polymerase PB2
+            (PB2) gene, complete cds.
+ACCESSION   KC866604
+VERSION     KC866604.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 2396)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D.G., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Strecker,T., Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C.,
+            Zaveri,J., Zhou,B., Becker,S., Donabedian,A., Mason,P.W.,
+            Glass,J.I., Rappuoli,R. and Venter,J.C.
+  TITLE     Synthetic generation of influenza vaccine viruses for rapid
+            response to pandemics
+  JOURNAL   Sci Transl Med 5 (185), 185RA68 (2013)
+   PUBMED   23677594
+REFERENCE   2  (bases 1 to 2396)
+  AUTHORS   Dormitzer,P. and Suphaphiphat,P.
+  TITLE     Synthetic influenza vaccine viruses for rapid pandemic response
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 2396)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C., Zaveri,J., Zhou,B.,
+            Becker,S., Donabedian,A., Mason,P.W., Glass,J.I., Rappuoli,R. and
+            Venter,J.C.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (01-APR-2013) Research, Novartis Vaccines & Diagnostics,
+            45 Sidney St., Cambridge, MA 02139, USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Sequencher v. 4.0
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..2396
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:604436"
+                     /segment="2"
+                     /country="Australia: Brisbane"
+                     /collection_date="2008"
+                     /note="passage history: EX/CX"
+     gene            24..2336
+                     /gene="PB2"
+     CDS             24..2336
+                     /gene="PB2"
+                     /codon_start=1
+                     /product="polymerase PB2"
+                     /protein_id="AGK63063.1"
+                     /translation="MTLAKIELLKQLLRDNEAKTVLKQTTVDQYNIIRKFNTSRIEKN
+                     PSLRMKWAMCSNFPLALTKGDMANRIPLEYKGIQLKTNAEDIGTKGQMCSIAAVTWWN
+                     TYGPIGDTEGFERVYESFFLRKMRLDNATWGRITFGPVERVRKRVLLNPLTKEMPPDE
+                     ASNVIMEILFPKEAGIPRESTWIHRELIKEKREKLKGTMITPIVLAYMLERELVARRR
+                     FLPVAGATSAEFIEMLHCLQGENWRQIYHPGGNKLTESRSQSMIVACRKIIRRSIVAS
+                     NPLELAVEIANKTVIDTEPLKSCLAAIDGGDVACDIIRAALGLKIRQRQRFGRLELKR
+                     ISGRGFKNDEEILIGNGTIQKIGIWDGEEEFHVRCGECRGILKKSKMKLEKLLINSAK
+                     KEDMRDLIILCMVFSQDTRMFQGVRGEINFLNRAGQLLSPMYQLQRYFLNRSNDLFDQ
+                     WGYEESPKASELHGINESMNASDYTLKGIVVTRNVIDDFSSIETEKVSITKNLSLIKR
+                     TGEVIMGANDVSELESQAQLMITYDTPKMWEMGTTKELVQNTYQWVLKNLVTLKAQFL
+                     LGKEDMFQWDAFEAFESIIPQKMAGQYSGFARAVLKQMRDQEVMKTDQFIKLLPFCFS
+                     PPKLRSNGEPYQFLKLVLKGGGENFIEVRKGSPLFSYNPQTEVLTICGRMMSLKGKIE
+                     DEERNRSMGNAVLAGFLVSGKYDPDLGDFKTIEELEKLKPGEKANILLYQGKPVKVVK
+                     RKRYSALSNDISQGIKRQRMTVESMGWALS"
+ORIGIN      
+        1 agcagaagcg gagcgttttc aagatgacat tggccaaaat tgaattgtta aaacaactgc
+       61 taagggacaa tgaagccaaa acagttttga agcaaacaac ggtagaccaa tataacataa
+      121 taagaaaatt caatacatca aggattgaaa agaatccttc actaaggatg aagtgggcca
+      181 tgtgttctaa ttttcccttg gctctaacca agggcgatat ggcaaacaga atccccttgg
+      241 aatacaaagg gatacaactt aaaacaaatg ctgaagacat aggaaccaaa ggccaaatgt
+      301 gctcaatagc agcagttact tggtggaata catatggacc aataggagat actgaaggtt
+      361 tcgaaagggt ctacgaaagc ttttttctca gaaaaatgag acttgacaac gccacttggg
+      421 gccgaataac ttttggccca gttgaaagag tgagaaaaag ggtactgcta aaccctctca
+      481 ccaaggaaat gcctccggat gaggcgagca atgtgataat ggaaatattg ttccctaaag
+      541 aagcaggaat accaagagaa tccacttgga tacataggga actgataaaa gaaaaaagag
+      601 aaaaattgaa aggaacaatg ataactccaa tcgtactggc atacatgctt gaaagagaac
+      661 tggttgctcg aagaagattc ttgccagtgg caggagcaac atcagctgag ttcatagaaa
+      721 tgctacactg cttacaaggt gaaaattgga gacaaatata tcacccagga gggaataaat
+      781 taactgagtc caggtctcaa tcaatgatag tagcttgtag aaaaataatc agaagatcaa
+      841 tagtcgcttc aaacccactg gagctagctg tagaaattgc aaacaagact gtgatagata
+      901 ctgaaccttt aaagtcatgt ctggcagcca tagacggagg tgatgtagct tgtgacataa
+      961 taagagctgc attaggacta aagatcagac aaagacaaag atttggacgg cttgagctaa
+     1021 aaagaatatc aggaagagga ttcaaaaatg atgaagaaat attaataggg aacggaacaa
+     1081 tacagaagat tggaatatgg gacggggaag aggagttcca tgtaagatgt ggtgaatgca
+     1141 ggggaatatt aaaaaagagt aaaatgaaac tggaaaaact actgataaat tcagccaaaa
+     1201 aggaggatat gagagattta ataatcttat gcatggtatt ttctcaagac actaggatgt
+     1261 tccaaggagt gagaggagaa ataaattttc ttaatcgagc aggccaactt ttatctccaa
+     1321 tgtaccaact ccaacgatat tttttgaata gaagcaacga cctttttgat caatgggggt
+     1381 atgaggaatc acccaaagca agtgaactac atgggataaa tgaatcaatg aatgcatctg
+     1441 actatacatt gaaagggatt gtagtgacaa gaaatgtaat tgacgacttt agctctattg
+     1501 aaacagaaaa agtatccata acaaaaaatc ttagtttaat aaaaaggact ggggaagtca
+     1561 taatgggagc taatgacgtg agtgaattag aatcacaagc acagctgatg ataacatatg
+     1621 atacacctaa aatgtgggaa atgggaacaa ccaaagaact ggtgcaaaac acttatcaat
+     1681 gggtgctaaa aaacttggtg acactgaagg ctcagtttct tctaggaaaa gaggacatgt
+     1741 tccaatggga tgcatttgaa gcatttgaga gcataattcc tcagaagatg gctggtcagt
+     1801 acagtggatt tgcaagagca gtgctcaaac aaatgagaga ccaggaggtt atgaaaactg
+     1861 accagttcat aaagttgttg cctttttgtt tctcaccacc aaaattaagg agcaatgggg
+     1921 agccttatca attcttaaaa cttgtgttga aaggaggagg ggaaaatttc atcgaagtaa
+     1981 ggaaagggtc ccctctattt tcctataatc cacaaacaga agtcctaact atatgcggca
+     2041 gaatgatgtc attaaaaggg aaaattgaag atgaagaaag gaatagatca atgggtaatg
+     2101 cagtattagc aggctttctc gttagtggca agtatgaccc agatcttgga gatttcaaaa
+     2161 ctattgaaga acttgaaaag ctgaaaccgg gggaaaaggc aaacatctta ctttatcaag
+     2221 gaaaaccagt taaagtagtt aaaaggaaaa ggtatagtgc tttgtccaat gacatttcac
+     2281 aaggaattaa gagacaaaga atgacagttg agtctatggg gtgggccttg agctaatata
+     2341 aatttatcca ttaattcaat gaacgcaatt gagtgaaaaa tgctcgtgtt tctact
+//
+
+LOCUS       KC866603                2369 bp    cRNA    linear   VRL 19-JUN-2013
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 1 polymerase PB1
+            (PB1) gene, complete cds.
+ACCESSION   KC866603
+VERSION     KC866603.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 2369)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D.G., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Strecker,T., Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C.,
+            Zaveri,J., Zhou,B., Becker,S., Donabedian,A., Mason,P.W.,
+            Glass,J.I., Rappuoli,R. and Venter,J.C.
+  TITLE     Synthetic generation of influenza vaccine viruses for rapid
+            response to pandemics
+  JOURNAL   Sci Transl Med 5 (185), 185RA68 (2013)
+   PUBMED   23677594
+REFERENCE   2  (bases 1 to 2369)
+  AUTHORS   Dormitzer,P. and Suphaphiphat,P.
+  TITLE     Synthetic influenza vaccine viruses for rapid pandemic response
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 2369)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C., Zaveri,J., Zhou,B.,
+            Becker,S., Donabedian,A., Mason,P.W., Glass,J.I., Rappuoli,R. and
+            Venter,J.C.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (01-APR-2013) Research, Novartis Vaccines & Diagnostics,
+            45 Sidney St., Cambridge, MA 02139, USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Sequencher v. 4.0
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..2369
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:604436"
+                     /segment="1"
+                     /country="Australia: Brisbane"
+                     /collection_date="2008"
+                     /note="passage history: EX/CX"
+     gene            22..2280
+                     /gene="PB1"
+     CDS             22..2280
+                     /gene="PB1"
+                     /codon_start=1
+                     /product="polymerase PB1"
+                     /protein_id="AGK63062.1"
+                     /translation="MNINPYFLFIDVPVQAAISTTFPYTGVPPYSHGTGTGYTIDTVI
+                     RTHEYSNKGKQYISDVTGCTMVDPTNGPLPEDNEPSAYAQLDCVLEALDRMDEEHPGL
+                     FQAASQNAMEALMVTTVDKLTQGRQTFDWTVCRNQPAATALNTTITSFRLNDLNGADK
+                     GGLIPFCQDIIDSLDRPEMTFFSVKNIKKKLPAKNRKGFLIKRIPMKVKDKITKVEYI
+                     KRALSLNTMTKDAERGKLKRRAIATAGIQIRGFVLVVENLAKNICENLEQSGLPVGGN
+                     EKKAKLSNAVAKMLSNCPPGGISMTVTGDNTKWNECLNPRIFLAMTERITRDSPVWFR
+                     DFCSIAPVLFSNKIARLGKGFMITSKTKRLKAQIPCPDLFSIPLERYNEETRAKLKKL
+                     KPFFNEEGTASLSPGMMMGMFNMLSTVLGVAALGIKNIGNKEYLWDGLQSSDDFALFV
+                     NAKDEETCMEGINDFYRTCKLLGVNMSKKKSYCNETGMFEFTSMFYRDGFVSNFAMEL
+                     PSFGVAGVNESADMAIGMTIIKNNMINNGMGPATAQTAIQLFIADYRYTYKCHRGDSK
+                     VEGKRMKIIKELWENTKGRDGLLVADGGPNIYNLRNLHIPEIVLKYNLMDPEYKGRLL
+                     HPQNPFVGHLSIEGIKEADITPAHGPVKKMDYDAVSGTHSWRTKRNRSILNTDQRNMI
+                     LEEQCYAKCCNLFEACFNSASYRKPVGQHSMLEAMAHRLRMDARLDYESGRMSKDDFE
+                     KAMAHLGEIGYI"
+ORIGIN      
+        1 agcagaagcg gagcctttaa gatgaatata aatccttatt ttctcttcat agatgtgccc
+       61 gtacaggcag caatttcaac aacattccca tacactggtg ttccccctta ttcccatgga
+      121 acaggaacag gctacacaat agacaccgtg atcagaacgc atgagtactc aaacaagggg
+      181 aaacagtaca tttctgatgt tacaggatgc acaatggtag atccaacaaa tggaccatta
+      241 cccgaagata atgagccgag tgcctatgcg caattagatt gcgttttaga ggctttggat
+      301 agaatggatg aagaacaccc aggtcttttt caagcagcct cacagaatgc tatggaggcc
+      361 ctaatggtca caactgtaga caaattaacc caggggagac agacttttga ttggacagta
+      421 tgcagaaacc aacctgctgc aacggcactg aacacaacaa taacctcttt taggttgaat
+      481 gatttaaatg gagccgacaa aggtggatta ataccttttt gccaggatat cattgattca
+      541 ttagaccgac ctgaaatgac tttcttctca gtaaagaata taaagaaaaa attgcctgcc
+      601 aaaaacagaa agggtttcct cataaagagg ataccaatga aggtaaaaga caaaataacc
+      661 aaagtggaat acatcaaaag agcattatca ttaaacacaa tgacaaaaga cgctgaaaga
+      721 ggcaaactga aaagaagagc gattgccact gctggaatac aaatcagagg gtttgtatta
+      781 gtagttgaaa acttggctaa aaatatatgt gaaaatctag aacaaagtgg tttaccagta
+      841 ggtggaaacg agaagaaagc caaactgtca aacgcagtgg ccaaaatgct cagtaactgc
+      901 ccaccaggag ggattagcat gacagtaaca ggagacaata caaaatggaa tgaatgttta
+      961 aacccaagaa tctttttggc tatgactgaa agaataacca gagacagccc agtttggttc
+     1021 agggattttt gtagtatagc accggtcctg ttctccaata agatagcaag attggggaaa
+     1081 gggtttatga taacaagcaa aacaaaaaga ctgaaggctc aaataccttg tcctgatctg
+     1141 tttagtatac cgttagaaag atataatgaa gaaacaaggg caaaattgaa aaagctaaaa
+     1201 ccattcttca atgaagaagg aactgcatct ttgtcgcctg ggatgatgat gggaatgttt
+     1261 aatatgctat ctaccgtgtt gggagtagct gcactaggta tcaagaacat tggaaacaaa
+     1321 gaatacttat gggatggact gcaatcttct gatgattttg ctctgtttgt taatgcaaag
+     1381 gatgaagaaa catgtatgga aggaataaac gacttttacc gaacatgtaa attattggga
+     1441 gtaaacatga gcaaaaagaa aagttactgt aatgagactg gaatgtttga atttacaagc
+     1501 atgttctaca gagatggatt tgtatctaat tttgcaatgg aactcccttc gtttggggtt
+     1561 gctggagtaa atgaatcagc agatatggca ataggaatga caataataaa gaacaacatg
+     1621 atcaacaatg gaatgggtcc ggcaacagca caaacagcca tacagttatt catagctgat
+     1681 tatagataca cctacaaatg ccacagggga gattccaaag tagaaggaaa gagaatgaaa
+     1741 atcataaagg agttatggga aaacactaaa ggaagagatg gtctattagt agcagatggt
+     1801 gggcccaaca tttacaattt gagaaacctg catatcccag aaatagtatt aaagtataat
+     1861 ctaatggacc ctgaatacaa agggcggtta cttcatcctc aaaatccctt tgtgggacat
+     1921 ttgtctattg agggcatcaa agaggcagac ataaccccag cacatggtcc agtaaagaaa
+     1981 atggactacg atgcggtgtc tggaactcat agttggagaa ccaaaagaaa cagatctata
+     2041 ctaaacactg atcagaggaa catgattctt gaggaacaat gctacgctaa atgttgcaac
+     2101 ctatttgagg cctgttttaa cagtgcatca tacaggaagc cagtgggtca acatagcatg
+     2161 cttgaggcta tggcccacag attaagaatg gatgcacgat tagattatga atcagggaga
+     2221 atgtcaaagg atgattttga gaaagcaatg gctcaccttg gtgagattgg gtacatataa
+     2281 gcttcgaaga tgtttatggg gttattggtc atcattgaat acatgcgata cacaaatgat
+     2341 taaaatgaaa aaaggctcgt gtttctact
+//
+
+LOCUS       KC866602                2305 bp    cRNA    linear   VRL 19-JUN-2013
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 3 polymerase PA (PA)
+            gene, complete cds.
+ACCESSION   KC866602
+VERSION     KC866602.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 2305)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D.G., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Strecker,T., Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C.,
+            Zaveri,J., Zhou,B., Becker,S., Donabedian,A., Mason,P.W.,
+            Glass,J.I., Rappuoli,R. and Venter,J.C.
+  TITLE     Synthetic generation of influenza vaccine viruses for rapid
+            response to pandemics
+  JOURNAL   Sci Transl Med 5 (185), 185RA68 (2013)
+   PUBMED   23677594
+REFERENCE   2  (bases 1 to 2305)
+  AUTHORS   Dormitzer,P. and Suphaphiphat,P.
+  TITLE     Synthetic influenza vaccine viruses for rapid pandemic response
+  JOURNAL   Unpublished
+REFERENCE   3  (bases 1 to 2305)
+  AUTHORS   Dormitzer,P.R., Suphaphiphat,P., Gibson,D., Wentworth,D.E.,
+            Stockwell,T.B., Algire,M.A., Alperovich,N., Barro,M., Brown,D.M.,
+            Craig,S., Dattilo,B.M., Denisova,E.A., De Souza,I., Eickmann,M.,
+            Dugan,V.G., Ferrari,A., Gomila,R.C., Han,L., Judge,C., Mane,S.,
+            Matrosovich,M., Merryman,C., Palladino,G., Palmer,G.A., Spencer,T.,
+            Trusheim,H., Uhlendorff,J., Wen,Y., Yee,A.C., Zaveri,J., Zhou,B.,
+            Becker,S., Donabedian,A., Mason,P.W., Glass,J.I., Rappuoli,R. and
+            Venter,J.C.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (01-APR-2013) Research, Novartis Vaccines & Diagnostics,
+            45 Sidney St., Cambridge, MA 02139, USA
+COMMENT     ##Assembly-Data-START##
+            Assembly Method       :: Sequencher v. 4.0
+            Sequencing Technology :: Sanger dideoxy sequencing
+            ##Assembly-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..2305
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:604436"
+                     /segment="3"
+                     /country="Australia: Brisbane"
+                     /collection_date="2008"
+                     /note="passage history: EX/CX"
+     gene            30..2210
+                     /gene="PA"
+     CDS             30..2210
+                     /gene="PA"
+                     /codon_start=1
+                     /product="polymerase PA"
+                     /protein_id="AGK63061.1"
+                     /translation="MDTFITRNFQTTIIQKAKNTMAEFSEDPELQPAMLFNICVHLEV
+                     CYVISDMNFLDEEGKAYTALEGQGKEQNLRPQYEVIEGMPRTIAWMVQRSLAQEHGIE
+                     TPKYLADLFDYKTKRFIEVGITKGLADDYFWKKKEKLGNSMELMIFSYNQDYSLSNES
+                     SLDEEGKGRVLSRLTELQAELSLKNLWQVLIGEEDVEKGIDFKLGQTISRLRDISVPA
+                     GFSNFEGMRSYIDNIDPKGAIERNLARMSPLVSVTPKKLTWEDLRPIGPHIYDHELPE
+                     VPYNAFLLMSDELGLANMTEGKSKKPKTLAKECLEKYSTLRDQTDPILIMKSEKANEN
+                     FLWKLWRDCVNTISNEETSNELQKTNYAKWATGDGLTYQKIMKEVAIDDETMCQEEPK
+                     IPNKCRVAAWVQTEMNLLSTLTSKRALDLPEIGPDIAPVEHVGSERRKYFVNEINYCK
+                     ASTVMMKYVLFHTSLLNESNASMGKYKVIPITNRVVNEKGESFDMLYGLAVKGQSHLR
+                     GDTDVVTVVTFEFSSTDPRVDSGKWPKYTVFRIGSLFVSGREKSVYLYCRVNGTNKIQ
+                     MKWGMEARRCLLQSMQQMEAIVEQESSIQGYDMTKACFKGDRVNSPKTFSIGTQEGKL
+                     VKGSFGKALRVIFTKCLMHYVFGNAQLEGFSAESRRLLLLIQALKDRKGPWVFDLEGM
+                     YSGIEECISNNPWVIQSVYWFNEWLGFEKEGNKVLESVDEIMDE"
+ORIGIN      
+        1 agcagaagcg gtgcgtttga tttgtcataa tggatacttt tattacaaga aacttccaga
+       61 ctacaataat acaaaaggcc aaaaacacaa tggcagaatt tagtgaagat cctgaattgc
+      121 aaccagcaat gctattcaat atctgcgtcc atctagaggt ttgctatgta ataagtgaca
+      181 tgaattttct tgacgaagaa ggaaaagcat atacagcatt agaaggacaa gggaaagaac
+      241 aaaacttgag accacaatat gaagtaattg agggaatgcc aagaaccata gcatggatgg
+      301 tccagagatc cttagctcaa gagcatggaa tagagactcc caagtatctg gctgatttgt
+      361 ttgattataa aaccaaaaga tttatagaag ttggaataac aaagggattg gctgatgatt
+      421 acttttggaa aaagaaagaa aagttgggaa atagcatgga actgatgata ttcagctaca
+      481 atcaagacta ctcgttaagt aatgaatcct cattggatga ggaagggaaa gggagagtgc
+      541 taagcagact cacagaactt caggctgaat taagtctgaa aaatttatgg caagttctca
+      601 taggagaaga agatgttgaa aagggaattg attttaaact tggacaaaca atatctagac
+      661 taagggatat atctgttcca gctggtttct ccaattttga aggaatgagg agctacatag
+      721 acaatataga cccaaaagga gcaatagaga gaaatctagc aaggatgtct cccttagtat
+      781 cagtcacacc taaaaagtta acatgggagg acctaagacc aatagggcct cacatttacg
+      841 accatgagct accagaagtt ccatataatg cctttcttct aatgtctgat gaactgggat
+      901 tggccaatat gactgaggga aagtccaaaa aaccgaagac attagccaaa gaatgtctag
+      961 aaaagtactc aacactacgg gatcaaactg acccaatatt aataatgaaa agcgaaaaag
+     1021 ctaacgaaaa tttcctatgg aagctttgga gagactgtgt aaatacaata agtaatgagg
+     1081 aaacgagtaa cgagttacag aaaaccaatt atgccaaatg ggccacaggg gatggattaa
+     1141 cataccagaa aataatgaaa gaagtagcaa tagatgacga aacaatgtgc caagaagagc
+     1201 ctaaaatccc taacaaatgt agagtggctg cttgggttca aacagagatg aatctattga
+     1261 gcactctgac aagtaaaaga gctctggacc taccagaaat agggccagac atagcacccg
+     1321 tggagcatgt aggaagtgaa agaaggaaat actttgttaa tgaaatcaac tactgtaagg
+     1381 cctctacagt tatgatgaag tatgtgcttt ttcacacttc attgttgaat gaaagcaatg
+     1441 ccagcatggg aaaatacaaa gtaataccaa taaccaatag agtagtaaat gaaaaaggag
+     1501 aaagtttcga catgctttac ggtctggcgg ttaaaggaca atctcatctg aggggagata
+     1561 ctgatgttgt aacagttgta actttcgaat ttagtagtac agatccaaga gtggactcag
+     1621 gaaagtggcc aaaatatact gtgtttagga ttggctccct atttgtgagt gggagggaaa
+     1681 aatctgtgta cttgtattgc cgagtgaatg gcacaaataa gatccaaatg aaatggggaa
+     1741 tggaagctag aagatgtttg cttcaatcaa tgcaacaaat ggaggcaatt gttgaacagg
+     1801 aatcatcaat acaaggatat gacatgacca aagcctgttt caagggagac agagtaaata
+     1861 gccccaaaac tttcagtatt ggaactcaag aaggaaaact agtaaaagga tcctttggaa
+     1921 aagcactaag agtaatattt actaaatgct tgatgcacta tgtatttgga aatgcccaat
+     1981 tggaggggtt tagtgccgag tctaggagac ttctactgtt gattcaagca ttaaaggaca
+     2041 gaaagggccc ttgggtgttc gacttagagg gaatgtattc tggaatagaa gaatgtatta
+     2101 gcaacaaccc ttgggtaata cagagtgtat actggttcaa tgaatggttg ggctttgaaa
+     2161 aggaggggaa taaagtgttg gaatcagtgg atgaaataat ggatgaataa aaggaaatgg
+     2221 tactcaattt ggtactattt tgttcattat gtatctaaac atccaataaa aagaaccaag
+     2281 aatcaaaaat gcacgtgttt ctact
+//
+
+LOCUS       FJ766841                1557 bp    cRNA    linear   VRL 28-FEB-2009
+DEFINITION  Influenza B virus (B/Brisbane/60/2008) segment 6 NB protein (NB)
+            and neuraminidase (NA) genes, complete cds.
+ACCESSION   FJ766841
+VERSION     FJ766841.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Brisbane/60/2008)
+  ORGANISM  Influenza B virus (B/Brisbane/60/2008)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1557)
+  AUTHORS   Komadina,N.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (12-FEB-2009) WHO CC for Reference and Research on
+            Influenza, Parkville, 45 Poplar Rd., Parkville, Victoria 3052,
+            Australia
+COMMENT     'Some of the information does not have GenBank feature identifiers
+            and is being provided in the comment section.'.
+            
+            ##EpifluData-START##
+            Isolate             :: B/Brisbane/60/2008
+            Segment_name        :: NA
+            Host_gender         :: M
+            Host_age            :: 15
+            Passage_history     :: MDCKX/MDCK1
+            Country             :: Australia
+            State/Province      :: Queensland
+            Localization_detail :: Gold Coast
+            Collection_day      :: 4
+            Collection_month    :: 8
+            Collection_year     :: 2008
+            EPI_accession       :: EPI173276
+            ##EpifluData-END##
+FEATURES             Location/Qualifiers
+     source          1..1557
+                     /organism="Influenza B virus (B/Brisbane/60/2008)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Brisbane/60/2008"
+                     /host="Homo sapiens; gender M; age 15"
+                     /db_xref="taxon:604436"
+                     /segment="6"
+                     /country="Australia: Queensland, Gold Coast"
+                     /collection_date="04-Aug-2008"
+     gene            47..349
+                     /gene="NB"
+     CDS             47..349
+                     /gene="NB"
+                     /codon_start=1
+                     /product="NB protein"
+                     /protein_id="ACN29382.1"
+                     /translation="MNNATFNYTNVNPIPHIRGSVIITICVSFIIILTIFGYIAKILT
+                     NRNNCTNNAIGLCKRIKCSGCEPFCNKRGDTSSPRTGVDIPAFILPGLNLSESTPN"
+     gene            54..1454
+                     /gene="NA"
+     CDS             54..1454
+                     /gene="NA"
+                     /codon_start=1
+                     /product="neuraminidase"
+                     /protein_id="ACN29381.1"
+                     /translation="MLPSTIQTLTLFLTSGGVLLSLYVSASLSYLLYSDILLKFSPTE
+                     ITAPTMPLDCANASNVQAVNRSATKGVTLLLPEPEWTYPRLSCPGSTFQKALLISPHR
+                     FGETKGNSAPLIIREPFIACGPNECKHFALTHYAAQPGGYYNGTRGDRNKLRHLISVK
+                     LGKIPTVENSIFHMAAWSGSACHDGKEWTYIGVDGPDNNALLKVKYGEAYTDTYHSYA
+                     NKILRTQESACNCIGGNCYLMITDGSASGVSECRFLKIREGRIIKEIFPTGRVKHTEE
+                     CTCGFASNKTIECACRDNSYTAKRPFVKLNVETDTAEIRLMCTDTYLDTPRPNDGSIT
+                     GPCESNGDKGSGGIKGGFVHQRMESKIGRWYSRTMSKTERMGMGLYVKYDGDPWADSD
+                     ALAFSGVMVSMKEPGWYSFGFEIKDKKCDVPCIGIEMVHDGGKETWHSAATAIYCLMG
+                     SGQLLWDTVTGVDMAL"
+ORIGIN      
+        1 agcagaagca gagcatcttc tcaaaactga ggcaaatagg ccaaaaatga acaatgctac
+       61 cttcaactat acaaacgtta accctattcc tcacatcagg gggagtgtta ttatcactat
+      121 atgtgtcagc ttcattatca tacttactat attcggatat attgctaaaa ttctcaccaa
+      181 cagaaataac tgcaccaaca atgccattgg attgtgcaaa cgcatcaaat gttcaggctg
+      241 tgaaccgttc tgcaacaaaa ggggtgacac ttcttctccc agaaccggag tggacatacc
+      301 cgcgtttatc ttgcccgggc tcaacctttc agaaagcact cctaattagc cctcatagat
+      361 tcggagaaac caaaggaaac tcagctccct tgataataag ggaacctttt attgcttgtg
+      421 gaccaaatga atgcaaacac tttgctctaa cccattatgc agcccaacca gggggatact
+      481 acaatggaac aagaggagac agaaacaagc tgaggcatct aatttcagtc aaattgggca
+      541 aaatcccaac agtagaaaac tccattttcc acatggcagc atggagcggg tccgcgtgcc
+      601 atgatggtaa ggaatggaca tatatcggag ttgatggccc tgacaataat gcattgctca
+      661 aagtaaaata tggagaagca tatactgaca cataccattc ctatgcaaac aaaatcctaa
+      721 gaacacaaga aagtgcctgc aattgcatcg ggggaaattg ttatcttatg ataactgatg
+      781 gctcagcttc aggtgttagt gaatgcagat ttcttaagat tcgagagggc cgaataataa
+      841 aagaaatatt tccaacagga agagtaaaac acactgagga atgcacatgc ggatttgcca
+      901 gcaataaaac catagaatgt gcctgtagag ataacagtta cacagcaaaa agaccttttg
+      961 tcaaattaaa cgtggagact gatacagcag aaataagatt gatgtgcaca gatacttatt
+     1021 tggacacccc cagaccaaac gatggaagca taacaggccc ttgtgaatct aatggggaca
+     1081 aagggagtgg aggcatcaag ggaggatttg ttcatcaaag aatggaatcc aagattggaa
+     1141 ggtggtactc tcgaacgatg tctaaaactg aaaggatggg gatgggactg tatgtcaagt
+     1201 atgatggaga cccatgggct gacagtgatg ccctagcttt tagtggagta atggtttcaa
+     1261 tgaaagaacc tggttggtac tcctttggct tcgaaataaa agataagaaa tgcgatgtcc
+     1321 cctgtattgg gatagagatg gtacatgatg gtggaaaaga gacttggcac tcagcagcaa
+     1381 cagccattta ctgtttaatg ggctcaggac agctgctgtg ggacactgtc acaggtgttg
+     1441 acatggctct gtaatggagg aatggttgag tctgttctaa accctttgtt cctgttttgt
+     1501 ttgaacaatt gtccttacta aacttaattg tttctgaaaa atgctcttgt tactact
+//
+

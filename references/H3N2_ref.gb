@@ -1,0 +1,787 @@
+LOCUS       CY114382                 999 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) matrix protein 2 (M2)
+            and matrix protein 1 (M1) genes, complete cds.
+ACCESSION   CY114382
+VERSION     CY114382.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 999)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 999)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..999
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="7"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..999
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.MP"
+     gene            11..992
+                     /gene="M2"
+     CDS             join(11..36,725..992)
+                     /gene="M2"
+                     /codon_start=1
+                     /product="matrix protein 2"
+                     /protein_id="AFH00650.1"
+                     /translation="MSLLTEVETPIRNEWGCRCNDSSDPLVVAANIIGILHLILWILD
+                     RLFFKCVYRLFKHGLKRGPSTEGVPESMREEYRKEQQNAVDADDSHFVSIELE"
+     gene            11..769
+                     /gene="M1"
+     CDS             11..769
+                     /gene="M1"
+                     /codon_start=1
+                     /product="matrix protein 1"
+                     /protein_id="AFH00649.1"
+                     /translation="MSLLTEVETYVLSIVPSGPLKAEIAQRLEDVFAGKNTDLEALME
+                     WLKTRPILSPLTKGILGFVFTLTVPSERGLQRRRFVQNALNGNGDPNNMDKAVKLYRK
+                     LKREITFHGAKEIALSYSAGALASCMGLIYNRMGAVTTEVAFGLVCATCEQIADSQHR
+                     SHRQMVATTNPLIRHENRMVLASTTAKAMEQMAGSSEQAAEAMEIASQARQMVQAMRA
+                     IGTHPSSSTGLRDDLLENLQTYQKRMGVQMQRFK"
+ORIGIN      
+        1 atattgaaag atgagccttc taaccgaggt cgaaacgtat gttctctcta tcgttccatc
+       61 aggccccctc aaagccgaga tcgcgcagag acttgaagat gtctttgctg ggaaaaacac
+      121 agatcttgag gctctcatgg aatggctaaa gacaagacca attctgtcac ctctgactaa
+      181 ggggattttg gggtttgtgt tcacgctcac cgtgcccagt gagcgaggac tgcagcgtag
+      241 acgctttgtc caaaatgccc tcaatgggaa tggagatcca aataacatgg acaaagcagt
+      301 taaactgtat aggaaactta agagggagat aacgttccat ggggccaaag aaatagctct
+      361 cagttattct gctggtgcac ttgccagttg catgggcctc atatacaata ggatgggggc
+      421 tgtaaccact gaagtggcat ttggcctggt atgtgcaaca tgtgagcaga ttgctgactc
+      481 ccagcacagg tctcataggc aaatggtggc aacaaccaat ccattaataa gacatgagaa
+      541 cagaatggtt ttggccagca ctacagctaa ggctatggag caaatggctg gatcaagtga
+      601 gcaggcagcg gaggccatgg agattgctag tcaggccagg cagatggtgc aggcaatgag
+      661 agccattggg actcatccta gttccagtac tggtctaaga gatgatcttc ttgaaaattt
+      721 gcagacctat cagaaacgaa tgggggtgca gatgcaacga ttcaagtgac ccgcttgttg
+      781 ttgccgcgaa tatcattggg atcttgcact tgatattgtg gattcttgat cgtctttttt
+      841 tcaaatgcgt ctatcgactc ttcaaacacg gccttaaaag aggcccttct acggaaggag
+      901 tacctgagtc tatgagggaa gaatatcgaa aggaacagca gaatgctgtg gatgctgacg
+      961 acagtcattt tgtcagcata gagttggagt aaaaaacta
+//
+
+LOCUS       CY114388                2310 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) polymerase PB2 (PB2)
+            gene, complete cds.
+ACCESSION   CY114388
+VERSION     CY114388.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2310)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2310)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..2310
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="1"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..2310
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.PB2"
+     gene            13..2292
+                     /gene="PB2"
+     CDS             13..2292
+                     /gene="PB2"
+                     /codon_start=1
+                     /product="polymerase PB2"
+                     /protein_id="AFH00658.1"
+                     /translation="MERIKELRNLMSQSRTREILTKTTVDHMAIIKKYTSGRQEKNPS
+                     LRMKWMMAMKYPITADKRITEMVPERNEQGQTLWSKMSDAGSDRVMVSPLAVTWWNRN
+                     GPVTSTVHYPKVYKTYFDKVERLKHGTFGPVHFRNQVKIRRRVDINPGHADLSAKEAQ
+                     DVIMEVVFPNEVGARILTSESQLTITKEKKEELRDCKISPLMVAYMLERELVRKTRFL
+                     PVAGGTSSIYIEVLHLTQGTCWEQMYTPGGEVRNDDVDQSLIIAARNIVRRAAVSADP
+                     LASLLEMCHSTQIGGTRMVDILRQNPTEEQAVDICKAAMGLRISSSFSFGGFTFKRTS
+                     GSSVKKEEEVLTGNLQTLKIRVHEGYEEFTMVGKRATAILRKATRRLVQLIVSGRDEQ
+                     SIAEAIIVAMVFSQEDCMIKAVRGDLNFVNRANQRLNPMHQLLRHFQKDAKVLFQNWG
+                     IEHIDSVMGMVGVLPDMTPSTEMSMRGIRVSKMGVDEYSSTERVVVSIDRFLRVRDQR
+                     GNVLLSPEEVSETQGTERLTITYSSSMMWEINGPESVLVNTYQWIIRNWEAVKIQWSQ
+                     NPAMLYNKMEFEPFQSLVPKAIRSQYSGFVRTLFQQMRDVLGTFDTTQIIKLLPFAAA
+                     PPKQSRMQFSSLTVNVRGSGMRILVRGNSPVFNYNKTTKRLTILGKDAGTLIEDPDES
+                     TSGVESAVLRGFLIIGKEDRRYGPALSINELSNLAKGEKANVLIGQGDVVLVMKRKRD
+                     SSILTDSQTATKRIRMAIN"
+ORIGIN      
+        1 attatattca gtatggaaag aataaaagaa ctacggaatc tgatgtcgca gtctcgcact
+       61 cgcgagatac taacaaaaac cacagtggac catatggcca taattaagaa gtacacatcg
+      121 gggagacagg aaaagaaccc gtcacttagg atgaaatgga tgatggcaat gaaataccca
+      181 atcactgctg acaaaaggat aacagaaatg gttccggaga gaaatgaaca aggacaaact
+      241 ctatggagta aaatgagtga tgctggatca gatcgagtga tggtatcacc tttggcagta
+      301 acatggtgga atagaaatgg acccgtgaca agtacggtcc attacccaaa agtatacaag
+      361 acttattttg acaaagtcga aaggttaaaa catggaacct ttggccctgt tcattttaga
+      421 aatcaagtca agatacgcag aagagtagac ataaaccctg gtcatgcaga cctcagtgcc
+      481 aaagaggcac aagatgtaat tatggaagtt gtttttccca atgaagtggg agccaggata
+      541 ctaacatcag aatcgcaatt aacaataact aaagagaaaa aagaagaact ccgagattgc
+      601 aaaatttctc ccttgatggt tgcatacatg ttagagagag aacttgtacg aaaaacaaga
+      661 tttctcccag ttgctggcgg aacaagcagt atatacattg aagttttaca tttgactcaa
+      721 ggaacgtgtt gggaacaaat gtacactcca ggtggagaag tgaggaatga cgatgttgac
+      781 caaagcctaa ttattgcggc caggaacata gtaagaagag ccgcagtatc agcagatcca
+      841 ctagcatctt tattggagat gtgccacagc acacaaattg gcgggacaag gatggtggac
+      901 attcttagac agaacccgac tgaagaacaa gctgtggata tatgcaaggc tgcaatggga
+      961 ttgagaatca gctcatcatt cagctttggt ggatttacat ttaaaagaac aagcgggtca
+     1021 tcagtcaaaa aagaggaaga agtgcttaca ggcaatctcc aaacattgaa gataagagta
+     1081 catgaggggt atgaggagtt cacaatggtg gggaaaagag caacagctat actcagaaaa
+     1141 gcaaccagaa gattggttca gctcatagtg agtggaagag acgagcagtc aatagccgaa
+     1201 gcaataatcg tggccatggt gttttcacaa gaggattgca tgataaaagc agttagaggt
+     1261 gacctgaatt tcgtcaacag ggcaaatcag cggttgaacc ccatgcatca gcttttaagg
+     1321 cattttcaga aagatgcgaa agtgcttttt caaaattggg gaattgaaca catcgacagt
+     1381 gtgatgggaa tggttggagt attaccagat atgactccaa gcacagagat gtcaatgaga
+     1441 ggaataagag tcagcaaaat gggtgtggat gaatactcca gtacagagag ggtggtggtt
+     1501 agcattgatc gatttttgag agttcgagac caacgtggga atgtattatt atctcctgag
+     1561 gaggtcagtg aaacacaggg aactgagaga ctgacaataa cttattcatc gtcgatgatg
+     1621 tgggagatta acggtcctga gtcggttttg gtcaatacct atcaatggat catcagaaat
+     1681 tgggaagctg tcaaaattca atggtctcag aatcctgcaa tgttgtacaa caaaatggaa
+     1741 tttgaaccat ttcaatcttt agtccccaag gccattagaa gccaatacag tgggtttgtc
+     1801 agaactctat tccaacaaat gagagacgta cttgggacat ttgacaccac ccagataata
+     1861 aagcttctcc cttttgcagc cgctccacca aagcaaagca gaatgcagtt ctcttcattg
+     1921 actgtaaatg tgaggggatc aggaatgaga atacttgtaa ggggcaattc tcctgtattc
+     1981 aactacaaca agaccactaa aagactaaca attctcggaa aagatgccgg cactttaatt
+     2041 gaagacccag atgaaagcac atccggagtg gagtccgccg tcttgagagg gtttctcatt
+     2101 ataggtaagg aagacagaag atacggacca gcattaagca tcaatgaact gagtaacctt
+     2161 gcaaaagggg aaaaggctaa tgtgctaatc gggcaaggag acgtggtgtt ggtaatgaaa
+     2221 cgaaaacggg actctagcat acttactgac agccagacag cgaccaaaag aattcggatg
+     2281 gccatcaatt aatgttgaat agtttaaaaa
+//
+
+LOCUS       CY114387                2312 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) polymerase PB1 (PB1)
+            and PB1-F2 protein (PB1-F2) genes, complete cds.
+ACCESSION   CY114387
+VERSION     CY114387.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2312)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2312)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..2312
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="2"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..2312
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.PB1"
+     gene            10..2283
+                     /gene="PB1"
+     CDS             10..2283
+                     /gene="PB1"
+                     /codon_start=1
+                     /product="polymerase PB1"
+                     /protein_id="AFH00656.1"
+                     /translation="MDVNPTLLFLKVPAQNAISTTFPYTGDPPYSHGTGTGYTMDTVN
+                     RTHQYSEKGKWTTNTETGAPQLNPIDGPLPEDNEPSGYAQTDCVLEAMAFLEESHPGI
+                     FENSCLETMEAVQQTRVDRLTQGRQTYDWTLNRNQPAATALANTIEVFRSNGLTANES
+                     GRLIDFLKDVMESMDKEEMEITTHFQRKRRVRDNMTKKMVTQRTIGKKKQRVNKRGYL
+                     IRALTLNTMTKDAERGKLKRRAIATPGMQIRGFVYFVETLARSICEKLEQSGLPVGGN
+                     EKKAKLANVVRKMMTNSQDTELSFTITGDNTKWNENQNPRMFLAMITYITKNQPEWFR
+                     NILSIAPIMFSNKMARLGKGYMFESKRMKLRTQIPAEMLASIDLKYFNESTRKKIEKI
+                     RPLLIDGTASLSPGMMMGMFNMLSTVLGVSILNLGQKKYTKTTYWWDGLQSSDDFALI
+                     VNAPNHEGIQAGVNRFYRTCKLVGINMSKKKSYINKTGTFEFTSFFYRYGFVANFSME
+                     LPSFGVSGINESADMSIGVTVIKNNMINNDLGPATAQMALQLFIKDYRYTYRCHRGDT
+                     QIQTRRSFELKKLWDQTQSRAGLLVSDGGPNLYNIRNLHIPEVCLKWELMDENYRGRL
+                     CNPLNPFVSHKEIESVNNAVVMPAHGPAKSMEYDAVATTHSWIPKRNRSILNTSQRGI
+                     LEDEQMYQKCCNLFEKFFPSSSYRRPIGISSMVEAMVSRARIDARIDFESGRIKKEEF
+                     SEIMKICSTIEELRRQR"
+     gene            104..376
+                     /gene="PB1-F2"
+     CDS             104..376
+                     /gene="PB1-F2"
+                     /codon_start=1
+                     /product="PB1-F2 protein"
+                     /protein_id="AFH00657.1"
+                     /translation="MEQEQGTPWTQSTEHTNIQRRGSGRQIQKLGHPNSTQLMDHYLR
+                     IMNQVDMHKQTVSWRLWPSLKNPTQVSLRTHALKQWKPFNRQGWTD"
+ORIGIN      
+        1 accatttgaa tggatgtcaa tccgactcta ctgttcctaa aggttccagc gcaaaatgcc
+       61 ataagcacaa cattccctta tactggagat cctccataca gccatggaac aggaacaggg
+      121 tacaccatgg acacagtcaa cagaacacac caatattcag agaaggggaa gtggacgaca
+      181 aatacagaaa ctggggcacc ccaactcaac ccaattgatg gaccactacc tgaggataat
+      241 gaaccaagtg gatatgcaca aacagactgt gtcctggagg ctatggcctt ccttgaagaa
+      301 tcccacccag gtatctttga gaactcatgc cttgaaacaa tggaagccgt tcaacagaca
+      361 agggtggaca gactaaccca aggtcgccag acttatgatt ggacattaaa cagaaatcaa
+      421 ccggcagcaa ctgcattagc caacaccata gaagttttta gatcgaatgg attaacagct
+      481 aatgaatcag gaaggctaat agatttcctc aaggatgtga tggaatcaat ggataaagag
+      541 gaaatggaga taacaacaca ctttcaaaga aaaaggagag taagggacaa catgaccaag
+      601 aaaatggtca cacaaagaac aatagggaag aaaaaacaaa gagtgaataa gagaggctac
+      661 ctaataagag ctttgacatt gaacacgatg accaaagatg cagagagagg taaattaaaa
+      721 agaagggcta ttgcaacacc cgggatgcaa attagagggt tcgtgtactt cgttgaaact
+      781 ttagctagaa gcatttgcga aaagcttgaa cagtctggac ttccggttgg gggtaatgaa
+      841 aagaaggcca aactggcaaa tgttgtgaga aaaatgatga ctaattcaca agacacagag
+      901 ctttctttca caatcactgg ggacaacact aagtggaatg aaaatcaaaa ccctcgaatg
+      961 tttttggcga tgattacata tatcacaaaa aatcaacctg agtggttcag aaacatcctg
+     1021 agcatcgcac caataatgtt ctcaaacaaa atggcaagac tgggaaaagg atacatgttc
+     1081 gagagtaaga gaatgaagct ccggacacaa atacctgcag aaatgctagc aagcattgac
+     1141 ctgaagtatt tcaatgaatc aacaaggaag aaaattgaga aaataaggcc tcttctaata
+     1201 gatggcacag catcattgag ccctggaatg atgatgggca tgttcaacat gctaagtacg
+     1261 gttttaggag tctcgatact gaatcttggg caaaagaaat acaccaagac aacatactgg
+     1321 tgggatgggc tccaatcctc cgacgatttt gccctcatag tgaatgcacc aaatcatgag
+     1381 ggaatacaag caggagtgaa tagattctac aggacctgca agttagtggg aatcaacatg
+     1441 agcaaaaaga agtcctatat aaataaaaca gggacatttg aattcactag ctttttttat
+     1501 cgatatggat ttgtggctaa ttttagcatg gaactgccca gttttggagt gtctggaata
+     1561 aacgagtcag ctgatatgag cattggagta acagtaataa agaacaacat gataaacaat
+     1621 gaccttggac cagcaacagc ccagatggct ctccaattgt tcatcaaaga ttacagatac
+     1681 acatataggt gccatagagg agacacacaa attcagacga gaagatcatt cgagctaaag
+     1741 aagctgtggg atcaaaccca atcaagggca ggactattgg tatcagatgg gggaccaaac
+     1801 ttatataata tccggaatct tcacatccct gaagtctgct taaagtggga gctaatggat
+     1861 gagaattatc ggggaagact ttgtaatccc ctgaatccct ttgtcagcca taaagaaatt
+     1921 gagtctgtaa acaatgctgt agtgatgcca gcccatggtc cggccaaaag tatggaatat
+     1981 gatgccgttg caactacaca ctcctggatt cccaagagga accgctctat tctcaacaca
+     2041 agccaaaggg gaattcttga ggatgaacag atgtaccaga agtgctgcaa cttgttcgag
+     2101 aaatttttcc ctagtagttc atataggaga ccgattggaa tttctagcat ggtggaggcc
+     2161 atggtgtcta gggcccggat tgatgccaga attgacttcg agtctggacg gattaagaag
+     2221 gaagagttct ctgagatcat gaagatctgt tccaccattg aagaactcag acggcaaaga
+     2281 taatgaattt agcttgtcct tcatgaaaaa at
+//
+
+LOCUS       CY114386                2192 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) polymerase PA (PA)
+            gene, complete cds.
+ACCESSION   CY114386
+VERSION     CY114386.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2192)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2192)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..2192
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="3"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..2192
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.PA"
+     gene            11..2161
+                     /gene="PA"
+     CDS             11..2161
+                     /gene="PA"
+                     /codon_start=1
+                     /product="polymerase PA"
+                     /protein_id="AFH00655.1"
+                     /translation="MEDFVRQCFNPMIVELAEKAMKEYGEDLKIETNKFAAICTHLEV
+                     CFMYSDFHFINEQGESIVVELDDPNALLKHRFEIIEGRDRTMAWTVVNSICNTTGAGK
+                     PKFLPDLYDYKENRFIEIGVTRREVHIYYLEKANKIKSENTHIHIFSFTGEEMATKAD
+                     YTLDEESRARIKTRLFTIRQEMANRGLWDSFRQSERGEETIEEKFEITGTMRRLADQS
+                     LPPNFSCLENFRAYVDGFEPNGCIEGKLSQMSKEVNAQIEPFLKTTPRPIKLPNGPPC
+                     YQRSKFLLMDALKLSIEDPSHEGEGIPLYDAIKCMKTFFGWKEPYIVKPHEKGINSNY
+                     LLSWKQVLSELQDIENEEKIPRTKNMKKTSQLKWALGENMAPEKVDFENCRDISDLKQ
+                     YDSDEPELRSLSSWIQNEFNKACELTDSVWIELDEIGEDVAPIEHIASMRRNYFTAEV
+                     SHCRATEYIMKGVYINTALLNASCAAMDDFQLIPMISKCRTKEGRRKTNLYGFIIKGR
+                     SHLRNDTDVVNFVSMEFSLTDPRLEPHKWEKYCVLEIGDMLLRSAIGQISRPMFLYVR
+                     TNGTSKVKMKWGMEMRRCLLQSLQQIESMIEAESSVKEKDMTKEFFENKSEAWPIGES
+                     PKGVEEGSIGKVCRTLLAKSVFNSLYASPQLEGFSAESRKLLLVVQALRDNLEPGTFD
+                     LGGLYEAIEECLINDPWVLLNASWFNSFLTHALK"
+ORIGIN      
+        1 ctgattcgaa atggaagatt ttgtgcgaca atgcttcaac ccgatgattg tcgaacttgc
+       61 agaaaaagca atgaaagagt atggggaaga tctgaaaatt gaaacaaaca aatttgcagc
+      121 aatatgcact cacttggagg tgtgtttcat gtattcagat tttcatttca tcaatgaaca
+      181 aggcgaatca atagtggtag aacttgacga tccaaatgca ctgttaaagc acagatttga
+      241 aataatcgag gggagagaca gaacaatggc ctggacagta gtaaacagta tctgcaacac
+      301 tactggagct ggaaaaccga agtttctacc agatttgtat gattacaagg agaacagatt
+      361 catcgaaatt ggggtgacaa ggagagaagt ccacatatat taccttgaaa aggccaataa
+      421 gattaaatct gagaacacac acattcacat tttctcattc actggggagg aaatggccac
+      481 aaaggcagac tacactctcg acgaggaaag cagggctagg attaagacca ggctgtttac
+      541 cataagacaa gaaatggcca acagaggcct ctgggattcc tttcgtcagt ccgaaagagg
+      601 cgaagaaaca attgaagaaa aatttgaaat cacaggaact atgcgtaggc ttgccgacca
+      661 aagtctccca ccgaacttct cctgccttga gaattttaga gcctatgtgg atggattcga
+      721 accgaacggc tgcattgagg gcaagctttc tcaaatgtcc aaagaagtga atgcccaaat
+      781 tgaacctttt ctgaagacaa caccaagacc aatcaaactt ccgaatggac ctccttgtta
+      841 tcagcggtcc aaattcctcc tgatggatgc tttaaaattg agcattgaag acccaagtca
+      901 cgaaggagaa gggatcccat tatatgatgc gatcaagtgc atgaaaacat tctttggatg
+      961 gaaagaacct tatatagtca aaccacacga aaagggaata aattcaaatt acctgctgtc
+     1021 atggaagcaa gtattgtcag aattgcagga cattgaaaat gaggagaaga ttccaaggac
+     1081 taaaaacatg aagaaaacga gtcaactgaa gtgggctctt ggtgaaaaca tggcaccaga
+     1141 gaaagtagac tttgaaaact gcagagacat aagcgatttg aagcaatatg atagtgacga
+     1201 acctgaatta aggtcacttt caagctggat acagaatgag ttcaacaagg cctgcgagct
+     1261 aactgattca gtctggatag agctcgatga aattggagag gacgtagccc caattgagca
+     1321 cattgcaagc atgaggagga attatttcac agcagaggtg tcccattgta gagccactga
+     1381 gtacataatg aagggggtat acattaacac tgccctgctc aatgcatcct gtgcagcaat
+     1441 ggacgatttt caactaattc ccatgataag caagtgcaga actaaagagg gaaggcgaaa
+     1501 aaccaattta tatggattca tcataaaagg aagatctcat ttaaggaatg acacagatgt
+     1561 ggtaaatttt gtgagcatgg agttttctct cactgacccg agacttgagc cacataaatg
+     1621 ggagaaatac tgtgtccttg agataggaga tatgttacta agaagtgcca taggccaaat
+     1681 ttcaaggcct atgttcttgt atgtgaggac aaacggaaca tcaaaggtca aaatgaaatg
+     1741 gggaatggag atgaggcgtt gcctccttca gtcactccag cagatcgaga gcatgattga
+     1801 agccgagtcc tcggttaaag agaaagacat gaccaaagag ttttttgaga ataaatcaga
+     1861 agcatggccc attggggagt cccccaaggg agtggaagaa ggttccattg ggaaagtctg
+     1921 taggactcta ttggctaagt cagtgttcaa tagcctgtat gcatcaccac aattggaagg
+     1981 attttcagcg gagtcaagaa aactgctcct tgttgttcag gctcttaggg acaaccttga
+     2041 acctgggacc tttgatcttg gggggctata tgaagcaatt gaggagtgcc tgattaatga
+     2101 tccctgggtt ttgctcaatg cgtcttggtt caactccttc ctgacacatg cattaaaata
+     2161 gttatggcag tgctactatt tgtcatccgt ac
+//
+
+LOCUS       CY114385                 863 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) nuclear export
+            protein (NEP) and nonstructural protein 1 (NS1) genes, complete
+            cds.
+ACCESSION   CY114385
+VERSION     CY114385.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 863)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 863)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..863
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="8"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..863
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.NS"
+     gene            12..849
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+     CDS             join(12..41,514..849)
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+                     /note="nonstructural protein 2"
+                     /codon_start=1
+                     /product="nuclear export protein"
+                     /protein_id="AFH00654.1"
+                     /translation="MDSNTVSSFQDILLRMSKMQLGSSSEDLNGMITQFESLKIYRDS
+                     LGEAVMRMGDLHLLQNRNGKWREQLGQKFEEIRWLIEEVRHRLKTTENSFEQITFMQA
+                     LQLLFEVEQEIRTFSFQLI"
+     gene            12..704
+                     /gene="NS1"
+     CDS             12..704
+                     /gene="NS1"
+                     /codon_start=1
+                     /product="nonstructural protein 1"
+                     /protein_id="AFH00653.1"
+                     /translation="MDSNTVSSFQVDCFLWHIRKQVVDQELSDAPFLDRLRRDQRSLR
+                     GRGNTLGLDIKAATHVGKQIVEKILKEESDEALKMTMVSTPASRYITDMTIEELSRNW
+                     FMLMPKQKVEGPLCIRMDQAIMEKNIMLKANFSVIFDRLETIVLLRAFTEEGAIVGEI
+                     SPLPSFPGHTIEDVKNAIGVLIGGLEWNDNTVRVSKNLQRFAWRSSNENGGPPLTPKQ
+                     KRKMARTARSKV"
+ORIGIN      
+        1 acaaagacat aatggattcc aacactgtgt caagtttcca ggtagattgc tttctttggc
+       61 atatccggaa acaagttgta gaccaagaac tgagtgatgc cccattcctt gatcggcttc
+      121 gccgagatca gaggtcccta aggggaagag gcaatactct cggtctagac atcaaagcag
+      181 ccacccatgt tggaaagcaa attgtagaaa agattctgaa agaagaatct gatgaggcac
+      241 ttaaaatgac catggtctcc acacctgctt cgcgatacat aactgacatg actattgagg
+      301 aattgtcaag aaactggttc atgctaatgc ccaagcagaa agtggaagga cctctttgca
+      361 tcagaatgga ccaggcaatc atggagaaaa acatcatgtt gaaagcgaat ttcagtgtga
+      421 tttttgaccg actagagacc atagtattac taagggcttt caccgaagag ggagcaattg
+      481 ttggcgaaat ctcaccattg ccttcttttc caggacatac tattgaggat gtcaaaaatg
+      541 caattggggt cctcatcgga ggacttgaat ggaatgataa cacagttcga gtctctaaaa
+      601 atctacagag attcgcttgg agaagcagta atgagaatgg gggacctcca cttactccaa
+      661 aacagaaacg gaaaatggcg agaacagcta ggtcaaaagt ttgaagagat aagatggctg
+      721 attgaagaag tgagacacag actaaaaaca actgaaaata gctttgaaca aataacattc
+      781 atgcaagcat tacaactgct gtttgaagtg gaacaggaga taagaacttt ctcatttcag
+      841 cttatttaat gataaaaaac acc
+//
+
+LOCUS       CY114384                1538 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) nucleocapsid protein
+            (NP) gene, complete cds.
+ACCESSION   CY114384
+VERSION     CY114384.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1538)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1538)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1538
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="5"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..1538
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.NP"
+     gene            31..1527
+                     /gene="NP"
+     CDS             31..1527
+                     /gene="NP"
+                     /codon_start=1
+                     /product="nucleocapsid protein"
+                     /protein_id="AFH00652.1"
+                     /translation="MASQGTKRSYEQMETDGDRQNATEIRASVGKMIDGIGRFYIQMC
+                     TELKLSDYEGRLIQNSLTIEKMVLSAFDERRNKYLEEHPSAGKDPKKTGGPIYRRVDG
+                     KWMRELVLYDKEEIRRIWRQANNGEDATAGLTHIMIWHSNLNDATYQRTRALVRTGMD
+                     PRMCSLMQGSTLPRRSGAAGAAVKGIGTMVMELIRMVKRGINDRNFWRGENGRKTRSA
+                     YERMCNILKGKFQTAAQRAMVDQVRESRNPGNAEIEDLIFLARSALILRGSVAHKSCL
+                     PACVYGPAVSSGYDFEKEGYSLVGIDPFKLLQNSQVYSLIRPNENPAHKSQLVWMACH
+                     SAAFEDLRLLSFIRGTKVSPRGKLSTRGVQIASNENMDNMGSGTLELRSGYWAIRTRS
+                     GGNTNQQRASAGQTSVQPTFSVQRNLPFEKSTIMAAFTGNTEGRTSDMRAEIIRMMEG
+                     AKPEEVSFRGRGVFELSDEKATNPIVPSFDMSNEGSYFFGDNAEEYDN"
+ORIGIN      
+        1 aataatcact cactgagtga catcaaaatc atggcgtccc aaggcaccaa acggtcttat
+       61 gaacagatgg aaactgatgg ggatcgccag aatgcaactg agattagggc atccgtcggg
+      121 aagatgattg atggaattgg gagattctac atccaaatgt gcactgaact taaactcagt
+      181 gattatgaag ggcggttgat ccagaacagc ttgacaatag agaaaatggt gctctctgct
+      241 tttgatgaaa gaaggaataa atatctggaa gaacacccca gcgctgggaa agatcctaag
+      301 aaaactgggg ggcccatata caggagagta gatggaaaat ggatgaggga actcgtcctt
+      361 tatgacaaag aagaaataag acgaatctgg cgccaagcca acaatggtga ggatgcgaca
+      421 gctggtctaa ctcacataat gatctggcat tcaaatttga atgatgcaac ataccagagg
+      481 acaagagctc ttgttcgaac cggaatggat cccagaatgt gctctctgat gcagggctcg
+      541 actctcccta gaaggtccgg agctgcaggt gctgcagtca aagggattgg aacaatggtg
+      601 atggagctga tcagaatggt caaacggggg atcaacgatc gaaatttctg gagaggtgaa
+      661 aatgggcgga aaacaagaag tgcttatgag agaatgtgca acattcttaa aggaaaattt
+      721 caaacagctg cacaaagagc aatggtggat caagtgagag aaagtcggaa cccaggaaat
+      781 gctgagatcg aagatctcat atttttggca agatctgcat tgatattgag agggtcagtt
+      841 gctcacaaat cttgcctacc tgcctgtgtg tatggacctg cagtatccag tgggtacgac
+      901 ttcgaaaagg agggatattc cttggtggga atagatcctt tcaaactact tcaaaatagc
+      961 caagtataca gcctaatcag acctaacgag aatccagcac acaagagtca gctggtgtgg
+     1021 atggcatgcc attctgctgc atttgaagat ttaagattgt taagcttcat cagagggaca
+     1081 aaagtatctc cgcgagggaa actttcaact agaggggtac aaattgcttc aaatgagaac
+     1141 atggataata tgggatcggg cactcttgaa ctgagaagcg ggtactgggc cataaggacc
+     1201 aggagtggag gaaacactaa tcaacagaga gcctccgcag gccaaaccag tgtgcaacct
+     1261 acgttttctg tacaaagaaa cctcccattt gagaagtcaa ccatcatggc agcattcact
+     1321 ggaaatacgg agggaagaac ttcagacatg agggcagaaa tcataagaat gatggaaggt
+     1381 gcaaaaccag aagaagtgtc gttccggggg aggggagttt tcgagctctc agacgagaag
+     1441 gcaacgaacc cgatcgtgcc ctcttttgat atgagtaatg aaggttctta tttcttcgga
+     1501 gacaatgcag aagagtacga caattgagga aaaatacc
+//
+
+LOCUS       CY114383                1436 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) neuraminidase (NA)
+            gene, complete cds.
+ACCESSION   CY114383
+VERSION     CY114383.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1436)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1436)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1436
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="6"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..1436
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.NA"
+     gene            4..1413
+                     /gene="NA"
+     CDS             4..1413
+                     /gene="NA"
+                     /codon_start=1
+                     /product="neuraminidase"
+                     /protein_id="AFH00651.1"
+                     /translation="MNPNQKIITIGSVSLTISTICFFMQIAILITTVTLHFKQYEFNS
+                     PPNNQVMLCEPTIIERNITEIVYLTNTTIEKEICPKLAEYRNWSKPQCNITGFAPFSK
+                     DNSIRLSAGGDIWVTREPYVSCDPDKCYQFALGQGTTLNNVHSNDTVHDRTPYRTLLM
+                     NELGVPFHLGTKQVCIAWSSSSCHDGKAWLHVCVTGDDKNATASFIYNGRLVDSIVSW
+                     SKEILRTQESECVCINGTCTVVMTDGSASGKADTKILFIEEGKIVHTSTLSGSAQHVE
+                     ECSCYPRYLGVRCVCRDNWKGSNRPIVDINIKDYSIVSSYVCSGLVGDTPRKNDSSSS
+                     SHCLDPNNEEGGHGVKGWAFDDGNDVWMGRTISEKLRSGYETFKVIEGWSNPNSKLQI
+                     NRQVIVDRGNRSGYSGIFSVEGKSCINRCFYVELIRGRKEETEVLWTSNSIVVFCGTS
+                     GTYGTGSWPDGADINLMPI"
+ORIGIN      
+        1 aagatgaatc caaatcaaaa gataataacg attggctctg tttctctcac catttccaca
+       61 atatgcttct tcatgcaaat tgccatcttg ataactactg taacattgca tttcaagcaa
+      121 tatgaattca actccccccc aaacaaccaa gtgatgctgt gtgaaccaac aataatagaa
+      181 agaaacataa cagagatagt gtatctgacc aacaccacca tagagaagga aatatgcccc
+      241 aaactagcag aatacagaaa ttggtcaaag ccgcaatgta acattacagg atttgcacct
+      301 ttttctaagg acaattcgat taggctttcc gctggtgggg acatctgggt gacaagagaa
+      361 ccttatgtgt catgcgatcc tgacaagtgt tatcaatttg cccttgggca gggaacaaca
+      421 ctaaacaacg tgcattcaaa tgacacagta catgatagga ccccttatcg gaccctattg
+      481 atgaatgagt taggtgttcc atttcatctg gggaccaagc aagtgtgcat agcatggtcc
+      541 agctcaagtt gtcacgatgg aaaagcatgg ctgcatgttt gtgtaacggg ggatgataaa
+      601 aatgcaactg ctagcttcat ttacaatggg aggcttgtag atagtattgt ttcatggtcc
+      661 aaagaaatcc tcaggaccca ggagtcagaa tgcgtttgta tcaatggaac ttgtacagta
+      721 gtaatgactg atgggagtgc ttcaggaaaa gctgatacta aaatactatt cattgaggag
+      781 gggaaaatcg ttcatactag cacattgtca ggaagtgctc agcatgtcga ggagtgctcc
+      841 tgctatcctc gatatcttgg tgtcagatgt gtctgcagag acaactggaa aggctccaat
+      901 aggcccatag tagatataaa cataaaggat tatagcattg tttccagtta tgtgtgctca
+      961 ggacttgttg gagacacacc cagaaaaaac gacagctcca gcagtagcca ttgcttggat
+     1021 cctaacaatg aagaaggtgg tcatggagtg aaaggctggg cctttgatga tggaaatgac
+     1081 gtgtggatgg gaagaacgat cagcgagaag ttacgctcag gatatgaaac cttcaaagtc
+     1141 attgaaggct ggtccaaccc taattccaaa ttgcagataa ataggcaagt catagttgac
+     1201 agaggtaata ggtccggtta ttctggtatt ttctctgttg aaggcaaaag ctgcatcaat
+     1261 cggtgctttt atgtggagtt gataagggga agaaaagagg aaactgaagt cttgtggacc
+     1321 tcaaacagta ttgttgtgtt ttgtggcacc tcaggtacat atggaacagg ctcatggcct
+     1381 gatggggcgg acatcaatct catgcctata taagctttcg caattttaga aaaaac
+//
+
+LOCUS       CY114381                1737 bp    cRNA    linear   VRL 04-APR-2012
+DEFINITION  Influenza A virus (A/Wisconsin/67/2005(H3N2)) hemagglutinin (HA)
+            gene, complete cds.
+ACCESSION   CY114381
+VERSION     CY114381.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Wisconsin/67/2005(H3N2))
+  ORGANISM  Influenza A virus (A/Wisconsin/67/2005(H3N2))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1737)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Westgeest,K.B.,
+            van Beek,R., Bestebroer,T.M., de Jong,J.C., Rimmelzwaan,G.F.,
+            Osterhaus,A.D.M.E., Fouchier,R.A.M., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1737)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-APR-2012) on behalf of JCVI/Erasmus Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1737
+                     /organism="Influenza A virus (A/Wisconsin/67/2005(H3N2))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Wisconsin/67/2005"
+                     /serotype="H3N2"
+                     /host="Homo sapiens"
+                     /bio_material="CEIRS#CIP047WI6705#"
+                     /db_xref="taxon:393902"
+                     /segment="4"
+                     /lab_host="xMDCK2 passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2005"
+     misc_feature    1..1737
+                     /db_xref="IRD:NIGSP_CEIRS_CIP047_RFH3_00274.HA"
+     gene            15..1715
+                     /gene="HA"
+     CDS             15..1715
+                     /gene="HA"
+                     /function="receptor binding and fusion protein"
+                     /codon_start=1
+                     /product="hemagglutinin"
+                     /protein_id="AFH00648.1"
+                     /translation="MKTIIALSYILCLVFAQKLPGNDDSTATLCLGHHAVPNGTIVKT
+                     ITNDQIEVTNATELVQSSSTGGICDSPHQILDGENCTLIDALLGDPQCDGFQNKKWDL
+                     FVERSKAYSNCYPYDVPDYASLRSLVASSGTLEFNDESFNWTGVTQNGTSSSCKRRSN
+                     NSFFSRLNWLTHLKFKYPALNVTMPNNEKFDKLYIWGVHHPVTDNDQIFLYAQASGRI
+                     TVSTKRSQQTVIPNIGSRPRIRNIPSRISIYWTIVKPGDILLINSTGNLIAPRGYFKI
+                     RSGKSSIMRSDAPIGKCNSECITPNGSIPNDKPFQNVNRITYGACPRYVKQNTLKLAT
+                     GMRNVPEKQTRGIFGAIAGFIENGWEGMVDGWYGFRHQNSEGIGQAADLKSTQAAINQ
+                     INGKLNRLIGKTNEKFHQIEKEFSEVEGRIQDLEKYVEDTKIDLWSYNAELLVALENQ
+                     HTIDLTDSEMNKLFERTKKQLRENAEDMGNGCFKIYHKCDNACIGSIRNGTYDHDVYR
+                     DEALNNRFQIKGVELKSGYKDWILWISFAISCFLLCVALLGFIMWACQKGNIRCNICI
+                     "
+     sig_peptide     15..62
+                     /gene="HA"
+     mat_peptide     63..1049
+                     /gene="HA"
+                     /product="HA1"
+     mat_peptide     1050..1712
+                     /gene="HA"
+                     /product="HA2"
+ORIGIN      
+        1 taattctatt aaccatgaag actatcattg ctttgagcta cattctatgt ctggttttcg
+       61 ctcaaaaact tcccggaaat gacgacagca cggcaacgct gtgccttggg caccatgcag
+      121 taccaaacgg aacgatagtg aaaacaatca cgaatgacca aattgaagtt actaatgcta
+      181 ctgagctggt tcagagttcc tcaacaggtg gaatatgcga cagtcctcat cagatccttg
+      241 atggagaaaa ctgcacacta atagatgctc tattgggaga ccctcagtgt gatggcttcc
+      301 aaaataagaa atgggacctt tttgttgaac gcagcaaagc ctacagcaac tgttaccctt
+      361 atgatgtgcc ggattatgcc tcccttaggt cactagttgc ctcatccggc acactggagt
+      421 ttaacgatga aagcttcaat tggactggag tcactcaaaa tggaacaagc tcttcttgca
+      481 aaaggagatc taataacagt ttctttagta gattgaattg gttgacccac ttaaaattca
+      541 aatacccagc attgaacgtg actatgccaa acaatgaaaa atttgacaaa ttgtacattt
+      601 ggggggttca ccacccggtt acggacaatg accaaatctt cctgtatgct caagcatcag
+      661 gaagaatcac agtctctacc aaaagaagcc aacaaactgt aatcccgaat atcggatcta
+      721 gacccagaat aaggaatatc cccagcagaa taagcatcta ttggacaata gtaaaaccgg
+      781 gagacatact tttgattaac agcacaggga atctaattgc tcctaggggt tacttcaaaa
+      841 tacgaagtgg gaaaagctca ataatgagat cagatgcacc cattggcaaa tgcaattctg
+      901 aatgcatcac tccaaatgga agcattccca atgacaaacc atttcaaaat gtaaacagga
+      961 tcacatatgg ggcctgtccc agatatgtta agcaaaacac tctgaaattg gcaacaggga
+     1021 tgcgaaatgt accagagaaa caaactagag gcatatttgg cgcaatcgcg ggtttcatag
+     1081 aaaatggttg ggagggaatg gtggatggtt ggtacggttt caggcatcaa aattctgagg
+     1141 gaataggaca agcagcagat ctcaaaagca ctcaagcagc aatcaatcaa atcaatggga
+     1201 agctgaatag gttgatcggg aaaaccaacg agaaattcca tcagattgaa aaagaattct
+     1261 cagaagtaga agggagaatt caggacctcg agaaatatgt tgaggacact aaaatagatc
+     1321 tctggtcata caacgcggag cttcttgttg ccctggagaa ccaacataca attgatctaa
+     1381 ctgactcaga aatgaacaaa ctgtttgaaa gaacaaagaa gcaactgagg gaaaatgctg
+     1441 aggatatggg caatggttgt ttcaaaatat accacaaatg tgacaatgcc tgcataggat
+     1501 caatcagaaa tggaacttat gaccatgatg tatacagaga tgaagcatta aacaaccggt
+     1561 tccagatcaa aggcgttgag ctgaagtcag gatacaaaga ttggatccta tggatttcct
+     1621 ttgccatatc atgttttttg ctttgtgttg ctttgttggg gttcatcatg tgggcctgcc
+     1681 aaaaaggcaa cattaggtgc aacatttgca tttgagtgca ttaattaaaa acacccc
+//
+

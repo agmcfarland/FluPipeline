@@ -1,0 +1,787 @@
+LOCUS       CY115190                2358 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) polymerase PB2 (PB2) gene,
+            complete cds.
+ACCESSION   CY115190
+VERSION     CY115190.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 2358)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2358)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..2358
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="2"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..2358
+                     /db_xref="IRD:NIGSP_BUCB_00032.PB2"
+     gene            4..2316
+                     /gene="PB2"
+     CDS             4..2316
+                     /gene="PB2"
+                     /codon_start=1
+                     /product="polymerase PB2"
+                     /protein_id="AFH57963.1"
+                     /translation="MTLAKIELLKQLLRDNEAKTVLKQTTVDQYNIIRKFNTSRIEKN
+                     PSLRMKWAMCSNFPLALTKGDMANRIPLEYKGIQLKTNAEDIGTKGQMCSIAAVTWWN
+                     TYGPIGDTEGFEKVYESFFLRKMRLDNATWGRITFGPVERVRKRVLLNPLTKEMPPDE
+                     ASNVIMEILFPKEAGIPRESTWIHRELIKEKREKLKGTMITPIVLAYMLERELIARRR
+                     FLPVAGATSAEFIEMLHCLQGENWRQIYHPGGNKLTESRSQSMIVACRKIIRRSIVAS
+                     NPLELAVEIANKTVIDTEPLKSCLTAIDGGDVACDIIRAALGLKIRQRQRFGRLELKR
+                     ISGRGFKNDEEILIGNGTIQKIGIWDGEEEFHVRCGECRGILKKSKMRMEKLLINSAK
+                     KEDMKDLIILCMVFSQDTRMFQGVRGEINFLNRAGQLLSPMYQLQRYFLSRSNDLFDQ
+                     WGYEESPKASELHGINELMNASDYTLKGVVVTKNVIDDFSSTETEKVSITKNLSLIKR
+                     TGEVIMGANDVSELESQAQLMITYDTPKMWEMGTTKELVQNTYQWVLKNLVTLKAQFL
+                     LGKEDMFQWDAFEAFESIIPQKMAGQYSGFARAVLKQMRDQEVMKTDQFIKLLPFCFS
+                     PPKLRSNGEPYQFLRLVLKGGGENFIEVRKGSPLFSYNPQTEVLTICGRMMSLKGKIE
+                     DEERNRSMGNAVLAGFLVSGKYDPDLGDFKTIEELEKLKPGEKANILLYQGKPVKVVK
+                     RKRYSALSNDISQGIKRQRMTVESMGWALS"
+ORIGIN      
+        1 aagatgacat tggctaaaat tgaattgtta aaacaactgt taagggacaa tgaagccaaa
+       61 acagtactga aacaaacaac agtagatcaa tataacataa taagaaaatt caatacatca
+      121 agaattgaaa agaacccttc attaaggatg aagtgggcga tgtgttctaa ttttcccttg
+      181 gctttgacca agggtgacat ggcaaacaga atccccctgg aatacaaggg aatacaactt
+      241 aaaacaaatg ctgaagacat aggaaccaaa ggccaaatgt gctcaatagc agcagttacc
+      301 tggtggaata catatggacc aataggagat actgaaggtt tcgaaaaagt ctacgaaagc
+      361 ttttttctca gaaagatgag acttgacaat gccacttggg gccgaataac ttttggccca
+      421 gttgaaagag taagaaaaag ggtactgcta aaccctctca ctaaggaaat gcctccagat
+      481 gaagcaagta atgtgataat ggaaatattg ttccctaaag aagcaggaat accaagagaa
+      541 tctacttgga tacataggga actgataaaa gaaaaaagag aaaaattgaa aggaacgatg
+      601 ataactccca ttgtactggc atacatgctc gagagggaat taattgccag gagaaggttc
+      661 ctgcccgtgg caggagcaac atcagctgag ttcatagaaa tgctacactg cttacaaggt
+      721 gaaaattgga ggcaaatata tcacccggga gggaataaac taactgaatc taggtcccaa
+      781 tcgatgattg tggcttgtag aaagataatc agaagatcaa tagtcgcatc aaacccattg
+      841 gagctagctg tagaaattgc aaataagacc gtgatagata ctgaaccttt aaaatcatgt
+      901 ctgacagcca tagacggagg tgatgtcgcc tgtgacataa taagagctgc attaggacta
+      961 aagatcagac aaagacaaag atttggacga cttgaactaa aaagaatatc aggaagagga
+     1021 ttcaaaaatg atgaagaaat attaatcggg aacggaacaa tacagaagat tggaatatgg
+     1081 gacggagaag aggagttcca tgtgagatgt ggtgaatgca ggggaatatt aaaaaagagc
+     1141 aaaatgagaa tggaaaaact actaataaat tcagctaaaa aggaggacat gaaagattta
+     1201 ataatattgt gcatggtatt ttcccaagac actaggatgt tccaaggagt gaggggtgaa
+     1261 ataaattttc ttaatagagc aggccaactt ttatctccaa tgtatcaact ccaaagatat
+     1321 tttttgagta gaagtaacga tctctttgat caatgggggt atgaggaatc acccaaagca
+     1381 agtgagctac atgggataaa tgaactaatg aatgcatctg actacacttt gaaaggagtt
+     1441 gtagtaacaa aaaatgtgat tgatgatttt agttctactg aaacagaaaa agtatctata
+     1501 acaaaaaatc ttagtttaat aaaaaggact ggggaagtca taatgggagc caatgacgta
+     1561 agtgaattag aatcacaagc acagctaatg ataacatatg atacaccaaa gatgtgggag
+     1621 atggggacaa ccaaagaact ggtgcaaaac acctatcaat gggtgctgaa aaatttggta
+     1681 acactgaagg ctcagtttct tctagggaaa gaagacatgt tccaatggga tgcatttgaa
+     1741 gcatttgaaa gcataatccc ccagaagatg gctggccaat acagtggatt tgcaagagca
+     1801 gtgctcaaac aaatgagaga ccaagaggtc atgaaaactg accagttcat aaagttgttg
+     1861 cccttttgtt tctcaccacc aaagttaagg agcaatgggg agccctatca gttcttgagg
+     1921 cttgtattga agggaggagg agaaaatttc atcgaagtaa ggaaagggtc tcctctattc
+     1981 tcttacaatc cacaaacaga agtcctaact atatgcggca gaatgatgtc attaaaaggg
+     2041 aaaattgaag atgaagaaag gaatagatca atggggaatg cagtgttggc gggttttctt
+     2101 gttagtggca agtatgaccc agatcttgga gatttcaaaa ccattgaaga acttgaaaag
+     2161 ctgaaaccag gggagaaagc aaacatctta ctttatcaag gaaagcccgt taaagtagtt
+     2221 aaaaggaaaa gatatagtgc tttatccaat gacatttcac aaggaattaa gagacaaaga
+     2281 atgacagttg agtccatggg gtgggccttg agctaatata aatttatcca ttaattcaat
+     2341 gaatacaatt gagtgaaa
+//
+
+LOCUS       CY115189                2330 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) polymerase PB1 (PB1) gene,
+            complete cds.
+ACCESSION   CY115189
+VERSION     CY115189.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 2330)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2330)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..2330
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="1"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..2330
+                     /db_xref="IRD:NIGSP_BUCB_00032.PB1"
+     gene            3..2261
+                     /gene="PB1"
+     CDS             3..2261
+                     /gene="PB1"
+                     /codon_start=1
+                     /product="polymerase PB1"
+                     /protein_id="AFH57962.1"
+                     /translation="MNINPYFLFIDVPIQAAISTTFPYTGVPPYSHGTGTGYTIDTVI
+                     RTHEYSNKGKQYVSDITGCTMIDPTNGPLPEDNEPSAYAQLDCVLEALDRMDEEHPGL
+                     FQAASQNAMEALMVTTVDKLTQGRQTFDWTVCRNQPAATALNTTITSFRLNDLNGADK
+                     GGLVPFCQDIIDSLDKPEMTFFSVKNIKKKLPAKNRKGFLIKRIPMKVKDRISRVEYI
+                     KRALSLNTMTKDAERGKLKRRAIATAGIQIRGFVLVVENLAKNICENLEQSGLPVGGN
+                     EKKAKLSNAVAKMLSNCPPGGISMTVTGDNTKWNECLNPRIFLAMTERITRDSPIWFR
+                     DFCSIAPVLFSNKIARLGKGFMITSKTKRLKAQIPCPDLFSIPLERYNEETRAKLKRL
+                     KPFFNEEGTASLSPGMMMGMFNMLSTVLGVAALGIKNIGNKEYLWDGLQSSDDFALFV
+                     NAKDEETCMEGINDFYRTCKLLGINMSKKKSYCNETGMFEFTSMFYRDGFVSNFAMEI
+                     PSFGVAGVNESADMAIGMTIIKNNMINNGMGPATAQTAIQLFIADYRYTYKCHRGDSK
+                     VEGKRMKIIKELWENTKGRDGLLVADGGPNIYNLRNLHIPEIVLKYNLMDPEYKGRLL
+                     HPQNPFVGHLSIEGIKEADITPAHGPVRKMDYDAVSGTHSWRTKRNRSILNTDQRNMI
+                     LEEQCYAKCCNLFEACFNSASYRKPVGQHSMLEAMAHRLRMDARLDYESGRMSKDDFE
+                     KAMAHLGEIGYT"
+ORIGIN      
+        1 agatgaatat aaatccttat tttctattca tagatgtacc catacaggca gcaatttcaa
+       61 caacattccc atacaccggt gttccccctt attcccatgg aacgggaaca ggctacacaa
+      121 tagacaccgt gatcagaaca catgagtact cgaacaaagg aaaacagtat gtttctgaca
+      181 tcacaggatg tacaatgata gatccaacaa atgggccatt acctgaagac aatgagccaa
+      241 gtgcctatgc acaattagat tgcgttctgg aggctttgga tagaatggat gaggaacatc
+      301 caggtctgtt tcaagcagcc tcacagaatg ccatggaggc actaatggtc acaactgtag
+      361 acaaattaac ccaggggaga cagactttcg attggacagt atgcagaaac cagcctgctg
+      421 caacggcact aaacacaaca ataacctcct tcagattgaa tgatttgaat ggagctgaca
+      481 agggtggatt ggtacccttt tgccaagata tcattgattc attagacaag cctgaaatga
+      541 ctttcttctc agtaaagaat ataaagaaaa aattgcctgc aaaaaacaga aagggtttcc
+      601 tcataaagag aataccaatg aaagtaaaag acaggatatc cagagtggaa tacatcaaaa
+      661 gagcattgtc attaaacaca atgacaaaag atgctgaaag gggcaaacta aaaagaagag
+      721 cgattgcaac cgctggaata caaatcagag ggtttgtatt agtagttgaa aacttggcta
+      781 aaaacatctg tgaaaatcta gaacaaagtg gtttgcccgt gggtggaaat gaaaagaagg
+      841 ccaaactgtc aaatgcagtg gccaaaatgc tcagtaactg cccaccagga gggatcagca
+      901 tgacagtaac aggagacaat actaaatgga atgaatgctt aaatccacga atctttttgg
+      961 ctatgactga aagaataacc agagacagcc caatttggtt ccgggatttt tgtagtatag
+     1021 caccggtctt gttctccaac aaaatagcca gattagggaa aggattcatg ataacaagta
+     1081 aaacaaaaag actaaaggct caaatacctt gtcctgatct gttcagcata ccattagaaa
+     1141 gatataatga agaaacaagg gcgaaattaa aaaggctgaa gccattcttc aatgaagaag
+     1201 gaacggcatc tttgtcgcct gggatgatga tgggaatgtt taatatgcta tctaccgtgt
+     1261 tgggagtagc agcactaggc atcaaaaaca ttggaaacaa ggaatactta tgggatggac
+     1321 tgcaatcttc cgatgatttt gctttgtttg ttaatgcaaa agatgaagaa acatgtatgg
+     1381 aagggataaa cgatttttac cgaacatgta aattattggg aataaacatg agcaaaaaga
+     1441 aaagttactg taacgaaact ggaatgtttg aatttacaag catgttctat agagatggat
+     1501 ttgtatctaa ctttgcaatg gaaattcctt catttggagt tgctggagta aatgaatcag
+     1561 cagatatggc aataggaatg acaataataa agaacaatat gattaacaat gggatgggtc
+     1621 cggcaacagc acaaacagcc atacaattgt tcatagctga ttataggtac acatacaaat
+     1681 gccacagagg agattccaaa gtggaaggaa aaagaatgaa aattataaag gagctatggg
+     1741 aaaacactaa aggaagagat ggtctgttag tagcagatgg tgggcccaac atttacaatt
+     1801 tgagaaactt acatatccca gaaatagtat tgaagtacaa cctaatggac cctgaataca
+     1861 aagggcggtt acttcaccct caaaatccct ttgtaggaca tttgtctatt gaaggcatca
+     1921 aagaagcaga tataacccca gcacatggtc ctgtgaggaa aatggattat gatgcagtgt
+     1981 ctggaactca tagttggaga accaaaagga acagatctat actaaatact gatcagagga
+     2041 acatgattct tgaagaacaa tgctacgcta aatgttgcaa tctttttgag gcctgtttta
+     2101 acagtgcatc atacaggaaa ccagtagggc agcatagcat gcttgaggct atggcccata
+     2161 gattaagaat ggatgcacga ctagattatg aatcaggaag aatgtcaaag gatgattttg
+     2221 aaaaagcaat ggctcacctt ggtgagattg ggtacacata agctccgaag atgtccatgg
+     2281 ggttattggt catcattgga tacatgtgat aaacaaatga ttaaaatgaa
+//
+
+LOCUS       CY115188                2255 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) polymerase PA (PA) gene,
+            complete cds.
+ACCESSION   CY115188
+VERSION     CY115188.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 2255)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 2255)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..2255
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="3"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..2255
+                     /db_xref="IRD:NIGSP_BUCB_00032.PA"
+     gene            10..2190
+                     /gene="PA"
+     CDS             10..2190
+                     /gene="PA"
+                     /codon_start=1
+                     /product="polymerase PA"
+                     /protein_id="AFH57961.1"
+                     /translation="MDTFITRNFQTTIIQKAKNTMAEFSEDPELQPAMLFNICVHLEV
+                     CYVISDMNFLDEEGKAYTALEGQGKEQNLRPQYEVIEGMPRTIAWMVQRSLAQEHGIE
+                     TPKYLADLFDYKTKRFIEVGITKGLADDYFWKKKEKLGNSMELMIFSYNQDYSLSNES
+                     SLDEEGKGRVLSRLTELQAELSLKNLWQVLIGEEDVEKGIDFKLGQTISRLRDISVPA
+                     GFSNFEGMRSYIDNIDPKGAIERNLARMSPLVSVTPKKLKWEDLRPIGPHIYNHELPE
+                     VPYNAFLLMSDELGLANMTEGKSKKPKTLAKECLEKYSTLRDQTDPILIMKSEKANEN
+                     FLWKLWRDCVNTISNEEMSNELQKTNYAKWATGDGLTYQKIMKEVAIDDETMCQEEPK
+                     IPNKCRVAAWVQTEMNLLSTLTSKRALDLPEIGPDVAPVEHVGSERRKYFVNEINYCK
+                     ASTVMMKYVLFHTSLLNESNASMGKYKVIPITNRIVNEKGESFDMLYGLAVKGQSHLR
+                     GDTDVVTVVTFEFSSTDPRVDSGKWPKYTVFRIGSLFVSGREKSVYLYCRVNGTNKIQ
+                     MKWGMEARRCLLQSMQQMEAIVEQESSIQGYDMTKACFKGDRVNSPKTFSIGTQEGKL
+                     VKGSFGKALRVIFTKCLMHYVFGNAQLEGFSAESRRLLLLIQALKDRKGPWVFDLEGM
+                     YSGIEECISNNPWVIQSAYWFNEWLGFEKEGSKVLESVDEIMDE"
+ORIGIN      
+        1 tttgtcataa tggatacttt tattacaaga aacttccaga ctacaataat acaaaaggcc
+       61 aaaaacacaa tggcagaatt tagtgaagat cctgaattac aaccagcaat gctattcaac
+      121 atctgtgtcc atctagaggt ttgctatgta ataagtgaca tgaattttct tgatgaagaa
+      181 ggaaaagcat atacagcatt agaaggacaa gggaaagaac aaaatttgag accacaatat
+      241 gaagtaattg agggaatgcc aagaaccata gcatggatgg tccaaagatc cttagctcaa
+      301 gagcatggga tagagactcc caagtatctg gctgatttgt ttgattataa gaccaagaga
+      361 tttatagaag ttggaataac aaaaggattg gctgatgatt acttttggaa aaagaaagaa
+      421 aagctgggaa atagcatgga actaatgata ttcagctaca atcaagacta ttcgttaagt
+      481 aatgaatcct cattggatga ggaagggaaa gggagagtgc taagcagact cacagaactt
+      541 caagctgaat taagtctgaa aaacctatgg caagttctca taggagaaga agatgttgaa
+      601 aagggaattg actttaaact tggacaaaca atatctagac taagggatat atctgttcct
+      661 gctggtttct ccaattttga aggaatgagg agctacatag acaatataga cccgaaagga
+      721 gcaatagaga gaaatctagc aaggatgtct cccttagtgt cagtcacacc taaaaagttg
+      781 aaatgggagg atctaagacc aatagggcct cacatttaca accatgagct accagaagtt
+      841 ccatataatg cctttctttt aatgtctgat gaactggggc tggccaatat gacggaggga
+      901 aagtccaaaa aaccaaagac attagccaaa gaatgtctag aaaagtactc aacactacgg
+      961 gatcagactg acccaatatt aataatgaaa agtgaaaaag ctaacgaaaa tttcctatgg
+     1021 aagctttgga gagactgtgt aaatacaata agtaatgagg aaatgagtaa cgaactacag
+     1081 aaaaccaatt atgccaagtg ggccacaggg gatggtttaa cataccaaaa aataatgaaa
+     1141 gaagtagcaa tagatgacga aacaatgtgc caagaagagc ctaaaatccc taacaagtgt
+     1201 agagtggctg cttgggttca aacagagatg aacctattga gcactctgac aagtaaaaga
+     1261 gctctggacc taccagaaat agggccagac gtagcaccag tggagcatgt tggaagtgaa
+     1321 agaaggaaat actttgttaa tgaaatcaac tactgtaagg cctctacagt tatgatgaag
+     1381 tatgtgcttt ttcacacttc attgctgaat gaaagcaatg ccagcatggg aaaatacaaa
+     1441 gtaataccaa taaccaatag aatagtaaat gaaaaaggag aaagtttcga catgctttat
+     1501 ggtttggcgg ttaaaggaca atctcatctg aggggagaca ctgatgttgt aacagttgta
+     1561 actttcgaat ttagtagtac agaccccaga gtggactcag gaaagtggcc aaaatatact
+     1621 gtgtttagga ttggctccct atttgtgagt ggaagggaaa aatctgtgta cctatattgc
+     1681 agagtgaatg gcacaaataa gatccaaatg aaatggggaa tggaagctag aagatgtctg
+     1741 cttcaatcaa tgcaacaaat ggaagcaatt gttgaacaag aatcctcgat acaaggatac
+     1801 gacatgacca aagcttgttt caagggggac agagtaaata gccccaaaac tttcagtatt
+     1861 ggaactcaag aagggaaact agtaaaagga tcctttggaa aagcactaag agtaatattt
+     1921 actaaatgtt tgatgcacta tgtatttgga aatgcccagt tggagggatt cagtgccgag
+     1981 tctaggagac ttctactgtt gattcaagca ttaaaggaca gaaagggccc ttgggtgttc
+     2041 gacttagagg gaatgtattc tggaatagaa gaatgtatca gtaacaaccc ttgggtaata
+     2101 cagagtgcat actggttcaa tgaatggttg ggttttgaaa aggaggggag taaagtatta
+     2161 gaatcagtag atgaaataat ggatgaataa aagacatagt actcaattta gtactacttt
+     2221 gttcattatg tatctaaaca tccaatataa agaac
+//
+
+LOCUS       CY115187                1063 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) nuclear export protein
+            (NEP) and nonstructural protein 1 (NS1) genes, complete cds.
+ACCESSION   CY115187
+VERSION     CY115187.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1063)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1063)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1063
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="8"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..1063
+                     /db_xref="IRD:NIGSP_BUCB_00032.NS"
+     gene            32..1055
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+     CDS             join(32..64,720..1055)
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+                     /note="nonstructural protein 2"
+                     /codon_start=1
+                     /product="nuclear export protein"
+                     /protein_id="AFH57960.1"
+                     /translation="MADNMTTTQIEWRMKKMAIGSSIHSSSVLMKDIQSQFEQLKLRW
+                     ESYPNLVKSTDYHQKRETIRLVTEELYLLSKRIDDNILFHKTVIANSSIIADMVVSLS
+                     LLETLYEMKDVVEVYSRQCL"
+     gene            32..877
+                     /gene="NS1"
+     CDS             32..877
+                     /gene="NS1"
+                     /codon_start=1
+                     /product="nonstructural protein 1"
+                     /protein_id="AFH57959.1"
+                     /translation="MADNMTTTQIEVGPGATNATINFEAGILECYERLSWQRALDYPG
+                     QDRLNRLKRKLESRIKTHNKSEPESKRMSLEERKAIGVKMMKVLLFMNPSAGIEGFEP
+                     YCMKSSSKSNCPKYNWIDYPSTPGRCLDDIEEEPDGVDGPTEIVLRDMNNKDARQKIK
+                     EEVNTQKEGKFRLTIKRDMRNVLSLRVLVNGTFLKHPNGYKSLSTLHRLNAYDQSGRL
+                     VAKLVATDDLTVEDEEDGHRILNSLFERLNEGHSKPIRAAETAVGVLSQFGQEHRLSP
+                     EEGDN"
+ORIGIN      
+        1 gatttgttta gtcactggca aacaggaaaa aatggcggac aatatgacca caacacaaat
+       61 tgaggtgggt ccgggagcaa ccaatgccac cataaacttc gaagcaggaa ttctggagtg
+      121 ctatgaaaga ctttcatggc aaagggccct tgactaccct ggtcaagacc gcctaaacag
+      181 actaaagaga aaattagagt caagaataaa gactcacaac aaaagtgagc ctgaaagtaa
+      241 aaggatgtct cttgaagaga gaaaagcaat tggagtaaaa atgatgaaag tacttctatt
+      301 tatgaatccg tctgctggaa ttgaagggtt tgagccatac tgtatgaaaa gttcctcaaa
+      361 gagcaactgt ccgaaataca attggattga ttacccttca accccaggga ggtgccttga
+      421 tgacatagaa gaagaaccag atggtgttga tggcccaact gaaatagtat taagggacat
+      481 gaacaacaaa gatgcaaggc aaaagataaa ggaggaagta aacactcaga aagaagggaa
+      541 gttccgtttg acaataaaaa gggatatgcg taatgtattg tccctgagag tgttagtaaa
+      601 cggaacattc ctcaaacacc ccaatggata caagtcctta tcaactctgc atagattgaa
+      661 tgcatatgac cagagtggaa ggcttgttgc taaacttgtt gctactgatg atcttacagt
+      721 ggaggatgaa gaagatggcc atcggatcct caattcactc ttcgagcgtc ttaatgaagg
+      781 acattcaaag ccaattcgag cagctgaaac tgcggtggga gtcttatccc aatttggtca
+      841 agagcaccga ttatcaccag aagagggaga caattagact ggtcacggaa gaactttatc
+      901 ttttaagtaa aagaattgat gataacatat tgttccacaa aacagtaata gctaacagct
+      961 ccataatagc tgacatggtt gtatcattat cattattaga aacattgtat gaaatgaagg
+     1021 atgtggttga agtgtacagc aggcagtgct tgtgaattta aaa
+//
+
+LOCUS       CY115186                1762 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) nucleoprotein (NP) gene,
+            complete cds.
+ACCESSION   CY115186
+VERSION     CY115186.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1762)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1762)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1762
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="5"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..1762
+                     /db_xref="IRD:NIGSP_BUCB_00032.NP"
+     gene            41..1723
+                     /gene="NP"
+     CDS             41..1723
+                     /gene="NP"
+                     /codon_start=1
+                     /product="nucleoprotein"
+                     /protein_id="AFH57958.1"
+                     /translation="MSNMDIDGINTGTIDKTPEEITSGTSGTTRPIIRPATLAPPSNK
+                     RTRNPSPERATTSSEDDVGRKTQKKQTPTEIKKSVYNMVVKLGEFYNQMMVKAGLNDD
+                     MERNLIQNAYAVERILLAATDDKKTEFQKKKNARDVKEGKEEIDHNKTGGTFYKMVRD
+                     DKTIYFSPIRITFLKEEVKTMYKTTMGSDGFSGLNHIMIGHSQMNDVCFQRSKALKRV
+                     GLDPSLISTFAGSTVPRRSGATGVAIKGGGTLVAEAIRFIGRAMADRGLLRDIKAKTA
+                     YEKILLNLKNKCSAPQQKALVDQVIGSRNPGIADIEDLTLLARSMVVVRPSVASKVVL
+                     PISIYAKIPQLGFNVEEYSMVGYEAMALYNMATPVSILRMGDDAKDKSQLFFMSCFGA
+                     AYEDLRVLSALTGTEFKPRSALKCKGFHVPAKEQVEGMGAALMSIKLQFWAPMTRSGG
+                     NEAGGDGGSGQISCSPVFAVERPIALSKQAVRRMLSMNIEGRDADVKGNLLKMMNDSM
+                     AKKTSGNAFIGKKMFQISDKNKTNPIEIPIKQTIPNFFFGRDTAEDYDDLDY"
+ORIGIN      
+        1 ttgtgaactt caagcaccag taaaagaact gaaaatcaaa atgtccaaca tggatattga
+       61 cggtataaac actgggacaa ttgacaaaac accggaagaa ataacttctg gaaccagtgg
+      121 gacaaccaga ccaatcatta gaccagcaac ccttgcccca ccaagcaaca aacgaacccg
+      181 taacccatcc ccggaaagag caaccacaag cagtgaagat gatgtcggaa ggaaaaccca
+      241 aaagaaacag accccgacag agataaagaa gagtgtctac aacatggtgg tgaaactggg
+      301 cgaattctat aaccagatga tggtcaaagc tggactcaat gatgacatgg agagaaacct
+      361 aatccaaaat gcgtatgccg tggaaagaat tctattggct gccactgatg acaagaaaac
+      421 agagttccag aagaaaaaga atgccagaga tgtcaaagaa gggaaagaag aaatagatca
+      481 caacaaaaca ggaggcacct tttacaagat ggtaagagat gataaaacca tctacttcag
+      541 ccctataaga attacctttt taaaagaaga ggtgaaaaca atgtacaaaa ccaccatggg
+      601 gagtgatggc ttcagtggac taaatcacat aatgattggg cattcacaga tgaatgatgt
+      661 ctgtttccaa agatcaaagg cactaaaaag agttggactt gatccttcat taatcagtac
+      721 ctttgcggga agcacagtcc ccagaagatc aggtgcgact ggtgtcgcaa tcaaaggagg
+      781 cggaacttta gtggctgaag ccattcgatt tataggaaga gcaatggcag acagagggct
+      841 attgagagac atcaaagcca agactgccta tgaaaagatt cttctgaatc taaaaaacaa
+      901 atgctctgcg ccccaacaaa aggctctagt tgatcaagtg atcggaagca gaaatccggg
+      961 gattgcagac attgaagatc taaccctgct tgctcgtagt atggtcgttg ttaggccctc
+     1021 tgtggcaagc aaagtggtgc ttcccataag catttacgcc aaaatacctc aactagggtt
+     1081 caatgttgaa gagtactcta tggttgggta cgaagccatg gctctttaca atatggcaac
+     1141 acctgtgtcc atattaagaa tgggagatga tgcaaaagat aaatcgcaat tattcttcat
+     1201 gtcttgcttc ggagctgcct atgaagacct gagagttttg tctgcattaa caggcacaga
+     1261 attcaagcct agatcagcat taaaatgcaa gggtttccat gttccagcaa aggaacaggt
+     1321 agaaggaatg ggagcagctc tgatgtccat caagctccag ttttgggctc cgatgaccag
+     1381 atctgggggg aacgaagcag gtggagacgg agggtctggc caaataagct gcagcccagt
+     1441 gtttgcagtg gaaagaccta ttgctctaag caagcaagct gtaagaagaa tgctgtcaat
+     1501 gaatattgag ggacgtgatg cagatgtcaa aggaaatcta ctcaagatga tgaatgactc
+     1561 aatggctaag aaaaccagtg gaaatgcttt cattgggaag aaaatgtttc aaatatcaga
+     1621 caaaaacaaa accaatccca ttgaaattcc aattaagcag accatcccca atttcttctt
+     1681 tgggagggac acagcagagg attatgatga cctcgattat taaagcaaca aaatagacac
+     1741 tatgactgtg attgtttcag ta
+//
+
+LOCUS       CY115185                1512 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) NB protein (NB) and
+            neuraminidase (NA) genes, complete cds.
+ACCESSION   CY115185
+VERSION     CY115185.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1512)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1512)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1512
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="6"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..1512
+                     /db_xref="IRD:NIGSP_BUCB_00032.NA"
+     gene            27..329
+                     /gene="NB"
+     CDS             27..329
+                     /gene="NB"
+                     /codon_start=1
+                     /product="NB protein"
+                     /protein_id="AFH57956.1"
+                     /translation="MNNATFNYTNVNLISHIRGSVIITICVSFIVILTIFGYIAKIFT
+                     NRNNCTNNAIGLCKRIKCSGCEPFCNKRGDTSSPRTGVDVPPFILPGLNLSESTPN"
+     gene            34..1434
+                     /gene="NA"
+     CDS             34..1434
+                     /gene="NA"
+                     /codon_start=1
+                     /product="neuraminidase"
+                     /protein_id="AFH57957.1"
+                     /translation="MLPSTIQTLTLFLTSGGVLLSLYVSASLSYLLYSDILLKFSRTE
+                     ITAPIMPLDCANASNVQAVNRSATKGVTLLLPEPEWTYPRLSCPGSTFQKALLISPHR
+                     FGETKGNSAPLIIREPFIACGPKECKHFALTHYAAQPGGYYNGTREDRNKLRHLISVK
+                     LGKIPTVENSIFHMAAWSGSACHDGREWTYIGVDGPDSNALLKIKYGEAYTDTYHSYA
+                     KNILRTQESACNCIGGDCYLMITDGPASGISECRFLKIREGRIIKEIFPTGRVKHTEE
+                     CTCGFASNKTIECACRDNSYTAKRPFVKLNVETDTAEIRLMCTETYLDTPRPNDGSIT
+                     GPCESNGDKGSGGIKGGFVHQRMASKIGRWYSRTMSKTKRMGMGLYVKYDGDPWTDSE
+                     ALALSGVMVSMEEPGWYSFGFEIKDKKCDVPCIGIEMVHDGGKTTWHSAATAIYCLMG
+                     SGQLLWDTVTGVNMTL"
+ORIGIN      
+        1 tcaaaactga ggcaaatagg ccaaaaatga acaatgctac cttcaactat acaaacgtta
+       61 accttatttc tcacatcagg gggagtgtta ttatcactat atgtgtcagc ttcattgtca
+      121 tacttactat attcggatat attgctaaaa ttttcacgaa cagaaataac tgcaccaata
+      181 atgccattgg attgtgcaaa cgcatcaaat gttcaggctg tgaaccgttc tgcaacaaaa
+      241 ggggtgacac ttcttctccc agaaccggag tggacgtacc cccgtttatc ttgcccgggc
+      301 tcaacctttc agaaagcact cctaattagc ccccatagat tcggagaaac caaaggaaac
+      361 tcagctccct tgataataag ggaacctttt attgcttgtg gaccaaagga atgcaaacat
+      421 tttgctctaa cccattatgc agctcaacca gggggatact acaatggaac aagagaagac
+      481 agaaacaagc tgaggcatct aatttcagtc aaattgggca aaatcccaac agtagaaaac
+      541 tctattttcc acatggcagc ttggagcggg tccgcatgcc atgatggtag agaatggact
+      601 tatatcggag ttgatggccc cgacagtaat gcattgctca aaataaaata tggagaagca
+      661 tatactgaca cataccattc ctatgcaaaa aacatcctaa ggacacaaga aagtgcttgc
+      721 aattgcatcg ggggagattg ttatcttatg ataactgatg gcccagcttc agggattagt
+      781 gaatgcagat tccttaagat tcgagagggc cgaataataa aagaaatatt tccaacagga
+      841 agagtaaaac atactgagga atgcacatgc ggatttgcca gcaacaaaac catagaatgt
+      901 gcctgtagag ataacagtta cacagcaaaa agaccctttg tcaaattaaa tgtggagact
+      961 gatacagcgg aaataagatt gatgtgcaca gagacttatt tggacacccc cagaccaaat
+     1021 gatggaagca taacagggcc ttgcgaatct aatggggaca aagggagtgg aggcatcaag
+     1081 ggaggatttg ttcaccaaag aatggcatcc aagattggaa ggtggtactc tcgaacgatg
+     1141 tctaaaacta aaagaatggg gatgggactg tatgtaaagt atgatggaga cccatggact
+     1201 gacagtgaag cccttgctct tagtggagta atggtttcaa tggaagaacc tggttggtat
+     1261 tcctttggct tcgaaataaa agataagaaa tgtgatgtcc cctgtattgg gatagaaatg
+     1321 gtacatgatg gtgggaaaac gacttggcac tcagcagcaa cagccattta ctgtttaatg
+     1381 ggctcaggac aactgctgtg ggacactgtc acaggtgtta atatgactct gtaatggagg
+     1441 aatggttgag tctgtcctaa accctttgtt cctattttgt ttgaacaatt gtccttactg
+     1501 aacttgattg tt
+//
+
+LOCUS       CY115184                1151 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) matrix protein 1 (M1) and
+            BM2 protein (BM2) genes, complete cds.
+ACCESSION   CY115184
+VERSION     CY115184.1
+KEYWORDS    .
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1151)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1151)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1151
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="7"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..1151
+                     /db_xref="IRD:NIGSP_BUCB_00032.MP"
+     gene            6..752
+                     /gene="M1"
+     CDS             6..752
+                     /gene="M1"
+                     /codon_start=1
+                     /product="matrix protein 1"
+                     /protein_id="AFH57954.1"
+                     /translation="MSLFGDTIAYLLSLTEDGEGKAELAEKLHCWFGGKEFDLDSALE
+                     WIKNKRCLTDIQKALIGASICFLKPKDQERKRRFITEPLSGMGTTATKKKGLILAERK
+                     MRKCVSFHEAFEIAEGHESSALLYCLMVMYLNPGNYSMQVKLGTLCALCEKQASHSHR
+                     AHSRAARSSVPGVRREMQMVSAMNTAKTMNGMGKGEDVQKLAEELQSNIGVLRSLGAS
+                     QKNGEGIAKDVMEVLKQSSMGNSALVKKYL"
+     gene            752..1081
+                     /gene="BM2"
+     CDS             752..1081
+                     /gene="BM2"
+                     /codon_start=1
+                     /product="BM2 protein"
+                     /protein_id="AFH57955.1"
+                     /translation="MFEPFQILSICSFILSALHFMAWTIGHLNQIKRGVNMKIRIKGP
+                     NKETINREVSILRHSYQKEIQAKEAMKEVLSDNMEVLSDHIVIEGLSAEEIIKMGETV
+                     LEVEELH"
+ORIGIN      
+        1 ttaaaatgtc gctgtttgga gacacaattg cctacctgct ttcattgaca gaagatggag
+       61 aaggcaaagc agaactagca gaaaaattac actgttggtt cggtgggaaa gaatttgacc
+      121 tagactctgc cttggaatgg ataaaaaaca aaagatgctt aactgatata cagaaagcac
+      181 taattggtgc ctctatctgc tttttaaaac ccaaagacca ggaaagaaaa agaagattca
+      241 tcacagagcc cctgtcggga atgggaacaa cagcaacaaa aaagaagggc ctgattctgg
+      301 ctgagagaaa aatgagaaaa tgtgtgagct tccatgaagc atttgaaata gcagaaggcc
+      361 atgaaagctc agcgctacta tattgtctca tggtcatgta cctgaatcct ggaaattatt
+      421 caatgcaagt aaaactagga acgctctgtg ctttgtgcga aaaacaagca tcacattcac
+      481 acagggctca tagcagagca gcgagatctt cagtgcccgg agtgagacgg gaaatgcaga
+      541 tggtctcagc tatgaacaca gcaaaaacaa tgaatggaat gggaaaagga gaagacgtcc
+      601 aaaaactggc agaagaactg caaagcaaca ttggagtatt gagatccctt ggggcaagtc
+      661 aaaagaatgg ggaaggaatt gcaaaggatg taatggaagt gctaaagcag agctctatgg
+      721 gaaattcagc tcttgtgaag aaatacctat aatgttcgaa ccatttcaga ttctttcaat
+      781 ttgttctttt attttatcag ctctccattt catggcttgg acaataggac atttaaatca
+      841 aataaaaaga ggagtaaata tgaaaataag aataaagggg ccaaataaag agacaataaa
+      901 cagagaggta tcaattttga gacacagtta ccaaaaagaa attcaggcta aagaagcaat
+      961 gaaggaagta ctctctgaca acatggaggt attgagtgac cacatagtaa ttgaggggct
+     1021 ttctgctgaa gagataataa aaatgggtga aacagttttg gaggtagaag aattgcatta
+     1081 aattcaattt ttactgtact tcttactatg catttaagca aattgtaatc aatgtcagca
+     1141 aataaactgg a
+//
+
+LOCUS       CY115183                1789 bp    cRNA    linear   VRL 11-APR-2012
+DEFINITION  Influenza B virus (B/Wisconsin/01/2010) hemagglutinin (HA) gene,
+            complete cds.
+ACCESSION   CY115183
+VERSION     CY115183.1
+KEYWORDS    STANDARD_DRAFT; VIRUS_AMBIGUITY.
+SOURCE      Influenza B virus (B/Wisconsin/01/2010)
+  ORGANISM  Influenza B virus (B/Wisconsin/01/2010)
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Betainfluenzavirus.
+REFERENCE   1  (bases 1 to 1789)
+  AUTHORS   Wentworth,D.E., Dugan,V., Halpin,R., Lin,X., Bera,J., Ghedin,E.,
+            Fedorova,N., Overton,L., Tsitrin,T., Stockwell,T., Amedeo,P.,
+            Bishop,B., Chen,H., Edworthy,P., Gupta,N., Katzel,D., Li,K.,
+            Schobel,S., Shrivastava,S., Thovarai,V., Wang,S., Ramanunninair,M.,
+            Silverman,J., Devis,R., Phan,L., Le,J., Pokorny,B.A., Onodera,S.,
+            Fulvini,A.A., He,Y., Kilbourne,E.D., Bucher,D., Bao,Y., Sanders,R.,
+            Dernovoy,D., Kiryutin,B., Lipman,D.J. and Tatusova,T.
+  TITLE     The NIAID Influenza Genome Sequencing Project
+  JOURNAL   Unpublished
+REFERENCE   2  (bases 1 to 1789)
+  CONSRTM   The NIAID Influenza Genome Sequencing Consortium
+  TITLE     Direct Submission
+  JOURNAL   Submitted (11-APR-2012) on behalf of JCVI/New York Medical
+            College/NCBI, National Center for Biotechnology Information, NIH,
+            Bethesda, MD 20894, USA
+COMMENT     This influenza isolate was sequenced as part of the NIAID Genome
+            Sequencing Center Influenza Genome Sequencing Project at the J.
+            Craig Venter Institute.  This sample is being submitted as a draft
+            sequence because after two rounds of targeted finishing some or all
+            segments do not meet either NCBI or J. Craig Venter Institute
+            standards of completeness due to low coverage, low quality,
+            ambiguities, frameshifts, gaps, or other problems.
+            This work was supported by the National Institute of Allergy and
+            Infectious Diseases (NIAID), Genome Sequencing Centers for
+            Infectious Diseases (GSCID) program.
+FEATURES             Location/Qualifiers
+     source          1..1789
+                     /organism="Influenza B virus (B/Wisconsin/01/2010)"
+                     /mol_type="viral cRNA"
+                     /strain="B/Wisconsin/01/2010"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:1089607"
+                     /segment="4"
+                     /lab_host="Egg passage(s)"
+                     /country="USA: Wisconsin"
+                     /collection_date="2010"
+     misc_feature    1..1789
+                     /db_xref="IRD:NIGSP_BUCB_00032.HA"
+     gene            4..1758
+                     /gene="HA"
+     CDS             4..1758
+                     /gene="HA"
+                     /function="receptor binding and fusion protein"
+                     /codon_start=1
+                     /product="hemagglutinin"
+                     /protein_id="AFH57953.1"
+                     /translation="MKAIIVLLMVVTSNADRICTGITSSNSPHVVKTATQGEVNVTGV
+                     IPLTTTPTKSYFANLKGTRTRGKLCPDCLNCTDLDVALGRPMCVGTTPSAKASILHEV
+                     RPVTSGCFPIMHDRTKIRQLPNLLRGYENIRLSTQNVIDAEKAPGGPYRLGTSGSCPN
+                     ATSKIGFFATMAWAVPKDNYKNATNPLTVEVPYICTEGEDQITVWGFHSDBKXQMKSL
+                     YGDSNPQKFTSSANGVTTHYVSQIGDFPDQTEDGGLPQSGRIVVDYMMQKPGKTGTIV
+                     YQRGVLLPQKVWCASGRSKVIKGSLPLIGEADCLHEKYGGLNKSKPYYTGEHAKAIGN
+                     CPIWVKTPLKLANGTKYRPPAKLLKERGFFGAIAGFLEGGWEGMIAGWHGYTSHGAHG
+                     VAVAADLKSTQEAINKITKNLNSLSELEVKNLQRLSGAMDELHNEILELDEKVDDLRA
+                     DTISSQIELAVLLSNEGIINSEDEHLLALERKLKKMLGPSAVDIGNGCFETKHKCNQT
+                     CLDRIAAGTFNAGEFSLPTFDSLNITAASLNDDGLDNHTILLYYSTAASSLAVTLMLA
+                     IFIVYMVSRDNVSCSICL"
+ORIGIN      
+        1 aaaatgaagg caataattgt actactcatg gtagtaacat ccaatgcaga tcgaatctgc
+       61 actgggataa catcttcaaa ctcacctcat gtggtcaaaa cagctactca aggggaggtc
+      121 aatgtgactg gcgtgatacc actgacaaca acaccaacaa aatcttattt tgcaaatctc
+      181 aaaggaacaa ggaccagagg gaaactatgc ccggactgtc tcaactgtac agatctggat
+      241 gtggccttgg gcaggccaat gtgtgtgggg accacacctt ctgctaaagc ttcaatactc
+      301 cacgaggtca gacctgttac atccgggtgc tttcctataa tgcacgacag aacaaaaatc
+      361 aggcaactac ccaatcttct cagaggatat gaaaatatca ggttatcaac ccaaaacgtt
+      421 atcgatgcag aaaaagcacc aggaggaccc tacagacttg gaacctcagg atcttgccct
+      481 aacgctacca gtaaaatcgg attttttgca acaatggctt gggctgtccc aaaggacaac
+      541 tacaaaaatg caacgaaccc actaacagta gaagtaccat acatttgtac agaaggggaa
+      601 gaccaaatta ctgtttgggg gttccattca gatracaaaa yccaaatgaa gagcctctat
+      661 ggagactcaa atcctcaaaa gttcacctca tctgctaatg gagtaaccac acattatgtt
+      721 tctcagattg gcgacttccc agatcaaaca gaagacggag gactaccaca aagcggcaga
+      781 attgttgttg attacatgat gcaaaaacct gggaaaacag gaacaattgt ctatcaaaga
+      841 ggtgttttgt tgcctcaaaa ggtgtggtgc gcgagtggca ggagcaaagt aataaaaggg
+      901 tcattgcctt taattggtga agcagattgc cttcatgaaa aatacggtgg attaaacaaa
+      961 agcaagcctt actacacagg agaacatgca aaagccatag gaaattgccc aatatgggta
+     1021 aaaacacctt tgaagcttgc caatggaacc aaatatagac ctcctgcaaa actattgaag
+     1081 gaaaggggtt tcttcggagc tattgctggt ttcctagaag gaggatggga aggaatgatt
+     1141 gcaggttggc acggatacac atctcacgga gcacatggag tggcagtggc ggcagacctt
+     1201 aagagtacac aagaagctat aaataagata acaaaaaatc tcaattcttt gagtgagcta
+     1261 gaagtaaaga accttcaaag actaagtggt gccatggatg aactccacaa cgaaatactc
+     1321 gagctggatg agaaagtgga tgatctcaga gctgacacta taagctcaca aatagaactt
+     1381 gcagtcttgc tttccaacga aggaataata aacagtgaag acgagcatct attggcactt
+     1441 gagagaaaac taaagaaaat gctgggtccc tctgctgtag acataggaaa cggatgcttc
+     1501 gaaaccaaac acaaatgcaa ccagacctgc ttagacagga tagctgctgg cacctttaat
+     1561 gcaggagaat tttctctccc cacttttgat tcattgaaca ttactgctgc atctttaaat
+     1621 gatgatggat tggataacca tactatactg ctctattact caactgctgc ttctagtttg
+     1681 gctgtaacat taatgctagc tatttttatt gtttatatgg tctccagaga caacgtttca
+     1741 tgctccatct gtctataagg aagattaggc cttgtatttt cctttattg
+//
+
