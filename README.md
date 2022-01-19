@@ -1,6 +1,6 @@
-# fluPipeline
+# FluPipeline
 
-FluPipeline 
+This pipeline takes a folder of illumina short read pairs in fastq.gz format and detects SNPs. 
 
 
 ## Installation instructions

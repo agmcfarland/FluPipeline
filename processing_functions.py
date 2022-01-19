@@ -204,11 +204,6 @@ def calculate_ReferenceCoverage(sequenceDataDir, reference, BWA_path, samtoolsbi
 # reference = 'H1N1pdm_ref.fasta'
 # ## troubleshooting inputs end ##
 
-	# print('ref: ',reference)
-	# print('read1_filename: ',read1_filename)
-	# print('read2_filename: ',read2_filename)
-	# print('samplename: ',samplename)
-
 	## index reference
 	subprocess.run([
 		BWA_path,

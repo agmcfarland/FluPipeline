@@ -16,17 +16,12 @@ from Bio.Seq import Seq
 from Bio import SeqIO, SeqFeature
 import argparse
 import logging
-pd.set_option('display.max_columns', None)
-
-
 global script_path
 script_path = os.path.split(os.path.realpath(os.path.abspath(__file__)))[0]
 sys.path.append(script_path)
-
-
 from processing_functions import *
 from processing_classes import SequencingSample, RunLogger, SampleTracker
-
+pd.set_option('display.max_columns', None)
 
 def run_FluPipeline(args):
 	'''
