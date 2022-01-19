@@ -93,7 +93,7 @@ If everything worked, you should see the help message displayed.
 cd /path/to/FluPipeline
 
 python fluPipeline.py \
---base_directory /home/agmcfarland/flu_project/shared_data/test_6_samples \
+--base_directory /path/to/output \
 --sequence_directory /home/agmcfarland/flu_project/shared_data/test_data_6_samples \
 --force \
 --force_base_directory \
