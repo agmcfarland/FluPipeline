@@ -22,6 +22,8 @@ conda env create --name FluPipeline_env --file FluPipeline_env.yml
 conda activate FluPipeline_env
 
 
+# you may get a message saying that fortran and gcc had errors in r-base installation. proceed regardless.
+
 # enter R
 R
 
@@ -34,11 +36,12 @@ rlib <- paste0(rlib,'/library')
 
 # verify that .libPaths() only includes the conda R library path
 .libPaths(rlib)
+.libPaths()
 
 # download R libraries. Do not update any libraries when prompted.
 install.packages('remotes',repos='https://cloud.r-project.org/')
-install_version("Rcpp", version = "1.0.7", repos = "http://cran.us.r-project.org", quiet=FALSE)
 library(remotes)
+install_version("Rcpp", version = "1.0.7", repos = "http://cran.us.r-project.org", quiet=FALSE)
 install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('ggplot2',repos='https://cloud.r-project.org/', quiet=FALSE)
@@ -48,10 +51,20 @@ install.packages('stringr',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('dplyr',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('tidyverse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install_version('latticeExtra','0.6-28',repos='https://cloud.r-project.org/', quiet=FALSE) #2016 version
+
+
+# download bioconductor libaries. Do not update any libraries when prompted.
 source("http://bioconductor.org/biocLite.R")
 biocLite()
 biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
 biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
+
+
+# check libraries are installed.
+library(ShortRead)
+library(genbankr)
+library(Rcpp)
+
 
 q(save="no")
 
@@ -125,11 +138,11 @@ optional arguments:
 # FOR DEVELOPMENT
 
 ```
-# create a new conda environment call FluPipeLine_env
-conda create --name FluPipeline_env3
+# create a new conda environment call FluPipeLine_envdev
+conda create --name FluPipeline_devenv
 
 # enter the environment
-source activate FluPipeline_env #or conda activate FluPipeline_env
+source activate FluPipeline_devenv #or conda activate FluPipeline_devenv
 
 
 # download the following. press y when prompted
@@ -173,8 +186,24 @@ R
 
 # download the following. Press an empty space when prompted.
 
-install.packages('remotes',repos='https://cloud.r-project.org/', quiet=FALSE)
+# enter R
+R
+
+# set the library that R will download packages to
+rlib <- system('which R', intern=TRUE)
+rlib <- sub(pattern='/bin/',replacement='/lib/',x=rlib)
+rlib <- paste0(rlib,'/library')
+
+#rlib = '/home/agmcfarland/miniconda3/envs/testenv/lib/R/library'
+
+# verify that .libPaths() only includes the conda R library path
+.libPaths(rlib)
+
+# download R libraries. Do not update any libraries when prompted.
+install.packages('remotes',repos='https://cloud.r-project.org/')
+install_version("Rcpp", version = "1.0.7", repos = "http://cran.us.r-project.org", quiet=FALSE)
 library(remotes)
+install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('ggplot2',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('knitr',repos='https://cloud.r-project.org/', quiet=FALSE)
@@ -187,8 +216,6 @@ source("http://bioconductor.org/biocLite.R")
 biocLite()
 biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
 biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
-
-#press space
 
 q(save="no")
 
