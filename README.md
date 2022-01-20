@@ -5,57 +5,36 @@ This pipeline takes a folder of illumina short read pairs in fastq.gz format and
 
 ## Installation instructions
 
-1. Set up a conda environment with all the necessary dependencies
 
 ```
-# create a new conda environment call FluPipeLine_env
-conda create --name FluPipeline_env
+# change directory to the pipeline folder
+cd /path/to/FluPipeline-main
 
-# enter the environment
-source activate FluPipeline_env
+# create the conda environment
+conda env create --name FluPipeline_env --file FluPipeline_env.yml
 
-# download the following. press y when prompted
-conda install -c conda-forge r=3.4.1
+# enter the conda environment
+conda activate FluPipeline_env
 
-#'y'
 
-conda install -c anaconda python=3.6.3
-
-#'y'
-
-pip install biopython numpy pandas
-
-conda install -c bioconda bwa=0.7.15
-
-#'y'
-
-conda install -c bioconda samtools=1.7
-
-#'y'
-
-conda install -c bioconda bcftools=1.8
-
-#'y'
-
-conda install -c bioconda fastp=0.12.4
-
-#'y'
-
-conda install -c bioconda bbmap=38.18
-
-#'y'
-
-conda install -c anaconda ipython
-
-#'y'
-
-## enter R 
-
+# enter R
 R
 
-# download the following. Press an empty space when prompted.
+# set the library that R will download packages to
+rlib <- system('which R', intern=TRUE)
+rlib <- sub(pattern='/bin/',replacement='/lib/',x=rlib)
+rlib <- paste0(rlib,'/library')
 
+#rlib = '/home/agmcfarland/miniconda3/envs/testenv/lib/R/library'
+
+# verify that .libPaths() only includes the conda R library path
+.libPaths(rlib)
+
+# download R libraries. Do not update any libraries when prompted.
+install.packages('remotes',repos='https://cloud.r-project.org/')
+install_version("Rcpp", version = "1.0.7", repos = "http://cran.us.r-project.org", quiet=FALSE)
 library(remotes)
+install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('ggplot2',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('knitr',repos='https://cloud.r-project.org/', quiet=FALSE)
@@ -69,28 +48,24 @@ biocLite()
 biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
 biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
 
-#press space
-
 q(save="no")
 
 ```
-
-2. Clone the FluPipeline repository 
 
 
 Afterwards change directory to the where the FluPipeline pipeline is located and type the following in the terminal:
 
 ```
-python FluPipeline.py -h
+python fluPipeline.py -h
 ```
 
-If everything worked, you should see the help message displayed.
+If you got a help message, proceed to run the test below.
 
 
 ## Test
 
 ```
-cd /path/to/FluPipeline
+cd /path/to/FluPipeline-main
 
 python fluPipeline.py \
 --base_directory /path/to/output \
@@ -139,3 +114,77 @@ optional arguments:
                         overwrite existing directory
   --threads THREADS     number of processors to use for multiprocessing
   ```
+
+
+
+# FOR DEVELOPMENT
+
+```
+# create a new conda environment call FluPipeLine_env
+conda create --name FluPipeline_env3
+
+# enter the environment
+source activate FluPipeline_env #or conda activate FluPipeline_env
+
+
+# download the following. press y when prompted
+conda install -c conda-forge r=3.4.1
+
+#'y'
+
+conda install -c anaconda python=3.6.3
+
+#'y'
+
+pip install biopython numpy pandas
+
+conda install -c bioconda bwa=0.7.15
+
+#'y'
+
+conda install -c bioconda samtools=1.7
+
+#'y'
+
+conda install -c bioconda bcftools=1.8
+
+#'y'
+
+conda install -c bioconda fastp=0.12.4
+
+#'y'
+
+conda install -c bioconda bbmap=38.18
+
+#'y'
+
+conda install -c anaconda ipython
+
+#'y'
+
+## enter R 
+
+R
+
+# download the following. Press an empty space when prompted.
+
+install.packages('remotes',repos='https://cloud.r-project.org/', quiet=FALSE)
+library(remotes)
+install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
+install.packages('ggplot2',repos='https://cloud.r-project.org/', quiet=FALSE)
+install.packages('knitr',repos='https://cloud.r-project.org/', quiet=FALSE)
+install.packages('kableExtra',repos='https://cloud.r-project.org/', quiet=FALSE)
+install.packages('stringr',repos='https://cloud.r-project.org/', quiet=FALSE)
+install.packages('dplyr',repos='https://cloud.r-project.org/', quiet=FALSE)
+install.packages('tidyverse',repos='https://cloud.r-project.org/', quiet=FALSE)
+install_version('latticeExtra','0.6-28',repos='https://cloud.r-project.org/', quiet=FALSE) #2016 version
+source("http://bioconductor.org/biocLite.R")
+biocLite()
+biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
+biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
+
+#press space
+
+q(save="no")
+
+```
