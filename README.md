@@ -5,6 +5,11 @@ This pipeline takes a folder of illumina short read pairs in fastq.gz format and
 
 ## Installation instructions
 
+Download the FluPipeline repository. The folder will be named `FluPipeline-main`.
+
+Follow the directions below to create a conda environment with all required packages and dependencies.
+
+Installing R packages will take a while.
 
 ```
 # change directory to the pipeline folder
