@@ -31,11 +31,9 @@ R
 rlib <- system('which R', intern=TRUE)
 rlib <- sub(pattern='/bin/',replacement='/lib/',x=rlib)
 rlib <- paste0(rlib,'/library')
-
-#rlib = '/home/agmcfarland/miniconda3/envs/testenv/lib/R/library'
+.libPaths(rlib)
 
 # verify that .libPaths() only includes the conda R library path
-.libPaths(rlib)
 .libPaths()
 
 # download R libraries. Do not update any libraries when prompted.
@@ -56,7 +54,9 @@ install_version('latticeExtra','0.6-28',repos='https://cloud.r-project.org/', qu
 # download bioconductor libaries. Do not update any libraries when prompted.
 source("http://bioconductor.org/biocLite.R")
 biocLite()
+# copy line separately:
 biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
+# copy line separately:
 biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
 
 
