@@ -114,22 +114,23 @@ Each run also will ouput a **runStats.csv** file.
 
 ```
 usage: fluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
-                      [--reference_directory REFERENCE_DIRECTORY]
-                      [--sequence_directory SEQUENCE_DIRECTORY] [--force]
-                      [--force_base_directory] [--threads THREADS]
+					  [--reference_directory REFERENCE_DIRECTORY]
+					  [--sequence_directory SEQUENCE_DIRECTORY] [--force]
+					  [--force_base_directory] [--cleanup] [--threads THREADS]
 
 optional arguments:
   -h, --help            show this help message and exit
   --base_directory BASE_DIRECTORY
-                        directory that run samples will be saved in
+						directory that run samples will be saved in
   --reference_directory REFERENCE_DIRECTORY
-                        directory containing reference strain files (.gb
-                        format). Default is the references folder where fluPipeline.py is located
+						directory containing reference strain files (.gb
+						format)
   --sequence_directory SEQUENCE_DIRECTORY
-                        directory containing fastq sequence files (.gz format)
+						directory containing fastq sequence files (.gz format)
   --force               overwrite existing files
   --force_base_directory
-                        overwrite existing directory
+						overwrite existing directory
+  --cleanup             remove intermediate files
   --threads THREADS     number of processors to use for multiprocessing
   ```
 

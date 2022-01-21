@@ -45,12 +45,14 @@ def flu_Pipeline(
 	force_overwrite,
 	BWA_path,
 	samtoolsbin_path,
-	bcftoolsbin_path):
+	bcftoolsbin_path,
+	cleanup_files):
 	'''
 	Runs through all steps of the flu pipeline. 
 	'''
 
 	# ## troubleshooting inputs start ##
+	# # use this exact input for troubleshooting the pipeline
 	# baseDirectory='/home/agmcfarland/flu_project/test/test4'
 	# Rscript='Rscript'
 	# softwareDir = '/home/agmcfarland/flu_project/flu_pipeline'
@@ -66,6 +68,7 @@ def flu_Pipeline(
 	# BWA_path =  '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
 	# samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
 	# bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+	# cleanup_files = True
 	# ## troubleshooting inputs end ##
 
 
@@ -185,7 +188,10 @@ def flu_Pipeline(
 
 	# ==================================clean up and record run=====================================================
 	# ==============================================================================================================
-	# sample.cleanup_OutputFiles(level='intermediate')
+	if cleanup_files == True:
+		sample.cleanup_OutputFiles(clean_level='intermediate')
+		sample_logger.add_Message('Removed intermediate files')
+
 	sample_logger.add_Message('Finished processing sample')
 	end_run_timer = datetime.now()-start_run_timer
 	# record the end of the run 
@@ -194,7 +200,8 @@ def flu_Pipeline(
 
 def calculate_ReferenceCoverage(sequenceDataDir, reference, BWA_path, samtoolsbin_path, read1_filename, read2_filename, samplename):
 	'''
-	Runs through all steps of a read mapping pipeline and calculates the coverage and depth for a given read file reference combo.
+	Runs through all steps of a simple read mapping pipeline and calculates the coverage and depth for a given read file reference combo.
+	Ouputs a csv containing the coverage stats for all segments
 	'''
 
 # ## troubleshooting inputs start ##

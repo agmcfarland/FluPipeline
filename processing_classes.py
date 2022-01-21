@@ -70,7 +70,7 @@ class SequencingSample:
 		none: no files removed
 		'''
 		intermediate_keep = [
-		'filt.qual.sorted.bam.bai','filt.qual.sorted.bam','vcf.gz','.filt.vcf.gz','.filt.vcf.gz.csi',
+		'.bam','filt.qual.sorted.bam.bai','filt.qual.sorted.bam','vcf.gz','.filt.vcf.gz','.filt.vcf.gz.csi',
 		'pileup','.Rdata','.pdf','fastp_stats','fastp.html','reference_coverage','_coverage_stats.csv','variantTable',
 		'reference_ha_coverage'
 		]

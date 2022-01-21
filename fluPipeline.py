@@ -34,6 +34,11 @@ def run_FluPipeline(args):
 	softwareDir = os.getcwd()
 	threads = args.threads
 
+	if args.cleanup == True:
+		cleanup_files = args.cleanup
+	else:
+		cleanup_files = False
+
 	if args.force == True:
 		force_overwrite = args.force
 	else:
@@ -105,19 +110,28 @@ def run_FluPipeline(args):
 			force_overwrite,
 			BWA_path,
 			samtoolsbin_path,
-			bcftoolsbin_path
+			bcftoolsbin_path,
+			cleanup_files
 			])
 
 	# log inputs
 	run_logger.add_Message('inputs:') #contains all path and paramater inputs
-	[run_logger.add_Message('{}: {}'.format(k, v)) for k,v in {'baseDirectory':baseDirectory,'Rscript':Rscript,'softwareDir':softwareDir,'pipeline_used':pipeline_used,'sequenceDataDir':sequenceDataDir,'referenceStrainsDir':referenceStrainsDir,'force_overwrite':force_overwrite,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path}.items()]
+	[run_logger.add_Message('{}: {}'.format(k, v)) for k,v in {
+	'cleanup_files':cleanup_files, 'force_overwrite':force_overwrite,'force_base_directory':force_base_directory,
+	'baseDirectory':baseDirectory,'Rscript':Rscript,'softwareDir':softwareDir,'pipeline_used':pipeline_used,
+	'sequenceDataDir':sequenceDataDir,'referenceStrainsDir':referenceStrainsDir,'force_overwrite':force_overwrite,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path
+	}.items()]
+
 	run_logger.add_Message('reference strains:')
+
 	[run_logger.add_Message(os.path.basename(g)) for g in glob.glob(pjoin(referenceStrainsDir,'*.gb'))]
+
 	run_logger.add_Message('samples:') # contains sample name, fastq R1 file, fastq R2 file
 	for s in glob.glob(pjoin(sequenceDataDir,'*_R1_*.fastq.gz')):
 		sample = SequencingSample()
 		sample.get_DataFromReadPairs(read1_filename=s)
-		run_logger.add_Message([sample.samplename,'  ',sample.read1_filename,'  ',sample.read2_filename])
+		run_logger.add_Message([sample.samplename,'  ',sample.read1_filename,'  ',sample.read2_filename])		
+
 	run_logger.add_Message('total samples: {}'.format(len(sample_submission))) # total samples ran
 
 
@@ -178,6 +192,7 @@ def main(args = None):
 	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) ')
 	parser.add_argument('--force', action='store_true', help='overwrite existing files')
 	parser.add_argument('--force_base_directory', action='store_true', help='overwrite existing directory')
+	parser.add_argument('--cleanup', action='store_true', help='remove intermediate files')
 	parser.add_argument('--threads',type=int, default=4, help='number of processors to use for multiprocessing')
 
 	args = parser.parse_args()
