@@ -1,0 +1,729 @@
+LOCUS       CY058484                2314 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 1 sequence.
+ACCESSION   CY058484
+VERSION     CY058484.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2314)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 2314)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..2314
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="1"
+                     /country="Australia"
+                     /collection_date="2007"
+     misc_feature    1..2314
+                     /db_xref="IRD:CEIRS-SJC001-165809.1"
+     gene            1..2280
+                     /gene="PB2"
+     CDS             1..2280
+                     /gene="PB2"
+                     /codon_start=1
+                     /product="polymerase PB2"
+                     /protein_id="ADE28746.1"
+                     /translation="MERIKELRNLMSQSRTREILTKTTVDHMAIIKKYTSGRQEKNPS
+                     LRMKWMMAMKYPITADKRITEMIPERNEHGQTLWSKVNDAGSDRVMVSPLAVTWWNRN
+                     GPVASTIHYPKIYKTYFEKVERLKQGTFGPVHFRNQVKIRRRVDINPGHADLSAKEAQ
+                     DVIMEVVFPNEVGARILTSESQLTITKEKKEELQNCKISPLMVAYMLERELVRKTRFL
+                     PVAGGTSSVYIEVLHLTQGTCWEQMYTPGGEVRNDDVDQSLIIAARNIVRRAAVSADP
+                     LASLLEMCHSTQIGGTRMVDILRQNPTEEQAVDICKAAMGLRISSSFSFGGFTFKRTS
+                     GSSVKREEEVLTGNLQTLKLTVHEGYEEFTMVGKRATAILRKATRRLIQLIVSGRDEQ
+                     SIVEAIVVAMVFSQEDCMVKAVRGDLNFVNRANQRLNPMHQLLRHFQKDAKVLFLNWG
+                     VEPIDNVMGMIGILPDMTPSTEMSMRGVRVSKMGVDEYSNAERVVVSIDRFLRVRDQR
+                     GNVLLSPEEVSETQGTEKLTITYSSSMMWEINGPESVLINTYQWIIRNWETVKIQWSQ
+                     NPTMLYNKMEFEPFQSLVPKAIRGQYSGFVRTLFQQMRDVLGTFDTTQIIKLLPFAAA
+                     PPKQSRMQFSSLTVNVRGSGMRILVRGNSPVFNYNKTTKRLTVLGKDAGTLTEDPDEG
+                     TAGVESAVLRGFLILGKEDRRYGPALSINELSNLAKGEKANVLIGQGDVVLVMKRKRD
+                     SSILTDSQTATKRIRMAIN"
+ORIGIN      
+        1 atggaaagaa taaaagagct aaggaatttg atgtcacaat ctcgcactcg cgagatactt
+       61 accaaaacta ctgtagacca catggccata atcaagaaat acacatcagg aagacaggag
+      121 aaaaacccat cacttaggat gaaatggatg atggcaatga aatacccaat tacagctgat
+      181 aaaaggataa cggaaatgat tcctgaaaga aatgagcatg gacagacatt atggagtaag
+      241 gtgaatgatg ccggatcaga ccgagtgatg gtatcacccc tggctgtgac atggtggaac
+      301 agaaatggac cagtggcaag tactattcac tatccaaaaa tctacaaaac ttactttgaa
+      361 aaggttgaaa ggttaaaaca aggaaccttt ggccctgtac actttagaaa ccaagtcaaa
+      421 atacgccgaa gagtcgacat aaatcctggt catgcagacc tcagcgccaa ggaggcacag
+      481 gatgtaatta tggaagttgt tttccctaat gaagtaggag ccagaatact aacatcagaa
+      541 tcgcaattaa cgataaccaa ggagaaaaaa gaagaactcc agaattgcaa aatttcccct
+      601 ttgatggttg catacatgtt agagagggaa cttgtccgca aaacaagatt tctcccggtt
+      661 gcaggtggaa caagcagtgt gtacattgaa gttttgcatt taacacaggg gacatgctgg
+      721 gagcagatgt acactccagg tggggaggtg aggaatgatg atgttgatca aagcctaatt
+      781 attgctgcta ggaacatagt gagaagagct gcagtatcag cagatccact agcatcttta
+      841 ttagaaatgt gccatagcac acagattggt ggaacaagga tggtggatat tctcaggcaa
+      901 aatccaacag aagaacaagc tgtggatata tgcaaggcag caatggggct gagaatcagc
+      961 tcatccttca gttttggcgg attcacattt aagagaacaa gtggatcatc agtcaaaagg
+     1021 gaggaagaag tgctcacggg caatctgcaa acattgaaac taaccgtgca tgagggatat
+     1081 gaagagttca caatggttgg gaaaagggca acagctatac tcagaaaagc aaccaggaga
+     1141 ttgattcaac taatagtgag tggaagagac gaacaatcaa tagtcgaagc aatagttgta
+     1201 gcaatggtat tctcacaaga agattgcatg gtaaaagcag ttagaggtga tctgaatttc
+     1261 gttaatagag cgaatcagcg gttgaatccc atgcatcaac tattgagaca ttttcagaag
+     1321 gatgctaaag tacttttctt aaattgggga gttgaaccta ttgacaatgt gatgggaatg
+     1381 attgggatat tacctgatat gactccaagt accgagatgt caatgagagg agtgagagtc
+     1441 agcaaaatgg gtgtagatga atactccaat gctgaaaggg tagtggtaag cattgaccgt
+     1501 tttttgagag tccgggacca aagaggaaat gtactactgt ctccagagga agtaagtgaa
+     1561 acacaaggga cagagaaact gacaataact tactcttcat caatgatgtg ggagattaat
+     1621 ggccctgagt cagtcttgat caatacctat cagtggatca tcagaaactg ggagactgtt
+     1681 aaaattcagt ggtctcagaa tcctacgatg ctgtacaata aaatggaatt tgaaccattt
+     1741 cagtctctag tccccaaggc cattagaggc caatacagtg ggtttgttag aactctattc
+     1801 caacaaatga gggatgtgct tgggactttt gacacaactc agataataaa acttcttccc
+     1861 tttgcagccg ctcctccaaa gcaaagcaga atgcaattct cgtcattaac tgtgaatgtg
+     1921 aggggatcag gaatgagaat acttgtgagg ggtaattctc cagtattcaa ctacaacaag
+     1981 actaccaaga gactcacagt cctcggaaag gatgctggca ctttaactga agacccagat
+     2041 gaaggcacag ctggagtgga atctgcggtt ctaaggggat tcctcatttt aggcaaagaa
+     2101 gatagaagat atgggccagc attaagcatc aatgaattga gcaaccttgc gaaaggggaa
+     2161 aaagctaatg tgctaattgg gcaaggggat gtagtgttgg taatgaaacg aaaacgggac
+     2221 tctagcatac ttactgacag ccagacagcg accaaaagaa ttcggatggc catcaattaa
+     2281 tttcgaataa tttaaaaacg accttgtttc tact
+//
+
+LOCUS       CY058485                2302 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 2 sequence.
+ACCESSION   CY058485
+VERSION     CY058485.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2302)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 2302)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..2302
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="2"
+                     /country="Australia"
+                     /collection_date="2007"
+     misc_feature    1..2302
+                     /db_xref="IRD:CEIRS-SJC001-165809.2"
+     gene            1..2274
+                     /gene="PB1"
+     CDS             1..2274
+                     /gene="PB1"
+                     /codon_start=1
+                     /product="polymerase PB1"
+                     /protein_id="ADE28747.1"
+                     /translation="MDVNPTLLFLKVPAQNAISTTFPYTGDPPYSHGTGTGYTMDTVN
+                     RTHQYSERGRWTKNTETGAPQLNPIDGPLPEDNEPSGYAQTDCVLEAMAFLEESHPGI
+                     FENSCIETMEVVQQTRVDKLTQGRQTYDWTLNRNQPAATALANTIEVFRSNGLIANES
+                     GRLIDFLKDVMESMDRGEVEVTTHFQRKRRVRDNVTKKMVTQRTIGKKKHKLDKRSYL
+                     IRALTLNTMTKDAERGKLKRRAIATPGMQIRGFVYFVETLARSICEKLEQSGLPVGGN
+                     EKKAKLANVVRKMMTNSQDTEISFTITGDNTKWNENQNPRMFLAMITYITKNQPEWFR
+                     NVLSIAPIMFSNKMARLGKGYMFESKSMKLRTQIPAEMLANIDLKYFNDSTKKKIEKI
+                     RPLLIDGTASLSPGMMMGMFNMLSTVLGVSILNLGQKRYTKTTYWWDGLQSSDDFALI
+                     VNAPNYAGIQAGVDRFYRTCKLLGINMSKKKSYINRTGTFEFTSFFYRYGFVANFSME
+                     LPSFGVSGVNESADMSIGVTVIKNNMINNDLGPATAQMALQLFIKDYRYTYRCHRGDT
+                     QIQTRRSFEIKKLWDQTRSKAGLLVSDGGPNLYNIRNLHIPEVCLKWELMDEDYQGRL
+                     CNPLNPFVSHKEIESVNNAVIMPAHGPAKNMEYDAVATTHSWVPKRNRSILNTSQRGI
+                     LEDEQMYQRCCNLFEKFFPSSSYRRPVGISSMVEAMVSRARIDARIDFESGRIKKEEF
+                     AEIMKICSTIEDLRRQK"
+     gene            95..268
+                     /gene="PB1-F2"
+     CDS             95..268
+                     /gene="PB1-F2"
+                     /codon_start=1
+                     /product="PB1-F2 protein"
+                     /protein_id="ADE28748.1"
+                     /translation="MGQEQDTPWIQSTGHTSTQKEEDGQKIPKLEHRNLTQLMVHYRK
+                     TMNQVAMPKQIVY"
+ORIGIN      
+        1 atggatgtca atccgacatt acttttctta aaagtgccag cacaaaatgc tataagcaca
+       61 acttttcctt atactggtga ccctccttac agccatggga caggaacagg atacaccatg
+      121 gatacagtca acaggacaca ccagtactca gaaagaggaa gatggacaaa aaataccgaa
+      181 actggagcac cgcaacttaa cccaattgat ggtccactac cggaagacaa tgaaccaagt
+      241 ggctatgccc aaacagattg tgtattagaa gcaatggctt tccttgaaga atcccatccc
+      301 ggtatctttg aaaactcttg tattgaaaca atggaggttg ttcagcaaac aagggtggac
+      361 aaactgacac aaggcagaca gacctatgac tggactctaa ataggaacca gcctgctgcc
+      421 acagcattgg caaacactat agaagtattc agatcaaacg gcctcatagc aaatgaatct
+      481 gggaggctaa tagacttcct taaagatgta atggagtcga tggacagagg cgaagtagag
+      541 gtcacaactc attttcaaag aaagaggaga gtgagagaca atgtaactaa aaaaatggtg
+      601 acccaaagaa caataggcaa aaagaaacat aaattagaca aaagaagtta cctaattagg
+      661 gcattaaccc tgaacacaat gaccaaagat gctgagaggg ggaaactaaa acgcagagca
+      721 attgcaaccc caggaatgca aataaggggg tttgtatact ttgttgagac actggcaaga
+      781 agcatatgtg aaaagcttga acaatcagga ttgccagttg gaggaaatga gaagaaagca
+      841 aagttagcaa atgttgtaag gaagatgatg accaactccc aggacactga aatttctttc
+      901 accataaccg gagataacac aaaatggaac gagaatcaaa accctagaat gttcttggcc
+      961 atgatcacat atataaccaa aaatcagcct gaatggttca gaaatgttct aagtattgct
+     1021 ccaataatgt tttcaaacaa gatggcgaga ctaggtaagg ggtacatgtt tgaaagcaag
+     1081 agtatgaaac tgagaactca aatacctgca gagatgctag ctaacataga tttgaaatat
+     1141 ttcaatgatt caactaaaaa gaaaattgaa aaaatccgac cattattaat agatggaact
+     1201 gcatcattga gtcctggaat gatgatgggc atgttcaata tgttgagcac cgtcttgggc
+     1261 gtctccattc tgaatcttgg gcaaaagaga tacaccaaga ctacttactg gtgggatggt
+     1321 cttcaatcgt ctgatgattt tgctttgatt gtgaatgcac ccaactatgc aggaattcaa
+     1381 gctggagttg acaggtttta tcgaacctgt aagctgctcg gaattaatat gagcaaaaag
+     1441 aagtcttaca taaacagaac aggtaccttt gaattcacga gctttttcta tcgttatggg
+     1501 tttgttgcca atttcagcat ggagcttcct agttttgggg tgtctggggt caatgaatct
+     1561 gcagacatga gtattggagt cactgtcatc aaaaacaata tgataaacaa tgaccttggc
+     1621 ccagcaactg ctcaaatggc ccttcagtta tttataaaag attacaggta cacttatcga
+     1681 tgccaccgag gtgacacaca aatacaaacc cggagatcat ttgagataaa gaaactatgg
+     1741 gaccaaaccc gctcaaaagc tgggctgttg gtctctgatg gaggccccaa tttatataac
+     1801 attagaaatc tccatattcc tgaagtttgc ttgaaatggg agttgatgga tgaggattac
+     1861 caggggcgtt tatgcaaccc attaaacccg tttgtcagcc ataaagagat tgaatcagtg
+     1921 aacaatgcag tgataatgcc ggcacatggt ccagccaaaa atatggagta tgacgctgtt
+     1981 gcaacaacac actcctgggt ccccaaaaga aatcgatcca ttttgaacac gagccaaagg
+     2041 gggatacttg aagatgagca aatgtatcag aggtgctgca atttatttga aaaattcttc
+     2101 ccaagtagct catacagaag accagttgga atatccagta tggtagaggc tatggtctca
+     2161 agagcccgaa ttgatgcacg gattgatttc gaatctggac ggataaagaa agaggaattt
+     2221 gctgagatca tgaagatctg ttccaccatt gaagacctca gacggcaaaa atgaggaatt
+     2281 tggcttgtcc ttcatgaaaa aa
+//
+
+LOCUS       CY058486                2203 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 3 sequence.
+ACCESSION   CY058486
+VERSION     CY058486.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 2203)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 2203)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..2203
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="3"
+                     /country="Australia"
+                     /collection_date="2007"
+     misc_feature    1..2203
+                     /db_xref="IRD:CEIRS-SJC001-165809.3"
+     gene            1..2151
+                     /gene="PA"
+     CDS             1..2151
+                     /gene="PA"
+                     /codon_start=1
+                     /product="polymerase PA"
+                     /protein_id="ADE28749.1"
+                     /translation="MEDFVRQCFNPMIVELAEKAMKEYGEDLKIETNKFAAICTHLEV
+                     CFMYSDFHFINEQGESIIVEPEDPNALLKHRFEIIEGRDRTMAWTVVNSICNTTGAEK
+                     PKFLPDLYDYKENRFIEIGVTRREVHIYYLEKANKIKSEKTHIHIFSFTGEEMATKAD
+                     YTLDEESRARIKTRLFTIRQEMASRGLWDSFRQSERGEETIEERFEITGTMRRLADQS
+                     LPPNFSCIENFRAYVDGFEPNGYIEGKLSQMSKEVNARIEPFLKTTPRPIRLPNGPPC
+                     FQRSKFLLMDSLKLSIEDPNHEGEGIPLYDAIKCMRTFFGWKEPTVVKPHEKGINPNY
+                     LLSWKQVLEELQDIESEERIPRTKNMKKTSQLKWALGENMAPEKVDFDDCKDISDLKQ
+                     YDSDEPELRSFSSWIQNEFNKACELTDSIWIELDEIGEDVAPIEHIASMRRNYFTAEV
+                     SHCRATEYIMKGVYINTALLNASCAAMDDFQLIPMISKCRTKEGRRKTNLYGFIVKGR
+                     SHLRNDTDVVNFVSMEFSLTDPRLEPHKWEKYCVLEIGDMLLRSAIGQVSRPMFLYVR
+                     TNGTSKIKMKWGMEMRRCLLQSLQQIESMIEAESSVKEKDMTKEFFENKSETWPIGES
+                     PKGVEEGSIGKVCRTLLAKSVFNSLYASPQLEGFSAESRKLLLIVQALRDNLEPGTFD
+                     LGGLYEAIEECLINDPWVLLNASWFNSFLTHALR"
+ORIGIN      
+        1 atggaagatt ttgtacgaca atgcttcaat ccgatgattg tcgagcttgc agaaaaagca
+       61 atgaaagagt atggagagga cctgaaaatc gaaacaaaca aatttgcagc aatatgcacc
+      121 cacttggaag tgtgcttcat gtattcagat tttcatttca tcaatgagca aggcgaatca
+      181 ataatagtag agcctgagga cccaaatgca cttttaaagc acagatttga gataatagag
+      241 ggacgagatc gtacaatggc atggacagtt gtaaacagta tttgcaacac cacaggagct
+      301 gagaaaccaa agtttctgcc agatctgtat gattacaaag agaatagatt catcgagatt
+      361 ggagtgacaa ggagggaagt tcacatatac tatctggaaa aggccaacaa aattaaatct
+      421 gagaagacac acattcacat tttctcattc accggcgaag aaatggccac aaaggccgat
+      481 tacactctcg atgaagaaag cagagctagg attaaaacca gattgttcac cataagacaa
+      541 gaaatggcaa gcagaggtct ttgggactcc tttcgtcagt ccgaaagagg cgaagaaaca
+      601 attgaagaaa gatttgaaat cacagggaca atgcgcaggc tcgctgacca aagccttccg
+      661 ccgaacttct cctgcattga gaattttaga gcctatgtgg atggatttga accgaacggc
+      721 tacattgagg gcaagctttc tcaaatgtcc aaagaagtaa atgctagaat tgagcctttt
+      781 ttgaaaacaa cacctcgacc aattagactt ccgaatggcc ctccttgttt tcagcggtca
+      841 aaattcctgc tgatggattc tttaaaatta agcattgagg atccaaatca tgaaggtgag
+      901 gggataccac tatatgatgc aatcaagtgt atgagaacat tctttggatg gaaagaaccc
+      961 actgttgtca agccacacga gaagggaata aatccgaatt atctgttgtc gtggaagcaa
+     1021 gtattggaag agctgcagga cattgagagt gaggagagga ttccaagaac aaaaaacatg
+     1081 aaaaaaacta gtcagctaaa gtgggcactt ggtgagaaca tggcaccaga gaaggtggat
+     1141 tttgatgact gtaaagatat aagcgatttg aagcaatatg acagtgacga acctgaatta
+     1201 agatcatttt caagttggat ccagaatgag ttcaacaagg catgcgagct gaccgattca
+     1261 atctggatag agcttgatga gattggagaa gatgtggctc cgattgaaca cattgcaagc
+     1321 atgagaagga attacttcac agctgaggtg tcccattgca gagccacaga atatataatg
+     1381 aagggggtat acattaatac tgctttgctc aatgcatcct gtgcagcaat ggatgatttc
+     1441 caactaattc ccatgataag caaatgtaga actaaagagg gaaggagaaa gaccaatttg
+     1501 tacggcttca tcgtaaaagg aagatctcac ttaaggaatg acaccgatgt ggtaaacttt
+     1561 gtgagcatgg agttttccct cactgaccca agacttgagc cacacaaatg ggagaagtac
+     1621 tgcgttcttg agataggaga tatgcttcta aggagtgcaa taggccaagt gtcaaggccc
+     1681 atgttcttgt atgtaaggac aaatggaacc tcaaaaatta aaatgaaatg gggaatggag
+     1741 atgaggcgtt gcctcctcca atccctccaa caaatagaga gcatgattga agctgagtcc
+     1801 tctgtcaaag agaaagacat gacaaaagag ttttttgaga ataaatcaga aacatggccc
+     1861 attggagagt caccaaaagg agtggaagaa ggttccattg ggaaagtatg caggacactg
+     1921 ttggctaagt cagtattcaa tagcctgtat gcatctccac aattagaagg attttcagct
+     1981 gagtcaagaa agttgctcct cattgttcag gctcttaggg acaatctgga acctgggacc
+     2041 tttgatcttg gggggctata tgaagcaatt gaggagtgcc tgattaatga tccctgggtt
+     2101 ttgcttaatg cttcttggtt caactccttc ctaacacatg cattgagata gctggggcaa
+     2161 tgctactatt tgttatccat actgtccaaa aaagtacatt gtt
+//
+
+LOCUS       CY058487                1743 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 4 sequence.
+ACCESSION   CY058487
+VERSION     CY058487.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1743)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 1743)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..1743
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="4"
+                     /country="Australia"
+                     /collection_date="2007"
+     misc_feature    1..1743
+                     /db_xref="IRD:CEIRS-SJC001-165809.4"
+     gene            1..1698
+                     /gene="HA"
+     CDS             1..1698
+                     /gene="HA"
+                     /function="receptor binding and fusion protein"
+                     /codon_start=1
+                     /product="hemagglutinin"
+                     /protein_id="ADE28750.1"
+                     /translation="MKVKLLVLLCTFTATYADTICIGYHANNSTDTVDTVLEKNVTVT
+                     HSVNLLENSHNGKLCLLKGIAPLQLGNCSVAGWILGNPECELLISKESWSYIVEKPNP
+                     ENGTCYPGHFADYEELREQLSSVSSFERFEIFPKESSWPNHTVTGVSASCSHNGESSF
+                     YRNLLWLTGKNGLYPNLSKSYANNKEKEVLVLWGVHHPPNIGNQKALYHTENAYVSVV
+                     SSHYSRKFTPEIAKRPKVRDQEGRINYYWTLLEPGDTIIFEANGNLIAPRYAFALSRG
+                     FGSGIINSNAPMDKCDAKCQTPQGAINSSLPFQNVHPVTIGECPKYVRSAKLRMVTGL
+                     RNIPSIQSRGLFGAIAGFIEGGWTGMVDGWYGYHHQNEQGSGYAADQKSTQNAINGIT
+                     NKVNSVIEKMNTQFTAVGKEFNKLERRMENLNKKVDDGFIDIWTYNAELLVLLENERT
+                     LDFHDSNVKNLYEKVKSQLKNNAKEIGNGCFEFYHKCNDECMESVKNGTYDYPKYSEE
+                     SKLNREKIDGVKLESMGVYQILAIYSTVASSLVLLVSLGAISFWMCSNGSLQCRICI"
+     sig_peptide     1..51
+                     /gene="HA"
+     mat_peptide     52..1029
+                     /gene="HA"
+                     /product="HA1"
+     mat_peptide     1030..1695
+                     /gene="HA"
+                     /product="HA2"
+ORIGIN      
+        1 atgaaagtaa aactactggt cctgttatgc acatttacag ctacatatgc agacacaata
+       61 tgtataggct accatgctaa caactcgacc gacactgttg acacagtact tgaaaagaat
+      121 gtgacagtga cacactctgt caacctgctt gagaacagtc acaatggaaa actatgtcta
+      181 ttaaaaggaa tagccccact acaattgggt aattgcagcg ttgccgggtg gatcttagga
+      241 aacccagaat gcgaattact gatttccaag gagtcatggt cctacattgt agaaaaacca
+      301 aatcctgaga atggaacatg ttacccaggg catttcgctg actatgagga actgagggag
+      361 caattgagtt cagtatcttc atttgagagg ttcgaaatat tccccaaaga aagctcatgg
+      421 cccaaccaca ccgtaaccgg agtgtcagca tcatgctccc ataatgggga aagcagtttt
+      481 tacagaaatt tgctatggct gacggggaag aatggtttgt acccaaacct gagcaagtcc
+      541 tatgcaaaca acaaagaaaa agaagtcctt gtactatggg gtgttcatca cccgccaaac
+      601 ataggtaacc aaaaggccct ctatcataca gaaaatgctt atgtctctgt agtgtcttca
+      661 cattatagca gaaaattcac cccagaaata gccaaaagac ccaaagtaag agatcaagaa
+      721 ggaagaatca attactactg gactctgctt gaacccgggg atacaataat atttgaggca
+      781 aatggaaatc taatagcgcc aagatatgct ttcgcactga gtagaggctt tggatcagga
+      841 atcatcaact caaatgcacc aatggataaa tgtgatgcga agtgccaaac acctcaggga
+      901 gctataaaca gcagtcttcc tttccagaac gtacacccag tcacaatagg agagtgtcca
+      961 aagtatgtca ggagtgcaaa attaaggatg gttacaggac taaggaacat cccatccatt
+     1021 caatccagag gtttgtttgg agccattgcc ggtttcattg aaggggggtg gactggaatg
+     1081 gtagatggtt ggtatggtta tcatcatcag aatgagcaag gatctggcta tgctgcagat
+     1141 caaaaaagca cacaaaatgc cattaatggg attacaaaca aggtgaattc tgtaattgag
+     1201 aaaatgaaca ctcaattcac agcagtgggc aaagaattca acaaattgga aagaaggatg
+     1261 gaaaacttga ataaaaaagt tgatgatggg tttatagaca tttggacata taatgcagaa
+     1321 ctgttggttc tactggaaaa tgaaaggact ttggatttcc atgactccaa tgtgaagaat
+     1381 ctgtatgaga aagtaaaaag ccagttaaag aataatgcta aagaaatagg aaatgggtgt
+     1441 tttgaattct atcacaagtg taacgatgaa tgcatggaga gtgtaaagaa tggaacttat
+     1501 gactatccaa aatattccga agaatcaaag ttaaacaggg agaaaattga tggagtgaaa
+     1561 ttggaatcaa tgggagtcta tcagattctg gcgatctact caacagtcgc cagttctctg
+     1621 gttcttttgg tctccctggg ggcaatcagc ttctggatgt gttccaatgg gtctttacag
+     1681 tgtagaatat gcatctaaga ccagaatttc agaaatataa ggaaaaacac ccttgtttct
+     1741 act
+//
+
+LOCUS       CY058488                1497 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 5 sequence.
+ACCESSION   CY058488
+VERSION     CY058488.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1497)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 1497)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..1497
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="5"
+                     /country="Australia"
+                     /collection_date="2007"
+     gene            1..1497
+                     /gene="NP"
+     CDS             1..1497
+                     /gene="NP"
+                     /codon_start=1
+                     /product="nucleocapsid protein"
+                     /protein_id="ADE28751.1"
+                     /translation="MASQGTKRSYEQMETDGERQNATEIRASVGRMIGGIGRFYIQMC
+                     TELKLNDYEGRLIQNSLTIERMVLSAFDERRNKYLEEHPSAGKDPKKTGGPIYKRVDG
+                     KWVRELVLYDKEEIRRIWRQANNGDDATAGLTHIMIWHSNLNDTTYQRTRALVRTGMD
+                     PRMCSLMQGSTLPRRSGAAGAAVKGVGTMVLELIRMIKRGINDRNFWRGENGRKTRIA
+                     YERMCNILKGKFQTAAQKAMMDQVRESRNPGNAEIEDLTFLARSALILRGSVAHKSCL
+                     PACVYGPAVASGYDFEKEGYSLVGVDPFKLLQTSQVYSLIRPNENPAHKSQLVWMACN
+                     SAAFEDLRVSSFIRGTRVLPRGKLSTRGVQIASNENMDAIVSSTLELRSRYWAIRTRS
+                     GGNTNQQRASAGQISTQPTFSVQRNLPFDKATIMAAFSGNTEGRTSDMRAEIIKMMES
+                     ARPEEVSFQGRGVFELSDERATNPIVPSFDMSNEGSYFFGDNAEEYDN"
+     misc_feature    1..1497
+                     /db_xref="IRD:CEIRS-SJC001-165809.5"
+ORIGIN      
+        1 atggcgtccc aaggcaccaa acggtcttac gaacagatgg agactgatgg ggaacgccag
+       61 aatgcaactg aaatcagagc atccgtcgga agaatgattg gtggaattgg gcgattctac
+      121 atccaaatgt gcaccgagct taagctcaat gattatgagg gacggctgat ccagaacagc
+      181 ttaacaatag agagaatggt gctctctgct tttgatgaga ggagaaataa atatctagag
+      241 gaacatccca gcgcggggaa agatcctaag aaaactggag gacccatata caagagagta
+      301 gatggaaagt gggtgaggga actcgtcctt tatgacaaag aagaaataag gcggatttgg
+      361 cgccaagcca acaatggtga tgatgcaacg gctggtttga ctcacattat gatctggcat
+      421 tctaatttga atgatacaac ttaccagagg acaagagctc ttgtccgcac cggaatggat
+      481 cccaggatgt gctctttgat gcaaggttca actctcccta gaagatctgg agcagcaggc
+      541 gccgcagtca aaggagtcgg gacaatggta ttggagttaa tcaggatgat caaacgtggg
+      601 atcaatgacc gaaacttctg gaggggtgag aatggaagaa aaacaaggat tgcttatgag
+      661 agaatgtgca acattctcaa aggaaaattt caaacagctg cacaaaaagc aatgatggac
+      721 caagtgagag aaagccggaa cccaggaaat gctgagatcg aagatctcac ttttctggca
+      781 cggtctgcac tcatattgag aggatcagtt gctcacaagt cttgcctgcc tgcctgtgtg
+      841 tatggaccag ccgtagccag tgggtatgac ttcgaaaaag agggttactc tttggtagga
+      901 gtagaccctt tcaaactgct tcaaaccagt caggtataca gtctaattag accaaacgag
+      961 aatcccgcac acaagagcca gttggtgtgg atggcatgca attctgctgc atttgaagat
+     1021 ctaagagtgt caagcttcat cagaggaaca agagtacttc caagggggaa gctctccact
+     1081 agaggagtac aaattgcttc aaatgaaaac atggatgcta ttgtgtcaag tactcttgaa
+     1141 ctgagaagca gatactgggc cataagaacc agaagtggag ggaacactaa tcaacaaagg
+     1201 gcctctgcgg gccaaatcag cacacaacct acgttttctg tgcagagaaa cctcccattt
+     1261 gacaaagcaa ccatcatggc agcattctct gggaatacag agggaagaac atcagacatg
+     1321 agggcagaaa tcataaagat gatggaaagt gcaagaccag aagaagtgtc cttccagggg
+     1381 cggggagtct ttgagctctc ggacgaaagg gcaacgaacc cgatcgtgcc ctcctttgac
+     1441 atgagtaatg aaggatctta tttcttcgga gacaatgcag aggagtacga caattaa
+//
+
+LOCUS       CY058489                1427 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 6 sequence.
+ACCESSION   CY058489
+VERSION     CY058489.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1427)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 1427)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..1427
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="6"
+                     /country="Australia"
+                     /collection_date="2007"
+     misc_feature    1..1427
+                     /db_xref="IRD:CEIRS-SJC001-165809.6"
+     gene            1..1413
+                     /gene="NA"
+     CDS             1..1413
+                     /gene="NA"
+                     /codon_start=1
+                     /product="neuraminidase"
+                     /protein_id="ADE28752.1"
+                     /translation="MNPNQKIITIGSISIAIGIISLMLQIGNIISIWASHSIQTGSQN
+                     NTGICNQRIITYENSTWVNHTYVNINNTNVVAGEDKTSVTLAGNSSLCSISGWAIYTK
+                     DNSIRIGSKGDVFVIREPFISCSHLECRTFFLTQGALLNDKHSNGTVKDRSPYRALMS
+                     CPLGEAPSPYNSKFESVAWSASACHDGMGWLTIGISGPDNGAVAVLKYNGIITGTIKS
+                     WKKQILRTQESECVCMNGSCFTIMTDGPSNKAASYKIFKIEKGKVTKSIELNAPNFHY
+                     EECSCYPDTGIVMCVCRDNWHGSNRPWVSFNQNLDYQIGYICSGVFGDNPRPEDGEGS
+                     CNPVTVDGANGVKGFSYKYDNGVWIGRTKSNRLRKGFEMIWDPNGWTNTDSDFSVKQD
+                     VVAITDWSGYSGSFVQHPELTGLDCIRPCFWVELVRGLPRENTTIWTSGSSISFCGVN
+                     SDTANWSWPDGAELPFTIDK"
+ORIGIN      
+        1 atgaacccaa atcaaaagat aataaccatt ggatcaatca gtatagcaat cggaataatt
+       61 agtctaatgt tgcaaatagg aaatattatt tcaatatggg ctagtcactc aatccaaact
+      121 ggaagtcaaa acaacactgg aatatgcaac caaagaatca tcacatatga aaacagcacc
+      181 tgggtgaatc acacatatgt taatattaac aacactaatg ttgttgctgg agaggacaaa
+      241 acttcagtga cattggctgg caattcatct ctttgttcta tcagtggatg ggctatatac
+      301 acaaaagaca acagcataag aattggctcc aaaggagatg tttttgtcat aagagaacct
+      361 ttcatatcat gttctcactt ggaatgcaga accttttttc tgacccaagg cgctctatta
+      421 aatgacaaac attcaaatgg gaccgtaaag gacagaagtc cttatagggc cttaatgagc
+      481 tgtcctctag gtgaagctcc gtccccatac aattcaaagt tcgaatcagt tgcatggtca
+      541 gcaagcgcat gccatgatgg catgggctgg ttaacaatcg gaatttctgg tccagacaat
+      601 ggagctgtgg ctgtactaaa atacaacgga ataataactg gaaccataaa aagttggaaa
+      661 aagcaaatat taagaacaca agagtctgaa tgtgtctgta tgaacgggtc atgtttcacc
+      721 ataatgaccg atggcccgag taataaggcc gcctcgtaca aaattttcaa gatcgaaaag
+      781 gggaaggtta ctaaatcaat agagttgaat gcacccaatt ttcattatga ggaatgttcc
+      841 tgttacccag acactggcat agtgatgtgt gtatgcaggg acaactggca tggttcaaat
+      901 cgaccttggg tgtcttttaa tcaaaacttg gattatcaaa taggatacat ctgcagtgga
+      961 gtgttcggtg acaatccgcg tcccgaagat ggagagggca gctgcaatcc agtgactgtt
+     1021 gatggagcaa acggagtaaa agggttttca tacaaatatg ataatggtgt ttggatagga
+     1081 aggaccaaaa gtaacagact tagaaagggg tttgagatga tttgggatcc taatggatgg
+     1141 acaaataccg acagtgattt ctcagtgaaa caggatgttg tagcaataac tgattggtca
+     1201 gggtacagcg gaagtttcgt ccaacatcct gagttaacag gattggactg tataagacct
+     1261 tgcttctggg ttgagttagt cagagggctg cctagagaaa atacaacaat ctggactagt
+     1321 gggagcagca tttctttttg tggcgttaat agtgatactg caaactggtc ttggccagac
+     1381 ggtgctgagt tgccgttcac cattgacaag tagttcgttg aaaaaaa
+//
+
+LOCUS       CY058490                1002 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 7 sequence.
+ACCESSION   CY058490
+VERSION     CY058490.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 1002)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 1002)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..1002
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="7"
+                     /country="Australia"
+                     /collection_date="2007"
+     misc_feature    1..1002
+                     /db_xref="IRD:CEIRS-SJC001-165809.7"
+     gene            1..982
+                     /gene="M2"
+     CDS             join(1..26,715..982)
+                     /gene="M2"
+                     /codon_start=1
+                     /product="matrix protein 2"
+                     /protein_id="ADE28754.1"
+                     /translation="MSLLTEVETPIRNEWGCRCNDSSDPLVVAASIIGIVHLILWIID
+                     RLFSKSIYRIFKHGLKRGPSTEGVPESMREEYREEQQNAVDADDDHFVSIELE"
+     gene            1..759
+                     /gene="M1"
+     CDS             1..759
+                     /gene="M1"
+                     /codon_start=1
+                     /product="matrix protein 1"
+                     /protein_id="ADE28753.1"
+                     /translation="MSLLTEVETYVLSIIPSGPLKAEIAQRLEDVFAGKNTDLEALME
+                     WLKTRPILSPLTKGILGFVFTLTVPSERGLQRRRFVQNALNGNGDPNNMDRAVKLYRK
+                     LKREITFHGAKEIALSYSAGALASCMGLIYNRMGAVTTESAFGLICATCEQIADSQHK
+                     SHRQMVTTTNPLIRHENRMVLASTTAKAMEQMAGSSEQAAEAMEVASQARQMVQAMRA
+                     IGTHPSSSTGLKNDLLENLQAYQKRMGVQMQRFK"
+ORIGIN      
+        1 atgagtcttc taaccgaggt cgaaacgtac gttctctcta tcatcccgtc aggccccctc
+       61 aaagccgaga tcgcacagag acttgaagat gtatttgctg gaaagaatac cgatcttgag
+      121 gctctcatgg agtggctaaa gacaagacca atcctgtcac ctctgactaa ggggatttta
+      181 ggatttgtgt tcacgctcac cgtgcccagt gagcgaggac tgcagcgtag acgctttgtc
+      241 caaaatgccc ttaatgggaa tggggatcca aataatatgg acagagcagt caaactttat
+      301 cgaaagctta agagggagat aacattccat ggggccaaag aaatagcact cagttattct
+      361 gctggtgcac ttgccagttg tatgggactc atatacaaca ggatgggggc tgtgaccacc
+      421 gaatcagcat ttggccttat atgtgcaacc tgtgaacaga ttgccgactc ccagcataag
+      481 tctcacaggc aaatggtaac aacaaccaat ccattaataa gacatgagaa cagaatggtt
+      541 ctggccagca ctacagctaa ggctatggag caaatggctg gatcgagcga acaagcagct
+      601 gaggccatgg aggttgctag tcaggccagg cagatggtgc aggcaatgag agccattggg
+      661 actcatccta gctctagcac tggtctgaaa aatgatctcc ttgaaaattt acaggcctat
+      721 cagaaacgaa tgggggtgca gatgcaacga ttcaagtgat cctcttgttg ttgccgcaag
+      781 tataattggg attgtgcact tgatattgtg gattattgat cgcctttttt ccaaaagcat
+      841 ttatcgtatc tttaaacacg gtttaaaaag agggccttct acggaaggag taccagagtc
+      901 tatgagggaa gaatatcgag aggaacagca gaatgctgtg gatgctgacg atgatcattt
+      961 tgtcagcata gagctagagt aaaaaactac cttgtttcta ct
+//
+
+LOCUS       CY058491                 870 bp    cRNA    linear   VRL 07-AUG-2012
+DEFINITION  Influenza A virus (A/Brisbane/59/2007(H1N1)) segment 8 sequence.
+ACCESSION   CY058491
+VERSION     CY058491.1
+KEYWORDS    .
+SOURCE      Influenza A virus (A/Brisbane/59/2007(H1N1))
+  ORGANISM  Influenza A virus (A/Brisbane/59/2007(H1N1))
+            Viruses; Riboviria; Orthornavirae; Negarnaviricota;
+            Polyploviricotina; Insthoviricetes; Articulavirales;
+            Orthomyxoviridae; Alphainfluenzavirus.
+REFERENCE   1  (bases 1 to 870)
+  AUTHORS   Barman,S., Krylov,P.S., Fabrizio,T.P., Franks,J., Turner,J.C.,
+            Seiler,P., Wang,D., Rehg,J.E., Erickson,G.A., Gramer,M.,
+            Webster,R.G. and Webby,R.J.
+  TITLE     Pathogenicity and transmissibility of north american triple
+            reassortant Swine influenza a viruses in ferrets
+  JOURNAL   PLoS Pathog. 8 (7), E1002791 (2012)
+   PUBMED   22829764
+  REMARK    Publication Status: Online-Only
+REFERENCE   2  (bases 1 to 870)
+  AUTHORS   Webby,R., Webster,R.G., Govorkova,E. and Duan,S.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (29-MAR-2010) Infectious Diseases, St. Jude Children's
+            Research Hospital, 262 Danny Thomas Place, Memphis, Tennessee
+            38105, USA
+FEATURES             Location/Qualifiers
+     source          1..870
+                     /organism="Influenza A virus (A/Brisbane/59/2007(H1N1))"
+                     /mol_type="viral cRNA"
+                     /strain="A/Brisbane/59/2007"
+                     /serotype="H1N1"
+                     /host="Homo sapiens"
+                     /db_xref="taxon:504904"
+                     /segment="8"
+                     /country="Australia"
+                     /collection_date="2007"
+     misc_feature    1..870
+                     /db_xref="IRD:CEIRS-SJC001-165809.8"
+     gene            1..838
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+     CDS             join(1..30,503..838)
+                     /gene="NEP"
+                     /gene_synonym="NS2"
+                     /note="nonstructural protein 2"
+                     /codon_start=1
+                     /product="nuclear export protein"
+                     /protein_id="ADE28756.1"
+                     /translation="MDSHTVSSFQDILMRMSKMQLGSSSGDLNGMITQFESLKLYRDS
+                     LGEAVMRLGDLHSLQHRNGKWREQLGQKFEEVRWLIEEVRHKLKTTENSFEQITFMQA
+                     LQLLFEVEQEIRTFSFQLI"
+     gene            1..693
+                     /gene="NS1"
+     CDS             1..693
+                     /gene="NS1"
+                     /codon_start=1
+                     /product="nonstructural protein 1"
+                     /protein_id="ADE28755.1"
+                     /translation="MDSHTVSSFQVDCFLWHVRKQAADQDLGDAPFLDRLRRDQKSLK
+                     GRGSTLGLNIETATCVGKQIVERILKEESDEALKMTMASALASRYLTDMTVEEMSRDW
+                     FMLMPKQKVAGPLCVRMDQAIMDKNIILKANFSVIFDRLENLTLLRAFTEEGAIVGEI
+                     SPLPSFPGHTNEDVKNAIGVLIGGLEWNDNTVRVSETLQRFAWRSSNETGGPPFTTTQ
+                     KRKMAGTTRSEV"
+ORIGIN      
+        1 atggattccc acactgtgtc aagctttcag gtagattgct tcctttggca tgtccgcaaa
+       61 caagctgcag accaagatct aggcgatgcc cccttccttg atcggcttcg ccgagatcag
+      121 aagtctctaa agggaagagg cagcactctc ggtctgaaca tcgaaacagc tacttgtgtt
+      181 ggaaagcaaa tagtagagag gattctgaaa gaagaatccg atgaggcact taaaatgacc
+      241 atggcctccg cacttgcttc gcggtaccta actgacatga ctgttgaaga aatgtcaagg
+      301 gactggttca tgctcatgcc caagcaaaaa gtggctggcc ctctttgtgt cagaatggac
+      361 caggcaataa tggataagaa catcatactg aaagcgaatt tcagtgtgat ttttgaccgg
+      421 ttggagaatc tgacattact aagggctttc accgaagagg gagcaattgt tggcgaaatt
+      481 tcaccattgc cttcttttcc aggacatact aatgaggatg tcaaaaatgc aattggggtc
+      541 ctcatcgggg gacttgaatg gaatgataac acagttcgag tctctgaaac tctacagaga
+      601 ttcgcttgga gaagcagtaa tgagactggg ggacctccat tcactacaac acagaaacgg
+      661 aaaatggcgg gaacaactag gtcagaagtt tgaagaagta agatggctga ttgaagaagt
+      721 gaggcataaa ttgaagacga cagagaatag ttttgagcaa ataacattta tgcaagcatt
+      781 acagctatta tttgaagtgg aacaagagat tagaacgttt tcgtttcagc ttatttagtg
+      841 ataaaaaaca cccttgtttc tactaataac
+//
+

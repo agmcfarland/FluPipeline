@@ -19,8 +19,8 @@ import logging
 global script_path
 script_path = os.path.split(os.path.realpath(os.path.abspath(__file__)))[0]
 sys.path.append(script_path)
-from processing_functions import *
-from processing_classes import SequencingSample, RunLogger, SampleTracker
+from pylibs.processing_functions import *
+from pylibs.processing_classes import SequencingSample, RunLogger, SampleTracker
 pd.set_option('display.max_columns', None)
 
 def run_FluPipeline(args):
@@ -50,23 +50,17 @@ def run_FluPipeline(args):
 			shutil.rmtree(baseDirectory)
 		except:
 			pass
-	# input data
-	# sequenceDataDir = '/home/agmcfarland/flu_project/test/test_data' #'/home/ashley/Fastq' # sequencing data comes from this directory
-	# sequenceDataDir = '/home/agmcfarland/flu_project/test/test_data' #'/home/ashley/Fastq' # sequencing data comes from this directory
-	# baseDirectory = '/home/agmcfarland/flu_project/test/test4' # all data/directory tree will be saved in this directory
-	# referenceStrainsDir = pjoin(script_path,'references') #'/home/agmcfarland/flu_project/test/test_data' #directory reference strains to find the best match for a given readset
 
 	# input scripts
-	Rscript = 'Rscript'#'/home/opt/R-3.4.0/bin/Rscript'
-	# softwareDir = '/home/agmcfarland/flu_project/flu_pipeline'
+	Rscript = 'Rscript'
 
 	#input other
 	pipeline_used = 'snp' #options: snp, phylo
 	process_method = 'bushman_artic_v2'
 	#force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
-	BWA_path = subprocess.Popen(['which','bwa'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n','')#'/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
-	samtoolsbin_path = os.path.dirname(subprocess.Popen(['which','samtools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))#'/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
-	bcftoolsbin_path = os.path.dirname(subprocess.Popen(['which','bcftools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))#'/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+	BWA_path = subprocess.Popen(['which','bwa'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n','')
+	samtoolsbin_path = os.path.dirname(subprocess.Popen(['which','samtools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))
+	bcftoolsbin_path = os.path.dirname(subprocess.Popen(['which','bcftools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))
 
 	### INPUTS end ####
 
@@ -133,7 +127,7 @@ def run_FluPipeline(args):
 		run_logger.add_Message([sample.samplename,'  ',sample.read1_filename,'  ',sample.read2_filename])		
 
 	run_logger.add_Message('total samples: {}'.format(len(sample_submission))) # total samples ran
-
+	run_logger.add_Message('Processing samples...')
 
 	## start data processing-----------------------------
 
@@ -146,7 +140,7 @@ def run_FluPipeline(args):
 	with Pool(processes=threads) as p:
 		df_processed = pd.concat(p.starmap(flu_Pipeline, sample_submission))
 
-
+	run_logger.add_Message('Finished processing samples...')
 	run_logger.add_Message('Making run report...')
 	## make run report
 	os.system('{} {}/report_runner.R --softwareDir {} --report_type {} --baseDir {}'.
@@ -175,7 +169,7 @@ def run_FluPipeline(args):
 
 
 
-def main(args = None):
+def main(args=None):
 	'''
 	Main function for parsing arguments
 	'''
@@ -194,10 +188,15 @@ def main(args = None):
 	parser.add_argument('--force_base_directory', action='store_true', help='overwrite existing directory')
 	parser.add_argument('--cleanup', action='store_true', help='remove intermediate files')
 	parser.add_argument('--threads',type=int, default=4, help='number of processors to use for multiprocessing')
+	parser.add_argument('--runtest', action='store_true', help='run an in silico test to make sure FluPipeline is working correctly')
 
 	args = parser.parse_args()
 
-	run_FluPipeline(args=args)
+	if args.runtest == True:
+		print('yes')
+
+	else:
+		run_FluPipeline(args=args)
 
 if __name__ == '__main__':
 	sys.exit(main())

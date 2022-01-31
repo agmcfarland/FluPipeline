@@ -113,7 +113,7 @@ def flu_Pipeline(
 			#'--disable_adapter_trimming' # adaptor trimming when adaptors are already trimmed can lead to unwanted errors
 			])
 
-		# randomly select 1000 reads with reformat.sh
+		# randomly select 2000 reads with reformat.sh
 		subprocess.run([
 			'reformat.sh',
 			'in1=fastp_trimmed_{}'.format(sample.read1_filename), 

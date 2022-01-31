@@ -91,7 +91,7 @@ class SequencingSample:
 
 class RunLogger:
 	'''
-	Handles logging.
+	Handles logging: Making a unique logfile by name. Adding messages to it. Removing logfiles.
 	'''
 	def __init__(self, directory, filename):
 		'''
