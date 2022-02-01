@@ -21,37 +21,28 @@ script_path = os.path.split(os.path.realpath(os.path.abspath(__file__)))[0]
 sys.path.append(script_path)
 from pylibs.processing_functions import *
 from pylibs.processing_classes import SequencingSample, RunLogger, SampleTracker
+from pylibs.insilico_test import *
 pd.set_option('display.max_columns', None)
 
 def run_FluPipeline(args):
 	'''
+	Runs through all steps of FluPipeline
 	'''
 
 	baseDirectory = args.base_directory
 	sequenceDataDir = args.sequence_directory
-	force_base_directory = args.force_base_directory
-	referenceStrainsDir = pjoin(script_path,'references') #hardcoded default
-	softwareDir = os.getcwd()
-	threads = args.threads
+	referenceStrainsDir = pjoin(script_path,'references') #hardcoded by design right now
+	softwareDir = script_path # GLOBAL VARIABLE
 
-	if args.cleanup == True:
-		cleanup_files = args.cleanup
-	else:
-		cleanup_files = False
-
-	if args.force == True:
-		force_overwrite = args.force
-	else:
-		force_overwrite = False
-
-	### INPUTS start ####'
-	if force_base_directory == True:
+	### INPUTS start ####
+	# remove base directory if it exiss
+	if args.force_base_directory == True:
 		try:
 			shutil.rmtree(baseDirectory)
 		except:
 			pass
 
-	# input scripts
+	# input Rscript path
 	Rscript = 'Rscript'
 
 	#input other
@@ -75,8 +66,10 @@ def run_FluPipeline(args):
 	run_logger = RunLogger(directory=os.getcwd(),filename='runLog')
 	run_logger.delete_LogFile() # deletes a previously existing logfile with the same name
 	run_logger.initialize_Log()
-	run_logger.add_Message('Start run')
-
+	run_logger.add_Message('start run')
+	run_logger.add_Message('arguments:')
+	run_logger.add_Message(args)
+	# [run_logger.add_Message(a) for a in args]
 	## load/create sample tracker sql database and tables for tracking
 	sample_tracker = SampleTracker(directory=baseDirectory)
 	sample_tracker.check_TableExists(tablename=pipeline_used)
@@ -101,19 +94,20 @@ def run_FluPipeline(args):
 			pipeline_used,
 			sequenceDataDir,
 			referenceStrainsDir,
-			force_overwrite,
+			args.force,
 			BWA_path,
 			samtoolsbin_path,
 			bcftoolsbin_path,
-			cleanup_files
+			args.cleanup,
+			args.strain_sample_depth
 			])
 
 	# log inputs
 	run_logger.add_Message('inputs:') #contains all path and paramater inputs
 	[run_logger.add_Message('{}: {}'.format(k, v)) for k,v in {
-	'cleanup_files':cleanup_files, 'force_overwrite':force_overwrite,'force_base_directory':force_base_directory,
+	'cleanup_files':args.cleanup, 'force_overwrite':args.force,'force_base_directory':args.force_base_directory,
 	'baseDirectory':baseDirectory,'Rscript':Rscript,'softwareDir':softwareDir,'pipeline_used':pipeline_used,
-	'sequenceDataDir':sequenceDataDir,'referenceStrainsDir':referenceStrainsDir,'force_overwrite':force_overwrite,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path
+	'sequenceDataDir':sequenceDataDir,'referenceStrainsDir':referenceStrainsDir,'force_overwrite':args.force,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path
 	}.items()]
 
 	run_logger.add_Message('reference strains:')
@@ -137,7 +131,7 @@ def run_FluPipeline(args):
 
 
 	## run listed samples through specified worflow
-	with Pool(processes=threads) as p:
+	with Pool(processes=args.threads) as p:
 		df_processed = pd.concat(p.starmap(flu_Pipeline, sample_submission))
 
 	run_logger.add_Message('Finished processing samples...')
@@ -165,7 +159,7 @@ def run_FluPipeline(args):
 	## close connection to sql database
 	sample_tracker.conn.close()
 
-	run_logger.add_Message('Finished run')
+	run_logger.add_Message('finished run')
 
 
 
@@ -184,16 +178,30 @@ def main(args=None):
 	parser.add_argument('--base_directory',type=str ,default=None, help='directory that run samples will be saved in')
 	parser.add_argument('--reference_directory',type=str ,default=None, help='directory containing reference strain files (.gb format)')
 	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) ')
-	parser.add_argument('--force', action='store_true', help='overwrite existing files')
-	parser.add_argument('--force_base_directory', action='store_true', help='overwrite existing directory')
-	parser.add_argument('--cleanup', action='store_true', help='remove intermediate files')
+	parser.add_argument('--force', action='store_true', default=False, help='overwrite existing files in assemble.R script')
+	parser.add_argument('--force_base_directory', action='store_true', default=False, help='overwrite existing directory')
+	parser.add_argument('--cleanup', action='store_true', default=False, help='remove intermediate files')
 	parser.add_argument('--threads',type=int, default=4, help='number of processors to use for multiprocessing')
-	parser.add_argument('--runtest', action='store_true', help='run an in silico test to make sure FluPipeline is working correctly')
+	parser.add_argument('--runtest', action='store_true', default=False, help='run an in silico test to make sure FluPipeline is working correctly')
+	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. default=2000')
 
 	args = parser.parse_args()
 
+	##---Run test #---
+
 	if args.runtest == True:
-		print('yes')
+		testDir =  pjoin(script_path,'run_test')
+		args.base_directory = pjoin(testDir,'output')
+		args.sequence_directory = pjoin(testDir,'data')
+		args.reference_directory = pjoin(script_path,'references')
+		args.force == True
+		args.force_base_directory = False
+		args.cleanup = False
+		args.threads = 6
+		create_TestData(testDir=testDir, referenceStrainsDir=args.reference_directory)
+		run_FluPipeline(args=args)
+
+	##---Run pipeline in its entirety #---	
 
 	else:
 		run_FluPipeline(args=args)

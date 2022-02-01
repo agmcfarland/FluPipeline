@@ -53,19 +53,31 @@ opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
 #alex start:FOR TESTING MANUALLY assign opt vals
-#opt$softwareDir <- '/home/agmcfarland/flu_project/flu_pipeline'
+#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
 #opt$process_method <- 'bushman_artic_v2'
-#opt$outputFile <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/H1N1pdm_ref_snp/H1N1pdm_ref_snp.Rdata'
-#opt$workDir <- '/home/agmcfarland/flu_project/test/test4/sampleOutputs/H1N1pdm_ref_snp'
-#opt$R1 <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref_snp_R1_001.fastq.gz'
-#opt$R2 <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref_snp_R2_001.fastq.gz'
-#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.fasta'
-#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.fasta' #alex comment:same as bwa.
-#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.gb'
-#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
-#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
-#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'
-#opt$samtoolsBin <- '/home/everett/ext/samtools/bin' #compare to
+#opt$outputFile <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp/H1N1_A_Brisbane_59_2007_snp.Rdata'
+#opt$workDir <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp'
+#opt$R1 <- '/home/agmcfarland/flu_project/FluPipeline/run_test/data/H1N1_A_Brisbane_59_2007_snp_R1_001.fastq.gz'
+#opt$R2 <- '/home/agmcfarland/flu_project/FluPipeline/run_test/data/H1N1_A_Brisbane_59_2007_snp_R2_001.fastq.gz'
+#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp/H1N1_A_Brisbane_59_2007.fasta'
+#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp/H1N1_A_Brisbane_59_2007.fasta' #alex comment:same as bwa.
+#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/FluPipeline/run_test/data/H1N1_A_Brisbane_59_2007.gb'
+#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/testenv/bin/bwa'
+
+#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
+#opt$process_method <- 'bushman_artic_v2'
+#opt$outputFile <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5/ashley_5.Rdata'
+#opt$workDir <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5'
+#opt$R1 <- '/home/agmcfarland/flu_project/shared_data/test_data_1_sample2/ashley_5_R1_001.fastq.gz'
+#opt$R2 <- '/home/agmcfarland/flu_project/shared_data/test_data_1_sample2/ashley_5_R2_001.fastq.gz'
+#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5/H1N1pdm_ref.fasta'
+#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5/H1N1pdm_ref.fasta' #alex comment:same as bwa.
+#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/FluPipeline/references/H1N1pdm_ref.gb'
+#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/testenv/bin/bwa'
 #alex end:FOR TESTING MANUALLY assign opt vals
 
 #alex start:set working directory to workDir
@@ -132,7 +144,13 @@ opt$contigs           <- Biostrings::DNAStringSet()
 R1s <- unlist(strsplit(opt$R1, ','));  if(! all(file.exists(R1s))) stop('All the R1 files could not be found.')
 R2s <- unlist(strsplit(opt$R2, ','));  if(! all(file.exists(R2s))) stop('All the R1 files could not be found.')
 
-t1 <- paste0(opt$workDir, '/x')
+
+#t1 <- paste0(opt$workDir, '/x') #alex comment: hashed out by alex. This makes the filename prefix `x`
+#alex start: make the file prefix equal to the workdir's name.
+samplename <- basename(opt$workDir)
+t1 <- paste0(opt$workDir, '/', samplename)
+#alex end:make the file prefix equal to the workdir's name.
+
 
 # Combine R1 and R2 data files in composite R1 and R2 files.
 system(paste0('cat ', paste0(R1s, collapse = ' '), ' > ', t1, '_R1.fastq'))
@@ -405,8 +423,57 @@ if(nrow(opt$pileupData) > 0){
   opt$errorMessage <- 'No pileup or variant data available.'
 }
 
-#alex start:hashed out this entire code block for predicting effect of SNPs/INDELs on viral proteins
+## Generate consensus sequence from a filtered VCF file. Use the variantTable to filter for only major variants.
+if(nrow(opt$variantTableMajor) > 0){
+  
+  # Here we copy the variant vcf file and selectively remove calls 
+  # which are not found in our filtered variantTable. This is done 
+  # to preserve the additional comment lines which appear to be necessary. 
+  
+  tryCatch({
+    system(paste0('cp ', t1, '.filt.vcf.gz ', t1, '.filt.vcf.copy.gz'))
+    system(paste0('gunzip ', t1, '.filt.vcf.copy.gz'))
+    
+    o <- lapply(readLines(paste0(t1, '.filt.vcf.copy')), function(x){
+      if(grepl('^#', x)){
+        return(x)
+      } else {
+        if(as.integer(unlist(strsplit(x, '\t'))[2]) %in% opt$variantTableMajor$POS){
+          return(x)
+        } else {
+          return(NULL)
+        }
+      }
+    })
+    
+    write(unlist(o[! sapply(o, is.null)]), file = paste0(t1, '.filt.vcf.copy2'))
+    
+    # Capture vcf
+    #read.table(textConnection(unlist(opt$finalVCF)), sep = '\t') #alex comment:hashed out by alex. unsure of what this does.
+    #opt$finalVCF = o[! sapply(o, is.null)] #alex comment:hashed out by alex. unsure of what this does.
+    
+    system(paste0('bgzip ', t1, '.filt.vcf.copy2'))
+    system(paste0(opt$bcftoolsBin, '/bcftools index ', t1, '.filt.vcf.copy2.gz'))
+    system(paste0('cat  ', opt$refGenomeFasta, ' | ', opt$bcftoolsBin, '/bcftools consensus ',  
+                  t1, '.filt.vcf.copy2.gz > ', t1, '.consensus.fasta'))
+    
+    #opt$concensusSeq <- as.character(readFasta(paste0(t1, '.consensus.fasta'))@sread)
+    opt$concensusSeq <- readFasta(paste0(t1, '.consensus.fasta'))
+    
+  }, error=function(cond) {
+    return('Error creating concensus sequence from vcf ')
+  })
+  
+# if the major variant table does not have any variants then the consensus sequence is equivalent to the reference sequence. 
+} else {
+  opt$concensusSeq <- readFasta(opt$refGenomeFasta)
+}
 
+# write the fasta to file
+writeFasta(opt$concensusSeq, paste0(t1, '.consensus.fasta')) 
+
+
+#alex start:hashed out this entire code block for predicting effect of SNPs/INDELs on viral proteins
 ##### SHIFTING THE DEL VALUES ARE PREVENTING A MATCH IN THE VCF FILES.
 
 

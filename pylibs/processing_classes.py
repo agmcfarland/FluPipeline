@@ -72,7 +72,7 @@ class SequencingSample:
 		intermediate_keep = [
 		'.bam','filt.qual.sorted.bam.bai','filt.qual.sorted.bam','vcf.gz','.filt.vcf.gz','.filt.vcf.gz.csi',
 		'pileup','.Rdata','.pdf','fastp_stats','fastp.html','reference_coverage','_coverage_stats.csv','variantTable',
-		'reference_ha_coverage'
+		'reference_ha_coverage','consensus.fasta'
 		]
 
 		to_remove = os.listdir(self.dirpath)
@@ -180,6 +180,8 @@ class SampleTracker:
 		df.to_csv(pjoin(output_dir,name+'.csv'),index=None)
 
 
+if __name__=='__main__':
+	pass
 
 
 

@@ -41,16 +41,31 @@ library(kableExtra)
 library(stringr)
 library(dplyr)
 library(tidyverse)
+library(scales)
 
 
 sampleDir <- params$sampleDir
 samplename <- params$samplename
+
 ##test inputs start
-#sampleDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Victoria_Ref_perfect'
-#samplename <- 'IBV_Victoria_Ref_perfect'
+#sampleDir <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp'
+#samplename <- 'H1N1_A_Brisbane_59_2007_snp'
+#library(optparse)
+#setwd('/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp')
 ##test inputs end
 
+# load in Rdata object
+df_majorvar <- tryCatch(
+    expr = {
+      load(paste0(sampleDir,'/',samplename,'.Rdata'))
+    },
+    error = function(e){ 
+      message('Error reading in Rdata file')
+    }
+)
 
+
+# helper functions
 get_VarCounts <- function(tablename){
   # get counts of variants per segment for a variantTable
   # return a datafarame of segment id, segment, count, and arrange by segment number.
@@ -67,12 +82,6 @@ get_VarCounts <- function(tablename){
 }
 
 # get variant counts
-
-opt$pileupData <- tryCatch({
-  read.table(paste0(t1, '.pileup'), sep = '\t', header = FALSE, quote = '')[,1:5]
-}, error = function(e) {
-  return(data.frame())
-})
 
 df_allvar <- tryCatch(
     expr = {
@@ -93,12 +102,12 @@ df_majorvar <- tryCatch(
 )
 
 # get coverage calculations
-load(paste0(sampleDir,'/',samplename,'.Rdata'))
 df_cov <- merge(opt$refGenomePercentCovered,opt$refGenomePercentCovered_5reads,by='V1',all.x=TRUE,all.y=TRUE)
 df_cov <- df_cov%>%
   dplyr::mutate(segment=stringr::str_sub(V1,start=-1))%>%
   dplyr::rename(segment_id=V1)%>%
   dplyr::select(segment_id,segment,perc_gt_1,perc_gt_5)%>%
+  dplyr::mutate(perc_gt_1 = round(perc_gt_1,2), perc_gt_5 = round(perc_gt_5,2))%>%
   dplyr::arrange(segment)
 
 # get reference genome
@@ -124,6 +133,31 @@ df_refstrains <- df_refstrains%>%
   pivot_wider(names_from=reference, values_from=c(average_coverage,average_depth))
 
 
+## get per-base depth values from pileup output file
+df_pile <- tryCatch({
+  opt$pileupData
+}, error = function(e) {
+  return(data.frame())
+})
+
+df_pile <- df_pile%>%select(1,2,3,4,5)%>%
+  dplyr::mutate(segment=stringr::str_sub(V1,start=-1))
+
+# make a per segment depth summary table. To merge with df_cov
+df_pilestats <- df_pile%>%
+  dplyr::group_by(segment)%>%
+  dplyr::mutate(mean_depth = round(mean(V4),2),
+         median_depth = round(median(V4),2),
+         min_depth = min(V4),
+         max_depth = max(V4),
+         std_depth = round(sd(V4),2))%>%
+  dplyr::select(segment,V1,mean_depth,median_depth,min_depth,max_depth,std_depth)%>%
+  ungroup()%>%
+  unique()%>%
+  dplyr::arrange(segment)%>%
+  dplyr::select(-segment)
+
+
 ```
 
 ```{r, echo=FALSE, results='asis'}
@@ -132,13 +166,16 @@ cat(paste('**Reference Genome: **',basename(opt$refGenomeFasta)))
 
 ```
 
-# Coverage 
+# Coverage and Depth
 \small
-Table 1: Percentage of read coverage per segment.
+Table 1: Percentage of genome covered by 1 or 5 reads (perc_gt_1, perc_gt_5) and and per-base read depth statistics per segment.
 \normalsize
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 
-kable(df_cov, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+df_cov1 <- merge(df_cov, df_pilestats, by.x='segment_id',by.y='V1',all.x=TRUE)%>%
+  arrange(segment)
+
+kable(df_cov1, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
   kable_styling(font_size = 7.5, latex_options="hold_position")
 ```
 
@@ -163,6 +200,100 @@ kable(df_majorvar, 'latex', booktabs = T, linesep = '', align = 'c') %>%
 
 ```
 \newpage
+\small
+Figure 1: Read depth and coverage map.
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=10, fig.align='center'}
+
+## Make a combined pileup and variant table
+df_variants <- tryCatch(
+    expr = {
+      read.csv(paste0(sampleDir,'/variantTableMajor.csv'))%>%
+        dplyr::select(CHROM,POS)%>%unique()%>%
+        dplyr::rename('segment_name'='CHROM',
+                  'var_position'='POS')%>%
+        dplyr::mutate(segment_name=as.character(segment_name),
+                      var_position=as.numeric(var_position),
+                      var_position2=var_position)
+    },
+    error = function(e){ 
+      # return a dataframe with dummy data so that plottng won't be affected.
+      return(data.frame('segment_name'=as.character('none'),'var_position'=as.numeric(0), 'var_position2'=as.numeric(0)))
+    }
+)
+
+df_pile1 <- df_pile%>%
+  dplyr::rename('segment_name'=1,'position'=2,'original'=3,'depth'=4,'quality'=5)%>%
+  dplyr::select(-quality,-original)%>%
+  dplyr::mutate(segment_name=as.character(segment_name),
+                position=as.numeric(position),
+                depth=as.numeric(depth),
+                segment=as.numeric(segment))
+
+# merge pileup positions with variant positions
+df_pile1 <- merge(df_pile1, df_variants, by.x=c('segment_name','position'), by.y=c('segment_name','var_position'), all.x=TRUE)
+
+ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
+  facet_wrap(~segment, scales='free_x',ncol=1, strip.position='right')+
+  geom_bar(stat='identity')+
+  geom_point(aes(x=var_position2, y=3,group=segment), color='yellow',alpha=0.85)+
+  theme_bw()+
+ theme(panel.grid.major = element_blank(),
+       panel.grid.minor = element_blank(),
+       panel.background = element_blank(),
+       panel.spacing = unit(0, 'lines'),
+       strip.text = element_text(size=14, colour='gray50'),
+       strip.text.y = element_text(angle=0),
+       strip.background = element_blank(), # getting rid of the panel to declutter
+       axis.line = element_line(colour = 'black'),
+       axis.text.y = element_text(size=10),
+       axis.text.x = element_text(size=7),
+       legend.position='none',
+       legend.title = element_blank())+
+  scale_x_continuous(labels = function(x)x/1000, # converting bp tick mark number to kilobasepairs
+                     breaks=seq(from=0,to=3000,by=250),
+                     expand=c(0,0))+
+  ylab(label = expression(Read~Coverage))+
+  xlab(label = expression(Genomic~Position~(Kb)))+
+  geom_hline(aes(yintercept=median(df_pile1$depth)), linetype='dashed',colour='lightblue')+
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+              labels = trans_format("log10", math_format(10^.x)))
+
+```
+
+\newpage
+\small
+Figure 2: Read depth and coverage map zoomed at a depth of 100 reads.
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=10, fig.align='center'}
+
+ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
+  facet_wrap(~segment, scales='free_x',ncol=1, strip.position='right')+
+  geom_bar(stat='identity')+
+  geom_point(aes(x=var_position2, y=3,group=segment), color='yellow',alpha=0.85)+
+  theme_bw()+
+ theme(panel.grid.major = element_blank(),
+       panel.grid.minor = element_blank(),
+       panel.background = element_blank(),
+       panel.spacing = unit(0, 'lines'),
+       strip.text = element_text(size=14, colour='gray50'),
+       strip.text.y = element_text(angle=0),
+       strip.background = element_blank(), # getting rid of the panel to declutter
+       axis.line = element_line(colour = 'black'),
+       axis.text.y = element_text(size=10),
+       axis.text.x = element_text(size=7),
+       legend.position='none',
+       legend.title = element_blank())+
+  scale_x_continuous(labels = function(x)x/1000, # converting bp tick mark number to kilobasepairs
+                     breaks=seq(from=0,to=3000,by=250),
+                     expand=c(0,0))+
+  ylab(label = expression(Read~Coverage))+
+  xlab(label = expression(Genomic~Position~(Kb)))+
+  geom_hline(aes(yintercept=median(df_pile1$depth)), linetype='dashed',colour='lightblue')+
+  scale_y_continuous(limits=c(0,100), breaks=c(0,20,40,60,80,100))
+
+```
+
+
+\newpage
 
 # Reference strain selection
 \small
@@ -175,7 +306,7 @@ kable(df_ref, 'latex', booktabs = T, linesep = '', align = 'c') %>%
 
 ```
 \small
-Table 5: Per-segment read coverage for reference strain alignment using 2,000 random reads.
+Table 5: Per-segment read coverage for reference strain alignment using a randomized subset of reads.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 
@@ -187,7 +318,7 @@ kable(df_refstrains%>%
 
 ```
 
-Table 6: Per-segment read depth for reference strain alignment using 2,000 random reads.
+Table 6: Per-segment read depth for reference strain alignment using a randomized subset of reads.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 

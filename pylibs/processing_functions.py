@@ -14,7 +14,7 @@ from Bio.Seq import Seq
 from Bio import SeqIO, SeqFeature
 import argparse
 import logging
-from processing_classes import SequencingSample, RunLogger, SampleTracker
+from .processing_classes import SequencingSample, RunLogger, SampleTracker
 
 def convert_GBKToFasta(filename):
 	'''
@@ -46,22 +46,23 @@ def flu_Pipeline(
 	BWA_path,
 	samtoolsbin_path,
 	bcftoolsbin_path,
-	cleanup_files):
+	cleanup_files,
+	strain_sample_depth):
 	'''
 	Runs through all steps of the flu pipeline. 
 	'''
 
 	# ## troubleshooting inputs start ##
 	# # use this exact input for troubleshooting the pipeline
-	# baseDirectory='/home/agmcfarland/flu_project/test/test4'
+	# baseDirectory='/home/agmcfarland/flu_project/FluPipeline/run_test/output'
 	# Rscript='Rscript'
-	# softwareDir = '/home/agmcfarland/flu_project/flu_pipeline'
+	# softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
 	# sample = SequencingSample()
-	# sample.get_DataFromReadPairs(read1_filename='H1N1pdm_ref_snp_R1_001.fastq.gz')
+	# sample.get_DataFromReadPairs(read1_filename='IBV_Yamagata_ref_snpindel_R1_001.fastq.gz')
 	# sample.get_SampleDirPath(directory=baseDirectory)
 	# pipeline_used='snp'
-	# sequenceDataDir = '/home/agmcfarland/flu_project/test/test_data'
-	# referenceStrainsDir = '/home/agmcfarland/flu_project/test/test_data' #directory reference strains to find the best match for a given readset
+	# sequenceDataDir = '/home/agmcfarland/flu_project/FluPipeline/run_test/data'
+	# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references' #directory reference strains to find the best match for a given readset
 	# pipeline_used = 'snp' #options: snp, phylo
 	# process_method = 'bushman_artic_v2'
 	# force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
@@ -69,6 +70,27 @@ def flu_Pipeline(
 	# samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
 	# bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
 	# cleanup_files = True
+	# strain_sample_depth = 3000
+
+
+	# use this exact input for troubleshooting the pipeline
+	# baseDirectory='/home/agmcfarland/flu_project/shared_data/test_6_samples'
+	# Rscript='Rscript'
+	# softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
+	# sample = SequencingSample()
+	# sample.get_DataFromReadPairs(read1_filename='ashley_5_R1_001.fastq.gz')
+	# sample.get_SampleDirPath(directory=baseDirectory)
+	# pipeline_used='snp'
+	# sequenceDataDir = '/home/agmcfarland/flu_project/shared_data/test_data_6_samples'
+	# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references' #directory reference strains to find the best match for a given readset
+	# pipeline_used = 'snp' #options: snp, phylo
+	# process_method = 'bushman_artic_v2'
+	# force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
+	# BWA_path =  '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
+	# samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
+	# bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+	# cleanup_files = True
+	# strain_sample_depth = 3000
 	# ## troubleshooting inputs end ##
 
 
@@ -109,18 +131,20 @@ def flu_Pipeline(
 			'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
 			'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
 			'-j', 'fastp_stats_{}'.format(sample.samplename), #json output
-			'-q', '30'#, #quality score 30
+			'-q', '30',#, #quality score 30
+			'overwrite=True'#,
 			#'--disable_adapter_trimming' # adaptor trimming when adaptors are already trimmed can lead to unwanted errors
 			])
 
-		# randomly select 2000 reads with reformat.sh
+		# randomly select a subset of reads with reformat.sh
 		subprocess.run([
 			'reformat.sh',
 			'in1=fastp_trimmed_{}'.format(sample.read1_filename), 
 			'in2=fastp_trimmed_{}'.format(sample.read2_filename),
 			'out1=subset_fastp_trimmed_{}'.format(sample.read1_filename), 
 			'out2=subset_fastp_trimmed_{}'.format(sample.read2_filename),
-			'samplereadstarget=2000'
+			'samplereadstarget={}'.format(strain_sample_depth),
+			'overwrite=True'
 		])
 
 
@@ -134,6 +158,9 @@ def flu_Pipeline(
 		reference_strain = select_BestReference(samplename=sample.samplename).replace('.fasta_coverage_stats.csv','.fasta')
 		refGenomeFasta = reference_strain
 		refGenomeBWA = reference_strain
+
+		# cleanup output files
+		cleanup_CalculateReferenceCoverage(samplename=sample.samplename)
 
 	except:
 		sample_logger.add_Message('failure at strain assignment',level='warning')
@@ -227,7 +254,7 @@ def calculate_ReferenceCoverage(sequenceDataDir, reference, BWA_path, samtoolsbi
 	os.system('{}/samtools index {}_bwa_alignment_{}.bam'.format(samtoolsbin_path,reference,samplename))
 
 	## pileup data with samtools
-	os.system('{}/samtools mpileup -A -a -Q 0 -o {}_pileup_{}.txt -d 10000 -f {} {}_bwa_alignment_{}.bam'.format(samtoolsbin_path, reference,samplename, reference, reference,samplename))
+	os.system('{}/samtools mpileup -A -a -Q 0 -o {}_pileup_{}.txt -d 100000 -f {} {}_bwa_alignment_{}.bam'.format(samtoolsbin_path, reference,samplename, reference, reference,samplename))
 
 	## calculate coverage per segment and average depth per segment
 	df = pd.read_csv('{}_pileup_{}.txt'.format(reference,samplename), names=['segment','position','base','coverage','quality','extra'], engine='python', sep='\t', quoting=3)
@@ -326,5 +353,43 @@ def select_BestReference(samplename):
 	return(df.head(1)['reference'].item())
 
 
+
+def cleanup_CalculateReferenceCoverage(samplename):
+	'''
+	Removes all files except the reference summary csv files, the reference strain .fasta file, the reference strain BWA index,
+	and the fastp statistics.
+
+	Only reference strain index files, fastp summary stats, and reference coverage sumamry files are kept.
+	'''
+# os.chdir('/home/agmcfarland/flu_project/shared_data/test_1_sample/sampleOutputs/ashley_5')
+# samplename = 'ashley_5'
+
+	df = pd.read_csv('reference_ha_coverage_{}.csv'.format(samplename))
+
+	# the reference strains are sorted with the best match at the top. select the the first item in the reference column
+	reference_to_keep = df['reference'][0].replace('.fasta_coverage_stats.csv','')
+
+	# remove files that are not the reference
+	for f in df['reference'][1:]:
+		f = f.replace('.fasta_coverage_stats.csv','')
+		for i in glob.glob('{}*'.format(f)):
+			os.remove(i)
+	# remove subsetted fastq and fastp trimmed fastq files
+	for i in glob.glob('fastp_trimmed*'):
+		os.remove(i)
+	for i in glob.glob('subset_fastp*'):
+		os.remove(i)
+	# remove all sam and bam and bai files
+	for i in glob.glob('*.bam'):
+		os.remove(i)
+	for i in glob.glob('*.bam.bai'):
+		os.remove(i)
+	for i in glob.glob('*.sam'):
+		os.remove(i)
+
+
+
+if __name__=='__main__':
+	pass
 
 

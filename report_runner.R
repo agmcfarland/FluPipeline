@@ -14,7 +14,7 @@ opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
 #troubleshooting inputs sample start
-#opt$softwareDir <- '/home/agmcfarland/flu_project/flu_pipeline'
+#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
 #opt$report_type <- 'sample'
 #opt$samplename <- 'IBV_Yamagata_Ref_snpindel'
 #opt$sampleDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Yamagata_Ref_snpindel'

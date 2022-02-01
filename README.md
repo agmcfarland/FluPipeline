@@ -85,12 +85,24 @@ If you got a help message, proceed to run the test below.
 ```
 cd /path/to/FluPipeline-main
 
-python fluPipeline.py \
---base_directory /path/to/output \
+conda activate FluPipeline_env
+
+
+# this runs on test data using synthetic reads
+python FluPipeline.py \
+--runtest --threads 6 --strain_sample_depth 3000
+
+
+# this runs on a small test data set of real reads
+python FluPipeline.py \
+--base_directory /change/this \
 --sequence_directory /home/agmcfarland/flu_project/shared_data/test_data_6_samples \
 --force \
 --force_base_directory \
---threads 5
+--threads 6 \
+--cleanup 
+
+
 
 ```
 
@@ -113,25 +125,31 @@ Each run also will ouput a **runStats.csv** file.
 ## Usage
 
 ```
-usage: fluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
-					  [--reference_directory REFERENCE_DIRECTORY]
-					  [--sequence_directory SEQUENCE_DIRECTORY] [--force]
-					  [--force_base_directory] [--cleanup] [--threads THREADS]
+usage: FluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
+                      [--reference_directory REFERENCE_DIRECTORY]
+                      [--sequence_directory SEQUENCE_DIRECTORY] [--force]
+                      [--force_base_directory] [--cleanup] [--threads THREADS]
+                      [--runtest] [--strain_sample_depth STRAIN_SAMPLE_DEPTH]
 
 optional arguments:
   -h, --help            show this help message and exit
   --base_directory BASE_DIRECTORY
-						directory that run samples will be saved in
+                        directory that run samples will be saved in
   --reference_directory REFERENCE_DIRECTORY
-						directory containing reference strain files (.gb
-						format)
+                        directory containing reference strain files (.gb
+                        format)
   --sequence_directory SEQUENCE_DIRECTORY
-						directory containing fastq sequence files (.gz format)
-  --force               overwrite existing files
+                        directory containing fastq sequence files (.gz format)
+  --force               overwrite existing files in assemble.R script
   --force_base_directory
-						overwrite existing directory
+                        overwrite existing directory
   --cleanup             remove intermediate files
   --threads THREADS     number of processors to use for multiprocessing
+  --runtest             run an in silico test to make sure FluPipeline is
+                        working correctly
+  --strain_sample_depth STRAIN_SAMPLE_DEPTH
+                        number of random reads to use to determine strain
+                        assignment. default=2000
   ```
 
 
