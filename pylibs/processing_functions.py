@@ -52,46 +52,46 @@ def flu_Pipeline(
 	Runs through all steps of the flu pipeline. 
 	'''
 
-	# ## troubleshooting inputs start ##
-	# # use this exact input for troubleshooting the pipeline
-	# baseDirectory='/home/agmcfarland/flu_project/FluPipeline/run_test/output'
-	# Rscript='Rscript'
-	# softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
-	# sample = SequencingSample()
-	# sample.get_DataFromReadPairs(read1_filename='IBV_Yamagata_ref_snpindel_R1_001.fastq.gz')
-	# sample.get_SampleDirPath(directory=baseDirectory)
-	# pipeline_used='snp'
-	# sequenceDataDir = '/home/agmcfarland/flu_project/FluPipeline/run_test/data'
-	# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references' #directory reference strains to find the best match for a given readset
-	# pipeline_used = 'snp' #options: snp, phylo
-	# process_method = 'bushman_artic_v2'
-	# force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
-	# BWA_path =  '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
-	# samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
-	# bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
-	# cleanup_files = True
-	# strain_sample_depth = 3000
+# ## troubleshooting inputs start ##
+# # use this exact input for troubleshooting the pipeline
+# baseDirectory='/home/agmcfarland/flu_project/FluPipeline/run_test/output'
+# Rscript='Rscript'
+# softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
+# sample = SequencingSample()
+# sample.get_DataFromReadPairs(read1_filename='IBV_Yamagata_ref_snpindel_R1_001.fastq.gz')
+# sample.get_SampleDirPath(directory=baseDirectory)
+# pipeline_used='snp'
+# sequenceDataDir = '/home/agmcfarland/flu_project/FluPipeline/run_test/data'
+# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references' #directory reference strains to find the best match for a given readset
+# pipeline_used = 'snp' #options: snp, phylo
+# process_method = 'bushman_artic_v2'
+# force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
+# BWA_path =  '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
+# samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
+# bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+# cleanup_files = True
+# strain_sample_depth = 3000
 
 
-	# use this exact input for troubleshooting the pipeline
-	# baseDirectory='/home/agmcfarland/flu_project/shared_data/test_6_samples'
-	# Rscript='Rscript'
-	# softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
-	# sample = SequencingSample()
-	# sample.get_DataFromReadPairs(read1_filename='ashley_5_R1_001.fastq.gz')
-	# sample.get_SampleDirPath(directory=baseDirectory)
-	# pipeline_used='snp'
-	# sequenceDataDir = '/home/agmcfarland/flu_project/shared_data/test_data_6_samples'
-	# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references' #directory reference strains to find the best match for a given readset
-	# pipeline_used = 'snp' #options: snp, phylo
-	# process_method = 'bushman_artic_v2'
-	# force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
-	# BWA_path =  '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
-	# samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
-	# bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
-	# cleanup_files = True
-	# strain_sample_depth = 3000
-	# ## troubleshooting inputs end ##
+# use this exact input for troubleshooting the pipeline
+# baseDirectory='/home/agmcfarland/flu_project/shared_data/test_6_samples'
+# Rscript='Rscript'
+# softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
+# sample = SequencingSample()
+# sample.get_DataFromReadPairs(read1_filename='ashley_5_R1_001.fastq.gz')
+# sample.get_SampleDirPath(directory=baseDirectory)
+# pipeline_used='snp'
+# sequenceDataDir = '/home/agmcfarland/flu_project/shared_data/test_data_6_samples'
+# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references' #directory reference strains to find the best match for a given readset
+# pipeline_used = 'snp' #options: snp, phylo
+# process_method = 'bushman_artic_v2'
+# force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
+# BWA_path =  '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'#'/home/everett/ext/bwa' #to keep bwa version consistent
+# samtoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'#'/home/everett/ext/samtools/bin' #to keep samtools verison consistent
+# bcftoolsbin_path = '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
+# cleanup_files = True
+# strain_sample_depth = 3000
+# ## troubleshooting inputs end ##
 
 
 	## ==================================Prepare sample run directory================================================
