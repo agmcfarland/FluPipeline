@@ -121,11 +121,8 @@ df_ref <- read.csv(paste0(sampleDir,'/','reference_coverage_',samplename,'.csv')
          reference=base::sub('\\.fasta.*', '', reference)) #capture everything before .fasta
 
 # per-segment coverage for each reference
-df_refstrains <- data.frame('segment'=character(),'average_coverage'=numeric(),'average_depth'=numeric(),'reference'=character())
-for (f in list.files(sampleDir, pattern='_coverage_stats.csv')){
-  df_refstrains <- rbind(df_refstrains,
-                         read.csv(paste(sampleDir,f,sep='/')))
-}
+df_refstrains <- read.csv(paste0(sampleDir,'/','combined_coverage_stats_',samplename,'.csv'))
+
 df_refstrains <- df_refstrains%>%
   mutate(average_coverage=round(segment_coverage,2),
          average_depth=round(average_read_depth,2))%>%
@@ -288,7 +285,8 @@ ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
   ylab(label = expression(Read~Coverage))+
   xlab(label = expression(Genomic~Position~(Kb)))+
   geom_hline(aes(yintercept=median(df_pile1$depth)), linetype='dashed',colour='lightblue')+
-  scale_y_continuous(limits=c(0,100), breaks=c(0,20,40,60,80,100))
+  coord_cartesian(ylim=c(0, 100))+
+  scale_y_continuous(breaks=c(0,20,40,60,80,100))
 
 ```
 
@@ -297,7 +295,7 @@ ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
 
 # Reference strain selection
 \small
-Table 4: Summary of read coverage and depth for reference strain alignment using 2,000 random reads.
+Table 4: Summary of read coverage and depth for reference strain alignment using a randomized subset of reads.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 

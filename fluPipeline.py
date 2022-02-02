@@ -161,6 +161,10 @@ def run_FluPipeline(args):
 
 	run_logger.add_Message('finished run')
 
+	# log the packages used by conda and pip in the file packages_used.txt
+	subprocess.run('conda', 'list', '--export', '>', 'packages_used.txt')
+	subprocess.run('pip', 'freeze', '>>', 'packages_used.txt')
+
 
 
 def main(args=None):
@@ -190,7 +194,7 @@ def main(args=None):
 	##---Run test #---
 
 	if args.runtest == True:
-		testDir =  pjoin(script_path,'run_test')
+		testDir =  pjoin(script_path,'run_test') #change script path to os.getcwd() in the future.
 		args.base_directory = pjoin(testDir,'output')
 		args.sequence_directory = pjoin(testDir,'data')
 		args.reference_directory = pjoin(script_path,'references')

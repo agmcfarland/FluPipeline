@@ -58,7 +58,7 @@ def flu_Pipeline(
 # Rscript='Rscript'
 # softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
 # sample = SequencingSample()
-# sample.get_DataFromReadPairs(read1_filename='IBV_Yamagata_ref_snpindel_R1_001.fastq.gz')
+# sample.get_DataFromReadPairs(read1_filename='IBV_Yamagata_ref_snp_R1_001.fastq.gz')
 # sample.get_SampleDirPath(directory=baseDirectory)
 # pipeline_used='snp'
 # sequenceDataDir = '/home/agmcfarland/flu_project/FluPipeline/run_test/data'
@@ -148,13 +148,16 @@ def flu_Pipeline(
 		])
 
 
-		# for each reference available get coverage stats
+		# for each reference available get coverage stats. produces the <reference>.fasta_coverage_stats.csv file
 		for reference in glob.glob('*.fasta'):
 			calculate_ReferenceCoverage(sequenceDataDir=sequenceDataDir,reference=reference, BWA_path=BWA_path, samtoolsbin_path=samtoolsbin_path, read1_filename=sample.read1_filename, read2_filename=sample.read2_filename,samplename=sample.samplename)
 
-		# select the best reference strain and assign it to variables used by assemble.R
+		# summarize the results of strain selection. will be used in sample reports.
 		summarize_ReferenceCoverage(samplename=sample.samplename)
 		summarize_HACoverage(samplename=sample.samplename)
+		combined_ReferenceCoverage(samplename=sample.samplename)
+
+		# select the best reference strain and assign it to variables used by assemble.R
 		reference_strain = select_BestReference(samplename=sample.samplename).replace('.fasta_coverage_stats.csv','.fasta')
 		refGenomeFasta = reference_strain
 		refGenomeBWA = reference_strain
@@ -289,7 +292,10 @@ def calculate_ReferenceCoverage(sequenceDataDir, reference, BWA_path, samtoolsbi
 def summarize_ReferenceCoverage(samplename):
 	'''
 	Write summary files of coverage, depth, segment count, for all references compared. 
+	Gives averages over all segments detected.
 	'''
+
+
 	df_cov = pd.DataFrame()
 	for reference_strain in glob.glob('*_coverage_stats.csv'):
 		df = pd.read_csv(reference_strain)
@@ -313,7 +319,19 @@ def summarize_ReferenceCoverage(samplename):
 
 	df_cov = df_cov.sort_values(['segment_count','segment_coverage_average','segment_average_read_depth'], ascending = [False,False,False])
 	df_cov['sample'] = samplename
-	df_cov.to_csv(pjoin('reference_coverage_{}.csv'.format(samplename)), index=False)
+	df_cov.to_csv('reference_coverage_{}.csv'.format(samplename), index=False)
+
+
+def combined_ReferenceCoverage(samplename):
+	'''
+	Writes a dataframe of combined *_coverage_stats.csv dataframes
+	'''
+	df_cov = pd.DataFrame()
+	for reference_strain in glob.glob('*_coverage_stats.csv'):
+		df = pd.read_csv(reference_strain)
+		df_cov = df_cov.append(df)
+	df_cov.to_csv('combined_coverage_stats_{}.csv'.format(samplename), index=False)
+
 
 
 def summarize_HACoverage(samplename):
@@ -339,7 +357,7 @@ def summarize_HACoverage(samplename):
 
 	df_ha = df_ha.sort_values(['ha_coverage','ha_read_depth'], ascending = [False,False])
 	df_ha['sample'] = samplename
-	df_ha.to_csv(pjoin('reference_ha_coverage_{}.csv'.format(samplename)), index=False)
+	df_ha.to_csv('reference_ha_coverage_{}.csv'.format(samplename), index=False)
 
 
 
@@ -359,15 +377,18 @@ def cleanup_CalculateReferenceCoverage(samplename):
 	Removes all files except the reference summary csv files, the reference strain .fasta file, the reference strain BWA index,
 	and the fastp statistics.
 
-	Only reference strain index files, fastp summary stats, and reference coverage sumamry files are kept.
+	Only reference strain index files, fastp summary stats, and reference coverage sumamry ,
+	and each individual <reference>_coverage_stats.csv file are kept.
 	'''
 # os.chdir('/home/agmcfarland/flu_project/shared_data/test_1_sample/sampleOutputs/ashley_5')
 # samplename = 'ashley_5'
+# samplename = sample.samplename
 
 	df = pd.read_csv('reference_ha_coverage_{}.csv'.format(samplename))
 
 	# the reference strains are sorted with the best match at the top. select the the first item in the reference column
 	reference_to_keep = df['reference'][0].replace('.fasta_coverage_stats.csv','')
+
 
 	# remove files that are not the reference
 	for f in df['reference'][1:]:
