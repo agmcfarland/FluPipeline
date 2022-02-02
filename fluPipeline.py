@@ -161,10 +161,6 @@ def run_FluPipeline(args):
 
 	run_logger.add_Message('finished run')
 
-	# log the packages used by conda and pip in the file packages_used.txt
-	subprocess.run('conda', 'list', '--export', '>', 'packages_used.txt')
-	subprocess.run('pip', 'freeze', '>>', 'packages_used.txt')
-
 
 
 def main(args=None):
