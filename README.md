@@ -138,31 +138,38 @@ Each run also will ouput a **runStats.csv** file.
 
 ```
 usage: FluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
-                      [--reference_directory REFERENCE_DIRECTORY]
-                      [--sequence_directory SEQUENCE_DIRECTORY] [--force]
-                      [--force_base_directory] [--cleanup] [--threads THREADS]
-                      [--runtest] [--strain_sample_depth STRAIN_SAMPLE_DEPTH]
+											[--reference_directory REFERENCE_DIRECTORY]
+											[--sequence_directory SEQUENCE_DIRECTORY] [--force]
+											[--force_base_directory] [--cleanup] [--threads THREADS]
+											[--runtest] [--strain_sample_depth STRAIN_SAMPLE_DEPTH]
+											[--use_fasta]
 
 optional arguments:
-  -h, --help            show this help message and exit
-  --base_directory BASE_DIRECTORY
-                        directory that run samples will be saved in
-  --reference_directory REFERENCE_DIRECTORY
-                        directory containing reference strain files (.gb
-                        format)
-  --sequence_directory SEQUENCE_DIRECTORY
-                        directory containing fastq sequence files (.gz format)
-  --force               overwrite existing files in assemble.R script
-  --force_base_directory
-                        overwrite existing directory
-  --cleanup             remove intermediate files
-  --threads THREADS     number of processors to use for multiprocessing
-  --runtest             run an in silico test to make sure FluPipeline is
-                        working correctly
-  --strain_sample_depth STRAIN_SAMPLE_DEPTH
-                        number of random reads to use to determine strain
-                        assignment. default=2000
-  ```
+	-h, --help            show this help message and exit
+	--base_directory BASE_DIRECTORY
+												directory that run samples will be saved in
+	--reference_directory REFERENCE_DIRECTORY
+												directory containing reference strain files (.gb or
+												.fasta (see --use_fasta flag))
+	--sequence_directory SEQUENCE_DIRECTORY
+												directory containing fastq sequence files (.gz format)
+	--force               overwrite existing files in assemble.R script
+	--force_base_directory
+												overwrite existing directory
+	--cleanup             remove intermediate files
+	--threads THREADS     number of processors to use for multiprocessing
+	--runtest             run an in silico test to make sure FluPipeline is
+												working correctly
+	--strain_sample_depth STRAIN_SAMPLE_DEPTH
+												number of random reads to use to determine strain
+												assignment. default=2000
+	--use_fasta           fasta file(s) containing all eight segments. All
+												segments must have a single name(only letters and
+												letters) separated by an underscores. At the end of
+												the name there should be an underscore followed by the
+												segment number. Example: an_example_name_1.
+												default=False
+	```
 
 
 
