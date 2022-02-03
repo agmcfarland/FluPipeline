@@ -409,6 +409,12 @@ def cleanup_CalculateReferenceCoverage(samplename):
 		os.remove(i)
 
 
+def flag_PotentialReassortment():
+	'''
+	'''
+	pass
+
+
 
 if __name__=='__main__':
 	pass

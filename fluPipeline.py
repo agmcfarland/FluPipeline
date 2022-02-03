@@ -29,9 +29,14 @@ def run_FluPipeline(args):
 	Runs through all steps of FluPipeline
 	'''
 
+	# prevent the user from using the default reference directory in combination with the use_fasta
+	if args.sequence_directory == pjoin(script_path,'references'):
+		args.use_fasta = False
+
+	# definining these variables from the args so that troubleshooting is easaier. will change this after.
 	baseDirectory = args.base_directory
 	sequenceDataDir = args.sequence_directory
-	referenceStrainsDir = pjoin(script_path,'references') #hardcoded by design right now
+	referenceStrainsDir = args.reference_directory
 	softwareDir = script_path # GLOBAL VARIABLE
 
 	### INPUTS start ####
@@ -112,7 +117,10 @@ def run_FluPipeline(args):
 
 	run_logger.add_Message('reference strains:')
 
-	[run_logger.add_Message(os.path.basename(g)) for g in glob.glob(pjoin(referenceStrainsDir,'*.gb'))]
+	if args.use_fasta == True:
+		[run_logger.add_Message(os.path.basename(g)) for g in glob.glob(pjoin(referenceStrainsDir,'*.fasta'))]
+	else:
+		[run_logger.add_Message(os.path.basename(g)) for g in glob.glob(pjoin(referenceStrainsDir,'*.gb'))]
 
 	run_logger.add_Message('samples:') # contains sample name, fastq R1 file, fastq R2 file
 	for s in glob.glob(pjoin(sequenceDataDir,'*_R1_*.fastq.gz')):
@@ -125,9 +133,13 @@ def run_FluPipeline(args):
 
 	## start data processing-----------------------------
 
-	# convert genbank files to uniformally-formatted fasta. see convert_GBKTOFasta for details.
-	gbk_reference_files = glob.glob(pjoin(referenceStrainsDir,'*.gb'))
-	[convert_GBKToFasta(filename=f.replace('.gb','')) for f in gbk_reference_files]
+	if args.use_fasta == True:
+		run_logger.add_Message('Using fasta files for reference')
+	else:
+		run_logger.add_Message('Using gbk files for reference')
+		# convert genbank files to uniformally-formatted fasta. see convert_GBKTOFasta for details.
+		gbk_reference_files = glob.glob(pjoin(referenceStrainsDir,'*.gb'))
+		[convert_GBKToFasta(filename=f.replace('.gb','')) for f in gbk_reference_files]
 
 
 	## run listed samples through specified worflow
@@ -176,7 +188,7 @@ def main(args=None):
 	parser = argparse.ArgumentParser()
 
 	parser.add_argument('--base_directory',type=str ,default=None, help='directory that run samples will be saved in')
-	parser.add_argument('--reference_directory',type=str ,default=None, help='directory containing reference strain files (.gb format)')
+	parser.add_argument('--reference_directory',type=str ,default=pjoin(script_path,'references'), help='directory containing reference strain files (.gb or .fasta (see --use_fasta flag))')
 	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) ')
 	parser.add_argument('--force', action='store_true', default=False, help='overwrite existing files in assemble.R script')
 	parser.add_argument('--force_base_directory', action='store_true', default=False, help='overwrite existing directory')
@@ -184,6 +196,8 @@ def main(args=None):
 	parser.add_argument('--threads',type=int, default=4, help='number of processors to use for multiprocessing')
 	parser.add_argument('--runtest', action='store_true', default=False, help='run an in silico test to make sure FluPipeline is working correctly')
 	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. default=2000')
+	parser.add_argument('--use_fasta', action='store_true', default=False, help='fasta file(s) containing all eight segments. All segments must have a single name(only letters and letters) separated by an underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. default=False')
+
 
 	args = parser.parse_args()
 

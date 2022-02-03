@@ -103,6 +103,18 @@ python FluPipeline.py \
 --cleanup 
 
 
+# use a custom reference directory that uses fasta instead of gb
+python FluPipeline.py \
+--base_directory /change/this/path \
+--sequence_directory /change/this/path \
+--force \
+--force_base_directory \
+--threads 6 \
+--cleanup \
+--use_fasta \
+--reference_directory /change/this/path
+
+
 
 ```
 
