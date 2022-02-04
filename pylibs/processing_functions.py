@@ -124,7 +124,7 @@ def flu_Pipeline(
 
 
 		# quality, adaptor trimming with fastp
-		subprocess.run([
+		fastp_log = subprocess.run([
 			'fastp', 
 			'--in1', pjoin(sequenceDataDir,sample.read1_filename), #readfileR1
 			'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
@@ -134,10 +134,11 @@ def flu_Pipeline(
 			'-q', '30',#, #quality score 30
 			'overwrite=True'#,
 			#'--disable_adapter_trimming' # adaptor trimming when adaptors are already trimmed can lead to unwanted errors
-			])
+		], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True).stdout
+		sample_logger.add_Message(fastp_log)
 
 		# randomly select a subset of reads with reformat.sh
-		subprocess.run([
+		subset_reads_log = subprocess.run([
 			'reformat.sh',
 			'in1=fastp_trimmed_{}'.format(sample.read1_filename), 
 			'in2=fastp_trimmed_{}'.format(sample.read2_filename),
@@ -145,8 +146,8 @@ def flu_Pipeline(
 			'out2=subset_fastp_trimmed_{}'.format(sample.read2_filename),
 			'samplereadstarget={}'.format(strain_sample_depth),
 			'overwrite=True'
-		])
-
+		], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True).stdout
+		sample_logger.add_Message(subset_reads_log)
 
 		# for each reference available get coverage stats. produces the <reference>.fasta_coverage_stats.csv file
 		for reference in glob.glob('*.fasta'):
@@ -175,23 +176,41 @@ def flu_Pipeline(
 	## ==============================================================================================================
 	try:
 		sample_logger.add_Message('Finding variants')
-		# run assemble.R 
-		os.system('{} {}/assemble.R --outputFile {} --workDir {} --process_method {} --softwareDir {} --R1 {} --R2 {} --refGenomeFasta {} --refGenomeBWA {} --bwaPath {} --samtoolsBin {} --bcftoolsBin {}'.
-		format(
-			Rscript, 
-			softwareDir,
-			pjoin(sample.dirpath,sample.samplename+'.Rdata'), #--outputFile
-			pjoin(sample.dirpath), #--workDir
-			'bushman_artic_v2', #--process_method
-			softwareDir, #--softwareDir
-			pjoin(sequenceDataDir,sample.read1_filename), #--R1
-			pjoin(sequenceDataDir,sample.read2_filename), #--R2
-			refGenomeFasta, #--refGenomeFasta
-			refGenomeBWA, #--refGenomeBWA
-			BWA_path,
-			samtoolsbin_path,
-			bcftoolsbin_path
-		))
+
+		assembler_output_log = subprocess.run([
+			'{}'.format(Rscript),
+			'{}/assemble.R'.format(softwareDir),
+			'--outputFile', '{}'.format(pjoin(sample.dirpath,sample.samplename+'.Rdata')),
+			'--workDir', '{}'.format(pjoin(sample.dirpath)),
+			'--process_method', '{}'.format('bushman_artic_v2'),
+			'--softwareDir', '{}'.format(softwareDir),
+			'--R1', '{}'.format(pjoin(sequenceDataDir,sample.read1_filename)),
+			'--R2', '{}'.format(pjoin(sequenceDataDir,sample.read2_filename)),
+			'--refGenomeFasta', '{}'.format(refGenomeFasta),
+			'--refGenomeBWA', '{}'.format(refGenomeBWA),
+			'--bwaPath', '{}'.format(BWA_path),
+			'--samtoolsBin', '{}'.format(samtoolsbin_path),
+			'--bcftoolsBin', '{}'.format(bcftoolsbin_path)
+			], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True).stdout
+		sample_logger.add_Message(assembler_output_log)
+
+		# # run assemble.R 
+		# os.system('{} {}/assemble.R --outputFile {} --workDir {} --process_method {} --softwareDir {} --R1 {} --R2 {} --refGenomeFasta {} --refGenomeBWA {} --bwaPath {} --samtoolsBin {} --bcftoolsBin {}'.
+		# format(
+		# 	Rscript, 
+		# 	softwareDir,
+		# 	pjoin(sample.dirpath,sample.samplename+'.Rdata'), #--outputFile
+		# 	pjoin(sample.dirpath), #--workDir
+		# 	'bushman_artic_v2', #--process_method
+		# 	softwareDir, #--softwareDir
+		# 	pjoin(sequenceDataDir,sample.read1_filename), #--R1
+		# 	pjoin(sequenceDataDir,sample.read2_filename), #--R2
+		# 	refGenomeFasta, #--refGenomeFasta
+		# 	refGenomeBWA, #--refGenomeBWA
+		# 	BWA_path,
+		# 	samtoolsbin_path,
+		# 	bcftoolsbin_path
+		# ))
 
 	except:
 		sample_logger.add_Message('failure at variant calling',level='warning')
