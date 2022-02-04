@@ -196,7 +196,7 @@ def main(args=None):
 	parser.add_argument('--threads',type=int, default=4, help='number of processors to use for multiprocessing')
 	parser.add_argument('--runtest', action='store_true', default=False, help='run an in silico test to make sure FluPipeline is working correctly')
 	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. default=2000')
-	parser.add_argument('--use_fasta', action='store_true', default=False, help='fasta file(s) containing all eight segments. All segments must have a single name(only letters and letters) separated by an underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. default=False')
+	parser.add_argument('--use_fasta', action='store_true', default=False, help='Fast format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. default=False')
 
 
 	args = parser.parse_args()

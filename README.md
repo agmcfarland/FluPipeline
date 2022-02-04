@@ -164,8 +164,8 @@ optional arguments:
                         number of random reads to use to determine strain
                         assignment. default=2000
   --use_fasta           fasta file(s) containing all eight segments. All
-                        segments must have a single name(only letters and
-                        letters) separated by an underscores. At the end of
+                        segments must have a single name(only letters,numbers, and underscores).
+                        At the end of
                         the name there should be an underscore followed by the
                         segment number. Example: an_example_name_1.
                         default=False
