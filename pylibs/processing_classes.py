@@ -89,6 +89,7 @@ class SequencingSample:
 			[os.remove(f) for f in to_remove]
 
 
+
 class RunLogger:
 	'''
 	Handles logging: Making a unique logfile by name. Adding messages to it. Removing logfiles.
@@ -101,83 +102,26 @@ class RunLogger:
 		self.directory = directory
 		self.filename = filename
 		self.filepath = pjoin(self.directory,self.filename)
+		self.formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
+			datefmt='%Y-%m-%d %H:%M:%S')
 
-
-	def initialize_Log(self):
+	def initialize_FileHandler(self):
 		'''
 		Initialize a logfile with time stamps and in append mode.
 		'''
-		formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
-			datefmt='%Y-%m-%d %H:%M:%S')
-
 		handler = logging.FileHandler('{}.txt'.format(self.filepath), mode='a')
-		handler.setFormatter(formatter)
+		handler.setFormatter(self.formatter)
 		self.logger = logging.getLogger(self.filename)
 		self.logger.setLevel(logging.DEBUG)
 		self.logger.addHandler(handler)
 
-
-	def add_Message(self, message, level='info'):
+	def add_StreamHandler(self):
 		'''
-		Add a message to the logfile
+		Adds the stream handler to the logger object
 		'''
-		if level == 'info':
-			self.logger.info(message)
-		if level == 'debug':
-			self.logger.debug(message)
-		if level == 'warning':
-			self.logger.warning(message)
-
-	def delete_LogFile(self):
-		'''
-		deletes the logfile
-		'''
-		if os.path.exists('{}.txt'.format(self.filepath)):
-			os.remove('{}.txt'.format(self.filepath))
-
-
-class SampleTracker:
-	'''
-	Loads the sample tracker sql database into the object. Check existence of tables, pull tables, update tables in server, save tables in .csv format.
-	'''
-	def __init__(self, directory):
-		'''
-		'''
-		self.conn = sql.connect(pjoin(directory,'sampleTracker.db'))
-
-	def check_TableExists(self, tablename):
-		'''
-		Check that a given processing table exists. if not then create it with the specified columns
-		'''
-		cursor = self.conn.cursor()
-		try:
-			cursor.execute('SELECT sample from {}'.format(tablename))
-			print('table {} exists'.format(tablename))
-		except:
-			cursor.execute("""CREATE TABLE {} (sample, processed, date_run, runtime, info)""".format(tablename))
-			print('created table {}'.format(tablename))
-		cursor.close()
-
-	def load_Table(self, tablename):
-		'''
-		Load a table with a given name into a pandas dataframe
-		'''
-		return(pd.read_sql_query('SELECT * FROM {}'.format(tablename), self.conn))
-
-	def update_Table(self, tablename, df, if_exists_):
-		'''
-		Update a sql table with a given name by supplying it a pandas dataframe.
-		'''
-		if tablename not in ['snp','phylo']:
-			raise ValueError('choose either snp or phylo')
-		df.to_sql(name=tablename,con=self.conn, if_exists=if_exists_,index_label='sample',index=False)
-
-	def write_Table(self, tablename, name, output_dir=os.getcwd()):
-		'''
-		Writes a table in the database with a given name to a file in a specificied directory
-		'''
-		df = pd.read_sql_query('SELECT * FROM {}'.format(tablename), self.conn)
-		df.to_csv(pjoin(output_dir,name+'.csv'),index=None)
+		handler = logging.StreamHandler()
+		handler.setFormatter(self.formatter)
+		self.logger.addHandler(handler)
 
 
 if __name__=='__main__':

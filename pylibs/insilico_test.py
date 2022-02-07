@@ -12,12 +12,12 @@ import numpy as np
 import logging
 import multiprocessing as mp
 from multiprocessing import Pool
-from .processing_functions import convert_GBKToFasta
-from .processing_classes import SampleTracker
+from .processing_functions import convert_GBKToFasta, call_Command
+from .processing_classes import RunLogger
 
 
 
-def create_SyntheticReads(filename):
+def create_SyntheticReads(filename, logger_, shell_=False):
 	'''
 	crete synthetic reads from fasta file using bbmap
 	'''
@@ -36,9 +36,10 @@ def create_SyntheticReads(filename):
 	# 	'q=40',
 	# 	'superflat=t',
 	# 	'overwrite=t'])
-	
 	# # SNPs
-	subprocess.run(['randomreads.sh',
+	call_Command(
+		[
+		'randomreads.sh',
 		'reads=100000',
 		# 'coverage=1000',
 		'prefix={}'.format(filename),
@@ -51,7 +52,8 @@ def create_SyntheticReads(filename):
 		'maxsubs=0',
 		'q=40',
 		'superflat=t',
-		'overwrite=t'])
+		'overwrite=t'
+		],logger_=logger_)
 
 	# # # insertions deletions and SNPs
 	# subprocess.run(['randomreads.sh',
@@ -67,15 +69,6 @@ def create_SyntheticReads(filename):
 	# 	'q=40',
 	# 	'superflat=t',
 	# 	'overwrite=t'])
-
-
-
-def generate_TestData(filename):
-	'''
-	Supply the filename with no suffix (i.e. remove .fasta)
-	'''
-	convert_GBKToFasta(filename=filename)
-	create_SyntheticReads(filename=filename)
 
 
 
@@ -103,6 +96,11 @@ def create_TestData(testDir, referenceStrainsDir):
 	# enter the test directory that will contain the insilico fastq files
 	os.chdir(sequenceDataDir)
 
+
+	run_logger = RunLogger(directory=baseDirectory,filename='insilicoTestLog')
+	run_logger.initialize_FileHandler()
+	run_logger.add_StreamHandler()
+
 	# copy reference genbank files (.gb) from referenceStrainsDir to the sequence data dir, sequenceDataDir
 	[shutil.copy(gbk, os.getcwd()) for gbk in glob.glob(pjoin(referenceStrainsDir,'*.gb'))]
 
@@ -110,9 +108,11 @@ def create_TestData(testDir, referenceStrainsDir):
 	gbk_files = glob.glob('*.gb')
 	gbk_files = [i.replace('.gb','') for i in gbk_files]
 
+	run_logger.logger.info('Making test data...')
 	# create fasta and synthetic read set
 	for strain in gbk_files:
-		generate_TestData(filename=strain)
+		convert_GBKToFasta(filename=strain)
+		create_SyntheticReads(filename=strain, logger_=run_logger)
 
 	# check perfect, snp, and indel are all made
 	print(len(gbk_files) == len(glob.glob('*perfect*'))/2)
@@ -122,7 +122,7 @@ def create_TestData(testDir, referenceStrainsDir):
 	# gzip fastq files
 	trimmed_fastq_list = glob.glob('*.fastq')
 	[subprocess.run(['gzip', trimmed_fastq]) for trimmed_fastq in trimmed_fastq_list] 
-
+	run_logger.logger.info('Finished test data')
 
 ## script end
 if __name__=='__main__':

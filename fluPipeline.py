@@ -20,7 +20,8 @@ global script_path
 script_path = os.path.split(os.path.realpath(os.path.abspath(__file__)))[0]
 sys.path.append(script_path)
 from pylibs.processing_functions import *
-from pylibs.processing_classes import SequencingSample, RunLogger, SampleTracker
+from pylibs.processing_classes import SequencingSample, RunLogger
+from pylibs.pipeline import flu_Pipeline
 from pylibs.insilico_test import *
 pd.set_option('display.max_columns', None)
 
@@ -33,17 +34,14 @@ def run_FluPipeline(args):
 	if args.sequence_directory == pjoin(script_path,'references'):
 		args.use_fasta = False
 
-	# definining these variables from the args so that troubleshooting is easaier. will change this after.
-	baseDirectory = args.base_directory
-	sequenceDataDir = args.sequence_directory
-	referenceStrainsDir = args.reference_directory
+	# assigning softwareDir as a copy of script_path for logical consistency with assemble.R inputs.
 	softwareDir = script_path # GLOBAL VARIABLE
 
 	### INPUTS start ####
 	# remove base directory if it exiss
 	if args.force_base_directory == True:
 		try:
-			shutil.rmtree(baseDirectory)
+			shutil.rmtree(args.base_directory)
 		except:
 			pass
 
@@ -61,44 +59,38 @@ def run_FluPipeline(args):
 	### INPUTS end ####
 
 	# set up main directories
-	os.makedirs(baseDirectory, exist_ok=True)
-	os.chdir(baseDirectory)
-	os.makedirs(pjoin(baseDirectory,'sampleLogs'), exist_ok=True)
-	os.makedirs(pjoin(baseDirectory,'sampleOutputs'), exist_ok=True)
-	os.makedirs(pjoin(baseDirectory,'sampleResults'), exist_ok=True)
+	os.makedirs(args.base_directory, exist_ok=True)
+	os.chdir(args.base_directory)
+	os.makedirs(pjoin(args.base_directory,'sampleLogs'), exist_ok=True)
+	os.makedirs(pjoin(args.base_directory,'sampleOutputs'), exist_ok=True)
+	os.makedirs(pjoin(args.base_directory,'sampleResults'), exist_ok=True)
 
 	# start up run logger
 	run_logger = RunLogger(directory=os.getcwd(),filename='runLog')
-	run_logger.delete_LogFile() # deletes a previously existing logfile with the same name
-	run_logger.initialize_Log()
-	run_logger.add_Message('start run')
-	run_logger.add_Message('arguments:')
-	run_logger.add_Message(args)
-	# [run_logger.add_Message(a) for a in args]
-	## load/create sample tracker sql database and tables for tracking
-	sample_tracker = SampleTracker(directory=baseDirectory)
-	sample_tracker.check_TableExists(tablename=pipeline_used)
-	df_st = sample_tracker.load_Table(tablename=pipeline_used) #load sql table into pandas df 
+	run_logger.initialize_FileHandler()
+	run_logger.add_StreamHandler()
+	run_logger.logger.info('Starting run...')
+	run_logger.logger.info('arguments:')
+	run_logger.logger.info(args)
 
-	print(df_st)
 	## collect all samples to process in a list for multiprocessing submission
 	sample_submission = []
-	for f in glob.glob(pjoin(sequenceDataDir,'*_R1_*.fastq.gz')):
+	for f in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
 		# create sample object with necessary data and check that it exists
 		sample = SequencingSample()
 		sample.get_DataFromReadPairs(read1_filename=f)
-		sample.get_SampleDirPath(directory=baseDirectory)
-		sample.check_ReadExistence(directory=sequenceDataDir)
+		sample.get_SampleDirPath(directory=args.base_directory)
+		sample.check_ReadExistence(directory=args.sequence_directory)
 
 		# append sample run parameters to master run list
 		sample_submission.append([
-			baseDirectory,
+			args.base_directory,
 			Rscript,
 			softwareDir,
 			sample,
 			pipeline_used,
-			sequenceDataDir,
-			referenceStrainsDir,
+			args.sequence_directory,
+			args.reference_directory,
 			args.force,
 			BWA_path,
 			samtoolsbin_path,
@@ -108,37 +100,37 @@ def run_FluPipeline(args):
 			])
 
 	# log inputs
-	run_logger.add_Message('inputs:') #contains all path and paramater inputs
-	[run_logger.add_Message('{}: {}'.format(k, v)) for k,v in {
+	run_logger.logger.info('inputs:') #contains all path and paramater inputs
+	[run_logger.logger.info('{}: {}'.format(k, v)) for k,v in {
 	'cleanup_files':args.cleanup, 'force_overwrite':args.force,'force_base_directory':args.force_base_directory,
-	'baseDirectory':baseDirectory,'Rscript':Rscript,'softwareDir':softwareDir,'pipeline_used':pipeline_used,
-	'sequenceDataDir':sequenceDataDir,'referenceStrainsDir':referenceStrainsDir,'force_overwrite':args.force,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path
+	'args.base_directory':args.base_directory,'Rscript':Rscript,'softwareDir':softwareDir,'pipeline_used':pipeline_used,
+	'args.sequence_directory':args.sequence_directory,'args.reference_directory':args.reference_directory,'force_overwrite':args.force,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path
 	}.items()]
 
-	run_logger.add_Message('reference strains:')
+	run_logger.logger.info('reference strains:')
 
 	if args.use_fasta == True:
-		[run_logger.add_Message(os.path.basename(g)) for g in glob.glob(pjoin(referenceStrainsDir,'*.fasta'))]
+		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.fasta'))]
 	else:
-		[run_logger.add_Message(os.path.basename(g)) for g in glob.glob(pjoin(referenceStrainsDir,'*.gb'))]
+		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.gb'))]
 
-	run_logger.add_Message('samples:') # contains sample name, fastq R1 file, fastq R2 file
-	for s in glob.glob(pjoin(sequenceDataDir,'*_R1_*.fastq.gz')):
+	run_logger.logger.info('samples:') # contains sample name, fastq R1 file, fastq R2 file
+	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
 		sample = SequencingSample()
 		sample.get_DataFromReadPairs(read1_filename=s)
-		run_logger.add_Message([sample.samplename,'  ',sample.read1_filename,'  ',sample.read2_filename])		
+		run_logger.logger.info([sample.samplename,'  ',sample.read1_filename,'  ',sample.read2_filename])		
 
-	run_logger.add_Message('total samples: {}'.format(len(sample_submission))) # total samples ran
-	run_logger.add_Message('Processing samples...')
+	run_logger.logger.info('total samples: {}'.format(len(sample_submission))) # total samples ran
+	run_logger.logger.info('Processing samples...')
 
 	## start data processing-----------------------------
 
 	if args.use_fasta == True:
-		run_logger.add_Message('Using fasta files for reference')
+		run_logger.logger.info('Using fasta files for reference')
 	else:
-		run_logger.add_Message('Using gbk files for reference')
+		run_logger.logger.info('Using gbk files for reference')
 		# convert genbank files to uniformally-formatted fasta. see convert_GBKTOFasta for details.
-		gbk_reference_files = glob.glob(pjoin(referenceStrainsDir,'*.gb'))
+		gbk_reference_files = glob.glob(pjoin(args.reference_directory,'*.gb'))
 		[convert_GBKToFasta(filename=f.replace('.gb','')) for f in gbk_reference_files]
 
 
@@ -146,32 +138,25 @@ def run_FluPipeline(args):
 	with Pool(processes=args.threads) as p:
 		df_processed = pd.concat(p.starmap(flu_Pipeline, sample_submission))
 
-	run_logger.add_Message('Finished processing samples...')
-	run_logger.add_Message('Making run report...')
+	run_logger.logger.info('Finished processing samples...')
+	run_logger.logger.info('Making run report...')
 	## make run report
-	os.system('{} {}/report_runner.R --softwareDir {} --report_type {} --baseDir {}'.
-		format(
-			Rscript,
-			softwareDir,
-			softwareDir, #--softwareDir
-			'run', #--report_type
-			baseDirectory #--baseDir
-			))
-	run_logger.add_Message('Finished making run report')
+	call_Command(cmd=
+		[
+		'{}'.format(Rscript),
+		 '{}/report_runner.R'.format(softwareDir),
+		 '--softwareDir', '{}'.format(softwareDir),
+		 '--report_type', '{}'.format('run'),
+		 '--baseDir', '{}'.format(args.base_directory)
+		 ], logger_=run_logger)
+
+	run_logger.logger.info('Finished making run report')
 
 	# gather sample reports
-	[shutil.copy(report, pjoin(baseDirectory,'sampleResults')) for report in glob.glob(pjoin(baseDirectory,'sampleOutputs','*','*.pdf'))]
+	[shutil.copy(report, pjoin(args.base_directory,'sampleResults')) for report in glob.glob(pjoin(args.base_directory,'sampleOutputs','*','*.pdf'))]
 
 	## end data processing-------------------------------
-
-	## update the sample tracker database
-	sample_tracker.update_Table(tablename=pipeline_used, df=df_processed, if_exists_='append')
-	sample_tracker.write_Table(tablename=pipeline_used, name='runStats', output_dir=baseDirectory)
-
-	## close connection to sql database
-	sample_tracker.conn.close()
-
-	run_logger.add_Message('finished run')
+	run_logger.logger.info('Finished run')
 
 
 
@@ -198,11 +183,9 @@ def main(args=None):
 	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. default=2000')
 	parser.add_argument('--use_fasta', action='store_true', default=False, help='Fast format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. default=False')
 
-
 	args = parser.parse_args()
 
 	##---Run test #---
-
 	if args.runtest == True:
 		testDir =  pjoin(script_path,'run_test') #change script path to os.getcwd() in the future.
 		args.base_directory = pjoin(testDir,'output')
@@ -216,7 +199,6 @@ def main(args=None):
 		run_FluPipeline(args=args)
 
 	##---Run pipeline in its entirety #---	
-
 	else:
 		run_FluPipeline(args=args)
 

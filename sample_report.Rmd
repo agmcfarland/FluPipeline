@@ -55,14 +55,11 @@ samplename <- params$samplename
 ##test inputs end
 
 # load in Rdata object
-df_majorvar <- tryCatch(
-    expr = {
-      load(paste0(sampleDir,'/',samplename,'.Rdata'))
-    },
-    error = function(e){ 
-      message('Error reading in Rdata file')
-    }
-)
+if (file.exists(paste0(sampleDir,'/',samplename,'.Rdata'))){
+  load(paste0(sampleDir,'/',samplename,'.Rdata'))
+} else {
+  print('no Rdata')
+}
 
 
 # helper functions
@@ -231,7 +228,8 @@ df_pile1 <- merge(df_pile1, df_variants, by.x=c('segment_name','position'), by.y
 
 ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
   facet_wrap(~segment, scales='free_x',ncol=1, strip.position='right')+
-  geom_bar(stat='identity')+
+  geom_area()+
+  #geom_bar(stat='identity')+
   geom_point(aes(x=var_position2, y=3,group=segment), color='yellow',alpha=0.85)+
   theme_bw()+
  theme(panel.grid.major = element_blank(),
@@ -264,7 +262,8 @@ Figure 2: Read depth and coverage map zoomed at a depth of 100 reads.
 
 ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
   facet_wrap(~segment, scales='free_x',ncol=1, strip.position='right')+
-  geom_bar(stat='identity')+
+  #geom_bar(stat='identity')+
+  geom_area()+
   geom_point(aes(x=var_position2, y=3,group=segment), color='yellow',alpha=0.85)+
   theme_bw()+
  theme(panel.grid.major = element_blank(),
