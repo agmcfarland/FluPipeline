@@ -14,7 +14,7 @@ from Bio.Seq import Seq
 from Bio import SeqIO, SeqFeature
 import argparse
 import logging
-from .processing_classes import SequencingSample, RunLogger, SampleTracker
+from .processing_classes import SequencingSample, RunLogger
 from .processing_functions import *
 
 def flu_Pipeline(
@@ -158,7 +158,6 @@ def flu_Pipeline(
 	except:
 		sample_logger.logger.exception('FluPipeline Error: failure at strain assignment', exc_info=True)
 		sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
-		return(None)
 
 	## ==================================assemble.R find variants====================================================
 	## ==============================================================================================================
@@ -187,7 +186,6 @@ def flu_Pipeline(
 	except:
 		sample_logger.logger.exception('FluPipeline Error: failure at variant calling', exc_info=True)
 		sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
-		return(None)
 
 	## ==================================Sample report generation====================================================
 	## ==============================================================================================================
@@ -209,7 +207,6 @@ def flu_Pipeline(
 	except:
 		sample_logger.logger.exception('FluPipeline Error: failure at sample report generation', exc_info=True)
 		end_run_timer = datetime.now()-start_run_timer
-		return(None)
 
 	# ==================================clean up and record run=====================================================
 	# ==============================================================================================================
@@ -219,5 +216,4 @@ def flu_Pipeline(
 
 	sample_logger.logger.info('Finished processing sample')
 	sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
-	return(None)
 

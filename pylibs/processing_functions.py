@@ -30,7 +30,7 @@ def call_Command(cmd, logger_, shell_=False):
 			capture = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 			logger_.logger.info(capture.communicate()[0].decode('utf-8'))
 	except:
-		logger_.logger.exception('FluPipeline Error:', exc_info=True)
+		logger_.logger.exception('\nFluPipeline Error:', exc_info=True)
 
 
 def convert_GBKToFasta(filename):
@@ -218,10 +218,6 @@ def cleanup_CalculateReferenceCoverage(samplename):
 	Only reference strain index files, fastp summary stats, and reference coverage sumamry ,
 	and each individual <reference>_coverage_stats.csv file are kept.
 	'''
-# os.chdir('/home/agmcfarland/flu_project/shared_data/test_1_sample/sampleOutputs/ashley_5')
-# samplename = 'ashley_5'
-# samplename = sample.samplename
-
 	df = pd.read_csv('reference_ha_coverage_{}.csv'.format(samplename))
 
 	# the reference strains are sorted with the best match at the top. select the the first item in the reference column

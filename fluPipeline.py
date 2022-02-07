@@ -34,10 +34,10 @@ def run_FluPipeline(args):
 	if args.sequence_directory == pjoin(script_path,'references'):
 		args.use_fasta = False
 
+	### INPUTS start ####
 	# assigning softwareDir as a copy of script_path for logical consistency with assemble.R inputs.
 	softwareDir = script_path # GLOBAL VARIABLE
 
-	### INPUTS start ####
 	# remove base directory if it exiss
 	if args.force_base_directory == True:
 		try:
@@ -69,8 +69,8 @@ def run_FluPipeline(args):
 	run_logger = RunLogger(directory=os.getcwd(),filename='runLog')
 	run_logger.initialize_FileHandler()
 	run_logger.add_StreamHandler()
-	run_logger.logger.info('Starting run...')
-	run_logger.logger.info('arguments:')
+	run_logger.logger.info('\nStarting FluPipeline...')
+	run_logger.logger.info('\narguments:')
 	run_logger.logger.info(args)
 
 	## collect all samples to process in a list for multiprocessing submission
@@ -100,35 +100,35 @@ def run_FluPipeline(args):
 			])
 
 	# log inputs
-	run_logger.logger.info('inputs:') #contains all path and paramater inputs
+	run_logger.logger.info('\ninputs:') #contains all path and paramater inputs
 	[run_logger.logger.info('{}: {}'.format(k, v)) for k,v in {
 	'cleanup_files':args.cleanup, 'force_overwrite':args.force,'force_base_directory':args.force_base_directory,
 	'args.base_directory':args.base_directory,'Rscript':Rscript,'softwareDir':softwareDir,'pipeline_used':pipeline_used,
 	'args.sequence_directory':args.sequence_directory,'args.reference_directory':args.reference_directory,'force_overwrite':args.force,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path
 	}.items()]
 
-	run_logger.logger.info('reference strains:')
+	run_logger.logger.info('\nreference strains:')
 
 	if args.use_fasta == True:
 		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.fasta'))]
 	else:
 		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.gb'))]
 
-	run_logger.logger.info('samples:') # contains sample name, fastq R1 file, fastq R2 file
+	run_logger.logger.info('\nsamples:') # contains sample name, fastq R1 file, fastq R2 file
 	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
 		sample = SequencingSample()
 		sample.get_DataFromReadPairs(read1_filename=s)
 		run_logger.logger.info([sample.samplename,'  ',sample.read1_filename,'  ',sample.read2_filename])		
 
-	run_logger.logger.info('total samples: {}'.format(len(sample_submission))) # total samples ran
-	run_logger.logger.info('Processing samples...')
+	run_logger.logger.info('\ntotal samples: {}'.format(len(sample_submission))) # total samples ran
+	run_logger.logger.info('\nProcessing samples...')
 
 	## start data processing-----------------------------
 
 	if args.use_fasta == True:
-		run_logger.logger.info('Using fasta files for reference')
+		run_logger.logger.info('\nUsing fasta files for reference')
 	else:
-		run_logger.logger.info('Using gbk files for reference')
+		run_logger.logger.info('\nUsing gbk files for reference')
 		# convert genbank files to uniformally-formatted fasta. see convert_GBKTOFasta for details.
 		gbk_reference_files = glob.glob(pjoin(args.reference_directory,'*.gb'))
 		[convert_GBKToFasta(filename=f.replace('.gb','')) for f in gbk_reference_files]
@@ -136,10 +136,10 @@ def run_FluPipeline(args):
 
 	## run listed samples through specified worflow
 	with Pool(processes=args.threads) as p:
-		df_processed = pd.concat(p.starmap(flu_Pipeline, sample_submission))
+		p.starmap(flu_Pipeline, sample_submission)
 
-	run_logger.logger.info('Finished processing samples...')
-	run_logger.logger.info('Making run report...')
+	run_logger.logger.info('\nFinished processing samples...')
+	run_logger.logger.info('\nMaking run report...')
 	## make run report
 	call_Command(cmd=
 		[
@@ -150,13 +150,13 @@ def run_FluPipeline(args):
 		 '--baseDir', '{}'.format(args.base_directory)
 		 ], logger_=run_logger)
 
-	run_logger.logger.info('Finished making run report')
+	run_logger.logger.info('\nFinished making run report')
 
 	# gather sample reports
 	[shutil.copy(report, pjoin(args.base_directory,'sampleResults')) for report in glob.glob(pjoin(args.base_directory,'sampleOutputs','*','*.pdf'))]
 
 	## end data processing-------------------------------
-	run_logger.logger.info('Finished run')
+	run_logger.logger.info('\nFinished running FluPipeline')
 
 
 
