@@ -312,21 +312,25 @@ ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
 Table 4: A. Clade assignment given to the strain using Nextclade. Highlighting the quality (qc) scores and qualitative assignment. B. Number of SNPs/indels. C. Amino acid level effects of SNPs/indels.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
-
-kable(df_nc%>%
-        select(1:4)
-        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
-  kable_styling(font_size = 7.5,latex_options="hold_position")
-
-kable(df_nc%>%
-        select(5:8)
-        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
-  kable_styling(font_size = 7.5,latex_options="hold_position")
-
-kable(df_nc%>%
-        select(9:11)
-        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
-  kable_styling(font_size = 7.5,latex_options="hold_position")
+if ( ncol(df_nc)>1 ){
+  kable(df_nc%>%
+          select(1:4)
+          , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+  
+  kable(df_nc%>%
+          select(5:8)
+          , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+  
+  kable(df_nc%>%
+          select(9:11)
+          , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+} else {
+      kable(df_nc, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+  }
 ```
 
 \newpage
