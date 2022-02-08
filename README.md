@@ -167,7 +167,7 @@ optional arguments:
                         segments must have a single name(only letters,numbers, and underscores).
                         At the end of
                         the name there should be an underscore followed by the
-                        segment number. Example: an_example_name_1.
+                        segment number. E3xample: an_example_name_1.
                         default=False
   ```
 

@@ -22,7 +22,6 @@ def flu_Pipeline(
 	Rscript,
 	softwareDir,
 	sample,
-	pipeline_used,
 	sequenceDataDir,
 	referenceStrainsDir,
 	force_overwrite,
@@ -206,7 +205,7 @@ def flu_Pipeline(
 
 	except:
 		sample_logger.logger.exception('FluPipeline Error: failure at sample report generation', exc_info=True)
-		end_run_timer = datetime.now()-start_run_timer
+		sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
 
 	# ==================================clean up and record run=====================================================
 	# ==============================================================================================================

@@ -16,6 +16,7 @@ from Bio.Seq import Seq
 from Bio import SeqIO, SeqFeature
 import argparse
 import logging
+
 global script_path
 script_path = os.path.split(os.path.realpath(os.path.abspath(__file__)))[0]
 sys.path.append(script_path)
@@ -29,14 +30,10 @@ def run_FluPipeline(args):
 	'''
 	Runs through all steps of FluPipeline
 	'''
-
+	## prepare working directory
 	# prevent the user from using the default reference directory in combination with the use_fasta
 	if args.sequence_directory == pjoin(script_path,'references'):
 		args.use_fasta = False
-
-	### INPUTS start ####
-	# assigning softwareDir as a copy of script_path for logical consistency with assemble.R inputs.
-	softwareDir = script_path # GLOBAL VARIABLE
 
 	# remove base directory if it exiss
 	if args.force_base_directory == True:
@@ -45,33 +42,45 @@ def run_FluPipeline(args):
 		except:
 			pass
 
-	# input Rscript path
+	## make inputs for assemble.R
+	# assigning softwareDir as a copy of script_path for logical consistency with assemble.R inputs.
 	Rscript = 'Rscript'
-
-	#input other
-	pipeline_used = 'snp' #options: snp, phylo
 	process_method = 'bushman_artic_v2'
-	#force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
 	BWA_path = subprocess.Popen(['which','bwa'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n','')
 	samtoolsbin_path = os.path.dirname(subprocess.Popen(['which','samtools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))
 	bcftoolsbin_path = os.path.dirname(subprocess.Popen(['which','bcftools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))
 
-	### INPUTS end ####
-
-	# set up main directories
+	## set up main directories
 	os.makedirs(args.base_directory, exist_ok=True)
 	os.chdir(args.base_directory)
 	os.makedirs(pjoin(args.base_directory,'sampleLogs'), exist_ok=True)
 	os.makedirs(pjoin(args.base_directory,'sampleOutputs'), exist_ok=True)
 	os.makedirs(pjoin(args.base_directory,'sampleResults'), exist_ok=True)
 
-	# start up run logger
+	## start up run logger
 	run_logger = RunLogger(directory=os.getcwd(),filename='runLog')
 	run_logger.initialize_FileHandler()
 	run_logger.add_StreamHandler()
-	run_logger.logger.info('\nStarting FluPipeline...')
-	run_logger.logger.info('\narguments:')
+	run_logger.logger.info('Starting FluPipeline...\n')
+
+	## log argument inputs, reference strains, and samples	
+	run_logger.logger.info('inputs:\n') #contains all path and paramater inputs
 	run_logger.logger.info(args)
+
+	run_logger.logger.info('reference strains:\n')
+	if args.use_fasta == True:
+		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.fasta'))]
+	else:
+		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.gb'))]
+
+	run_logger.logger.info('samples:\n') # contains sample name, fastq R1 file, fastq R2 file
+	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
+		sample = SequencingSample()
+		sample.get_DataFromReadPairs(read1_filename=s)
+		run_logger.logger.info(sample.samplename)		
+
+
+	## start data processing------------------------------------------------------------
 
 	## collect all samples to process in a list for multiprocessing submission
 	sample_submission = []
@@ -86,9 +95,8 @@ def run_FluPipeline(args):
 		sample_submission.append([
 			args.base_directory,
 			Rscript,
-			softwareDir,
+			script_path,
 			sample,
-			pipeline_used,
 			args.sequence_directory,
 			args.reference_directory,
 			args.force,
@@ -99,64 +107,69 @@ def run_FluPipeline(args):
 			args.strain_sample_depth
 			])
 
-	# log inputs
-	run_logger.logger.info('\ninputs:') #contains all path and paramater inputs
-	[run_logger.logger.info('{}: {}'.format(k, v)) for k,v in {
-	'cleanup_files':args.cleanup, 'force_overwrite':args.force,'force_base_directory':args.force_base_directory,
-	'args.base_directory':args.base_directory,'Rscript':Rscript,'softwareDir':softwareDir,'pipeline_used':pipeline_used,
-	'args.sequence_directory':args.sequence_directory,'args.reference_directory':args.reference_directory,'force_overwrite':args.force,'BWA_path':BWA_path,'samtoolsbin_path':samtoolsbin_path
-	}.items()]
-
-	run_logger.logger.info('\nreference strains:')
+	run_logger.logger.info('total samples: {}\n'.format(len(sample_submission))) # total samples ran
+	run_logger.logger.info('Processing samples...\n')	
 
 	if args.use_fasta == True:
-		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.fasta'))]
+		run_logger.logger.info('Using fasta files for reference\n')
 	else:
-		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.gb'))]
-
-	run_logger.logger.info('\nsamples:') # contains sample name, fastq R1 file, fastq R2 file
-	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
-		sample = SequencingSample()
-		sample.get_DataFromReadPairs(read1_filename=s)
-		run_logger.logger.info([sample.samplename,'  ',sample.read1_filename,'  ',sample.read2_filename])		
-
-	run_logger.logger.info('\ntotal samples: {}'.format(len(sample_submission))) # total samples ran
-	run_logger.logger.info('\nProcessing samples...')
-
-	## start data processing-----------------------------
-
-	if args.use_fasta == True:
-		run_logger.logger.info('\nUsing fasta files for reference')
-	else:
-		run_logger.logger.info('\nUsing gbk files for reference')
+		run_logger.logger.info('Using gbk files for reference\n')
 		# convert genbank files to uniformally-formatted fasta. see convert_GBKTOFasta for details.
 		gbk_reference_files = glob.glob(pjoin(args.reference_directory,'*.gb'))
 		[convert_GBKToFasta(filename=f.replace('.gb','')) for f in gbk_reference_files]
 
 
-	## run listed samples through specified worflow
+	## run listed samples through flu_Pipeline function
 	with Pool(processes=args.threads) as p:
 		p.starmap(flu_Pipeline, sample_submission)
 
-	run_logger.logger.info('\nFinished processing samples...')
-	run_logger.logger.info('\nMaking run report...')
+	run_logger.logger.info('Finished processing samples...\n')
+	run_logger.logger.info('Making run report...\n')
 	## make run report
 	call_Command(cmd=
 		[
 		'{}'.format(Rscript),
-		 '{}/report_runner.R'.format(softwareDir),
-		 '--softwareDir', '{}'.format(softwareDir),
+		 '{}/report_runner.R'.format(script_path),
+		 '--softwareDir', '{}'.format(script_path),
 		 '--report_type', '{}'.format('run'),
 		 '--baseDir', '{}'.format(args.base_directory)
 		 ], logger_=run_logger)
 
-	run_logger.logger.info('\nFinished making run report')
+	run_logger.logger.info('Finished making run report\n')
 
 	# gather sample reports
 	[shutil.copy(report, pjoin(args.base_directory,'sampleResults')) for report in glob.glob(pjoin(args.base_directory,'sampleOutputs','*','*.pdf'))]
 
-	## end data processing-------------------------------
-	run_logger.logger.info('\nFinished running FluPipeline')
+	## end data processing--------------------------------------------------------------
+
+	## store run metadata
+	# gather run metadata in a list and then store as a pandas df
+	run_metadata = []
+	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
+		sample = SequencingSample()
+		sample.get_DataFromReadPairs(read1_filename=s)
+		with open(pjoin(os.getcwd(),'sampleLogs',sample.samplename+'.txt'),'r') as infile:
+			error_status = ''
+			time_ran = ''
+			for l in infile:
+				if l.find('FluPipeline Error:') > -1:
+					error_status = 'error'
+				if l.find('FluPipeline Time:') > -1:
+					time_ran = l[l.find('me: ')+4:].replace('\n','') #use 'me: ' as an anchor + 4 positions to extract just the time
+			run_metadata.append([datetime.now(),sample.samplename,error_status,time_ran,pjoin(args.sequence_directory,sample.read1_filename),pjoin(args.sequence_directory,sample.read2_filename)])
+	df_meta = pd.DataFrame(run_metadata)
+	df_meta.columns = ['date_time','sample','error_status','time_ran','read1_filepath','read2_filepath']
+
+	# save the run metadata to file. if there already is a file, the metadata get appeneded to it.
+	if os.path.exists('runStats.csv') == True:
+		df_meta1 = pd.read_csv('runStats.csv')
+		df_meta1 = df_meta1.append(df_meta)
+		df_meta1.to_csv('runStats.csv',index=None)
+	else:
+		df_meta.to_csv('runStats.csv',index=None)
+
+	## end run		
+	run_logger.logger.info('Finished running FluPipeline\n')
 
 
 
@@ -198,7 +211,7 @@ def main(args=None):
 		create_TestData(testDir=testDir, referenceStrainsDir=args.reference_directory)
 		run_FluPipeline(args=args)
 
-	##---Run pipeline in its entirety #---	
+	##---Run FluPipleine #---	
 	else:
 		run_FluPipeline(args=args)
 
