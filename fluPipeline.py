@@ -168,7 +168,8 @@ def run_FluPipeline(args):
 	else:
 		df_meta.to_csv('runStats.csv',index=None)
 
-	## end run		
+	## end run
+	run_logger.logger.info('Run ouputs stored in {}\n'.format(args.base_directory))	
 	run_logger.logger.info('Finished running FluPipeline\n')
 
 
@@ -182,9 +183,9 @@ def main(args=None):
 		args = sys.argv[1:]
 
 	# create parser
-	# parser = argparse.ArgumentParser(prog='fluPipeline')
 	parser = argparse.ArgumentParser()
 
+	# add arguments to parser
 	parser.add_argument('--base_directory',type=str ,default=None, help='directory that run samples will be saved in')
 	parser.add_argument('--reference_directory',type=str ,default=pjoin(script_path,'references'), help='directory containing reference strain files (.gb or .fasta (see --use_fasta flag))')
 	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) ')
@@ -196,6 +197,7 @@ def main(args=None):
 	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. default=2000')
 	parser.add_argument('--use_fasta', action='store_true', default=False, help='Fast format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. default=False')
 
+	# create args opbject with arguments
 	args = parser.parse_args()
 
 	##---Run test #---

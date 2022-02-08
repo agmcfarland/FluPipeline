@@ -186,6 +186,45 @@ def flu_Pipeline(
 		sample_logger.logger.exception('FluPipeline Error: failure at variant calling', exc_info=True)
 		sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
 
+	
+	## ==================================nextclade clade assignment==================================================
+	## ==============================================================================================================
+	try:
+		nextclade_reference = reference_NextCladeLookUp(reference=reference_strain.replace('.fasta',''))
+
+		if nextclade_reference != 'none available':
+			sample_logger.logger.info('Finding clade assignment using nextclade')
+
+			# make new fasta file containing only the HA sequence (segment 4) that is used by nextclade for clade assignment
+			with open('{}_HA.consensus.fasta'.format(sample.samplename),'w') as infile:
+				for record in SeqIO.parse('{}.consensus.fasta'.format(sample.samplename),'fasta'):
+					if record.id.endswith('_4') == True:
+						infile.write('>{}-{}\n'.format(sample.samplename,record.id))
+						infile.write('{}\n'.format(str(record.seq)))
+
+			# copy the reference directory files from the nextclade_references directory and store it in the sample directory			
+			shutil.copytree(src=pjoin(softwareDir,'nextclade_references',nextclade_reference), dst=pjoin(os.getcwd(),nextclade_reference))
+
+			# run nextclade. all ouputs are stored in a folder called 'nextclade_output'
+			call_Command(cmd=
+				[
+				'nextclade', 
+				'--in-order', 
+				'--input-fasta', '{}_HA.consensus.fasta'.format(sample.samplename),
+				'--input-dataset', pjoin(os.getcwd(),nextclade_reference),
+				'--output-tsv', 'nextclade_output/{}_clade_assignment.tsv'.format(sample.samplename), 
+				'--output-tree', 'nextclade_output/{}.auspice.json'.format(sample.samplename),
+				'--output-dir', 'nextclade_output/', 
+				'--output-basename', '{}'.format(sample.samplename)
+				],
+				logger_=sample_logger)
+		else:
+			sample_logger.logger.info('No nextclade reference strain exists for this sample strain')
+
+	except:
+		sample_logger.logger.exception('FluPipeline Error: failure at nextclade clade assignment', exc_info=True)
+		sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
+
 	## ==================================Sample report generation====================================================
 	## ==============================================================================================================
 

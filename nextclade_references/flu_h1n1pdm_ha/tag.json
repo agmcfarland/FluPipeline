@@ -1,0 +1,38 @@
+{
+  "comment": "feat: enables reversion and labeled mutations highlighted",
+  "compatibility": {
+    "nextcladeCli": {
+      "max": null,
+      "min": "1.10.0"
+    },
+    "nextcladeWeb": {
+      "max": null,
+      "min": "1.13.0"
+    }
+  },
+  "defaultGene": "HA1",
+  "defaultRef": "CY121680",
+  "enabled": true,
+  "files": {
+    "geneMap": "genemap.gff",
+    "primers": "primers.csv",
+    "qc": "qc.json",
+    "reference": "reference.fasta",
+    "sequences": "sequences.fasta",
+    "tree": "tree.json",
+    "virusPropertiesJson": "virus_properties.json"
+  },
+  "geneOrderPreference": [
+    "HA1",
+    "HA2"
+  ],
+  "metadata": {},
+  "name": "flu_h1n1pdm_ha",
+  "nameFriendly": "Influenza A H1N1pdm HA",
+  "reference": {
+    "accession": "CY121680",
+    "source": "genbank",
+    "strainName": "A/California/07/2009"
+  },
+  "tag": "2022-01-18T12:00:00Z"
+}

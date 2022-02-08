@@ -218,6 +218,14 @@ conda install -c anaconda ipython
 
 #'y'
 
+conda install -c bioconda nextclade
+
+#'y'
+
+conda install -c conda-forge pandoc
+
+#'y'
+
 ## enter R 
 
 R
@@ -257,4 +265,9 @@ biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
 
 q(save="no")
 
+```
+
+Saving conda environment in yml
+```
+conda env export --name FluPipeline_env > FluPipeline_env.yml
 ```

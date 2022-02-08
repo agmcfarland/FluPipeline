@@ -36,7 +36,7 @@ def create_SyntheticReads(filename, logger_, shell_=False):
 	# 	'q=40',
 	# 	'superflat=t',
 	# 	'overwrite=t'])
-	# # SNPs
+	# # SNPsµ
 	call_Command(
 		[
 		'randomreads.sh',
@@ -108,7 +108,7 @@ def create_TestData(testDir, referenceStrainsDir):
 	gbk_files = glob.glob('*.gb')
 	gbk_files = [i.replace('.gb','') for i in gbk_files]
 
-	run_logger.logger.info('Making test data...')
+	run_logger.logger.info('Making test data...\n')
 	# create fasta and synthetic read set
 	for strain in gbk_files:
 		convert_GBKToFasta(filename=strain)
@@ -120,9 +120,18 @@ def create_TestData(testDir, referenceStrainsDir):
 	print(len(gbk_files) == len(glob.glob('*snpindel*'))/2)
 
 	# gzip fastq files
+	run_logger.logger.info('Compressing in silico fastq files...\n')
 	trimmed_fastq_list = glob.glob('*.fastq')
 	[subprocess.run(['gzip', trimmed_fastq]) for trimmed_fastq in trimmed_fastq_list] 
-	run_logger.logger.info('Finished test data')
+	run_logger.logger.info('Finished test data\n')
+
+
+def compare_TestResults(): 
+	'''
+	Compares the results of the test routine with those produced by the development version of FluPipeline
+	'''
+	pass
+
 
 ## script end
 if __name__=='__main__':

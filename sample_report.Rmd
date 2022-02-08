@@ -43,6 +43,7 @@ library(dplyr)
 library(tidyverse)
 library(scales)
 
+#https://www.dataquest.io/blog/r-markdown-tips-tricks-and-shortcuts/#:~:text=To%20break%20a%20line%20in,spaces%20and%20then%20hit%20return%20.
 
 sampleDir <- params$sampleDir
 samplename <- params$samplename
@@ -151,12 +152,27 @@ df_pilestats <- df_pile%>%
   dplyr::arrange(segment)%>%
   dplyr::select(-segment)
 
+## get tsv
+if ( file.exists(paste0(sampleDir,'/','nextclade_output','/',samplename,'_clade_assignment.tsv')) ){
+  df_nc <- read.csv(paste0(sampleDir,'/','nextclade_output','/',samplename,'_clade_assignment.tsv'), sep='\t')%>%
+    select(1:13)
+}else{
+  df_nc <- data.frame('No nextclade assignment available'=NA)
+}
+
+
 
 ```
 
 ```{r, echo=FALSE, results='asis'}
 # Prints the reference genome that is used 
-cat(paste('**Reference Genome: **',basename(opt$refGenomeFasta)))
+cat(paste('**Reference Genome: **',basename(opt$refGenomeFasta),'  \n'))
+
+if ( ncol(df_nc) == 13 ){
+  cat(paste('**Clade assignment: **', df_nc$clade))
+} else {
+  cat(paste('**Clade assignment: **', 'No nextclade assignment available'))
+}
 
 ```
 
@@ -185,7 +201,7 @@ kable(df_allvar, 'latex', booktabs = T, linesep = '', align = 'c') %>%
 ```
 
 \small
-Table 3: Counts of major variants per segment (>=50% of reads contain variant).
+Table 4: Counts of major variants per segment (>=50% of reads contain variant).
 \normalsize
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 
@@ -291,10 +307,32 @@ ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
 
 
 \newpage
+# Clade assignment and HA sequence stats
+\small
+Table 4: A. Clade assignment given to the strain using Nextclade. Highlighting the quality (qc) scores and qualitative assignment. B. Number of SNPs/indels. C. Amino acid level effects of SNPs/indels.
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+
+kable(df_nc%>%
+        select(1:4)
+        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5,latex_options="hold_position")
+
+kable(df_nc%>%
+        select(5:8)
+        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5,latex_options="hold_position")
+
+kable(df_nc%>%
+        select(9:11)
+        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5,latex_options="hold_position")
+```
+
+\newpage
 # Reference strain selection
 \small
-Table 4: Summary of read coverage and depth for reference strain alignment using a randomized subset of reads.
+Table 5: Summary of read coverage and depth for reference strain alignment using a randomized subset of reads.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 
@@ -303,7 +341,7 @@ kable(df_ref, 'latex', booktabs = T, linesep = '', align = 'c') %>%
 
 ```
 \small
-Table 5: Per-segment read coverage for reference strain alignment using a randomized subset of reads.
+Table 6: Per-segment read coverage for reference strain alignment using a randomized subset of reads.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 
@@ -315,7 +353,7 @@ kable(df_refstrains%>%
 
 ```
 
-Table 6: Per-segment read depth for reference strain alignment using a randomized subset of reads.
+Table 7: Per-segment read depth for reference strain alignment using a randomized subset of reads.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
 

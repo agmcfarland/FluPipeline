@@ -243,6 +243,22 @@ def cleanup_CalculateReferenceCoverage(samplename):
 		os.remove(i)
 
 
+def reference_NextCladeLookUp(reference):
+	'''
+	Returns the the nextclade folder name containing all necessary comparison data to run nextclade
+	'''
+	reference_dict = {
+	'IBV_Victoria_ref':'flu_vic_ha',
+	'IBV_Yamagata_ref':'flu_yam_ha',
+	'H1N1pdm_ref':'flu_h1n1pdm_ha',
+	'H3N2_ref':'flu_h3n2_ha',
+	'H6N2_Massachusetts':'none available',
+	'H1N1_A_Brisbane_59_2007':'none available'
+	}
+	return(reference_dict[reference])
+
+
+
 def flag_PotentialReassortment():
 	'''
 	'''
