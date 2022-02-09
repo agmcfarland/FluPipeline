@@ -42,6 +42,7 @@ def run_FluPipeline(args):
 		except:
 			pass
 
+
 	## make inputs for assemble.R
 	# assigning softwareDir as a copy of script_path for logical consistency with assemble.R inputs.
 	Rscript = 'Rscript'
@@ -49,6 +50,7 @@ def run_FluPipeline(args):
 	BWA_path = subprocess.Popen(['which','bwa'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n','')
 	samtoolsbin_path = os.path.dirname(subprocess.Popen(['which','samtools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))
 	bcftoolsbin_path = os.path.dirname(subprocess.Popen(['which','bcftools'],stdout=subprocess.PIPE,stderr=subprocess.STDOUT).communicate()[0].decode('ascii').replace('\n',''))
+
 
 	## set up main directories
 	os.makedirs(args.base_directory, exist_ok=True)
@@ -119,31 +121,19 @@ def run_FluPipeline(args):
 		[convert_GBKToFasta(filename=f.replace('.gb','')) for f in gbk_reference_files]
 
 
+	run_logger.logger.info('Processing samples...\n')
 	## run listed samples through flu_Pipeline function
 	with Pool(processes=args.threads) as p:
 		p.starmap(flu_Pipeline, sample_submission)
 
 	run_logger.logger.info('Finished processing samples...\n')
-	run_logger.logger.info('Making run report...\n')
-	## make run report
-	call_Command(cmd=
-		[
-		'{}'.format(Rscript),
-		 '{}/report_runner.R'.format(script_path),
-		 '--softwareDir', '{}'.format(script_path),
-		 '--report_type', '{}'.format('run'),
-		 '--baseDir', '{}'.format(args.base_directory)
-		 ], logger_=run_logger)
-
-	run_logger.logger.info('Finished making run report\n')
-
-	# gather sample reports
-	[shutil.copy(report, pjoin(args.base_directory,'sampleResults')) for report in glob.glob(pjoin(args.base_directory,'sampleOutputs','*','*.pdf'))]
 
 	## end data processing--------------------------------------------------------------
 
+
 	## store run metadata
-	# gather run metadata in a list and then store as a pandas df
+	run_logger.logger.info('Storing run statistics in runStats.csv\n')
+	# gather run metadata from logfile in a list and then store as a pandas df
 	run_metadata = []
 	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
 		sample = SequencingSample()
@@ -167,6 +157,24 @@ def run_FluPipeline(args):
 		df_meta1.to_csv('runStats.csv',index=None)
 	else:
 		df_meta.to_csv('runStats.csv',index=None)
+
+
+	## make run report
+	run_logger.logger.info('Making run summary...\n')
+	call_Command(cmd=
+		[
+		'{}'.format(Rscript),
+		 '{}/report_runner.R'.format(script_path),
+		 '--softwareDir', '{}'.format(script_path),
+		 '--report_type', '{}'.format('run'),
+		 '--baseDir', '{}'.format(args.base_directory)
+		 ], logger_=run_logger)
+
+	run_logger.logger.info('Finished making run summary\n')
+
+	# copy sample reports pdfs to sampleResults directory
+	[shutil.copy(report, pjoin(args.base_directory,'sampleResults')) for report in glob.glob(pjoin(args.base_directory,'sampleOutputs','*','*.pdf'))]
+
 
 	## end run
 	run_logger.logger.info('Run ouputs stored in {}\n'.format(args.base_directory))	
