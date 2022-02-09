@@ -207,6 +207,7 @@ system(paste0(opt$samtoolsBin, '/samtools view -q ', opt$minBWAmappingScore, ' -
 
 # Retrieve a list of aligned reads.
 alignedReadsIDs <- system(paste0(opt$samtoolsBin, '/samtools view ', t1, '_genome.filt.qual.bam | cut  -f 1 | uniq'), intern = TRUE)
+opt$alignedReadIDs <- alignedReadsIDs
 
 if(length(alignedReadsIDs) == 0){
   opt$errorCode <- 1

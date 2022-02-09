@@ -14,6 +14,7 @@ from Bio.Seq import Seq
 from Bio import SeqIO, SeqFeature
 import argparse
 import logging
+import json
 from .processing_classes import SequencingSample, RunLogger
 from .processing_functions import *
 
@@ -105,7 +106,7 @@ def flu_Pipeline(
 
 
 		# quality, adaptor trimming with fastp
-		sample_logger.logger.info('Step 1: read trimming and quality\n')
+		sample_logger.logger.info('Step 1: read trimming and quality scoring\n')
 		call_Command(cmd=
 			[
 			'fastp', 
@@ -119,6 +120,19 @@ def flu_Pipeline(
 			#'--disable_adapter_trimming' # adaptor trimming when adaptors are already trimmed can lead to unwanted errors
 			],
 			logger_=sample_logger)
+
+		# convert fastp json into table
+		with open('fastp_stats_{}'.format(sample.samplename)) as infile:
+			readstats = json.load(infile)
+		pd.DataFrame(
+			{
+			'sample':[sample.samplename],
+			'total_reads_before':[readstats['summary']['before_filtering']['total_reads']],
+			'total_reads_after':[readstats['summary']['after_filtering']['total_reads']],
+			'passed_filter_reads':[readstats['filtering_result']['passed_filter_reads']],
+			'low_quality_reads':[readstats['filtering_result']['low_quality_reads']],
+			'too_many_N_reads':[readstats['filtering_result']['too_many_N_reads']]
+			}).to_csv('fastp_stats_{}.csv'.format(sample.samplename), index=None)
 
 
 		# randomly select a subset of reads with reformat.sh
