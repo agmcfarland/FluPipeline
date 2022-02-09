@@ -245,7 +245,9 @@ def cleanup_CalculateReferenceCoverage(samplename):
 
 def reference_NextCladeLookUp(reference):
 	'''
-	Returns the the nextclade folder name containing all necessary comparison data to run nextclade
+	Returns the the nextclade folder name containing all necessary comparison data to run nextclade.
+	If the reference is not available in the dictionary will return none available. this is useful when user is 
+	supplying their own references.
 	'''
 	reference_dict = {
 	'IBV_Victoria_ref':'flu_vic_ha',
@@ -255,9 +257,13 @@ def reference_NextCladeLookUp(reference):
 	'H6N2_Massachusetts':'none available',
 	'H1N1_A_Brisbane_59_2007':'none available'
 	}
-	return(reference_dict[reference])
 
+	try:
+		refname = reference_dict[reference]
+	except:
+		return('none available')
 
+	return(refname)
 
 def flag_PotentialReassortment():
 	'''

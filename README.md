@@ -3,7 +3,7 @@
 `FluPipeline` is a command line program that does phylogenetic placement, SNP identification, and consenseus sequence generation. It takes as input a folder of paired-end read files. It ouputs a folder containing detailed data and visualizations for each sample read pair.
 
 
-## Installation instructions
+## Installation
 
 Download the FluPipeline repository. The folder will be named `FluPipeline-main`.
 
@@ -67,7 +67,6 @@ library(Rcpp)
 
 
 q(save="no")
-
 ```
 
 
@@ -80,7 +79,7 @@ python fluPipeline.py -h
 If you got a help message, proceed to run the test below.
 
 
-## Test
+## Tests
 
 ```
 cd /path/to/FluPipeline-main
@@ -101,21 +100,34 @@ python FluPipeline.py \
 --force_base_directory \
 --threads 6 \
 --cleanup 
+```
 
+## Usage examples
 
-# use a custom reference directory that uses fasta instead of gb
+Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to a new folder (--base_directory). Removes the output folder if it already exists (--force, --force_base_directory). Uses 6 threads (--threads). Removes intermediate files that are not used in the final output (--cleanup)
+
+```
 python FluPipeline.py \
---base_directory /change/this/path \
---sequence_directory /change/this/path \
+--base_directory /path/to/output/folder \
+--sequence_directory /path/to/sequence/folder \
+--force \
+--force_base_directory \
+--threads 6 \
+--cleanup 
+```
+
+Use a custom reference directory that uses fasta instead of gb. Nextclade will not work if this is done.
+
+```
+python FluPipeline.py \
+--base_directory /path/to/output/folder \
+--sequence_directory /path/to/sequence/folder \
 --force \
 --force_base_directory \
 --threads 6 \
 --cleanup \
 --use_fasta \
---reference_directory /change/this/path
-
-
-
+--reference_directory /path/to/custom/references
 ```
 
 ## Output files
@@ -133,8 +145,7 @@ Each run will produce a **run_summary.pdf**  report summarizing read coverage/de
 
 Each run also will ouput a **runStats.csv** file.
 
-
-## Usage
+## Usage Paramters
 
 ```
 usage: FluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
