@@ -91,10 +91,12 @@ def flu_Pipeline(
 	os.chdir(sample.dirpath)
 
 	start_run_timer = datetime.now()
+	# record bulk ouputs to sample_logger
 	sample_logger = RunLogger(directory=pjoin(baseDirectory,'sampleLogs'),filename=sample.samplename)
 	sample_logger.initialize_FileHandler()
-	sample_logger.logger.info('Starting run')
-	sample_logger.logger.info('sample: {}'.format(sample.samplename))
+	sample_logger.logger.info('Processing sample: {}'.format(sample.samplename))
+	# use print so that the program talks more
+	print('Processing sample: {}'.format(sample.samplename))
 
 	## ==================================Find and assign reference strain============================================
 	## ==============================================================================================================
@@ -266,6 +268,9 @@ def flu_Pipeline(
 		sample.cleanup_OutputFiles(clean_level='intermediate')
 		sample_logger.logger.info('Removed intermediate files')
 
-	sample_logger.logger.info('Finished processing sample')
+	sample_logger.logger.info('Finished processing sample {}'.format(sample.samplename))
 	sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
+	#use print so the program talks more
+	print('Finished processing sample {}'.format(sample.samplename))
+	print('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
 

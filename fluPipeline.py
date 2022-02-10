@@ -109,8 +109,11 @@ def run_FluPipeline(args):
 			args.strain_sample_depth
 			])
 
-	run_logger.logger.info('total samples: {}\n'.format(len(sample_submission))) # total samples ran
-	run_logger.logger.info('Processing samples...\n')	
+	run_logger.logger.info('Total samples to process: {}\n'.format(len(sample_submission))) # total samples ran
+
+	if len(sample_submission) == 0:
+		run_logger.logger.exception('No samples available to process. Check directory for correctly formatted fastq file names.\n')
+		sys.exit('Stopped FluPipeline')
 
 	if args.use_fasta == True:
 		run_logger.logger.info('Using fasta files for reference\n')
@@ -126,7 +129,7 @@ def run_FluPipeline(args):
 	with Pool(processes=args.threads) as p:
 		p.starmap(flu_Pipeline, sample_submission)
 
-	run_logger.logger.info('Finished processing samples...\n')
+	run_logger.logger.info('Finished processing samples\n')
 
 	## end data processing--------------------------------------------------------------
 
