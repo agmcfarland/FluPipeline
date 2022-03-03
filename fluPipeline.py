@@ -171,7 +171,14 @@ def run_FluPipeline(args):
 	## close connection to sql database
 	sample_tracker.conn.close()
 
+<<<<<<< Updated upstream
 	run_logger.add_Message('Finished run')
+=======
+	## end run
+	run_logger.logger.info('Finished running FluPipeline\n')
+	run_logger.logger.info('Toal Time: {}\n'.format(datetime.now()-start_run_timer))
+	run_logger.logger.info('Run ouputs stored in {}\n'.format(args.base_directory))	
+>>>>>>> Stashed changes
 
 
 
