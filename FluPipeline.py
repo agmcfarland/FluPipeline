@@ -225,7 +225,6 @@ def main(args=None):
 		args.force == True
 		args.force_base_directory = False
 		args.cleanup = False
-		# args.threads = 6
 		create_TestData(testDir=testDir, referenceStrainsDir=args.reference_directory)
 		run_FluPipeline(args=args)
 

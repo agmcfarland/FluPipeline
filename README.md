@@ -3,7 +3,7 @@
 `FluPipeline` is a command line program that does phylogenetic placement, SNP identification, and consenseus sequence generation. It takes as input a folder of paired-end read files. It ouputs a folder containing detailed data and visualizations for each sample read pair.
 
 
-## Installation
+## Installation instructions
 
 Download the FluPipeline repository. The folder will be named `FluPipeline-main`.
 
