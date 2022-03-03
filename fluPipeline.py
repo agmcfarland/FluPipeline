@@ -30,6 +30,7 @@ def run_FluPipeline(args):
 	'''
 	Runs through all steps of FluPipeline
 	'''
+	start_run_timer = datetime.now()
 	## prepare working directory
 	# prevent the user from using the default reference directory in combination with the use_fasta
 	if args.sequence_directory == pjoin(script_path,'references'):
@@ -66,20 +67,26 @@ def run_FluPipeline(args):
 	run_logger.logger.info('Starting FluPipeline...\n')
 
 	## log argument inputs, reference strains, and samples	
-	run_logger.logger.info('inputs:\n') #contains all path and paramater inputs
-	run_logger.logger.info(args)
+	arguments_list = vars(args)
+	for k,v in arguments_list.items():
+		run_logger.logger.info('{}: {}\n'.format(k,v))
 
-	run_logger.logger.info('reference strains:\n')
+	# run_logger.logger.info('inputs:\n') #contains all path and paramater inputs
+	# run_logger.logger.info(args)
+
+	run_logger.logger.info('reference strains:')
 	if args.use_fasta == True:
 		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.fasta'))]
 	else:
 		[run_logger.logger.info(os.path.basename(g)) for g in glob.glob(pjoin(args.reference_directory,'*.gb'))]
+	run_logger.logger.info('\n')
 
-	run_logger.logger.info('samples:\n') # contains sample name, fastq R1 file, fastq R2 file
+	run_logger.logger.info('samples:') # contains sample name, fastq R1 file, fastq R2 file
 	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
 		sample = SequencingSample()
 		sample.get_DataFromReadPairs(read1_filename=s)
-		run_logger.logger.info(sample.samplename)		
+		run_logger.logger.info(sample.samplename)
+	run_logger.logger.info('\n')		
 
 
 	## start data processing------------------------------------------------------------
@@ -180,8 +187,9 @@ def run_FluPipeline(args):
 
 
 	## end run
-	run_logger.logger.info('Run ouputs stored in {}\n'.format(args.base_directory))	
 	run_logger.logger.info('Finished running FluPipeline\n')
+	sample_logger.logger.info('Toal Time: {}'.format(datetime.now()-start_run_timer))
+	run_logger.logger.info('Run ouputs stored in {}\n'.format(args.base_directory))	
 
 
 
