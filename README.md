@@ -72,7 +72,7 @@ q(save="no")
 Afterwards change directory to the where the FluPipeline pipeline is located and type the following in the terminal:
 
 ```
-python fluPipeline.py -h
+python FluPipeline.py -h
 ```
 
 If you got a help message, proceed to run the test below.
