@@ -1,9 +1,9 @@
 # FluPipeline
 
-This pipeline takes a folder of illumina short read pairs in fastq.gz format and detects SNPs. 
+`FluPipeline` is a command line program that does phylogenetic placement, SNP identification, and consenseus sequence generation. It takes as input a folder of paired-end read files. It ouputs a folder containing detailed data and visualizations for each sample read pair.
 
 
-## Installation instructions
+## Installation
 
 Download the FluPipeline repository. The folder will be named `FluPipeline-main`.
 
@@ -67,7 +67,6 @@ library(Rcpp)
 
 
 q(save="no")
-
 ```
 
 
@@ -80,18 +79,55 @@ python fluPipeline.py -h
 If you got a help message, proceed to run the test below.
 
 
-## Test
+## Tests
 
 ```
 cd /path/to/FluPipeline-main
 
-python fluPipeline.py \
---base_directory /path/to/output \
+conda activate FluPipeline_env
+
+
+# this runs on test data using synthetic reads
+python FluPipeline.py \
+--runtest --threads 6 --strain_sample_depth 3000
+
+
+# this runs on a small test data set of real reads
+python FluPipeline.py \
+--base_directory /change/this \
 --sequence_directory /home/agmcfarland/flu_project/shared_data/test_data_6_samples \
 --force \
 --force_base_directory \
---threads 5
+--threads 6 \
+--cleanup 
+```
 
+## Usage examples
+
+Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to a new folder (--base_directory). Removes the output folder if it already exists (--force, --force_base_directory). Uses 6 threads (--threads). Removes intermediate files that are not used in the final output (--cleanup)
+
+```
+python FluPipeline.py \
+--base_directory /path/to/output/folder \
+--sequence_directory /path/to/sequence/folder \
+--force \
+--force_base_directory \
+--threads 6 \
+--cleanup 
+```
+
+Use a custom reference directory that uses fasta instead of gb. Nextclade will not work if this is done.
+
+```
+python FluPipeline.py \
+--base_directory /path/to/output/folder \
+--sequence_directory /path/to/sequence/folder \
+--force \
+--force_base_directory \
+--threads 6 \
+--cleanup \
+--use_fasta \
+--reference_directory /path/to/custom/references
 ```
 
 ## Output files
@@ -109,29 +145,41 @@ Each run will produce a **run_summary.pdf**  report summarizing read coverage/de
 
 Each run also will ouput a **runStats.csv** file.
 
-
-## Usage
+## Usage Paramters
 
 ```
-usage: fluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
-					  [--reference_directory REFERENCE_DIRECTORY]
-					  [--sequence_directory SEQUENCE_DIRECTORY] [--force]
-					  [--force_base_directory] [--cleanup] [--threads THREADS]
+usage: FluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
+                      [--reference_directory REFERENCE_DIRECTORY]
+                      [--sequence_directory SEQUENCE_DIRECTORY] [--force]
+                      [--force_base_directory] [--cleanup] [--threads THREADS]
+                      [--runtest] [--strain_sample_depth STRAIN_SAMPLE_DEPTH]
+                      [--use_fasta]
 
 optional arguments:
   -h, --help            show this help message and exit
   --base_directory BASE_DIRECTORY
-						directory that run samples will be saved in
+                        directory that run samples will be saved in
   --reference_directory REFERENCE_DIRECTORY
-						directory containing reference strain files (.gb
-						format)
+                        directory containing reference strain files (.gb or
+                        .fasta (see --use_fasta flag))
   --sequence_directory SEQUENCE_DIRECTORY
-						directory containing fastq sequence files (.gz format)
-  --force               overwrite existing files
+                        directory containing fastq sequence files (.gz format)
+  --force               overwrite existing files in assemble.R script
   --force_base_directory
-						overwrite existing directory
+                        overwrite existing directory
   --cleanup             remove intermediate files
   --threads THREADS     number of processors to use for multiprocessing
+  --runtest             run an in silico test to make sure FluPipeline is
+                        working correctly
+  --strain_sample_depth STRAIN_SAMPLE_DEPTH
+                        number of random reads to use to determine strain
+                        assignment. default=2000
+  --use_fasta           fasta file(s) containing all eight segments. All
+                        segments must have a single name(only letters,numbers, and underscores).
+                        At the end of
+                        the name there should be an underscore followed by the
+                        segment number. E3xample: an_example_name_1.
+                        default=False
   ```
 
 
@@ -181,6 +229,14 @@ conda install -c anaconda ipython
 
 #'y'
 
+conda install -c bioconda nextclade
+
+#'y'
+
+conda install -c conda-forge pandoc
+
+#'y'
+
 ## enter R 
 
 R
@@ -220,4 +276,9 @@ biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
 
 q(save="no")
 
+```
+
+Saving conda environment in yml
+```
+conda env export --name FluPipeline_env > FluPipeline_env.yml
 ```

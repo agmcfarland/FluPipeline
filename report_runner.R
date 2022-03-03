@@ -14,7 +14,7 @@ opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
 #troubleshooting inputs sample start
-#opt$softwareDir <- '/home/agmcfarland/flu_project/flu_pipeline'
+#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
 #opt$report_type <- 'sample'
 #opt$samplename <- 'IBV_Yamagata_Ref_snpindel'
 #opt$sampleDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Yamagata_Ref_snpindel'
@@ -30,7 +30,7 @@ opt = parse_args(opt_parser)
 
 if (opt$report_type=='sample'){
   rmarkdown::render(file.path(opt$softwareDir, 'sample_report.Rmd'),
-                    output_file = file.path(opt$sampleDir, paste0(opt$samplename, '.pdf')),
+                    output_file = file.path(opt$sampleDir, paste0(opt$samplename, '.pdf')),#clean = TRUE,
                     params = list(
                       date  = format(Sys.time(), "%Y-%m-%d"),
                       title = paste0('Influenza ', opt$samplename),
@@ -39,7 +39,7 @@ if (opt$report_type=='sample'){
   
   } else if (opt$report_type=='run') {
       rmarkdown::render(file.path(opt$softwareDir, 'run_report.Rmd'),
-                    output_file = file.path(opt$baseDir, 'run_summary.pdf'),
+                    output_file = file.path(opt$baseDir, 'run_summary.pdf'),#clean = TRUE,
                     params = list(
                       date  = format(Sys.time(), "%Y-%m-%d"),
                       title = paste0('Influenza Run Summary'),

@@ -34,23 +34,62 @@ output:
 
 \vspace{0.5cm}
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=4}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(knitr)
 library(kableExtra)
 library(stringr)
 library(dplyr)
 library(tidyverse)
+library(scales)
 
+#https://www.dataquest.io/blog/r-markdown-tips-tricks-and-shortcuts/#:~:text=To%20break%20a%20line%20in,spaces%20and%20then%20hit%20return%20.
 
 sampleDir <- params$sampleDir
 samplename <- params$samplename
+
 ##test inputs start
-#sampleDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Victoria_Ref_perfect'
-#samplename <- 'IBV_Victoria_Ref_perfect'
+#sampleDir <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp'
+#samplename <- 'H1N1_A_Brisbane_59_2007_snp'
+#library(optparse)
+#setwd('/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp')
+
+#sampleDir <- '/home/agmcfarland/flu_project/shared_data/test7/sampleOutputs/HUP_19_007_S3'
+#samplename <- 'HUP_19_007_S3'
+#library(optparse)
+#setwd(sampleDir)
+
+#sampleDir <- '/home/ashley/PipeLine_Output/121021-NGS_new/Set_1/sampleOutputs/water2_S25'
+#samplename <- 'water2_S25'
+#library(optparse)
+#setwd(sampleDir)
+
+
+#sampleDir <- '/home/ashley/PipeLine_Output/121021-NGS_new/Set_1/sampleOutputs/water1_S24'
+#samplename <- 'water1_S24'
+#library(optparse)
+#setwd(sampleDir)
 ##test inputs end
 
+eval_assembleRan <- TRUE
+# load in Rdata object
+# test 
+if (file.exists(paste0(sampleDir,'/',samplename,'.Rdata'))){
+  load(paste0(sampleDir,'/',samplename,'.Rdata'))
+  if (opt$errorCode > 0){
+    eval_assembleRan <- FALSE
+  }
+} else {
+  print('no Rdata')
+  eval_assembleRan <- FALSE
+}
+```
 
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, eval=eval_assembleRan}
+
+# helper functions
 get_VarCounts <- function(tablename){
   # get counts of variants per segment for a variantTable
   # return a datafarame of segment id, segment, count, and arrange by segment number.
@@ -67,12 +106,6 @@ get_VarCounts <- function(tablename){
 }
 
 # get variant counts
-
-opt$pileupData <- tryCatch({
-  read.table(paste0(t1, '.pileup'), sep = '\t', header = FALSE, quote = '')[,1:5]
-}, error = function(e) {
-  return(data.frame())
-})
 
 df_allvar <- tryCatch(
     expr = {
@@ -93,16 +126,272 @@ df_majorvar <- tryCatch(
 )
 
 # get coverage calculations
-load(paste0(sampleDir,'/',samplename,'.Rdata'))
 df_cov <- merge(opt$refGenomePercentCovered,opt$refGenomePercentCovered_5reads,by='V1',all.x=TRUE,all.y=TRUE)
 df_cov <- df_cov%>%
   dplyr::mutate(segment=stringr::str_sub(V1,start=-1))%>%
   dplyr::rename(segment_id=V1)%>%
   dplyr::select(segment_id,segment,perc_gt_1,perc_gt_5)%>%
+  dplyr::mutate(perc_gt_1 = round(perc_gt_1,2), perc_gt_5 = round(perc_gt_5,2))%>%
   dplyr::arrange(segment)
 
 # get reference genome
 reference_genome <- opt$refGenomeFasta
+
+## get per-base depth values from pileup output file
+df_pile <- tryCatch({
+  opt$pileupData
+}, error = function(e) {
+  return(data.frame())
+})
+
+df_pile <- df_pile%>%select(1,2,3,4,5)%>%
+  dplyr::mutate(segment=stringr::str_sub(V1,start=-1))
+
+# make a per segment depth summary table. To merge with df_cov
+df_pilestats <- df_pile%>%
+  dplyr::group_by(segment)%>%
+  dplyr::mutate(mean_depth = round(mean(V4),2),
+         median_depth = round(median(V4),2),
+         min_depth = min(V4),
+         max_depth = max(V4),
+         std_depth = round(sd(V4),2))%>%
+  dplyr::select(segment,V1,mean_depth,median_depth,min_depth,max_depth,std_depth)%>%
+  ungroup()%>%
+  unique()%>%
+  dplyr::arrange(segment)%>%
+  dplyr::select(-segment)
+
+## get nexclade tsv
+if ( file.exists(paste0(sampleDir,'/','nextclade_output','/',samplename,'_clade_assignment.tsv')) ){
+  df_nc <- read.csv(paste0(sampleDir,'/','nextclade_output','/',samplename,'_clade_assignment.tsv'), sep='\t')%>%
+    select(1:13)
+}else{
+  df_nc <- data.frame('No nextclade assignment available'=NA)
+}
+
+```
+
+```{r, echo=FALSE, results='asis'}
+if (eval_assembleRan == FALSE){
+  cat(paste('**No SNP, consensus sequence, or taxonomic data available.**','  \n','**Likely reason: **',basename(opt$errorMessage)))
+}
+```
+
+```{r, echo=FALSE, results='asis',eval=eval_assembleRan}
+cat(paste('**Reference Genome: **',basename(opt$refGenomeFasta),'  \n'))
+
+if ( ncol(df_nc) == 13 ){
+  cat(paste('**Clade assignment: **', df_nc$clade))
+} else {
+  cat(paste('**Clade assignment: **', 'No nextclade assignment available'))
+}
+
+```
+
+# Clade assignment and HA sequence stats
+\small
+Table 1: NextClade results. A. Clade assignment given to the strain using Nextclade. Highlighting the quality (qc) scores and qualitative assignment.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_assembleRan}
+if ( ncol(df_nc)>1 ){
+  kable(df_nc%>%
+          select(1:4)
+          , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+} else {
+  kable(df_nc, 'latex', booktabs = T, linesep = '', align = 'c') %>%
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+}
+```
+
+\small
+B. Number of SNPs/indels.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_assembleRan}
+if ( ncol(df_nc)>1 ){
+  kable(df_nc%>%
+          select(5:8)
+          , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+} else {
+  kable(df_nc, 'latex', booktabs = T, linesep = '', align = 'c') %>%
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+}
+```
+
+\small
+C. Amino acid level effects of SNPs/indels.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_assembleRan}
+if ( ncol(df_nc)>1 ){
+  kable(df_nc%>%
+          select(9:11)
+          , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+} else {
+  kable(df_nc, 'latex', booktabs = T, linesep = '', align = 'c') %>%
+    kable_styling(font_size = 7.5,latex_options="hold_position")
+}
+```
+\newpage
+
+# Read stats
+\small
+Table 2: Read quality stats using fastp and number of paired reads aligned to reference.
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_assembleRan}
+
+## make reads dataframe
+df_reads <- read.csv(paste0(sampleDir,'/','fastp_stats_',samplename,'.csv'))
+
+if (eval_assembleRan==TRUE){
+  df_reads$aligned <- length(opt$alignedReadIDs)
+} else {
+  df_reads$aligned <- NA
+}
+
+kable(df_reads%>%
+        rename_all(~str_replace_all(.,'reads',''))%>%select(-sample)
+        , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5,latex_options="hold_position")
+```
+
+# Coverage and Depth
+\small
+Table 3: Percent of genome covered by 1 or 5 reads and per-base read depth stats per segment.
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_assembleRan}
+
+df_cov1 <- merge(df_cov, df_pilestats, by.x='segment_id',by.y='V1',all.x=TRUE)%>%
+  arrange(segment)
+
+kable(df_cov1, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+```
+\newpage
+# Variants
+\small
+Table 4: Counts of all variants per segment.
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_assembleRan}
+
+kable(df_allvar, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+
+```
+
+\small
+Table 5: Counts of major variants per segment (>=50% of reads contain variant).
+\normalsize
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_assembleRan}
+
+kable(df_majorvar, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
+  kable_styling(font_size = 7.5, latex_options="hold_position")
+
+```
+\newpage
+\small
+Figure 1: Read depth and coverage map.
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=10, fig.align='center',eval=eval_assembleRan}
+
+## Make a combined pileup and variant table
+df_variants <- tryCatch(
+    expr = {
+      read.csv(paste0(sampleDir,'/variantTableMajor.csv'))%>%
+        dplyr::select(CHROM,POS)%>%unique()%>%
+        dplyr::rename('segment_name'='CHROM',
+                  'var_position'='POS')%>%
+        dplyr::mutate(segment_name=as.character(segment_name),
+                      var_position=as.numeric(var_position),
+                      var_position2=var_position)
+    },
+    error = function(e){ 
+      # return a dataframe with dummy data so that plottng won't be affected.
+      return(data.frame('segment_name'=as.character('none'),'var_position'=as.numeric(0), 'var_position2'=as.numeric(0)))
+    }
+)
+
+df_pile1 <- df_pile%>%
+  dplyr::rename('segment_name'=1,'position'=2,'original'=3,'depth'=4,'quality'=5)%>%
+  dplyr::select(-quality,-original)%>%
+  dplyr::mutate(segment_name=as.character(segment_name),
+                position=as.numeric(position),
+                depth=as.numeric(depth),
+                segment=as.numeric(segment))
+
+# merge pileup positions with variant positions
+df_pile1 <- merge(df_pile1, df_variants, by.x=c('segment_name','position'), by.y=c('segment_name','var_position'), all.x=TRUE)
+
+ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
+  facet_wrap(~segment, scales='free_x',ncol=1, strip.position='right')+
+  #geom_area()+
+  geom_bar(stat='identity')+
+  geom_point(aes(x=var_position2, y=3,group=segment), color='yellow',alpha=0.85)+
+  theme_bw()+
+ theme(panel.grid.major = element_blank(),
+       panel.grid.minor = element_blank(),
+       panel.background = element_blank(),
+       panel.spacing = unit(0, 'lines'),
+       strip.text = element_text(size=14, colour='gray50'),
+       strip.text.y = element_text(angle=0),
+       strip.background = element_blank(), # getting rid of the panel to declutter
+       axis.line = element_line(colour = 'black'),
+       axis.text.y = element_text(size=10),
+       axis.text.x = element_text(size=7),
+       legend.position='none',
+       legend.title = element_blank())+
+  scale_x_continuous(labels = function(x)x/1000, # converting bp tick mark number to kilobasepairs
+                     breaks=seq(from=0,to=3000,by=250),
+                     expand=c(0,0))+
+  ylab(label = expression(Read~Coverage))+
+  xlab(label = expression(Genomic~Position~(Kb)))+
+  geom_hline(aes(yintercept=median(df_pile1$depth)), linetype='dashed',colour='lightblue')+
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+              labels = trans_format("log10", math_format(10^.x)))
+
+```
+
+\newpage
+\small
+Figure 2: Read depth and coverage map zoomed at a depth of 100 reads.
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=10, fig.align='center',eval=eval_assembleRan}
+
+ggplot(df_pile1, aes(x=position, y=depth, group=segment_name))+
+  facet_wrap(~segment, scales='free_x',ncol=1, strip.position='right')+
+  geom_bar(stat='identity')+
+  #geom_area()+
+  geom_point(aes(x=var_position2, y=3,group=segment), color='yellow',alpha=0.85)+
+  theme_bw()+
+ theme(panel.grid.major = element_blank(),
+       panel.grid.minor = element_blank(),
+       panel.background = element_blank(),
+       panel.spacing = unit(0, 'lines'),
+       strip.text = element_text(size=14, colour='gray50'),
+       strip.text.y = element_text(angle=0),
+       strip.background = element_blank(), # getting rid of the panel to declutter
+       axis.line = element_line(colour = 'black'),
+       axis.text.y = element_text(size=10),
+       axis.text.x = element_text(size=7),
+       legend.position='none',
+       legend.title = element_blank())+
+  scale_x_continuous(labels = function(x)x/1000, # converting bp tick mark number to kilobasepairs
+                     breaks=seq(from=0,to=3000,by=250),
+                     expand=c(0,0))+
+  ylab(label = expression(Read~Coverage))+
+  xlab(label = expression(Genomic~Position~(Kb)))+
+  geom_hline(aes(yintercept=median(df_pile1$depth)), linetype='dashed',colour='lightblue')+
+  coord_cartesian(ylim=c(0, 100))+
+  scale_y_continuous(breaks=c(0,20,40,60,80,100))
+
+```
+
+
+
+\newpage
+# Reference strain selection
+\small
+Table 6: Summary of read coverage and depth for reference strain alignment using a randomized subset of reads.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=TRUE}
 
 # reference strain coverage summary
 df_ref <- read.csv(paste0(sampleDir,'/','reference_coverage_',samplename,'.csv'))%>%
@@ -111,85 +400,46 @@ df_ref <- read.csv(paste0(sampleDir,'/','reference_coverage_',samplename,'.csv')
          segment_average_read_depth=round(segment_average_read_depth,2),
          reference=base::sub('\\.fasta.*', '', reference)) #capture everything before .fasta
 
-# per-segment coverage for each reference
-df_refstrains <- data.frame('segment'=character(),'average_coverage'=numeric(),'average_depth'=numeric(),'reference'=character())
-for (f in list.files(sampleDir, pattern='_coverage_stats.csv')){
-  df_refstrains <- rbind(df_refstrains,
-                         read.csv(paste(sampleDir,f,sep='/')))
-}
-df_refstrains <- df_refstrains%>%
-  mutate(average_coverage=round(segment_coverage,2),
-         average_depth=round(average_read_depth,2))%>%
-  select(-segment_coverage,-average_read_depth)%>%
-  pivot_wider(names_from=reference, values_from=c(average_coverage,average_depth))
-
-
-```
-
-```{r, echo=FALSE, results='asis'}
-# Prints the reference genome that is used 
-cat(paste('**Reference Genome: **',basename(opt$refGenomeFasta)))
-
-```
-
-# Coverage 
-\small
-Table 1: Percentage of read coverage per segment.
-\normalsize
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
-
-kable(df_cov, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
-  kable_styling(font_size = 7.5, latex_options="hold_position")
-```
-
-# Variants
-\small
-Table 2: Counts of all variants per segment.
-\normalsize
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
-
-kable(df_allvar, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
-  kable_styling(font_size = 7.5, latex_options="hold_position")
-
-```
-
-\small
-Table 3: Counts of major variants per segment (>=50% of reads contain variant).
-\normalsize
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
-
-kable(df_majorvar, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
-  kable_styling(font_size = 7.5, latex_options="hold_position")
-
-```
-\newpage
-
-# Reference strain selection
-\small
-Table 4: Summary of read coverage and depth for reference strain alignment using 2,000 random reads.
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
-
 kable(df_ref, 'latex', booktabs = T, linesep = '', align = 'c') %>% 
   kable_styling(font_size = 7.5,latex_options="hold_position")
 
 ```
 \small
-Table 5: Per-segment read coverage for reference strain alignment using 2,000 random reads.
+Table 7: Per-segment read coverage for reference strain alignment using a randomized subset of reads.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=TRUE}
 
-kable(df_refstrains%>%
+# per-segment coverage for each reference
+df_refstrains <- read.csv(paste0(sampleDir,'/','combined_coverage_stats_',samplename,'.csv'))
+
+if (nrow(df_refstrains)>0){
+  df_refstrains <- df_refstrains%>%
+  mutate(average_coverage=round(segment_coverage,2),
+         average_depth=round(average_read_depth,2))%>%
+  select(-segment_coverage,-average_read_depth)%>%
+  pivot_wider(names_from=reference, values_from=c(average_coverage,average_depth))
+  
+  eval_refstrains <- TRUE
+  
+  kable(df_refstrains%>%
        dplyr:: select(starts_with(c('segment','average_coverage')))%>%
        dplyr::rename_with(~str_remove(., 'average_coverage_'))
         , 'latex', booktabs = T, linesep = '', align = 'c') %>% 
   kable_styling(font_size = 7.5, latex_options="hold_position")
+  
+} else {
+  df_refstrains <- data.frame('No per-segment coverage data available'=NA)
+  eval_refstrains <- FALSE
+
+}
+
+
 
 ```
 
-Table 6: Per-segment read depth for reference strain alignment using 2,000 random reads.
+Table 8: Per-segment read depth for reference strain alignment using a randomized subset of reads.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=eval_refstrains}
 
 kable(df_refstrains%>%
        dplyr:: select(starts_with(c('segment','average_depth')))%>%
@@ -202,7 +452,7 @@ kable(df_refstrains%>%
 
 # Software environment
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2,eval=TRUE}
 kable(opt$softwareVersionTable, 'latex',longtable = T, booktabs = T,  linesep = '', align = 'l') %>% 
   column_spec(1, width = "5cm") %>% 
   kable_styling(latex_options =c("repeat_header"))

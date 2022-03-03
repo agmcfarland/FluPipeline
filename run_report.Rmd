@@ -43,6 +43,7 @@ library(tidyverse)
 baseDir <- params$baseDir
 ##test inputs start
 #baseDir <- '/home/agmcfarland/flu_project/test/test_6_samples'
+#baseDir <- '/home/ashley/PipeLine_Output/121021-NGS_new/Set_1'
 ##test inputs end
 
 ```
@@ -102,9 +103,12 @@ df_covsum <- df_covsum%>%
   dplyr::arrange(segment)%>%
   dplyr::mutate(segment=paste0('seg',segment))%>%
   dplyr::mutate(coverage=round(coverage,2))%>%
-  pivot_wider(names_from=segment, values_from=c(coverage))%>%
+  pivot_wider(names_from=segment, values_from=c(coverage))
+
+df_covsum <- df_covsum%>%
   dplyr::rowwise()%>%
-  dplyr::mutate(average_cov=mean(c(seg1,seg2,seg3,seg4,seg5,seg6,seg7,seg8)))%>%
+  dplyr::mutate(average_cov=mean(colnames(df_covsum)[2:ncol(df_covsum)]))%>%
+  #dplyr::mutate(average_cov=mean(c(seg1,seg2,seg3,seg4,seg5,seg6,seg7,seg8)))%>%
   dplyr::arrange(desc(average_cov))
 
 

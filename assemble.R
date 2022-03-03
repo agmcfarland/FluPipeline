@@ -1,27 +1,10 @@
-#alex start:installing packages
-#library(remotes)
-#install.packages('optparse')
-#install_version('latticeExtra','0.6-28') #2016 version
-#source("http://bioconductor.org/biocLite.R")
-#biocLite()
-#biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
-#biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
-# alex end:installing packages
-
 library(ShortRead)
 library(tidyverse)
 library(optparse)
 library(genbankr)
 library(GenomicRanges)
 
-# planet_paragon processing settings.
-# Conda enviromnent named fgbio with fgbio installed required.
-#planet_paragon_primerTrimmingCoords <- '/home/common/SARS-CoV-2-Philadelphia/data/references/NC_045512.2.primerTrimCoords' #alex comment:code hashed out by alex
-#planet_paragon_fgbioCommand   <- 'java -jar /home/everett/miniconda3/envs/fgbio/share/fgbio/fgbio.jar' #alex comment:code hashed out by alex
-#planet_paragon_refGenomeFasta <- '/home/common/SARS-CoV-2-Philadelphia/data/references/NC_045512.2.fasta' #alex comment:code hashed out by alex
-#planet_paragon_refGenomeBWA   <- '/home/common/SARS-CoV-2-Philadelphia/data/references/NC_045512.2.fasta' #alex comment:code hashed out by alex
-#planet_paragon_minAmpliconLength <- 100 #alex comment:code hashed out by alex
-#planet_paragon_maxAmpliconLength <- 200 #alex comment:code hashed out by alex
+message('start assemble.R')
 
 # All options default to the default process_method.
 option_list = list(
@@ -53,19 +36,44 @@ opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
 #alex start:FOR TESTING MANUALLY assign opt vals
-#opt$softwareDir <- '/home/agmcfarland/flu_project/flu_pipeline'
+#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
 #opt$process_method <- 'bushman_artic_v2'
-#opt$outputFile <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/H1N1pdm_ref_snp/H1N1pdm_ref_snp.Rdata'
-#opt$workDir <- '/home/agmcfarland/flu_project/test/test4/sampleOutputs/H1N1pdm_ref_snp'
-#opt$R1 <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref_snp_R1_001.fastq.gz'
-#opt$R2 <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref_snp_R2_001.fastq.gz'
-#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.fasta'
-#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.fasta' #alex comment:same as bwa.
-#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/test/test_data/H1N1pdm_ref.gb'
-#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
-#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin'
-#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/FluPipeline_env/bin/bwa'
-#opt$samtoolsBin <- '/home/everett/ext/samtools/bin' #compare to
+#opt$outputFile <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp/H1N1_A_Brisbane_59_2007_snp.Rdata'
+#opt$workDir <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp'
+#opt$R1 <- '/home/agmcfarland/flu_project/FluPipeline/run_test/data/H1N1_A_Brisbane_59_2007_snp_R1_001.fastq.gz'
+#opt$R2 <- '/home/agmcfarland/flu_project/FluPipeline/run_test/data/H1N1_A_Brisbane_59_2007_snp_R2_001.fastq.gz'
+#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp/H1N1_A_Brisbane_59_2007.fasta'
+#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp/H1N1_A_Brisbane_59_2007.fasta' #alex comment:same as bwa.
+#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/FluPipeline/run_test/data/H1N1_A_Brisbane_59_2007.gb'
+#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/testenv/bin/bwa'
+
+#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
+#opt$process_method <- 'bushman_artic_v2'
+#opt$outputFile <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5/ashley_5.Rdata'
+#opt$workDir <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5'
+#opt$R1 <- '/home/agmcfarland/flu_project/shared_data/test_data_1_sample2/ashley_5_R1_001.fastq.gz'
+#opt$R2 <- '/home/agmcfarland/flu_project/shared_data/test_data_1_sample2/ashley_5_R2_001.fastq.gz'
+#opt$refGenomeBWA <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5/H1N1pdm_ref.fasta'
+#opt$refGenomeFasta <- '/home/agmcfarland/flu_project/shared_data/test_1_sample2/sampleOutputs/ashley_5/H1N1pdm_ref.fasta' #alex comment:same as bwa.
+#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/FluPipeline/references/H1N1pdm_ref.gb'
+#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/testenv/bin/bwa'
+
+#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
+#opt$process_method <- 'bushman_artic_v2'
+#opt$outputFile <- '/home/agmcfarland/test_flu/output/sampleOutputs/HUP_19_007_S3/HUP_19_007_S3.Rdata'
+#opt$workDir <- '/home/agmcfarland/test_flu/output/sampleOutputs/HUP_19_007_S3'
+#opt$R1 <- '/home/agmcfarland/test_flu/data/HUP_19_007_S3_R1_001.fastq.gz'
+#opt$R2 <- '/home/agmcfarland/test_flu/data/HUP_19_007_S3_R2_001.fastq.gz'
+#opt$refGenomeBWA <- '/home/agmcfarland/test_flu/output/sampleOutputs/HUP_19_007_S3/H1N1pdm_ref.fasta'
+#opt$refGenomeFasta <- '/home/agmcfarland/test_flu/output/sampleOutputs/HUP_19_007_S3/H1N1pdm_ref.fasta' #alex comment:same as bwa.
+#opt$refGenomeGenBank <- '/home/agmcfarland/flu_project/FluPipeline/references/H1N1pdm_ref.gb'
+#opt$bcftoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$samtoolsBin <- '/home/agmcfarland/miniconda3/envs/testenv/bin'
+#opt$bwaPath <- '/home/agmcfarland/miniconda3/envs/testenv/bin/bwa'
 #alex end:FOR TESTING MANUALLY assign opt vals
 
 #alex start:set working directory to workDir
@@ -75,28 +83,14 @@ setwd(opt$workDir)
 #alex start:copy bwa files to workDir and change the reference path locations to the files in workDir
 system(paste0('cp ',opt$refGenomeBWA, ' .'))
 system(paste0('cp ',opt$refGenomeFasta, ' .'))
-#system(paste0('cp ',opt$refGenomeGenBank, ' .'))
 opt$refGenomeBWA <- paste0(opt$workDir,'/',basename(opt$refGenomeBWA))
 opt$refGenomeFasta <- paste0(opt$workDir,'/',basename(opt$refGenomeFasta))
-#opt$refGenomeGenBank <- paste0(opt$workDir,'/',basename(opt$refGenomeGenBank))
 #alex end:copy bwa files to workDir and change the reference path locations to the files in workDir
 
 #alex start:MANUAL change source
 source(paste0(opt$softwareDir, '/lib/assemble.lib.R'))#source(paste0(opt$softwareDir, '/lib/assemble.lib.R'))
 #alex end:change source
 
-
-# Set up non-default processing parameter
-if(opt$process_method == 'planet_paragon'){
-  opt$removeNTsFromAlignmentEnds <- 0
-  opt$removeClippedReads <- FALSE
-  opt$refGenomeFasta <- planet_paragon_refGenomeFasta
-  opt$refGenomeBWA   <- planet_paragon_refGenomeBWA
-  opt$fgbioCommand   <- planet_paragon_fgbioCommand
-  opt$minAmpliconLength <- planet_paragon_minAmpliconLength
-  opt$maxAmpliconLength <- planet_paragon_maxAmpliconLength
-  opt$fgbioTrimPrimerCoords <- planet_paragon_primerTrimmingCoords
-}
 
 if(opt$process_method == 'bushman_artic_v2'){
   opt$removeNTsFromAlignmentEnds <- 3
@@ -108,11 +102,6 @@ if(opt$process_method == 'bushman_artic_v2'){
 if(! 'R1' %in% names(opt)) stop('--R1 must be defined.')
 if(! 'R2' %in% names(opt)) stop('--R2 must be defined.')
 
-
-# Create work directory.
-#if(dir.exists(opt$workDir)) stop('Error -- work directory already exists') #alex comment:hashed out by alex
-#dir.create(opt$workDir) #alex comment:hashed out by alex
-#if(! dir.exists(opt$workDir)) stop('Error -- could not create the work directory.') #alex comment:hashed out by alex
 
 # Create table of software and R package version numbers.
 opt$softwareVersionTable <- createSoftwareVersionTable()
@@ -132,7 +121,13 @@ opt$contigs           <- Biostrings::DNAStringSet()
 R1s <- unlist(strsplit(opt$R1, ','));  if(! all(file.exists(R1s))) stop('All the R1 files could not be found.')
 R2s <- unlist(strsplit(opt$R2, ','));  if(! all(file.exists(R2s))) stop('All the R1 files could not be found.')
 
-t1 <- paste0(opt$workDir, '/x')
+
+#t1 <- paste0(opt$workDir, '/x') #alex comment: hashed out by alex. This makes the filename prefix `x`
+#alex start: make the file prefix equal to the workdir's name.
+samplename <- basename(opt$workDir)
+t1 <- paste0(opt$workDir, '/', samplename)
+#alex end:make the file prefix equal to the workdir's name.
+
 
 # Combine R1 and R2 data files in composite R1 and R2 files.
 system(paste0('cat ', paste0(R1s, collapse = ' '), ' > ', t1, '_R1.fastq'))
@@ -140,6 +135,7 @@ system(paste0('cat ', paste0(R2s, collapse = ' '), ' > ', t1, '_R2.fastq'))
 
 
 # Quality trim reads and create trimmed FASTA files.
+message('quality trimming...')
 r <- prepareTrimmedReads(readFastq(paste0(t1, '_R1.fastq')), readFastq(paste0(t1, '_R2.fastq')), qualCode = opt$trimQualCode)
 writeFasta(r[[1]], file = paste0(t1, '_R1.trimmed.fasta'))
 writeFasta(r[[2]], file = paste0(t1, '_R2.trimmed.fasta'))
@@ -147,8 +143,10 @@ writeFasta(r[[2]], file = paste0(t1, '_R2.trimmed.fasta'))
 
 # Align trimmed reads to the reference genome.
 #alex start:make bwa index file for reference
+message('make bwa index...')
 system(paste0(opt$bwaPath, ' index ', opt$refGenomeBWA)) #makes index files using the whole filename as the prefix
 #alex end:make bwa index file for reference
+message('align reads to reference...')
 system(paste0(opt$bwaPath, ' mem -M ', opt$refGenomeBWA, ' ',  paste0(t1, '_R1.trimmed.fasta'), ' ', 
               paste0(t1, '_R2.trimmed.fasta'),  ' > ', paste0(t1, '_genome.sam')))
 
@@ -191,28 +189,12 @@ comm <- paste0(opt$samtoolsBin, '/samtools view -F 8 -h ', t1, "_genome.bam | aw
 system(comm)
 
 
-#system(paste0(' cp ',  t1, '_genome.bam ',  t1, '_genome.filt.bam')) #alex comment:this line was hashed out in the original script
-
-#alex start:commented out planet paragon block
-#if(opt$process_method == 'planet_paragon'){
-#comm <- paste0(opt$fgbioCommand, ' TrimPrimers -i ', t1, '_genome.filt.bam -o ', t1, '_genome.filt.fgbio.bam -H true -p ', opt$fgbioTrimPrimerCoords)
-
-#p <- c('#!/bin/bash', paste0('source ', opt$condaShellPath), 'conda activate fgbio', comm)
-#writeLines(p, file.path(opt$workDir, 'fgbio.script'))
-#system(paste0('chmod 755 ', file.path(opt$workDir, 'fgbio.script')))
-#system(file.path(opt$workDir, 'fgbio.script'))
-
-# Copy the primer trimmed to the orignal file so the pipeline can continue.
-#system(paste0('cp ', t1, '_genome.filt.bam ',  t1, '_genome.filt.org.bam'))
-#system(paste0('cp ', t1, '_genome.filt.fgbio.bam ', t1, '_genome.filt.bam'))
-#opt$fgbioPrimerTrimmed <- TRUE
-#}
-#alex end:commented out planet paragon block
 
 # Trim NTs from the ends of all aligned reads.#alex comment:this step is suggested by John to improve SNP detection, espcially with deletions
 #alex comment: it doesn't seem like there is an option to not do this either.
 #-------------------------------------------------------------------------------------------------- 
 if(opt$removeNTsFromAlignmentEnds > 0){
+  message('trim alignments...')
   message('Trimming alignments by ', opt$removeNTsFromAlignmentEnds > 0, ' NTs\n')
   system(paste0(opt$trimBamCommand, ' ', t1, '_genome.filt.bam ', t1, '_genome.filt.endTrim.bam ', opt$removeNTsFromAlignmentEnds, ' --clip'))
   system(paste0('cp ', t1, '_genome.filt.endTrim.bam ', t1, '_genome.filt.bam'))
@@ -225,6 +207,7 @@ system(paste0(opt$samtoolsBin, '/samtools view -q ', opt$minBWAmappingScore, ' -
 
 # Retrieve a list of aligned reads.
 alignedReadsIDs <- system(paste0(opt$samtoolsBin, '/samtools view ', t1, '_genome.filt.qual.bam | cut  -f 1 | uniq'), intern = TRUE)
+opt$alignedReadIDs <- alignedReadsIDs
 
 if(length(alignedReadsIDs) == 0){
   opt$errorCode <- 1
@@ -234,12 +217,9 @@ if(length(alignedReadsIDs) == 0){
   stop()
 }
 
-#alex start:skipping denovo assembly step
-#code would be here
-#alex end: skipping denovo assembly step
-
 
 # Sort and index filtered genome alignment.
+message('sort and index genome alignment...')
 system(paste0(opt$samtoolsBin, '/samtools sort -o ', paste0(t1, '_genome.filt.qual.sorted.bam'), ' ', paste0(t1, '_genome.filt.qual.bam')))
 system(paste0(opt$samtoolsBin, '/samtools index ', paste0(t1, '_genome.filt.qual.sorted.bam')))
 
@@ -247,6 +227,7 @@ system(paste0(opt$samtoolsBin, '/samtools index ', paste0(t1, '_genome.filt.qual
 # Determine the maximum read depth. Overlapping mates will count a position twice.
 #alex comment: changed the -o to > for the conda version of samtools. it is still v1.7 like John's version but it doesn't take -o for some reason.
 #system(paste0(opt$samtoolsBin, '/samtools depth -d 0 ', paste0(t1, '_genome.filt.qual.sorted.bam'), ' -o ', paste0(t1, '.depth'))) #alex comment:depth file shows all segments have per base depth reported
+message('calculate depth with samtools...')
 system(paste0(opt$samtoolsBin, '/samtools depth -d 0 ', paste0(t1, '_genome.filt.qual.sorted.bam'), ' > ', paste0(t1, '.depth'))) #alex comment:depth file shows all segments have per base depth reported
 maxReadDepth <- max(read.table(paste0(t1, '.depth'), sep = '\t', header = FALSE)[,3])
 
@@ -254,6 +235,7 @@ maxReadDepth <- max(read.table(paste0(t1, '.depth'), sep = '\t', header = FALSE)
 # (!) mpileup will remove duplicate reads.
 #alex comment:http://www.htslib.org/doc/samtools-mpileup.html
 #alex comment:-A(count orphans) -a(output all positions, even those with 0 depth) -Q(minimum base quality for a base to be considered) -d(max read depth to filter at)
+message('pileup reads with samtools...')
 system(paste0(opt$samtoolsBin, '/samtools mpileup -A -a -Q 0 -o ', paste0(t1, '.pileup'), ' -d ', maxReadDepth, 
               ' -f ', opt$refGenomeFasta, ' ', paste0(t1, '_genome.filt.qual.sorted.bam')))
 
@@ -267,13 +249,17 @@ opt$pileupData <- tryCatch({
 })
 
 
+## Making variant table from pileup data ----------------------------------------------------------
+# for testing
+#setwd('/home/agmcfarland/flu_project/FluPipeline/run_test/output/sampleOutputs/H1N1_A_Brisbane_59_2007_snp')
+#load('H1N1_A_Brisbane_59_2007_snp.Rdata')
 
 # Pileup format reports the number of read pairs (column 4) while VCF format (DP) 
 # reports the number of reads which appears to report 2x the pileup format value. 
 # Confirmed by looking at pileup in IGV.
 
-
 if(nrow(opt$pileupData) > 0){
+  message('find all variants...')
   #alex start:reconfiguring pileup coverge calculation to work with multiple segments
   #refGenomeLength <- nchar(as.character(readFasta(opt$refGenomeFasta)@sread)) #original code hashed out by alex
   #opt$refGenomePercentCovered <- nrow(subset(opt$pileupData,  V4 >= 1))  / refGenomeLength #original code hashed out by alex
@@ -315,37 +301,42 @@ if(nrow(opt$pileupData) > 0){
   },  error=function(cond) {
     return(data.frame()) 
   })
-  
-  
-  #x <- read.table(paste0(t1, '.vcf.gz'), sep = '\t', header = FALSE, comment.char = '#') #added by alex for testing
-  #names(x) <- c('CHROM', 'POS', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'INFO', 'FORMAT', 'OTHER')#added by alex for testing
-  #x <- x[, !is.na(names(x))]#added by alex for testing
-  
-  if(nrow(opt$variantTable) > 0){
-    
+}
+
+
+##-----Find variants in pileup and vcf outputs. Adding to variant table #------------
+
+if(nrow(opt$variantTable) > 0){
+    message('Find variants in pileup and vcf outputs...')
     opt$variantTable <- tryCatch({
       # Here we parse the pileup data to create a more informative alt call for variants.
       #alex comment:for each row in the variant table generated by `bcftools call` and reference that row in the pileup data generated by `samtools pileup`.
       #alex comment:In the pileup data extract the string from the column containing the per read base stats http://www.htslib.org/doc/samtools-mpileup.html (keyword: This encodes information matches,)
       #alex comment:parsePileUpString2 counts the number of base substitutions observed uses grepl or indel info using a boolean flag to count indel length and sequence. It's a little complicated.
       x <- bind_rows(lapply(1:nrow(opt$variantTable), function(i){
-        x <- opt$variantTable[i,]
-        
-        ###if(x$POS == 25445) browser()
-        #d <- subset(opt$pileupData, V2 == x$POS) #original code hashed out by alex
-        #alex start:adding line for multi chromosome support
-        d <- subset(opt$pileupData, V2 == x$POS & V1 == as.character(x$CHROM))
-        #alex end:adding line for multi chromosome support
-        p <- parsePileUpString2(as.character(d$V5))
-        
-        # Expand the variant call to include the different possibilities.
-        x <- x[rep(1, length(p)),] #alex comment: make new identical rows of x (which should be one row) that are the length of p. Then below alter it to contain additional variant information.
-        x$ALT <- names(p)
-        x$altCount <- as.numeric(p)
-        
-        dplyr::select(x, -ID, -FILTER, -INFO, -FORMAT, -OTHER) #alex comment: left with these columns: CHROM, POS, REF, ALT, QUAL, altCount
-      }))
+        #browser()
+      x <- opt$variantTable[i,]
+      
+      ###if(x$POS == 25445) browser()
+      #d <- subset(opt$pileupData, V2 == x$POS) #original code hashed out by alex
+      #alex comment: editing for multi chromosome support
+      # subset the pileup data for the chromosome and position detected in the variant table
+      d <- subset(opt$pileupData, V2 == x$POS & V1 == as.character(x$CHROM))
+      #--------------------------------------
+      # alex comment: search the d$V5 column which has indel, matching (.), and SNP [ACTG], as characters. The total number of each character equals its abundance at that position.
+      # more info on pileup read data d$V5 column here: https://en.wikipedia.org/wiki/Pileup_format
+      p <- parsePileUpString2(as.character(d$V5))
+      
+      # Expand the variant call to include the different possibilities.
+      x <- x[rep(1, length(p)),] #alex comment: make new identical rows of x (which should be one row) that are the length of p. Then below alter it to contain additional variant information.
+      x$ALT <- names(p)
+      x$altCount <- as.numeric(p)
+      
+      dplyr::select(x, -ID, -FILTER, -INFO, -FORMAT, -OTHER) #alex comment: left with these columns: CHROM, POS, REF, ALT, QUAL, altCount
+      })) 
+      
       x #alex comment:returns x as opt$variantTable
+      
     }, error=function(cond) {
       #alex start:adding error message to this stop trycatch
       opt$errorCode <- 5
@@ -354,7 +345,7 @@ if(nrow(opt$pileupData) > 0){
       #alex end:adding error message to this stop trycatch
       stop(paste0(opt$workDir,' Error parsing variant occurrences.'))
     })
-    
+
     # Increment the position of indels because their calls are from the NT preceding the event.
     opt$variantTable$POS <- ifelse(grepl('ins|del', opt$variantTable$ALT), opt$variantTable$POS+1, opt$variantTable$POS)
     
@@ -362,15 +353,15 @@ if(nrow(opt$pileupData) > 0){
     # had to increment the indel positions.
     
     #alex start:make the process of merging updated read base position in opt$variantTable with read count pileup data in opt$pileupData able to handle multiple chromosomes
-    
+    #browser()
     #opt$variantTable <- bind_rows(lapply(split(opt$variantTable, opt$variantTable$POS), function(x){ #original code hashed out by alex
     #browser() #original code hashed out by alex
     #x$reads <- subset(opt$pileupData, V2 == x$POS[1])$V4 #original code hashed out by alex
     #x$percentAlt <- x$altCount / x$reads[1] #original code hashed out by alex
     #x #original code hashed out by alex
     #})) #original code hashed out by alex
-    
     #start new
+    message('Merge variant table with pileup table...')
     # important: the rownames are different, but i don't think this should affect anything downstream
     opt$variantTable <- merge(opt$variantTable, opt$pileupData%>%select(-V3,-V5), 
                               by.x=c('CHROM','POS'), 
@@ -396,189 +387,75 @@ if(nrow(opt$pileupData) > 0){
       dplyr::ungroup() %>%
       dplyr::filter(reads > 4)
     
+  } else {
+    opt$variantTableMajor <- data.frame()
   }
-} else {
-  opt$refGenomePercentCovered <- 0
-  opt$refGenomePercentCovered_5reads  <- 0
+
+###---------- Generate consensus sequence from filtered VCF and variantTableMajor #-------------------
+
+# Generate consensus sequence from a filtered VCF file. Use the variantTable to filter for only major variants.
+if(nrow(opt$variantTableMajor) > 0){
+  message('Generate conensus sequence...')
   
-  opt$errorCode <- 5
-  opt$errorMessage <- 'No pileup or variant data available.'
+  # Here we copy the variant vcf file and selectively remove calls 
+  # which are not found in our filtered variantTable. This is done 
+  # to preserve the additional comment lines which appear to be necessary. 
+  
+  tryCatch({
+    # copy variant file and gunzip them 
+    system(paste0('cp ', t1, '.filt.vcf.gz ', t1, '.filt.vcf.copy.gz'))
+    system(paste0('gunzip ', t1, '.filt.vcf.copy.gz'))
+    
+    
+    store_vcf_pass<- c()
+    for (i in readLines(paste0(t1, '.filt.vcf.copy'))) {
+      # for each line in filt.vcf.copy:
+      # if the line starts with # then it is a header and will be stored
+      if(grepl('^#', i)){
+        store_vcf_pass <- c(store_vcf_pass,i)
+        
+      } else {
+        # if the line does not start with #, then it is part of the vcf table. split it on \t and unlist it and store it in vector
+        vcf_row <- unlist(strsplit(i,'\t'))
+        
+        # check if the vcf row is in the variantTableMajor
+        df_puprow <- opt$variantTableMajor%>%filter(CHROM==vcf_row[1],POS==vcf_row[2])
+        
+        if (nrow(df_puprow) == 0){
+          next
+        } else {
+          store_vcf_pass <- c(store_vcf_pass,i)
+        }
+      } 
+    }
+    
+    write(unlist(store_vcf_pass[! sapply(store_vcf_pass, is.null)]), file = paste0(t1, '.filt.vcf.copy2'))
+    
+    # Capture vcf
+    #read.table(textConnection(unlist(opt$finalVCF)), sep = '\t') #alex comment:hashed out by alex. unsure of what this does.
+    #opt$finalVCF = o[! sapply(o, is.null)] #alex comment:hashed out by alex. unsure of what this does.
+    
+    # reformat the filtered vcf file into a gzip file
+    system(paste0('bgzip ', t1, '.filt.vcf.copy2'))
+    # index the filtered vcf file
+    system(paste0(opt$bcftoolsBin, '/bcftools index ', t1, '.filt.vcf.copy2.gz'))
+    # extract the consensus sequence using bcftools
+    system(paste0('cat  ', opt$refGenomeFasta, ' | ', opt$bcftoolsBin, '/bcftools consensus ',  
+                  t1, '.filt.vcf.copy2.gz > ', t1, '.consensus.fasta'))
+    
+    opt$concensusSeq <- readFasta(paste0(t1, '.consensus.fasta'))
+    
+  }, error=function(cond) {
+    return('Error creating concensus sequence from vcf ')
+  })
+  
+# if the major variant table does not have any variants then the consensus sequence is equivalent to the reference sequence. 
+} else {
+  opt$concensusSeq <- readFasta(opt$refGenomeFasta)
 }
 
-#alex start:hashed out this entire code block for predicting effect of SNPs/INDELs on viral proteins
-
-##### SHIFTING THE DEL VALUES ARE PREVENTING A MATCH IN THE VCF FILES.
-
-
-# # Determine the result of the variants on the AA sequence of viral proteins.
-# # This approach assumes all orfs are non-overlapping pos. strand sequenes.
-# if(nrow(opt$variantTableMajor) > 0){
-
-#   # Here we copy the variant vcf file and selectively remove calls 
-#   # which are not found in our filtered variantTable. This is done 
-#   # to preserve the additional comment lines which appear to be necessary. 
-
-#   tryCatch({
-#     system(paste0('cp ', t1, '.filt.vcf.gz ', t1, '.filt.vcf.copy.gz'))
-#     system(paste0('gunzip ', t1, '.filt.vcf.copy.gz'))
-
-#     o <- lapply(readLines(paste0(t1, '.filt.vcf.copy')), function(x){
-#       if(grepl('^#', x)){
-#         return(x)
-#       } else {
-#         if(as.integer(unlist(strsplit(x, '\t'))[2]) %in% opt$variantTableMajor$POS){
-#           return(x)
-#         } else {
-#           return(NULL)
-#         }
-#       }
-#     })
-
-#     write(unlist(o[! sapply(o, is.null)]), file = paste0(t1, '.filt.vcf.copy2'))
-
-#     # Capture vcf
-#     # read.table(textConnection(unlist(opt$finalVCF)), sep = '\t')
-#     opt$finalVCF = o[! sapply(o, is.null)]
-
-#     system(paste0('bgzip ', t1, '.filt.vcf.copy2'))
-#     system(paste0(opt$bcftoolsBin, '/bcftools index ', t1, '.filt.vcf.copy2.gz'))
-#     system(paste0('cat  ', opt$refGenomeFasta, ' | ', opt$bcftoolsBin, '/bcftools consensus ',  
-#                   t1, '.filt.vcf.copy2.gz > ', t1, '.consensus.fasta'))
-
-#     opt$concensusSeq <- as.character(readFasta(paste0(t1, '.consensus.fasta'))@sread)
-
-#     # Predict pangolin lineage for genomes with >= 90% coverage.
-#     if(opt$refGenomePercentCovered_5reads >= 0.90){
-
-#       # Create a bash script which will start the requires Conda environment and run pangolin.
-#       p <- c('#!/bin/bash', paste0('source ', opt$condaShellPath), 'conda activate pangolin', 'pangolin -o $2 $1')
-#       writeLines(p, file.path(opt$workDir, 'pangolin.script'))
-#       system(paste0('chmod 755 ', file.path(opt$workDir, 'pangolin.script')))
-
-#       comm <- paste0(file.path(opt$workDir, 'pangolin.script'), ' ', t1, '.consensus.fasta ', t1, '.consensus.pangolin')
-#       system(comm)
-
-#       if(file.exists(paste0(t1, '.consensus.pangolin/lineage_report.csv'))){
-#         o <- read.csv(paste0(t1, '.consensus.pangolin/lineage_report.csv')) 
-
-#         if(nrow(o) > 0){
-#           opt$pangolinAssignment <- as.character(o[1,]$lineage)
-#           opt$pangolinAssignmentConflict <- as.numeric(o[1,]$conflict)
-#           opt$pangolinAssignmentPangoLEARN_version <- as.character(o[1,]$pangoLEARN_version)
-#         }
-#       }
-#     } 
-#   }, error=function(cond) {
-#     stop('Error creating concensus sequence.')
-#   })
-
-#   message('Concensus sequence is ', refGenomeLength - nchar(opt$concensusSeq), ' NT shorter than the reference sequence.')
-
-#   gb <- readGenBank(opt$refGenomeGenBank)
-
-#   cds <- gb@cds
-#   seqlevels(cds) <- 'genome'
-#   seqnames(cds)  <- 'genome'
-
-#   # Calculate how the shift left or right caused by deletions and insertions.
-#   opt$variantTableMajor$shift <- ifelse(grepl('del', opt$variantTableMajor$ALT), (nchar(opt$variantTableMajor$ALT)-3)*-1, 0)
-#   opt$variantTableMajor$shift <- ifelse(grepl('ins', opt$variantTableMajor$ALT), (nchar(opt$variantTableMajor$ALT)-3), opt$variantTableMajor$shift)
-
-
-#   # Remove variant positions flanking indels since they appear to be artifacts. 
-#   artifacts <- c(opt$variantTableMajor[grep('ins|del', opt$variantTableMajor$ALT),]$POS + abs(opt$variantTableMajor[grep('ins|del', opt$variantTableMajor$ALT),]$shift),
-#                  opt$variantTableMajor[grep('ins|del', opt$variantTableMajor$ALT),]$POS -1)
-
-#   opt$variantTableMajor <- opt$variantTableMajor[! opt$variantTableMajor$POS %in% artifacts,]
-
-#   opt$variantTableMajor <- bind_rows(lapply(split(opt$variantTableMajor, 1:nrow(opt$variantTableMajor)), function(x){
-
-#     # Determine the offset of this position in the concensus sequence because it may not be the same length
-#     # if indels have been applied. Here we sum the indel shifts before this variant call.
-
-#     offset <- sum(opt$variantTableMajor[1:grep(x$POS, opt$variantTableMajor$POS),]$shift) 
-
-#     cds2 <- cds
-#     start(cds2) <- start(cds2) + offset 
-#     end(cds2) <- end(cds2) + offset 
-
-#     v1 <- GRanges(seqnames = 'genome', ranges = IRanges(x$POS, end = x$POS), strand = '+')
-#     o1 <- GenomicRanges::findOverlaps(v1, cds)
-
-#     v2 <- GRanges(seqnames = 'genome', ranges = IRanges(x$POS + offset, end = x$POS + offset), strand = '+')
-#     o2 <- GenomicRanges::findOverlaps(v2, cds2)
-
-#     if(length(o2) == 0){
-#       x$genes <- 'intergenic'
-
-#       if (grepl('ins', as.character(x$ALT))){
-#         x$type <- paste0('ins ', nchar(x$ALT)-3)
-#       } else if (grepl('del', as.character(x$ALT))){
-#         x$type <- paste0('del ', nchar(x$ALT)-3)
-#       } else {
-#         x$type <- ' '
-#       }
-#     } else {
-
-#       # Define the gene the variant is within.
-#       hit1 <- cds[subjectHits(o1)]
-#       hit2 <- cds2[subjectHits(o2)]
-
-#       x$genes <- paste0(hit2$gene, collapse = ', ')
-
-#       # Native gene AA sequence.
-#       orf1  <- as.character(translate(DNAString(substr(as.character(readFasta(opt$refGenomeFasta)@sread), start(hit1), end(hit1)))))
-
-#       # Variant gene AA sequence.
-#       orf2 <- as.character(translate(DNAString(substr(opt$concensusSeq, start(hit2), end(hit2)))))
-
-
-#       # Determine the offset of this position in the concensus sequence because it may not be the same length
-#       # if indels have been applied. Here we sum the indel shifts before this variant call.
-#       # offset <- sum(opt$variantTableMajor[1:grep(x$POS, opt$variantTableMajor$POS),]$shift)
-
-#       #              1   2   3   4   5   6   7   8
-#       # 123 456 789 012 345 678 901 234 567 890 123
-#       # ATG CAT TGA ATG GGC TTA CGA GCT TAA GTA TAG
-#       #             ^             x  21-10 + 2 = 13/3 = 4.3 ~ 4
-#       #                          x   20-10 + 2 = 12/3 = 4.0 = 4
-#       #                         x    19-10 + 2 = 11/3 = 3.6 ~ 4
-#       #                                 x   25-10 + 2 = 17/3 = 5.6 ~ 6
-#       #                                  x  26-10 + 2 = 18/3 = 6.0 = 6
-#       #                                   x 27-10 + 2 = 19/3 = 6.3 ~ 6
-
-#       aa <- round(((x$POS - start(hit1)) + 2)/3)
-#       orf_aa <- substr(orf1, aa, aa)
-
-#       aa2 <- round((((x$POS + offset) - start(hit2)) + 2)/3)
-#       orf2_aa <- substr(orf2, aa2, aa2)
-
-#       maxALTchars <- max(nchar(unlist(strsplit(as.character(x$ALT), ','))))
-
-#       if(nchar(as.character(x$REF)) == 1 & nchar(as.character(x$ALT)) > 1 & maxALTchars == 1){
-#         x$type <- paste0(x$POS, '_mixedPop')
-#       } else if (grepl('ins', as.character(x$ALT))){
-#         x$type <- paste0('ins ', nchar(x$ALT)-3)
-#       } else if (grepl('del', as.character(x$ALT))){
-#         x$type <- paste0('del ', nchar(x$ALT)-3)
-#       } else if (orf_aa != orf2_aa){
-#         # JKE 2021-08-18.
-#         # Fixes probject of multiple hits.
-#         ###x$type <- paste0(orf_aa, aa2, orf2_aa)
-#         x$type <- paste0(orf_aa[1], aa2[1], orf2_aa[1])
-#       } else {
-#         x$type <- 'silent'
-#       }
-#     }
-#     x
-#   }))
-
-# } else {
-#   # There were no variants called so we report the reference as the concensus sequence.
-#   opt$concensusSeq <- as.character(readFasta(opt$refGenomeFasta)@sread)
-# }
-
-#alex end:hashed out this entire code block for predicting effect of SNPs/INDELs on viral proteins
+# write the fasta to file
+writeFasta(opt$concensusSeq, paste0(t1, '.consensus.fasta')) 
 
 
 # BCFtools calls indels by the base preceding the modification.
@@ -589,10 +466,11 @@ if(any(i)) opt$variantTable[i,]$POS <- opt$variantTable[i,]$POS+1
 i <- opt$variantTableMajor$POS %in% opt$variantTableMajor[grep('del', opt$variantTableMajor$ALT),]$POS
 if(any(i)) opt$variantTableMajor[i,]$POS <- opt$variantTableMajor[i,]$POS+1
 
+message('write variant tables to file...')
 write.csv(opt$variantTable,'variantTable.csv',row.names=FALSE)
 write.csv(opt$variantTableMajor,'variantTableMajor.csv',row.names=FALSE)
 
+message('write final rdata object to file...')
 save(opt, file = opt$outputFile)
-#unlink(opt$workDir, recursive = TRUE) #alex comment:delete all files in the folder
-
+message('end of assemble.R')
 
