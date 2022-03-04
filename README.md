@@ -41,7 +41,6 @@ install.packages('remotes',repos='https://cloud.r-project.org/')
 library(remotes)
 install_version("Rcpp", version = "1.0.7", repos = "http://cran.us.r-project.org", quiet=FALSE)
 install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('ggplot2',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('knitr',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('kableExtra',repos='https://cloud.r-project.org/', quiet=FALSE)
@@ -73,7 +72,7 @@ q(save="no")
 Afterwards change directory to the where the FluPipeline pipeline is located and type the following in the terminal:
 
 ```
-python fluPipeline.py -h
+python FluPipeline.py -h
 ```
 
 If you got a help message, proceed to run the test below.
