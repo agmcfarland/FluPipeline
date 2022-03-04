@@ -185,7 +185,7 @@ def run_FluPipeline(args):
 
 	## end run
 	run_logger.logger.info('Finished running FluPipeline\n')
-	run_logger.logger.info('Toal Time: {}'.format(datetime.now()-start_run_timer))
+	run_logger.logger.info('Total Time: {}\n'.format(datetime.now()-start_run_timer))
 	run_logger.logger.info('Run ouputs stored in {}\n'.format(args.base_directory))	
 
 

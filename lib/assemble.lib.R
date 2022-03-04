@@ -52,15 +52,15 @@ createSoftwareVersionTable <- function(){
   opt$bwaVersion <<- sub('version:\\s+', '', tolower(v[grep('Version', v, ignore.case = TRUE)]))
   
   
-  p <- c('#!/bin/bash', paste0('source ', opt$condaShellPath), 'conda activate pangolin', 'pangolin -v')
-  writeLines(p, file.path(opt$workDir, 'pangolin.version.script'))
-  system(paste0('chmod 755 ', file.path(opt$workDir, 'pangolin.version.script')))
-  opt$pangolinVersion <<- sub('pangolin\\s+', '',  system(file.path(opt$workDir, 'pangolin.version.script'), intern = TRUE))
+  # p <- c('#!/bin/bash', paste0('source ', opt$condaShellPath), 'conda activate pangolin', 'pangolin -v')
+  # writeLines(p, file.path(opt$workDir, 'pangolin.version.script'))
+  # system(paste0('chmod 755 ', file.path(opt$workDir, 'pangolin.version.script')))
+  # opt$pangolinVersion <<- sub('pangolin\\s+', '',  system(file.path(opt$workDir, 'pangolin.version.script'), intern = TRUE))
   
   p <- installed.packages()[names(sessionInfo()$otherPkgs), 'Version']
-  bind_rows(tibble('Software/R package' = c('R', 'bwa', 'samtools', 'bcftools', 'pangolin'),
+  bind_rows(tibble('Software/R package' = c('R', 'bwa', 'samtools', 'bcftools'),
                    'Version' = c(paste0(R.Version()$major, '.', R.Version()$minor),
-                                 opt$bwaVersion, opt$samtoolsVersion, opt$bcftoolsVersion, opt$pangolinVersion)),
+                                 opt$bwaVersion, opt$samtoolsVersion, opt$bcftoolsVersion)),
             tibble('Software/R package' = names(p), 'Version' = p))
 }
 

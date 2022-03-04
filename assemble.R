@@ -23,9 +23,9 @@ option_list = list(
   make_option(c("--bwaPath"), type="character", default='/home/everett/ext/bwa', help="path to bwa binary", metavar="character"), 
   make_option(c("--megahitPath"), type="character", default='/home/everett/ext/megahit/bin/megahit', help="path to megahit binary", metavar="character"), 
   make_option(c("--minBWAmappingScore"), type="integer", default=30, help="minimum BWA mapping score", metavar="character"), 
-  make_option(c("--minPangolinConf"), type="numeric", default=0.9, help="minimum pangolin confidence value (0-1)", metavar="character"), 
+  #make_option(c("--minPangolinConf"), type="numeric", default=0.9, help="minimum pangolin confidence value (0-1)", metavar="character"), 
   make_option(c("--samtoolsBin"), type="character", default='/home/everett/ext/samtools/bin', help="path to samtools bin", metavar="character"), 
-  make_option(c("--condaShellPath"), type="character", default='/home/everett/miniconda3/etc/profile.d/conda.sh', help="path to conda.sh", metavar="character"),
+  #make_option(c("--condaShellPath"), type="character", default='/home/everett/miniconda3/etc/profile.d/conda.sh', help="path to conda.sh", metavar="character"),
   make_option(c("--bcftoolsBin"), type="character", default='/home/everett/ext/bcftools/bin',  help="path to bcftools bin", metavar="character"),
   make_option(c("--trimBamCommand"), type="character", default='/home/everett/ext/bamUtil_1.0.15/bam trimBam',  help="Trim bam command", metavar="character"),
   make_option(c("--removeClippedReads"), type="logical", default=FALSE,  help="Number of NTs to remove from the end of alignments", metavar="character"),
@@ -113,9 +113,9 @@ opt$errorMessage <- NA
 opt$pangolinAssignment <- NA
 opt$pangolinAssignmentConflict <- NA
 opt$pangolinAssignmentPangoLEARN_version <- NA
-opt$variantTable      <- data.frame()
+opt$variantTable <- data.frame()
 opt$variantTableMajor <- data.frame()
-opt$contigs           <- Biostrings::DNAStringSet()
+opt$contigs <- Biostrings::DNAStringSet()
 
 
 R1s <- unlist(strsplit(opt$R1, ','));  if(! all(file.exists(R1s))) stop('All the R1 files could not be found.')
@@ -127,7 +127,6 @@ R2s <- unlist(strsplit(opt$R2, ','));  if(! all(file.exists(R2s))) stop('All the
 samplename <- basename(opt$workDir)
 t1 <- paste0(opt$workDir, '/', samplename)
 #alex end:make the file prefix equal to the workdir's name.
-
 
 # Combine R1 and R2 data files in composite R1 and R2 files.
 system(paste0('cat ', paste0(R1s, collapse = ' '), ' > ', t1, '_R1.fastq'))
