@@ -56,7 +56,6 @@ cat(paste0('**Run directory: **',as.character(baseDir)))
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=2}
-
 ## Extract info about run outcome and strain variant
 df_runstats <- data.frame(sample=character(),reference=character(),errorCode=numeric(),errorMessage=character())
 
