@@ -12,8 +12,9 @@ import numpy as np
 import logging
 import multiprocessing as mp
 from multiprocessing import Pool
-from .processing_functions import convert_GBKToFasta, call_Command
+from .processing_functions import convert_GBKToFasta
 from .processing_classes import RunLogger
+from .helper_functions import call_Command
 
 
 
@@ -76,11 +77,8 @@ def create_TestData(testDir, referenceStrainsDir):
 	'''
 	Main function for this script
 	'''
-	# testDir = '/home/agmcfarland/flu_project/FluPipeline_test/'
 	baseDirectory = pjoin(testDir,'output')
 	sequenceDataDir = pjoin(testDir,'data')
-	# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references'
-
 
 	# remove testing directory if it already exists
 	try:
@@ -96,7 +94,7 @@ def create_TestData(testDir, referenceStrainsDir):
 	# enter the test directory that will contain the insilico fastq files
 	os.chdir(sequenceDataDir)
 
-
+	# intialize logfile handler
 	run_logger = RunLogger(directory=baseDirectory,filename='insilicoTestLog')
 	run_logger.initialize_FileHandler()
 	run_logger.add_StreamHandler()
@@ -108,22 +106,17 @@ def create_TestData(testDir, referenceStrainsDir):
 	gbk_files = glob.glob('*.gb')
 	gbk_files = [i.replace('.gb','') for i in gbk_files]
 
-	run_logger.logger.info('Making test data...\n')
 	# create fasta and synthetic read set
+	run_logger.logger.info('Making test data...\n')
 	for strain in gbk_files:
 		convert_GBKToFasta(filename=strain)
 		create_SyntheticReads(filename=strain, logger_=run_logger)
-
-	# check perfect, snp, and indel are all made
-	print(len(gbk_files) == len(glob.glob('*perfect*'))/2)
-	print(len(gbk_files) == len(glob.glob('*_snp_*'))/2)
-	print(len(gbk_files) == len(glob.glob('*snpindel*'))/2)
 
 	# gzip fastq files
 	run_logger.logger.info('Compressing in silico fastq files...\n')
 	trimmed_fastq_list = glob.glob('*.fastq')
 	[subprocess.run(['gzip', trimmed_fastq]) for trimmed_fastq in trimmed_fastq_list] 
-	run_logger.logger.info('Finished test data\n')
+	run_logger.logger.info('Finished making test data\n')
 
 
 def compare_TestResults(): 

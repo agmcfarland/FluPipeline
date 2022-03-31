@@ -5,7 +5,6 @@ import multiprocessing as mp
 from multiprocessing import Pool
 import pandas as pd
 import re
-import sqlite3 as sql
 import glob
 import shutil
 import subprocess
@@ -14,23 +13,10 @@ from Bio.Seq import Seq
 from Bio import SeqIO, SeqFeature
 import argparse
 import logging
+import numpy as np
 from .processing_classes import SequencingSample, RunLogger
+from .helper_functions import call_Command
 
-
-def call_Command(cmd, logger_, shell_=False):
-	'''
-	Runs a shell command using subprocess.run. Recods output to a logger object that has already been created.
-	Default is to use subprocess.run. If shell is necessary then subprocess.Popen is used.
-	'''
-	try:
-		if shell_ == False:
-			capture = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True).stdout
-			logger_.logger.info(capture)
-		else:
-			capture = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-			logger_.logger.info(capture.communicate()[0].decode('utf-8'))
-	except:
-		logger_.logger.exception('\nFluPipeline Error:', exc_info=True)
 
 
 def convert_GBKToFasta(filename):
@@ -51,50 +37,43 @@ def convert_GBKToFasta(filename):
 			infile.write('{}\n'.format(str(record.seq)))
 
 
-def calculate_ReferenceCoverage(sequenceDataDir, reference, BWA_path, samtoolsbin_path, read1_filename, read2_filename, samplename, logger_):
+def calculate_ReferenceCoverage(sequenceDataDir, reference, read1_filename, read2_filename, samplename, logger_):
 	'''
 	Runs through all steps of a simple read mapping pipeline and calculates the coverage and depth for a given read file reference combo.
 	Ouputs a csv containing the coverage stats for all segments
 	'''
 
-# ## troubleshooting inputs start ##
-# read1_filename = sample.read1_filename
-# read2_filename = sample.read2_filename
-# samplename = sample.samplename
-# reference = 'H1N1pdm_ref.fasta'
-# ## troubleshooting inputs end ##
-
 	## index reference
 	call_Command(cmd=
 		[
-		BWA_path,'index',reference
+		'bwa','index',reference
 		],
 		logger_=logger_)
 
 	## align random read subset to reference with bwa
 	call_Command(cmd=
-		'{} mem -M {} subset_fastp_trimmed_{} subset_fastp_trimmed_{} > {}_bwa_alignment_{}.sam'.format(BWA_path, reference, read1_filename, read2_filename, reference, samplename)
+		'bwa mem -M {} subset_fastp_trimmed_{} subset_fastp_trimmed_{} > {}_bwa_alignment_{}.sam'.format(reference, read1_filename, read2_filename, reference, samplename)
 		,
 		logger_=logger_,
 		shell_=True)
 
 	## sam to bam and sort and index alignment using samtools
 	call_Command(cmd=
-		'{}/samtools view -S -b {}_bwa_alignment_{}.sam > {}_bwa_alignment_{}.bam'.format(samtoolsbin_path,reference,samplename,reference,samplename),
+		'samtools view -S -b {}_bwa_alignment_{}.sam > {}_bwa_alignment_{}.bam'.format(reference,samplename,reference,samplename),
 		logger_=logger_,
 		shell_=True)
 	call_Command(cmd=
-		'{}/samtools sort -o {}_bwa_alignment_{}.bam {}_bwa_alignment_{}.bam'.format(samtoolsbin_path,reference,samplename,reference,samplename),
+		'samtools sort -o {}_bwa_alignment_{}.bam {}_bwa_alignment_{}.bam'.format(reference,samplename,reference,samplename),
 		logger_=logger_,
 		shell_=True)
 	call_Command(cmd=
-		'{}/samtools index {}_bwa_alignment_{}.bam'.format(samtoolsbin_path,reference,samplename),
+		'samtools index {}_bwa_alignment_{}.bam'.format(reference,samplename),
 		logger_=logger_,
 		shell_=True)
 
 	## pileup data with samtools
 	call_Command(cmd=
-		'{}/samtools mpileup -A -a -Q 0 -o {}_pileup_{}.txt -d 100000 -f {} {}_bwa_alignment_{}.bam'.format(samtoolsbin_path, reference,samplename, reference, reference,samplename),
+		'samtools mpileup -A -a -Q 0 -o {}_pileup_{}.txt -d 100000 -f {} {}_bwa_alignment_{}.bam'.format( reference,samplename, reference, reference,samplename),
 		logger_=logger_,
 		shell_=True)
 
@@ -171,7 +150,6 @@ def combined_ReferenceCoverage(samplename):
 	df_cov.to_csv('combined_coverage_stats_{}.csv'.format(samplename), index=False)
 
 
-
 def summarize_HACoverage(samplename):
 	'''
 	Write summary files of coverage, depth, segment count, for all references compared. 
@@ -223,15 +201,14 @@ def cleanup_CalculateReferenceCoverage(samplename):
 	# the reference strains are sorted with the best match at the top. select the the first item in the reference column
 	reference_to_keep = df['reference'][0].replace('.fasta_coverage_stats.csv','')
 
-
 	# remove files that are not the reference
 	for f in df['reference'][1:]:
 		f = f.replace('.fasta_coverage_stats.csv','')
 		for i in glob.glob('{}*'.format(f)):
 			os.remove(i)
 	# remove subsetted fastq and fastp trimmed fastq files
-	for i in glob.glob('fastp_trimmed*'):
-		os.remove(i)
+	# for i in glob.glob('fastp_trimmed*'):
+	# 	os.remove(i)
 	for i in glob.glob('subset_fastp*'):
 		os.remove(i)
 	# remove all sam and bam and bai files
@@ -265,14 +242,22 @@ def reference_NextCladeLookUp(reference):
 
 	return(refname)
 
-def flag_PotentialReassortment():
-	'''
-	'''
-	pass
-
-
 
 if __name__=='__main__':
 	pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

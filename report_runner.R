@@ -6,7 +6,7 @@ option_list = list(
   make_option(c("--softwareDir"), type="character", default='/home/common/SARS-CoV-2-Philadelphia', help="path to software directory", metavar="character"),
   make_option(c("--report_type"), type="character", default='sample', help="type of report to generate", metavar="character"),
   make_option(c("--sampleDir"), type="character", default='sample directory', help="sample directory path", metavar="character"),
-  make_option(c("--samplename"), type="character", default='sample directory', help="sample name", metavar="character"),
+  make_option(c("--samplename"), type="character", default='sample name', help="sample name", metavar="character"),
   make_option(c("--baseDir"), type="character", default='base directory', help="type of report to generate", metavar="character")
   )
 
@@ -14,39 +14,41 @@ opt_parser = OptionParser(option_list=option_list)
 opt = parse_args(opt_parser)
 
 #troubleshooting inputs sample start
-#opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
-#opt$report_type <- 'sample'
-#opt$samplename <- 'IBV_Yamagata_Ref_snpindel'
-#opt$sampleDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Yamagata_Ref_snpindel'
-#opt$samplename <- 'IBV_Victoria_Ref_perfect'
-#opt$sampleDir <- '/home/agmcfarland/flu_project/test/test3/sampleOutputs/IBV_Victoria_Ref_perfect'
+# opt$sampleDir <- '/home/agmcfarland/quick_tests/output/sampleOutputs/Ashley_1_2_S81'
+# opt$samplename <- basename(opt$sampleDir)
+# opt$report_type <- 'sample'
+# opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
 #troubleshooting inputs sample end
 
 #troubleshooting inputs run start
-#opt$softwareDir <- '/home/agmcfarland/flu_project/flu_pipeline'
-#opt$report_type <- 'run'
-#opt$baseDir <- '/home/agmcfarland/flu_project/test/test4'
+# opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
+# opt$report_type <- 'run'
+# opt$baseDir <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output'
 #troubleshooting inputs run end
 
 if (opt$report_type=='sample'){
-  rmarkdown::render(file.path(opt$softwareDir, 'sample_report.Rmd'),
-                    output_file = file.path(opt$sampleDir, paste0(opt$samplename, '.pdf')),#clean = TRUE,
+  suppressWarnings(rmarkdown::render(file.path(opt$softwareDir, 'sample_report.Rmd'),
+                    output_file = file.path(opt$sampleDir, paste0(opt$samplename, '.pdf')),
                     params = list(
                       date  = format(Sys.time(), "%Y-%m-%d"),
-                      title = paste0('Influenza ', opt$samplename),
+                      title = opt$samplename,
                       sampleDir=opt$sampleDir,
-                      samplename=opt$samplename))
-  
+                      samplename=opt$samplename),
+                    clean=TRUE))
   } else if (opt$report_type=='run') {
-      rmarkdown::render(file.path(opt$softwareDir, 'run_report.Rmd'),
-                    output_file = file.path(opt$baseDir, 'run_summary.pdf'),#clean = TRUE,
+    suppressWarnings(rmarkdown::render(file.path(opt$softwareDir, 'run_report.Rmd'),
+                    output_file = file.path(opt$baseDir, 'runSummary.pdf'),
+                    knit_root_dir=opt$softwareDir,
                     params = list(
                       date  = format(Sys.time(), "%Y-%m-%d"),
-                      title = paste0('Influenza Run Summary'),
-                      baseDir = opt$baseDir))
+                      title = paste0('FluPipeline Run Summary'),
+                      baseDir = opt$baseDir),
+                    clean=TRUE))
     } else {
-  print('nothing')
-}
+  system('echo Error in report_runner.R. Check that report_type specified is correct/exists')
+    }
+
+
 
 
 
