@@ -16,7 +16,7 @@ Installing R packages will take a while.
 cd /path/to/FluPipeline-main
 
 # create the conda environment
-conda env create --name FluPipeline_env --file FluPipeline_env.yml
+conda env create --name FluPipeline_env --file environment.yml
 
 # enter the conda environment
 conda activate FluPipeline_env
@@ -50,18 +50,7 @@ install.packages('tidyverse',repos='https://cloud.r-project.org/', quiet=FALSE)
 install_version('latticeExtra','0.6-28',repos='https://cloud.r-project.org/', quiet=FALSE) #2016 version
 
 
-# download bioconductor libaries. Do not update any libraries when prompted.
-source("http://bioconductor.org/biocLite.R")
-biocLite()
-# copy line separately:
-biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
-# copy line separately:
-biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
-
-
 # check libraries are installed.
-library(ShortRead)
-library(genbankr)
 library(Rcpp)
 
 
