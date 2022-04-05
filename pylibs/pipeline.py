@@ -36,7 +36,8 @@ def flu_Pipeline(
 	BWA_mapping_score,
 	masked_nextclade,
 	masked_ivar,
-	base_quality):
+	base_quality,
+	no_deduplicate):
 	'''
 	Runs through all steps of the flu pipeline. 
 	'''
@@ -56,13 +57,13 @@ def flu_Pipeline(
 # strain_sample_depth = 3000
 # downsample = 500000
 # consensus_masking_threshold = 0
-# min_variant_phred_score = 20
+# min_variant_phred_score = 4
 # remove_NTs_from_alignment_ends = 3
 # BWA_mapping_score = 30
 # masked_nextclade= False
 # masked_ivar = False
 # base_quality = 30
-
+# deduplicate = True
 
 # baseDirectory='/home/agmcfarland/flu_project/test_variant_genomes/output'
 # Rscript='Rscript'
@@ -83,6 +84,7 @@ def flu_Pipeline(
 # masked_nextclade= False
 # masked_ivar = False
 # base_quality = 30
+
 
 ## troubleshooting inputs end ##
 
@@ -121,31 +123,56 @@ def flu_Pipeline(
 			[shutil.copy(rf,sample.dirpath) for rf in reference_fasta_list] # copy to sample dir
 
 
-			# quality, adaptor trimming with fastp
-			sample_logger.logger.info('Step 1: read trimming and quality scoring\n')
-			call_Command(cmd=
-				[
-				'fastp', 
-				'--in1', pjoin(sequenceDataDir,sample.read1_filename), #readfileR1
-				'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
-				'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
-				'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
-				'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
-				'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
-				'-q', str(base_quality),#, #quality score 30
-				'overwrite=True',
-				'--cut_by_quality5', #cut from front
-				'--cut_window_size', '4',#, #cut_window_size
-				'--cut_mean_quality', '20',
-				'--length_required', '50', #minimum read length
-				'--thread', '3'
-				],
-				logger_=sample_logger)
+			if no_deduplicate == False:
+				# read deuplication. quality, adaptor trimming with fastp
+				sample_logger.logger.info('Deduplicate reads, read trimming and quality scoring\n')
+				call_Command(cmd=
+					[
+					'fastp', 
+					'--in1', pjoin(sequenceDataDir,sample.read1_filename), #readfileR1
+					'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
+					'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
+					'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
+					'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
+					'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
+					'-q', str(base_quality),#, #quality score 30
+					'overwrite=True',
+					'--cut_front', #cut from front
+					'--cut_window_size', '4',#, #cut_window_size
+					'--cut_mean_quality', '20',
+					'--length_required', '50', #minimum read length
+					'--thread', '3',
+					'--dedup'
+					],
+					logger_=sample_logger)
+
+			else :
+				# quality, adaptor trimming with fastp
+				sample_logger.logger.info('Read trimming and quality scoring\n')
+				call_Command(cmd=
+					[
+					'fastp', 
+					'--in1', pjoin(sequenceDataDir,sample
+					.read1_filename), #readfileR1
+					'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
+					'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
+					'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
+					'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
+					'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
+					'-q', str(base_quality),#, #quality score 30
+					'overwrite=True',
+					'--cut_front', #cut from front
+					'--cut_window_size', '4',#, #cut_window_size
+					'--cut_mean_quality', '20',
+					'--length_required', '50', #minimum read length
+					'--thread', '3'
+					],
+					logger_=sample_logger)
 
 
 			if downsample != -1:
 				# downsamples to the user-inputted number of reads
-				sample_logger.logger.info('Step 1.5: Downsampling reads to {}\n'.format(downsample))
+				sample_logger.logger.info('Downsampling reads to {}\n'.format(downsample))
 				call_Command(cmd=
 					[		
 					'reformat.sh', 
@@ -178,7 +205,7 @@ def flu_Pipeline(
 
 
 			# randomly select a subset of reads with reformat.sh
-			sample_logger.logger.info('Step 2: subsample reads\n')
+			sample_logger.logger.info('Subsample reads\n')
 			call_Command(cmd=
 				[
 				'reformat.sh',
@@ -193,11 +220,11 @@ def flu_Pipeline(
 
 
 			# for each reference available get coverage stats. produces the <reference>.fasta_coverage_stats.csv file
-			sample_logger.logger.info('Step 3: calculate coverage\n')
+			sample_logger.logger.info('Calculate coverage\n')
 			for reference in glob.glob('*.fasta'):
 				calculate_ReferenceCoverage(sequenceDataDir=sequenceDataDir,reference=reference, read1_filename=sample.read1_filename, read2_filename=sample.read2_filename,samplename=sample.samplename, logger_=sample_logger)
 
-			sample_logger.logger.info('Step 4: summarize coverage and pick reference\n')
+			sample_logger.logger.info('Summarize coverage and pick reference\n')
 			# summarize the results of strain selection. will be used in sample reports.
 			summarize_ReferenceCoverage(samplename=sample.samplename)
 			summarize_HACoverage(samplename=sample.samplename)
@@ -205,7 +232,7 @@ def flu_Pipeline(
 			# select the best reference strain and assign it to variables used by assemble.R
 			reference_strain = select_BestReference(samplename=sample.samplename).replace('.fasta_coverage_stats.csv','.fasta')
 
-			sample_logger.logger.info('Step 5: remove intermediate output files\n')
+			sample_logger.logger.info('Remove intermediate output files\n')
 			# cleanup output files
 			cleanup_CalculateReferenceCoverage(samplename=sample.samplename)
 

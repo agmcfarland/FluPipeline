@@ -23,7 +23,7 @@ opt = parse_args(opt_parser)
 #troubleshooting inputs run start
 # opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
 # opt$report_type <- 'run'
-# opt$baseDir <- '/home/agmcfarland/flu_project/FluPipeline/run_test/output'
+# opt$baseDir <- '/home/agmcfarland/quick_tests/output/'
 #troubleshooting inputs run end
 
 if (opt$report_type=='sample'){

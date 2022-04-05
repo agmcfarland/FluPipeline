@@ -18,7 +18,6 @@ option_list = list(
   make_option(c("--minVariantPhredScore"), type="integer", default=12, help="minimum PHRED score allowed for called varinats", metavar="character"),
   make_option(c("--removeNTsFromAlignmentEnds"), type="integer", default=3,  help="Number of NTs to remove from the end of alignments", metavar="character"),
   make_option(c("--BWAmappingScore"), type="integer", default=30, help="minimum BWA mapping score", metavar="character")
-  #make_option(c("--input_type"), type="integer", default=30, help="minimum BWA mapping score", metavar="character")
   )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -36,7 +35,7 @@ detect_variants_message_file <- 'detect_variants_messages.txt'
 # opt$refGenomeFasta <- '/home/agmcfarland/flu_project/FluPipeline/references/H3N2_ref.fasta' #'/home/agmcfarland/flu_project/FluPipeline/references/IBV_Yamagata_ref.fasta'
 
 # opt$softwareDir <- '/home/agmcfarland/flu_project/FluPipeline'
-# opt$workDir <- '/home/agmcfarland/flu_project/test_variant_genomes/output/sampleOutputs/H3N2_test'
+# opt$workDir <- '/home/agmcfarland/quick_tests/output/sampleOutputs/H3N2_test'
 # opt$R1 <- 'fastp_trimmed_H3N2_test_R1_001.fastq.gz'
 # opt$R2 <- 'fastp_trimmed_H3N2_test_R2_001.fastq.gz'
 # opt$refGenomeFasta <- '/home/agmcfarland/flu_project/FluPipeline/references/H3N2_ref.fasta' #'/home/agmcfarland/flu_project/FluPipeline/references/IBV_Yamagata_ref.fasta'
@@ -51,7 +50,7 @@ detect_variants_message_file <- 'detect_variants_messages.txt'
 ## End
 # 
 
-# Sys.setenv(PATH="/home/agmcfarland/miniconda3/envs/testenv2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games")
+Sys.setenv(PATH="/home/agmcfarland/miniconda3/envs/testenv2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games")
 
 # set working directory and load helper functions
 setwd(opt$workDir)
@@ -128,6 +127,7 @@ message('Calling variants...')
 
 system(paste0('callvariants.sh in=',paste0(samplename, '_genome.filt.qual.sorted.bam '), 'ref=',opt$refGenomeFasta,' out=',paste0(samplename, '_allVariants.vcf '), 'shist=',paste0(samplename, '_variantQualityHisto.txt '), 
               'rarity=0 overwrite=t clearfilters'))
+
 
 # read in variant .vcf file
 allVariantsRaw <- tryCatch({

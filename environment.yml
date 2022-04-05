@@ -24,16 +24,16 @@ dependencies:
   - bwa=0.7.15=1
   - bzip2=1.0.8=h7f98852_4
   - c-ares=1.18.1=h7f98852_0
-  - ca-certificates=2022.2.1=h06a4308_0
+  - ca-certificates=2022.3.29=h06a4308_0
   - cairo=1.14.12=he6fea26_5
-  - certifi=2021.5.30=py36h5fab9bb_0
+  - certifi=2021.5.30=py36h06a4308_0
   - cffi=1.14.0=py36h2e261b9_0
   - chardet=4.0.0=py36h06a4308_1003
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
   - cryptography=2.3.1=py36hc365091_0
   - curl=7.55.1=hcb0b314_2
   - decorator=4.4.2=py_0
-  - fastp=0.12.4=0
+  - fastp=0.22.0=h2e03b76_0
   - filprofiler=2021.05.0=py36hfd491a5_0
   - fontconfig=2.13.1=h2176d3f_1000
   - freetype=2.9.1=h3cfcefd_1004
@@ -79,12 +79,13 @@ dependencies:
   - nextclade=1.10.2=h9ee0642_0
   - nextstrain-cli=3.0.3=py_0
   - openjdk=8.0.152=h7b6447c_3
-  - openssl=1.0.2u=h516909a_0
+  - openssl=1.0.2u=h7b6447c_0
   - pandoc=2.17.1.1=ha770c72_0
   - pango=1.40.14=h53a7087_1002
   - parso=0.8.0=py_0
   - pcre=8.39=0
   - pexpect=4.8.0=py36_0
+  - picard=2.26.11=hdfd78af_0
   - pickleshare=0.7.5=py36_0
   - pip=20.2.4=py36_0
   - pixman=0.34.0=h14c3975_1003
@@ -122,9 +123,9 @@ dependencies:
   - s3transfer=0.5.0=pyhd3eb1b0_0
   - samtools=1.7=2
   - setuptools=50.3.0=py36hb0f4dca_1
-  - six=1.16.0=pyhd3eb1b0_0
+  - six=1.16.0=pyhd3eb1b0_1
   - sqlite=3.26.0=h7b6447c_0
-  - threadpoolctl=3.1.0=pyh8a188c0_0
+  - threadpoolctl=2.2.0=pyh0d69192_0
   - tk=8.6.11=h27826a3_1
   - traitlets=4.3.3=py36_0
   - typing-extensions=3.10.0.2=hd3eb1b0_0

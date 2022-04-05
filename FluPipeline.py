@@ -117,7 +117,8 @@ def run_FluPipeline(args):
 			args.BWA_mapping_score,
 			args.masked_nextclade,
 			args.masked_ivar,
-			args.base_quality			
+			args.base_quality,
+			args.no_deduplicate			
 			])
 
 	run_logger.logger.info('Total samples to process: {}\n'.format(len(sample_submission))) # total samples ran
@@ -228,12 +229,14 @@ def main(args=None):
 	parser.add_argument('--max_mem_per_thread', type=int, default=None, help='automatically determines the number of threads to use based on memory per thread supplied (in Gb) [default=None]', metavar='')
 	parser.add_argument('--consensus_masking_threshold', type=int, default=0, help='replace any nucleotides in the consensus sequence with N if their depth falls below this number. [default=0]', metavar='')
 	parser.add_argument('--downsample', type=int, default=-1, help='downsample all read files to these many reads. [default=-1 (no downsampling)]', metavar='')
-	parser.add_argument('--min_variant_phred_score', type=int, default=20, help='keep all variants above or equal to this phred-scaled value. [default=20]', metavar='')
+	parser.add_argument('--min_variant_phred_score', type=int, default=5, help='keep all variants above or equal to this phred-scaled value. [default=5]', metavar='')
 	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [default=3]', metavar='')
 	parser.add_argument('--BWA_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [default=3]', metavar='')
 	parser.add_argument('--masked_nextclade', action='store_true', default=False, help='use the masked consensus sequence fasta file for nextclade clade assignment.  [default=False]')
 	parser.add_argument('--masked_ivar', action='store_true', default=False, help='use the masked consensus sequence fasta file for intrahost variation detection.  [default=False]')
-	parser.add_argument('--base_quality', type=int, default=30, help='keep reads that have at least an average of this pphred-scaled value. [default=3]', metavar='')
+	parser.add_argument('--base_quality', type=int, default=30, help='keep reads that have at least an average of this pphred-scaled value. [default=30]', metavar='')
+	parser.add_argument('--no_deduplicate',  action='store_true', default=False, help='do not conduct read deduplication.  [default=False]')
+
 
 
 	# create args opbject with arguments

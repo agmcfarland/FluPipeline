@@ -325,9 +325,7 @@ df_bounds <- df_baseCov%>%
 p1 <- ggplot(df_baseCov,
        aes(x=POS, y=read_depth, group=as.factor(segment_id)))+
   facet_wrap(~segment_id,ncol=1, strip.position='right')+
-  #geom_area()+
   geom_bar(stat='identity')+
-  #geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "segment"),
   geom_segment(data=df_bounds,aes(x=max_POS+1,xend=max_POS+1,y=0,yend=max_depth,group=segment_id,color=color,linetype='dashed'),show.legend=FALSE)+
   theme_classic()+
  theme(panel.grid.major.x = element_line(size=0.35,linetype='dashed',color='grey'),
