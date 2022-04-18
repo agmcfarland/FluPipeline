@@ -33,7 +33,6 @@ yes | conda env create --name FluPipeline_env --file environment.yml
 conda activate FluPipeline_env
 
 yes | Rscript ./r_packages.R
-
 ```
 
 ## Run a test
@@ -77,9 +76,22 @@ python FluPipeline.py \
 --strain_sample_depth 10000 # use 10,000 reads for reference strain identification (default is 2,000)
 ```
 
-## Output files
+## Output tree
 
-Three main folders within the specified base_directory are created and contain the following.
+The output folder will have the following tree:
+
+```
+.
+├── runLog.txt
+├── runStats.csv
+├── runSummary.pdf
+├── sampleLogs
+├── sampleOutputs
+├── sampleReports
+└── softwareVersions.txt
+```
+
+Three main folders within the specified base_directory are created and contain the following:
 
 1. sampleOutputs: Each sample read pair (from here on termed a sample) has a folder with the sample's name containing all files created during processing.
 
@@ -88,13 +100,26 @@ Three main folders within the specified base_directory are created and contain t
 3. sampleLogs: A record of how the run for each sample went.
 
 
-Each run will produce a **run_summary.pdf**  report summarizing read coverage/depth, strain used as reference per sample, and whether errors occurred and for which samples an error occurred. 
+Four run files:
 
-Each run also will ouput a **runStats.csv** file.
+1. RunSummary.pdf: 
+
+- Reference strains used
+
+- Overall read quality and coverage for each sample
+
+- Errors encountered in a readable format
+
+2. runLog.txt: All messages during run time
+
+3. runStats.csv: Samples processed, their runtime, and errors encountered
+
+4. softwareVersions.txt: The names and versions for all packages/tools/programs/libraries used by FluPipeline
+
 
 ## Usage Parameters
 
-All usage parameters supported by FluPipeine. Default values are in brackets.
+All usage parameters supported by FluPipeline. Default values are in brackets.
 
 ```
 usage: FluPipeline [-h] [--base_directory] [--reference_directory]
@@ -164,10 +189,8 @@ optional arguments:
 #Citation
 
 ```
-
 [FluPipeline - Alex McFarland - github.com/agmcfarland/FluPipeline](https://github.com/agmcfarland/FluPipeline)
 
 [Follow me on twitter! @alexmcfarland_](https://twitter.com/alexmcfarland_)
-
 ```
 
