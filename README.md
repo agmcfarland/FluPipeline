@@ -188,9 +188,7 @@ optional arguments:
 
 # Citation
 
-```
 [FluPipeline - Alex McFarland - github.com/agmcfarland/FluPipeline](https://github.com/agmcfarland/FluPipeline)
 
 [Follow me on twitter! @alexmcfarland_](https://twitter.com/alexmcfarland_)
-```
 
