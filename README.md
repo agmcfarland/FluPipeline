@@ -1,7 +1,6 @@
 # FluPipeline
 
-`FluPipeline` is a command line program for processing influenza sequencin data. It takes as input a folder of paired-end read files and outputs a folder with data and visualizations.
-
+`FluPipeline` is a command line program for processing influenza sequencin data. It takes as input a folder of paired-end read files and outputs a folder containing variant call, taxonomic, and mapping data and visualizations.
 
 ---
 
@@ -14,9 +13,11 @@
 - Detailed tables and figures
 - Custom reference strains can be added
 - Automatic thread selection selection to run samples in parallel
-- Run pipeline only on a subsample of reads
+- Downsample reads and run pipeline
 - Automatic testing
 - Simple installation
+
+---
 
 ## Installation instructions
 
@@ -47,7 +48,6 @@ conda activate FluPipeline_env
 python FluPipeline.py \
 --runtest \
 --threads 6
-
 ```
 
 ## Usage examples
@@ -61,23 +61,20 @@ python FluPipeline.py \
 --base_directory /path/to/output/folder \
 --sequence_directory /path/to/sequence/folder \
 --max_mem_per_thread 8
-
 ```
 
-### Advances
-
-Use a custom reference directory of fasta files. 
+### Advanced
 
 ```
 python FluPipeline.py \
 --base_directory /path/to/output/folder \
 --sequence_directory /path/to/sequence/folder \
---force \
---force_base_directory \
---threads 6 \
---cleanup \
---use_fasta \
---reference_directory /path/to/custom/references
+--force_base_directory \ # overwrite base_directory if it exists
+--threads 6 \ # use 6 threads
+--use_fasta \ # use custom reference genomes (in fasta format)
+--reference_directory /path/to/custom/references \ # directory with custom reference genomes
+--downsample 1000000 \ # downsample all read pairs to 1 million reads
+--strain_sample_depth 10000 # use 10,000 reads for reference strain identification (default is 2,000)
 ```
 
 ## Output files
@@ -95,140 +92,82 @@ Each run will produce a **run_summary.pdf**  report summarizing read coverage/de
 
 Each run also will ouput a **runStats.csv** file.
 
-## Usage Paramters
+## Usage Parameters
+
+All usage parameters supported by FluPipeine. Default values are in brackets.
 
 ```
-usage: FluPipeline.py [-h] [--base_directory BASE_DIRECTORY]
-                      [--reference_directory REFERENCE_DIRECTORY]
-                      [--sequence_directory SEQUENCE_DIRECTORY] [--force]
-                      [--force_base_directory] [--cleanup] [--threads THREADS]
-                      [--runtest] [--strain_sample_depth STRAIN_SAMPLE_DEPTH]
-                      [--use_fasta]
+usage: FluPipeline [-h] [--base_directory] [--reference_directory]
+                   [--sequence_directory] [--force] [--force_base_directory]
+                   [--max_mem_per_thread] [--keep_all_intermediate_files]
+                   [--threads] [--strain_sample_depth] [--use_fasta]
+                   [--consensus_masking_threshold] [--downsample]
+                   [--min_variant_phred_score]
+                   [--remove_NTs_from_alignment_ends]
+                   [--min_read_mapping_score] [--masked_nextclade]
+                   [--masked_ivar] [--base_quality] [--no_deduplicate]
+                   [--runtest]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --base_directory BASE_DIRECTORY
-                        directory that run samples will be saved in
-  --reference_directory REFERENCE_DIRECTORY
+  --base_directory      directory that run samples will be saved in. [None]
+  --reference_directory
                         directory containing reference strain files (.gb or
                         .fasta (see --use_fasta flag))
-  --sequence_directory SEQUENCE_DIRECTORY
+                        [script_path/references]
+  --sequence_directory
                         directory containing fastq sequence files (.gz format)
-  --force               overwrite existing files in assemble.R script
+                        [None]
+  --force               overwrite existing sample files. [False]
   --force_base_directory
-                        overwrite existing directory
-  --cleanup             remove intermediate files
-  --threads THREADS     number of processors to use for multiprocessing
-  --runtest             run an in silico test to make sure FluPipeline is
-                        working correctly
-  --strain_sample_depth STRAIN_SAMPLE_DEPTH
+                        overwrite existing directory. [False
+  --max_mem_per_thread
+                        automatically determines the number of threads to use
+                        based on memory per thread supplied (in Gb) [None]
+  --keep_all_intermediate_files
+                        remove intermediate files. [False]
+  --threads             number of samples to process in paralell. one sample
+                        is one read pair [4]
+  --strain_sample_depth
                         number of random reads to use to determine strain
-                        assignment. default=2000
-  --use_fasta           fasta file(s) containing all eight segments. All
-                        segments must have a single name(only letters,numbers, and underscores).
-                        At the end of
-                        the name there should be an underscore followed by the
-                        segment number. E3xample: an_example_name_1.
-                        default=False
+                        assignment. [2000]
+  --use_fasta           fasta format: fasta file(s) contain all eight segments
+                        sequences. All segments must have a single name (only
+                        letters, numbers, and underscores. At the end of the
+                        name there should be an underscore followed by the
+                        segment number. Example: an_example_name_1. [False]
+  --consensus_masking_threshold
+                        replace any nucleotides in the consensus sequence with
+                        N if their depth falls below this number. [0]
+  --downsample          downsample all read files to these many reads. [-1 (no
+                        downsampling)]
+  --min_variant_phred_score
+                        keep all variants above or equal to this phred-scaled
+                        value. [5]
+  --remove_NTs_from_alignment_ends
+                        remove this many bases from the left and right of each
+                        read prior to mapping. [3]
+  --min_read_mapping_score
+                        keep reads that mapped above or eequal to this phred-
+                        scaled value. [3]
+  --masked_nextclade    use the masked consensus sequence fasta file for
+                        nextclade clade assignment. [False]
+  --masked_ivar         use the masked consensus sequence fasta file for
+                        intrahost variation detection. [False]
+  --base_quality        keep reads that have at least an average of this
+                        pphred-scaled value. [30]
+  --no_deduplicate      do not conduct read deduplication. [False]
+  --runtest             run an in silico test to make sure FluPipeline is
+                        working correctly. [False]
   ```
 
-
-
-# FOR DEVELOPMENT
-
-```
-# create a new conda environment call FluPipeLine_envdev
-conda create --name FluPipeline_devenv
-
-# enter the environment
-source activate FluPipeline_devenv #or conda activate FluPipeline_devenv
-
-
-# download the following. press y when prompted
-conda install -c conda-forge r=3.4.1
-
-#'y'
-
-conda install -c anaconda python=3.6.3
-
-#'y'
-
-pip install biopython numpy pandas
-
-conda install -c bioconda bwa=0.7.15
-
-#'y'
-
-conda install -c bioconda samtools=1.7
-
-#'y'
-
-conda install -c bioconda bcftools=1.8
-
-#'y'
-
-conda install -c bioconda fastp=0.12.4
-
-#'y'
-
-conda install -c bioconda bbmap=38.18
-
-#'y'
-
-conda install -c anaconda ipython
-
-#'y'
-
-conda install -c bioconda nextclade
-
-#'y'
-
-conda install -c conda-forge pandoc
-
-#'y'
-
-## enter R 
-
-R
-
-# download the following. Press an empty space when prompted.
-
-# enter R
-R
-
-# set the library that R will download packages to
-rlib <- system('which R', intern=TRUE)
-rlib <- sub(pattern='/bin/',replacement='/lib/',x=rlib)
-rlib <- paste0(rlib,'/library')
-
-#rlib = '/home/agmcfarland/miniconda3/envs/testenv/lib/R/library'
-
-# verify that .libPaths() only includes the conda R library path
-.libPaths(rlib)
-
-# download R libraries. Do not update any libraries when prompted.
-install.packages('remotes',repos='https://cloud.r-project.org/')
-install_version("Rcpp", version = "1.0.7", repos = "http://cran.us.r-project.org", quiet=FALSE)
-library(remotes)
-install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('ggplot2',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('knitr',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('kableExtra',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('stringr',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('dplyr',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('tidyverse',repos='https://cloud.r-project.org/', quiet=FALSE)
-install_version('latticeExtra','0.6-28',repos='https://cloud.r-project.org/', quiet=FALSE) #2016 version
-source("http://bioconductor.org/biocLite.R")
-biocLite()
-biocLite('ShortRead', suppressUpdates=TRUE, ask=FALSE)
-biocLite('genbankr', suppressUpdates=TRUE, ask=FALSE)
-
-q(save="no")
+#Citation
 
 ```
 
-Saving conda environment in yml
+[FluPipeline - Alex McFarland - github.com/agmcfarland/FluPipeline](https://github.com/agmcfarland/FluPipeline)
+
+[Follow me on twitter! @alexmcfarland_](https://twitter.com/alexmcfarland_)
+
 ```
-conda env export --name FluPipeline_env > FluPipeline_env.yml
-```
+
