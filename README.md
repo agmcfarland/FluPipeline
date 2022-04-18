@@ -9,6 +9,14 @@
 
 <img src="docs/overview.png" alt="FluPipeline overview" width=1000>
 
+**Highlighted Features**
+
+- Detailed tables and figures
+- Custom reference strains can be added
+- Automatic thread selection selection to run samples in parallel
+- Run pipeline only on a subsample of reads
+- Automatic testing
+- Simple installation
 
 ## Installation instructions
 
@@ -27,7 +35,6 @@ yes | Rscript ./r_packages.R
 
 ```
 
-
 ## Run a test
 
 Generates synthetic read data and runs FluPipeline on it. Great for making sure everything installed correctly!
@@ -37,27 +44,29 @@ cd /path/to/FluPipeline-main
 
 conda activate FluPipeline_env
 
-# this runs on test data using synthetic reads
 python FluPipeline.py \
---runtest --threads 6 --strain_sample_depth 3000
+--runtest \
+--threads 6
 
 ```
 
 ## Usage examples
 
-Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to a new folder (--base_directory). Removes the output folder if it already exists (--force, --force_base_directory). Uses 6 threads (--threads). Removes intermediate files that are not used in the final output (--cleanup)
+Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to a new folder (--base_directory). Removes the output folder if it already exists (--force, --force_base_directory). Chooses the appropritate number of threads to run samples in parallel based on the assumption one sample will use 8 Gb of memory (--max_mem_per_thread).
+
+### Basic
 
 ```
 python FluPipeline.py \
 --base_directory /path/to/output/folder \
 --sequence_directory /path/to/sequence/folder \
---force \
---force_base_directory \
---threads 6 \
---cleanup 
+--max_mem_per_thread 8
+
 ```
 
-Use a custom reference directory that uses fasta instead of gb. Nextclade will not work if this is done.
+### Advances
+
+Use a custom reference directory of fasta files. 
 
 ```
 python FluPipeline.py \

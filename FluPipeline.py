@@ -213,30 +213,29 @@ def main(args=None):
 		args = sys.argv[1:]
 
 	# create parser
-	parser = argparse.ArgumentParser()
+	parser = argparse.ArgumentParser(prog = 'FluPipeline')
 
 	# add arguments to parser
-	parser.add_argument('--base_directory',type=str ,default=None, help='directory that run samples will be saved in. [default=None]', metavar='')
-	parser.add_argument('--reference_directory',type=str ,default=pjoin(script_path,'references'), help='directory containing reference strain files (.gb or .fasta (see --use_fasta flag)) [default=script_path/references]', metavar='')
-	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) [default=None]', metavar='')
-	parser.add_argument('--force', action='store_true', default=False, help='overwrite existing files in assemble.R script. [default=False]')
-	parser.add_argument('--force_base_directory', action='store_true', default=False, help='overwrite existing directory. [default=False')
-	parser.add_argument('--keep_all_intermediate_files', action='store_true', default=False, help='remove intermediate files. [default=False]')
-	parser.add_argument('--threads',type=int, default=4, help='number of samples to process in paralell. one sample is one read pair [default=4]', metavar='')
-	parser.add_argument('--runtest', action='store_true', default=False, help='run an in silico test to make sure FluPipeline is working correctly. [default=False]')
-	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. [default=2000]', metavar='')
-	parser.add_argument('--use_fasta', action='store_true', default=False, help='fasta format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. [default=False]')
-	parser.add_argument('--max_mem_per_thread', type=int, default=None, help='automatically determines the number of threads to use based on memory per thread supplied (in Gb) [default=None]', metavar='')
-	parser.add_argument('--consensus_masking_threshold', type=int, default=0, help='replace any nucleotides in the consensus sequence with N if their depth falls below this number. [default=0]', metavar='')
-	parser.add_argument('--downsample', type=int, default=-1, help='downsample all read files to these many reads. [default=-1 (no downsampling)]', metavar='')
-	parser.add_argument('--min_variant_phred_score', type=int, default=5, help='keep all variants above or equal to this phred-scaled value. [default=5]', metavar='')
-	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [default=3]', metavar='')
-	parser.add_argument('--min_read_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [default=3]', metavar='')
-	parser.add_argument('--masked_nextclade', action='store_true', default=False, help='use the masked consensus sequence fasta file for nextclade clade assignment.  [default=False]')
-	parser.add_argument('--masked_ivar', action='store_true', default=False, help='use the masked consensus sequence fasta file for intrahost variation detection.  [default=False]')
-	parser.add_argument('--base_quality', type=int, default=30, help='keep reads that have at least an average of this pphred-scaled value. [default=30]', metavar='')
-	parser.add_argument('--no_deduplicate',  action='store_true', default=False, help='do not conduct read deduplication.  [default=False]')
-
+	parser.add_argument('--base_directory',type=str ,default=None, help='directory that run samples will be saved in. [None]', metavar='')
+	parser.add_argument('--reference_directory',type=str ,default=pjoin(script_path,'references'), help='directory containing reference strain files (.gb or .fasta (see --use_fasta flag)) [script_path/references]', metavar='')
+	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) [None]', metavar='')
+	parser.add_argument('--force', action='store_true', default=False, help='overwrite existing sample files. [False]')
+	parser.add_argument('--force_base_directory', action='store_true', default=False, help='overwrite existing directory. [False')
+	parser.add_argument('--max_mem_per_thread', type=int, default=None, help='automatically determines the number of threads to use based on memory per thread supplied (in Gb) [None]', metavar='')
+	parser.add_argument('--keep_all_intermediate_files', action='store_true', default=False, help='remove intermediate files. [False]')
+	parser.add_argument('--threads',type=int, default=4, help='number of samples to process in paralell. one sample is one read pair [4]', metavar='')
+	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. [2000]', metavar='')
+	parser.add_argument('--use_fasta', action='store_true', default=False, help='fasta format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. [False]')
+	parser.add_argument('--consensus_masking_threshold', type=int, default=0, help='replace any nucleotides in the consensus sequence with N if their depth falls below this number. [0]', metavar='')
+	parser.add_argument('--downsample', type=int, default=-1, help='downsample all read files to these many reads. [-1 (no downsampling)]', metavar='')
+	parser.add_argument('--min_variant_phred_score', type=int, default=5, help='keep all variants above or equal to this phred-scaled value. [5]', metavar='')
+	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [3]', metavar='')
+	parser.add_argument('--min_read_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [3]', metavar='')
+	parser.add_argument('--masked_nextclade', action='store_true', default=False, help='use the masked consensus sequence fasta file for nextclade clade assignment.  [False]')
+	parser.add_argument('--masked_ivar', action='store_true', default=False, help='use the masked consensus sequence fasta file for intrahost variation detection.  [False]')
+	parser.add_argument('--base_quality', type=int, default=30, help='keep reads that have at least an average of this pphred-scaled value. [30]', metavar='')
+	parser.add_argument('--no_deduplicate',  action='store_true', default=False, help='do not conduct read deduplication.  [False]')
+	parser.add_argument('--runtest', action='store_true', default=False, help='run an in silico test to make sure FluPipeline is working correctly. [False]')
 
 
 	# create args opbject with arguments
