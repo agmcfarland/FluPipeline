@@ -76,7 +76,7 @@ python FluPipeline.py \
 --strain_sample_depth 10000 # use 10,000 reads for reference strain identification (default is 2,000)
 ```
 
-## Output tree
+## Outputs
 
 The output folder will have the following tree:
 
@@ -91,18 +91,20 @@ The output folder will have the following tree:
 └── softwareVersions.txt
 ```
 
-Three main folders within the specified base_directory are created and contain the following:
+###  Output descriptions
 
-1. sampleOutputs: Each sample read pair (from here on termed a sample) has a folder with the sample's name containing all files created during processing.
+**Folders**
 
-2. sampleResults: Each sample report is copied here for quick access.
+1. **sampleOutputs:** Each sample read pair (from here on termed a sample) has a folder with the sample's name containing all files created during processing.
 
-3. sampleLogs: A record of how the run for each sample went.
+2. **sampleResults:** Each sample report is copied here for quick access.
+
+3. **sampleLogs:** A record of how the run for each sample went.
 
 
-Four run files:
+**Files**
 
-1. RunSummary.pdf: 
+1. **RunSummary.pdf:** 
 
 - Reference strains used
 
@@ -110,11 +112,11 @@ Four run files:
 
 - Errors encountered in a readable format
 
-2. runLog.txt: All messages during run time
+2. **runLog.txt:** All messages during run time
 
-3. runStats.csv: Samples processed, their runtime, and errors encountered
+3. **runStats.csv:** Samples processed, their runtime, and errors encountered
 
-4. softwareVersions.txt: The names and versions for all packages/tools/programs/libraries used by FluPipeline
+4. **softwareVersions.txt:** The names and versions for all packages/tools/programs/libraries used by FluPipeline
 
 
 ## Usage Parameters
@@ -186,7 +188,7 @@ optional arguments:
                         working correctly. [False]
   ```
 
-#Citation
+# Citation
 
 ```
 [FluPipeline - Alex McFarland - github.com/agmcfarland/FluPipeline](https://github.com/agmcfarland/FluPipeline)
