@@ -33,7 +33,7 @@ def flu_Pipeline(
 	consensus_masking_threshold,
 	min_variant_phred_score,
 	remove_NTs_from_alignment_ends,
-	BWA_mapping_score,
+	min_read_mapping_score,
 	masked_nextclade,
 	masked_ivar,
 	base_quality,
@@ -59,31 +59,11 @@ def flu_Pipeline(
 # consensus_masking_threshold = 0
 # min_variant_phred_score = 4
 # remove_NTs_from_alignment_ends = 3
-# BWA_mapping_score = 30
+# min_read_mapping_score = 30
 # masked_nextclade= False
 # masked_ivar = False
 # base_quality = 30
 # deduplicate = True
-
-# baseDirectory='/home/agmcfarland/flu_project/test_variant_genomes/output'
-# Rscript='Rscript'
-# softwareDir = '/home/agmcfarland/flu_project/FluPipeline'
-# sample = SequencingSample()
-# sample.get_DataFromReadPairs(read1_filename='H3N2_test_R1_001.fastq.gz')
-# sample.get_SampleDirPath(directory=baseDirectory)
-# sequenceDataDir = '/home/agmcfarland/flu_project/test_variant_genomes'
-# referenceStrainsDir = '/home/agmcfarland/flu_project/FluPipeline/references' #directory reference strains to find the best match for a given readset
-# force_overwrite = True #deletes and remakes the sample folder in sampleOutputs
-# keep_all_intermediate_files = False
-# strain_sample_depth = 3000
-# downsample = 500000
-# consensus_masking_threshold = 0
-# min_variant_phred_score = 20
-# remove_NTs_from_alignment_ends = 3
-# BWA_mapping_score = 30
-# masked_nextclade= False
-# masked_ivar = False
-# base_quality = 30
 
 
 ## troubleshooting inputs end ##
@@ -261,7 +241,7 @@ def flu_Pipeline(
 				'--refGenomeFasta', '{}'.format(reference_strain),
 				'--minVariantPhredScore', '{}'.format(min_variant_phred_score),
 				'--removeNTsFromAlignmentEnds', '{}'.format(remove_NTs_from_alignment_ends),
-				'--BWAmappingScore', '{}'.format(BWA_mapping_score)
+				'--BWAmappingScore', '{}'.format(min_read_mapping_score)
 				],logger_=sample_logger
 				)
 
@@ -383,7 +363,7 @@ def flu_Pipeline(
 				'--refGenomeFasta', '{}'.format(pjoin(sample.dirpath,ivar_input_fasta)),
 				'--minVariantPhredScore', '{}'.format(min_variant_phred_score),
 				'--removeNTsFromAlignmentEnds', '{}'.format(remove_NTs_from_alignment_ends),
-				'--BWAmappingScore', '{}'.format(BWA_mapping_score)
+				'--BWAmappingScore', '{}'.format(min_read_mapping_score)
 				],logger_=sample_logger
 				)
 

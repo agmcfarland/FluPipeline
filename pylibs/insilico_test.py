@@ -22,22 +22,6 @@ def create_SyntheticReads(filename, logger_, shell_=False):
 	'''
 	crete synthetic reads from fasta file using bbmap
 	'''
-	# # # no errors
-	# subprocess.run(['randomreads.sh',
-	# 	'reads=100000',
-	# 	# 'coverage=1000',
-	# 	'prefix={}'.format(filename),
-	# 	'seed=5','paired=t','addpairnum=f','illuminanames=t','adderrors=f',
-	# 	'ref={}.fasta'.format(filename),'out1={}_perfect_R1_001.fastq'.format(filename),'out2={}_perfect_R2_001.fastq'.format(filename),
-	# 	'minlength=150','maxlength=150',
-	# 	'maxsnps=0','snprate=0',
-	# 	'maxinss=0',
-	# 	'maxdels=0',
-	# 	'maxsubs=0',
-	# 	'q=40',
-	# 	'superflat=t',
-	# 	'overwrite=t'])
-	# # SNPsµ
 	call_Command(
 		[
 		'randomreads.sh',
@@ -55,22 +39,6 @@ def create_SyntheticReads(filename, logger_, shell_=False):
 		'superflat=t',
 		'overwrite=t'
 		],logger_=logger_)
-
-	# # # insertions deletions and SNPs
-	# subprocess.run(['randomreads.sh',
-	# 	'reads=100000',
-	# 	# 'coverage=1000',
-	# 	'prefix={}'.format(filename),
-	# 	'seed=5','paired=t','addpairnum=f','illuminanames=t','adderrors=f',
-	# 	'ref={}.fasta'.format(filename),'out1={}_snpindel_R1_001.fastq'.format(filename),'out2={}_snpindel_R2_001.fastq'.format(filename),
-	# 	'minlength=150','maxlength=150',
-	# 	'maxsnps=2','snprate=1',
-	# 	'maxinss=2','insrate=1','maxinslen=3',
-	# 	'maxdels=2','delrate=1','maxdellen=3',
-	# 	'q=40',
-	# 	'superflat=t',
-	# 	'overwrite=t'])
-
 
 
 def create_TestData(testDir, referenceStrainsDir):

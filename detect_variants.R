@@ -50,7 +50,7 @@ detect_variants_message_file <- 'detect_variants_messages.txt'
 ## End
 # 
 
-Sys.setenv(PATH="/home/agmcfarland/miniconda3/envs/testenv2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games")
+# Sys.setenv(PATH="/home/agmcfarland/miniconda3/envs/testenv2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games")
 
 # set working directory and load helper functions
 setwd(opt$workDir)

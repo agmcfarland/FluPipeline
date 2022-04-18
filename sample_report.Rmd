@@ -48,12 +48,12 @@ sampleDir <- params$sampleDir
 samplename <- params$samplename
 
 ##test inputs start
-# sampleDir <- '/home/agmcfarland/quick_tests/output/sampleOutputs/H3N2_ref'
+sampleDir <- '/home/agmcfarland/flu_project/benchmarks/test1/FluPipeline_output/sampleOutputs/H3N2_snp-1'
 # sampleDir <- '/home/agmcfarland/quick_tests/output/sampleOutputs/Ashley_1_2_S81'
 # sampleDir <- '/home/agmcfarland/quick_tests/output/sampleOutputs/water2_S25'
 # sampleDir <- '/home/agmcfarland/quick_tests/output/sampleOutputs/H3_7_S11'
-# samplename <- basename(sampleDir)
-# setwd(sampleDir)
+samplename <- basename(sampleDir)
+setwd(sampleDir)
 ##test inputs end
 
 ```
@@ -492,6 +492,7 @@ plot_TableAllVars <- function(df_allVars,tablename,message){
     kable_styling(font_size = 10,latex_options='hold_position'))
       
   } else {
+    cat(paste0('\n**',message,'**\n'))
     cat('\nNo variants detected\n')
   }
   

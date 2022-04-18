@@ -114,7 +114,7 @@ def run_FluPipeline(args):
 			args.consensus_masking_threshold,
 			args.min_variant_phred_score,
 			args.remove_NTs_from_alignment_ends,
-			args.BWA_mapping_score,
+			args.min_read_mapping_score,
 			args.masked_nextclade,
 			args.masked_ivar,
 			args.base_quality,
@@ -231,7 +231,7 @@ def main(args=None):
 	parser.add_argument('--downsample', type=int, default=-1, help='downsample all read files to these many reads. [default=-1 (no downsampling)]', metavar='')
 	parser.add_argument('--min_variant_phred_score', type=int, default=5, help='keep all variants above or equal to this phred-scaled value. [default=5]', metavar='')
 	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [default=3]', metavar='')
-	parser.add_argument('--BWA_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [default=3]', metavar='')
+	parser.add_argument('--min_read_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [default=3]', metavar='')
 	parser.add_argument('--masked_nextclade', action='store_true', default=False, help='use the masked consensus sequence fasta file for nextclade clade assignment.  [default=False]')
 	parser.add_argument('--masked_ivar', action='store_true', default=False, help='use the masked consensus sequence fasta file for intrahost variation detection.  [default=False]')
 	parser.add_argument('--base_quality', type=int, default=30, help='keep reads that have at least an average of this pphred-scaled value. [default=30]', metavar='')

@@ -1,93 +1,46 @@
 # FluPipeline
 
-`FluPipeline` is a command line program that does phylogenetic placement, SNP identification, and consenseus sequence generation. It takes as input a folder of paired-end read files. It ouputs a folder containing detailed data and visualizations for each sample read pair.
+`FluPipeline` is a command line program for processing influenza sequencin data. It takes as input a folder of paired-end read files and outputs a folder with data and visualizations.
+
+
+---
+
+## Overview
+
+<img src="docs/overview.png" alt="FluPipeline overview" width=1000>
 
 
 ## Installation instructions
 
-Download the FluPipeline repository. The folder will be named `FluPipeline-main`.
+Download the FluPipeline repository
 
 Follow the directions below to create a conda environment with all required packages and dependencies.
 
-Installing R packages will take a while.
-
 ```
-# change directory to the pipeline folder
-cd /path/to/FluPipeline-main
+cd /path/to/FluPipeline-main/install
 
-# create the conda environment
-conda env create --name FluPipeline_env --file environment.yml
+yes | conda env create --name FluPipeline_env --file environment.yml
 
-# enter the conda environment
 conda activate FluPipeline_env
 
-
-# you may get a message saying that fortran and gcc had errors in r-base installation. proceed regardless.
-
-# enter R
-R
-
-# set the library that R will download packages to
-rlib <- system('which R', intern=TRUE)
-rlib <- sub(pattern='/bin/',replacement='/lib/',x=rlib)
-rlib <- paste0(rlib,'/library')
-.libPaths(rlib)
-
-# verify that .libPaths() only includes the conda R library path
-.libPaths()
-
-# download R libraries. Do not update any libraries when prompted.
-install.packages('remotes',repos='https://cloud.r-project.org/')
-library(remotes)
-install_version("Rcpp", version = "1.0.7", repos = "http://cran.us.r-project.org", quiet=FALSE)
-install.packages('optparse',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('ggplot2',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('knitr',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('kableExtra',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('stringr',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('dplyr',repos='https://cloud.r-project.org/', quiet=FALSE)
-install.packages('tidyverse',repos='https://cloud.r-project.org/', quiet=FALSE)
-install_version('latticeExtra','0.6-28',repos='https://cloud.r-project.org/', quiet=FALSE) #2016 version
-
-
-# check libraries are installed.
-library(Rcpp)
-
-
-q(save="no")
-```
-
-
-Afterwards change directory to the where the FluPipeline pipeline is located and type the following in the terminal:
+yes | Rscript ./r_packages.R
 
 ```
-python FluPipeline.py -h
-```
-
-If you got a help message, proceed to run the test below.
 
 
-## Tests
+## Run a test
+
+Generates synthetic read data and runs FluPipeline on it. Great for making sure everything installed correctly!
 
 ```
 cd /path/to/FluPipeline-main
 
 conda activate FluPipeline_env
-
 
 # this runs on test data using synthetic reads
 python FluPipeline.py \
 --runtest --threads 6 --strain_sample_depth 3000
 
-
-# this runs on a small test data set of real reads
-python FluPipeline.py \
---base_directory /change/this \
---sequence_directory /home/agmcfarland/flu_project/shared_data/test_data_6_samples \
---force \
---force_base_directory \
---threads 6 \
---cleanup 
 ```
 
 ## Usage examples
