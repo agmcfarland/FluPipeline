@@ -136,7 +136,7 @@ optional arguments:
   -h, --help            show this help message and exit
 
   # main arguments
-  --base_directory      directory that run samples will be saved in.
+  --base_directory      directory that run will output data to.
                         [./FluPipeline_output]
   --reference_directory
                         directory containing reference strain files (.gb or

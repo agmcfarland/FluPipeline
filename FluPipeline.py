@@ -218,7 +218,7 @@ def main(args=None):
 
 	# add arguments to parser
 	# main arguments
-	parser.add_argument('--base_directory',type=str ,default=pjoin(os.getcwd(),'FluPipeline_output'), help='directory that run samples will be saved in. [./FluPipeline_output]', metavar='')
+	parser.add_argument('--base_directory',type=str ,default=pjoin(os.getcwd(),'FluPipeline_output'), help='directory that run will output data to [./FluPipeline_output]', metavar='')
 	parser.add_argument('--reference_directory',type=str ,default=pjoin(script_path,'references'), help='directory containing reference strain files (.gb or .fasta (see --use_fasta flag)) [script_path/references]', metavar='')
 	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) [None]', metavar='')
 	parser.add_argument('--use_fasta', action='store_true', default=False, help='fasta format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. [False]')
