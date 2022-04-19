@@ -49,7 +49,7 @@ python FluPipeline.py \
 
 ## Usage examples
 
-Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to a new folder (--base_directory). Removes the output folder if it already exists (--force, --force_base_directory). Chooses the appropritate number of threads to run samples in parallel based on the assumption one sample will use 8 Gb of memory (--max_mem_per_thread).
+Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to a new folder (--base_directory). Removes the output folder if it already exists (--force_base_directory). Chooses the appropritate number of threads to run samples in parallel based on the assumption one sample will use 8 Gb of memory (--max_mem_per_thread).
 
 ### Basic
 
@@ -57,7 +57,8 @@ Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to
 python FluPipeline.py \
 --base_directory /path/to/output/folder \
 --sequence_directory /path/to/sequence/folder \
---max_mem_per_thread 8
+--max_mem_per_thread 8 \
+--force_base_directory
 ```
 
 ### Advanced
