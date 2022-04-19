@@ -37,7 +37,8 @@ def flu_Pipeline(
 	masked_nextclade,
 	masked_ivar,
 	base_quality,
-	no_deduplicate):
+	no_deduplicate,
+	min_variant_frequency):
 	'''
 	Runs through all steps of the flu pipeline. 
 	'''
@@ -241,7 +242,8 @@ def flu_Pipeline(
 				'--refGenomeFasta', '{}'.format(reference_strain),
 				'--minVariantPhredScore', '{}'.format(min_variant_phred_score),
 				'--removeNTsFromAlignmentEnds', '{}'.format(remove_NTs_from_alignment_ends),
-				'--BWAmappingScore', '{}'.format(min_read_mapping_score)
+				'--BWAmappingScore', '{}'.format(min_read_mapping_score),
+				'--minorVariantThreshold', '{}'.format(min_variant_frequency)
 				],logger_=sample_logger
 				)
 
@@ -363,7 +365,8 @@ def flu_Pipeline(
 				'--refGenomeFasta', '{}'.format(pjoin(sample.dirpath,ivar_input_fasta)),
 				'--minVariantPhredScore', '{}'.format(min_variant_phred_score),
 				'--removeNTsFromAlignmentEnds', '{}'.format(remove_NTs_from_alignment_ends),
-				'--BWAmappingScore', '{}'.format(min_read_mapping_score)
+				'--BWAmappingScore', '{}'.format(min_read_mapping_score),
+				'--minorVariantThreshold', '{}'.format(min_variant_frequency)
 				],logger_=sample_logger
 				)
 

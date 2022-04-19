@@ -123,19 +123,21 @@ All usage parameters supported by FluPipeline. Default values are in brackets.
 
 ```
 usage: FluPipeline [-h] [--base_directory] [--reference_directory]
-                   [--sequence_directory] [--force] [--force_base_directory]
-                   [--max_mem_per_thread] [--keep_all_intermediate_files]
-                   [--threads] [--strain_sample_depth] [--use_fasta]
-                   [--consensus_masking_threshold] [--downsample]
-                   [--min_variant_phred_score]
+                   [--sequence_directory] [--use_fasta] [--force]
+                   [--force_base_directory] [--keep_all_intermediate_files]
+                   [--threads] [--max_mem_per_thread] [--strain_sample_depth]
+                   [--downsample] [--base_quality] [--no_deduplicate]
                    [--remove_NTs_from_alignment_ends]
-                   [--min_read_mapping_score] [--masked_nextclade]
-                   [--masked_ivar] [--base_quality] [--no_deduplicate]
-                   [--runtest]
+                   [--min_read_mapping_score] [--min_variant_phred_score]
+                   [--min_variant_frequency] [--consensus_masking_threshold]
+                   [--masked_nextclade] [--masked_ivar] [--runtest]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --base_directory      directory that run samples will be saved in. [None]
+
+  # main arguments
+  --base_directory      directory that run samples will be saved in.
+                        [./FluPipeline_output]
   --reference_directory
                         directory containing reference strain files (.gb or
                         .fasta (see --use_fasta flag))
@@ -143,45 +145,65 @@ optional arguments:
   --sequence_directory
                         directory containing fastq sequence files (.gz format)
                         [None]
-  --force               overwrite existing sample files. [False]
-  --force_base_directory
-                        overwrite existing directory. [False
-  --max_mem_per_thread
-                        automatically determines the number of threads to use
-                        based on memory per thread supplied (in Gb) [None]
-  --keep_all_intermediate_files
-                        remove intermediate files. [False]
-  --threads             number of samples to process in paralell. one sample
-                        is one read pair [4]
-  --strain_sample_depth
-                        number of random reads to use to determine strain
-                        assignment. [2000]
   --use_fasta           fasta format: fasta file(s) contain all eight segments
                         sequences. All segments must have a single name (only
                         letters, numbers, and underscores. At the end of the
                         name there should be an underscore followed by the
                         segment number. Example: an_example_name_1. [False]
-  --consensus_masking_threshold
-                        replace any nucleotides in the consensus sequence with
-                        N if their depth falls below this number. [0]
+  
+	# remove files/folders
+  --force               overwrite existing sample files. [False]
+  --force_base_directory
+                        overwrite existing directory. [False
+  --keep_all_intermediate_files
+                        remove intermediate files. [False]
+  
+  # parallel jobs                      
+  --threads             number of samples to process in paralell. one sample
+                        is one read pair [4]
+  --max_mem_per_thread
+                        automatically determines the number of threads to use
+                        based on memory per thread supplied (in Gb) [None]
+  
+  # number of reads to use
+  --strain_sample_depth
+                        number of random reads to use to determine strain
+                        assignment. [2000]
   --downsample          downsample all read files to these many reads. [-1 (no
                         downsampling)]
-  --min_variant_phred_score
-                        keep all variants above or equal to this phred-scaled
-                        value. [5]
+  
+  # read processing                    
+  --base_quality        keep reads that have at least an average of this
+                        phred-scaled value. [30]
+  --no_deduplicate      do not conduct read deduplication. [False]
   --remove_NTs_from_alignment_ends
                         remove this many bases from the left and right of each
                         read prior to mapping. [3]
+  
+  # read mapping
   --min_read_mapping_score
                         keep reads that mapped above or eequal to this phred-
                         scaled value. [3]
+  
+  # variant calling 
+  --min_variant_phred_score
+                        keep all variants above or equal to this phred-scaled
+                        value. [5]
+  --min_variant_frequency
+                        keep all variants with allele frequencies above or
+                        equal this value. [0.05]
+  
+  # consensus sequence generation and usage
+  --consensus_masking_threshold
+                        replace any nucleotides in the consensus sequence with
+                        N if their depth falls below this number. [0]
   --masked_nextclade    use the masked consensus sequence fasta file for
                         nextclade clade assignment. [False]
-  --masked_ivar         use the masked consensus sequence fasta file for
-                        intrahost variation detection. [False]
-  --base_quality        keep reads that have at least an average of this
-                        pphred-scaled value. [30]
-  --no_deduplicate      do not conduct read deduplication. [False]
+  --masked_ivar         use the masked consensus sequence fasta file as the
+                        reference genome for intrahost variation detection.
+                        [False]
+  
+  # run test
   --runtest             run an in silico test to make sure FluPipeline is
                         working correctly. [False]
   ```

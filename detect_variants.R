@@ -17,7 +17,8 @@ option_list = list(
   make_option(c("--maxAmpliconLength"), type="integer", default=350, help="comma delimited list of R2 fastq files", metavar="character"),
   make_option(c("--minVariantPhredScore"), type="integer", default=12, help="minimum PHRED score allowed for called varinats", metavar="character"),
   make_option(c("--removeNTsFromAlignmentEnds"), type="integer", default=3,  help="Number of NTs to remove from the end of alignments", metavar="character"),
-  make_option(c("--BWAmappingScore"), type="integer", default=30, help="minimum BWA mapping score", metavar="character")
+  make_option(c("--BWAmappingScore"), type="integer", default=30, help="minimum BWA mapping score", metavar="character"),
+  make_option(c("--minorVariantThreshold"), type="integer", default=0.05, help="minimum minor variant allele frequency threshold", metavar="character")
   )
 
 opt_parser = OptionParser(option_list=option_list)
@@ -169,7 +170,9 @@ allVariantsFiltered$AF <- as.numeric(allVariantsFiltered$AF)
 
 # Create a filtered variant file
 # opt$minVariantPhredScore <- 5
-allVariantsFiltered <- allVariantsFiltered%>%filter(QUAL>=opt$minVariantPhredScore)
+allVariantsFiltered <- allVariantsFiltered%>%
+  filter(QUAL>=opt$minVariantPhredScore,
+         AF>=opt$minorVariantThreshold)
 
 # get major variants
 majorVariants <- allVariantsFiltered%>%
