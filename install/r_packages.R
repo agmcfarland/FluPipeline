@@ -1,4 +1,3 @@
-
 # set the library that R will download packages to
 rlib <- system('which R', intern=TRUE)
 rlib <- sub(pattern='/bin/',replacement='/lib/',x=rlib)
@@ -20,4 +19,3 @@ install.packages('stringr',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('dplyr',repos='https://cloud.r-project.org/', quiet=FALSE)
 install.packages('tidyr',repos='https://cloud.r-project.org/', quiet=FALSE)
 install_version('latticeExtra','0.6-28',repos='https://cloud.r-project.org/', quiet=FALSE) #2016 version
-
