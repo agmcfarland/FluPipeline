@@ -1,6 +1,6 @@
 # FluPipeline
 
-`FluPipeline` is a command line program for processing influenza sequencing data. It takes as input a folder of paired-end read files and outputs a folder containing variant call, taxonomic, and mapping data and visualizations.
+`FluPipeline` is a command line program for processing influenza sequencing data. It takes as input a folder of paired-end read files and outputs a folder containing variant call, assembly, taxonomic, and mapping data and visualizations and reports.
 
 ## Overview
 
