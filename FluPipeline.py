@@ -119,7 +119,8 @@ def run_FluPipeline(args):
 			args.masked_ivar,
 			args.base_quality,
 			args.no_deduplicate,
-			args.min_variant_frequency
+			args.min_variant_frequency,
+			args.no_assembly
 			])
 
 	run_logger.logger.info('Total samples to process: {}\n'.format(len(sample_submission))) # total samples ran
@@ -241,6 +242,9 @@ def main(args=None):
 	parser.add_argument('--no_deduplicate',  action='store_true', default=False, help='do not conduct read deduplication.  [False]')
 	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [3]', metavar='')
 	
+	# assembly
+	parser.add_argument('--no_assembly', action='store_true', default=False, help='Do not assemble reads into a draft genome. [False]')
+
 	# read mapping
 	parser.add_argument('--min_read_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [3]', metavar='')
 	

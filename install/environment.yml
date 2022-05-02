@@ -1,4 +1,4 @@
-name: testenv2
+name: testenv3
 channels:
   - bioconda
   - anaconda
@@ -24,7 +24,7 @@ dependencies:
   - bwa=0.7.15=1
   - bzip2=1.0.8=h7f98852_4
   - c-ares=1.18.1=h7f98852_0
-  - ca-certificates=2022.3.29=h06a4308_0
+  - ca-certificates=2022.3.29=h06a4308_1
   - cairo=1.14.12=he6fea26_5
   - certifi=2021.5.30=py36h06a4308_0
   - cffi=1.14.0=py36h2e261b9_0
@@ -124,6 +124,7 @@ dependencies:
   - samtools=1.7=2
   - setuptools=50.3.0=py36hb0f4dca_1
   - six=1.16.0=pyhd3eb1b0_1
+  - spades=3.13.0=0
   - sqlite=3.26.0=h7b6447c_0
   - threadpoolctl=2.2.0=pyh0d69192_0
   - tk=8.6.11=h27826a3_1
@@ -160,4 +161,4 @@ dependencies:
     - psutil==5.9.0
     - pyparsing==3.0.7
     - pytz==2021.3
-prefix: /home/agmcfarland/miniconda3/envs/testenv2
+prefix: /home/agmcfarland/miniconda3/envs/testenv3

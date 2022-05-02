@@ -38,7 +38,8 @@ def flu_Pipeline(
 	masked_ivar,
 	base_quality,
 	no_deduplicate,
-	min_variant_frequency):
+	min_variant_frequency,
+	no_assembly):
 	'''
 	Runs through all steps of the flu pipeline. 
 	'''
@@ -221,14 +222,47 @@ def flu_Pipeline(
 			sample_logger.logger.exception('FluPipeline Error: failure at strain assignment', exc_info=True)
 			run_chunk = False
 
+	
+	# set new trimmed filenames
+	trimmed_r1 = 'fastp_trimmed_'+sample.read1_filename
+	trimmed_r2 = 'fastp_trimmed_'+sample.read2_filename
+
+
+	## ==================================assemble reads==============================================================
+	## ==============================================================================================================
+	if run_chunk == True:
+		try:
+			if no_assembly == False:
+				sample_logger.logger.info('Assembling reads')
+
+				# run spades
+				os.makedirs('assembly', exist_ok=True)
+				call_Command(cmd=
+					[
+					'spades.py',
+					'-1','{}'.format(pjoin(sample.dirpath,trimmed_r1)),
+					'-2','{}'.format(pjoin(sample.dirpath,trimmed_r2)),
+					'-o','{}/assembly'.format(sample.dirpath),
+					'-t','4',
+					'--phred-offset','33'
+					],logger_=sample_logger
+					)
+			else:
+				sample_logger.logger.info('Assembly option not selected')
+
+
+		except:
+			sample_logger.logger.exception('FluPipeline Error: failure at read assembly', exc_info=True)
+			run_chunk = False			
+
 	## ==================================find variants===============================================================
 	## ==============================================================================================================
 	if run_chunk == True:
 		try:
 			sample_logger.logger.info('Finding variants')
 
-			trimmed_r1 = 'fastp_trimmed_'+sample.read1_filename
-			trimmed_r2 = 'fastp_trimmed_'+sample.read2_filename
+			# trimmed_r1 = 'fastp_trimmed_'+sample.read1_filename
+			# trimmed_r2 = 'fastp_trimmed_'+sample.read2_filename
 
 			# run assemble.R
 			call_Command(cmd=

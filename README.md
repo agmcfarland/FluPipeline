@@ -61,6 +61,18 @@ python FluPipeline.py \
 --force_base_directory
 ```
 
+The same as above but without the de-novo assembly step (--no_assembly).
+
+```
+python FluPipeline.py \
+--base_directory /path/to/output/folder \
+--sequence_directory /path/to/sequence/folder \
+--max_mem_per_thread 8 \
+--force_base_directory \
+--no_assembly
+```
+
+
 ### Advanced
 
 ```
@@ -186,6 +198,9 @@ optional arguments:
                         keep reads that mapped above or eequal to this phred-
                         scaled value. [3]
   
+  # assembly
+  --no_assembly         Do not assemble reads into a draft genome. [False]
+
   # variant calling 
   --min_variant_phred_score
                         keep all variants above or equal to this phred-scaled

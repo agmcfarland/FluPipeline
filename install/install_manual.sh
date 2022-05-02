@@ -22,6 +22,8 @@ yes | conda install -c bioconda fastp=0.22.0
 
 yes | conda install -c bioconda bbmap=38.18
 
+yes | conda install -c bioconda spades=3.13.0
+
 yes | conda install -c anaconda ipython
 
 yes | Rscript ./r_packages.R
