@@ -17,7 +17,7 @@ mamba install -c conda-forge gsl
 
 mamba install -c bioconda bcftools=1.15.1
 
-yes | pip install biopython numpy pandas psutil
+yes | pip install biopython numpy pandas psutil pytz
 
 yes | mamba install -c bioconda bwa=0.7.17
 

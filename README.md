@@ -17,41 +17,7 @@
 
 ---
 
-## Installation instructions
-
-Download the FluPipeline repository
-
-Follow the directions below to create a conda environment with all required packages and dependencies.
-
-```
-cd /path/to/FluPipeline-main/install
-
-yes | conda env create --name FluPipeline_env --file environment.yml
-
-conda activate FluPipeline_env
-
-yes | Rscript ./r_packages.R
-```
-
-## Run a test
-
-Generates synthetic read data and runs FluPipeline on it. Great for making sure everything installed correctly!
-
-```
-cd /path/to/FluPipeline-main
-
-conda activate FluPipeline_env
-
-python FluPipeline.py \
---runtest \
---threads 6
-```
-
-## Usage examples
-
-Run FluPipeline on fastq files in a folder (--sequence_directory) and outputs to a new folder (--base_directory). Removes the output folder if it already exists (--force_base_directory). Chooses the appropritate number of threads to run samples in parallel based on the assumption one sample will use 8 Gb of memory (--max_mem_per_thread).
-
-### Basic
+### Generic
 
 ```
 conda activate testenv
@@ -70,6 +36,30 @@ python FluPipeline.py \
 --variant_caller bcftools \
 --keep_trimmed_reads
 ```
+
+**Example**
+
+Should take 10 minutes to run
+
+```
+conda activate testenv
+
+cd /data/FluPipeline-update5
+
+python FluPipeline.py -h
+
+
+python FluPipeline.py \
+--base_directory /data/alex/output \
+--sequence_directory /data/alex/data \
+--threads 8 \
+--downsample 1000000 \
+--force_base_directory \
+--variant_caller bcftools \
+--keep_trimmed_reads
+```
+
+
 
 Check out all the options below
 
