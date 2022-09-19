@@ -95,22 +95,22 @@ if __name__ == '__main__':
 
 	# ## OG ## 
 	## Troubleshooting inputs
-	samplename = 'CHOA-063_S38'
-	baseDir = '/data/flu_project/benchmarking_project/compare_caller/lofreq/sampleOutputs/CHOA-063_S38'
-	logDir = baseDir
-	R1 = 'fastp_trimmed_CHOA-063_S38_R1_001.fastq.gz'
-	R2 = 'fastp_trimmed_CHOA-063_S38_R2_001.fastq.gz'
-	refGenomeFasta = 'H3N2_ref.fasta'
-	minAmpliconLength = 50
-	maxAmpliconLength = 350
-	minVariantPhredScore = 30
-	removeNTsFromAlignmentEnds = 3
-	BWAmappingScore = 60
-	minorVariantThreshold = 0.05
-	majorVariantThreshold = 0.8
-	majorIndelVariantThreshold = 0.8
-	variant_caller = 'bcftools'
-	minimum_read_depth = 10
+	# samplename = 'CHOA-063_S38'
+	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/lofreq/sampleOutputs/CHOA-063_S38'
+	# logDir = baseDir
+	# R1 = 'fastp_trimmed_CHOA-063_S38_R1_001.fastq.gz'
+	# R2 = 'fastp_trimmed_CHOA-063_S38_R2_001.fastq.gz'
+	# refGenomeFasta = 'H3N2_ref.fasta'
+	# minAmpliconLength = 50
+	# maxAmpliconLength = 350
+	# minVariantPhredScore = 30
+	# removeNTsFromAlignmentEnds = 3
+	# BWAmappingScore = 60
+	# minorVariantThreshold = 0.05
+	# majorVariantThreshold = 0.8
+	# majorIndelVariantThreshold = 0.8
+	# variant_caller = 'bcftools'
+	# minimum_read_depth = 10
 
 	args = parser.parse_args()
 
