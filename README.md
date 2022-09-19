@@ -117,16 +117,15 @@ options:
   --min_variant_frequency
                         keep all variants with allele frequencies above or equal this value. [0.05]
   --major_variant_frequency
-                        keep all major variants with allele frequencies above or equal this value.
+                        keep all major variants with allele frequencies above this value.
                         [0.5]
   --major_indel_frequency
-                        keep all major indels with allele frequencies above or equal this value.
+                        keep all major indels with allele frequencies above or equal to this value.
                         [0.8]
   --minimum_read_depth
                         Mask/ignore all bases and variants at or below this read depth. [10]
   --consensus_masking_threshold
-                        replace any nucleotides in the consensus sequence with N if their depth
-                        falls below this number. [0]
+                        replace any nucleotides in the consensus sequence with N if their depth falls below this number. [0]
   --masked_nextclade    use the masked consensus sequence fasta file for nextclade clade
                         assignment. [False]
   --masked_ivar         use the masked consensus sequence fasta file as the reference genome for

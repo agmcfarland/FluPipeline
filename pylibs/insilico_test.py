@@ -48,43 +48,43 @@ def create_TestData(testDir, referenceStrainsDir):
 	baseDirectory = pjoin(testDir,'output')
 	sequenceDataDir = pjoin(testDir,'data')
 
-	# # remove testing directory if it already exists
-	# try:
-	# 	shutil.rmtree(testDir)
-	# except:
-	# 	pass
+	# remove testing directory if it already exists
+	try:
+		shutil.rmtree(testDir)
+	except:
+		pass
 
-	# # make testing directories
-	# os.makedirs(testDir, exist_ok=True)
-	# os.makedirs(baseDirectory, exist_ok=True)
-	# os.makedirs(sequenceDataDir, exist_ok=True)
+	# make testing directories
+	os.makedirs(testDir, exist_ok=True)
+	os.makedirs(baseDirectory, exist_ok=True)
+	os.makedirs(sequenceDataDir, exist_ok=True)
 
-	# # enter the test directory that will contain the insilico fastq files
-	# os.chdir(sequenceDataDir)
+	# enter the test directory that will contain the insilico fastq files
+	os.chdir(sequenceDataDir)
 
-	# # intialize logfile handler
-	# run_logger = RunLogger(directory=baseDirectory,filename='insilicoTestLog')
-	# run_logger.initialize_FileHandler()
-	# run_logger.add_StreamHandler()
+	# intialize logfile handler
+	run_logger = RunLogger(directory=baseDirectory,filename='insilicoTestLog')
+	run_logger.initialize_FileHandler()
+	run_logger.add_StreamHandler()
 
-	# # copy reference genbank files (.gb) from referenceStrainsDir to the sequence data dir, sequenceDataDir
-	# [shutil.copy(gbk, os.getcwd()) for gbk in glob.glob(pjoin(referenceStrainsDir,'*.gb'))]
+	# copy reference genbank files (.gb) from referenceStrainsDir to the sequence data dir, sequenceDataDir
+	[shutil.copy(gbk, os.getcwd()) for gbk in glob.glob(pjoin(referenceStrainsDir,'*.gb'))]
 
-	# # extract just the filename, no suffix for all gbs to convert to synthetic reads
-	# gbk_files = glob.glob('*.gb')
-	# gbk_files = [i.replace('.gb','') for i in gbk_files]
+	# extract just the filename, no suffix for all gbs to convert to synthetic reads
+	gbk_files = glob.glob('*.gb')
+	gbk_files = [i.replace('.gb','') for i in gbk_files]
 
-	# # create fasta and synthetic read set
-	# run_logger.logger.info('Making test data...\n')
-	# for strain in gbk_files:
-	# 	convert_GBKToFasta(filename=strain)
-	# 	create_SyntheticReads(filename=strain, logger_=run_logger)
+	# create fasta and synthetic read set
+	run_logger.logger.info('Making test data...\n')
+	for strain in gbk_files:
+		convert_GBKToFasta(filename=strain)
+		create_SyntheticReads(filename=strain, logger_=run_logger)
 
-	# # gzip fastq files
-	# run_logger.logger.info('Compressing in silico fastq files...\n')
-	# trimmed_fastq_list = glob.glob('*.fastq')
-	# [subprocess.run(['gzip', trimmed_fastq]) for trimmed_fastq in trimmed_fastq_list] 
-	# run_logger.logger.info('Finished making test data\n')
+	# gzip fastq files
+	run_logger.logger.info('Compressing in silico fastq files...\n')
+	trimmed_fastq_list = glob.glob('*.fastq')
+	[subprocess.run(['gzip', trimmed_fastq]) for trimmed_fastq in trimmed_fastq_list] 
+	run_logger.logger.info('Finished making test data\n')
 
 
 def compare_TestResults(): 

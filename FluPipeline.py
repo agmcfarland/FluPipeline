@@ -257,7 +257,8 @@ def main(args=None):
 		create_TestData(testDir=testDir, referenceStrainsDir=args.reference_directory)
 
 	if args.testbin == True:
-		os.system(f'python -m bin.summarize --baseDir {args.base_directory} --sequenceDir {args.sequence_directory}')
+		# os.system(f'python -m bin.summarize --baseDir {args.base_directory} --sequenceDir {args.sequence_directory}')
+		os.system(f'python -m bin.summarize -h')
 		sys.exit()
 
 	if args.variant_caller != 'bcftools':

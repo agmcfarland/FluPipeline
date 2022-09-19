@@ -17,7 +17,6 @@ import numpy as np
 from .processing_classes import SequencingSample, RunLogger
 
 
-
 def convert_GBKToFasta(filename):
 	'''
 	Creates a fasta file from genbank that uses the accession ids and segment numbers to name each segment. 

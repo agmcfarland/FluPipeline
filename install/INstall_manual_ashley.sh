@@ -13,9 +13,9 @@ conda config --append channels bioconda
 conda config --append channels main
 conda config --append channels anaconda
 
-mamba install -c conda-forge gsl
+yes | mamba install -c conda-forge gsl
 
-mamba install -c bioconda bcftools=1.15.1
+yes | mamba install -c bioconda bcftools=1.15.1
 
 yes | pip install biopython numpy pandas psutil pytz
 
@@ -29,7 +29,7 @@ yes | mamba install -c bioconda nextclade=2.4.0
 
 yes | mamba install -c bioconda bbmap=38.18
 
-yes | mamba install -c bioconda spades=3.13.0
+# yes | mamba install -c bioconda spades=3.13.0
 
 yes | mamba install -c bioconda lofreq=2.1.5
 

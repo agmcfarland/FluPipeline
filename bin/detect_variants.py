@@ -95,22 +95,22 @@ if __name__ == '__main__':
 
 	# ## OG ## 
 	## Troubleshooting inputs
-	# samplename = 'CHOA-063_S38'
-	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/bcftools/sampleOutputs/CHOA-063_S38'
-	# logDir = baseDir
-	# R1 = 'fastp_trimmed_CHOA-063_S38_R1_001.fastq.gz'
-	# R2 = 'fastp_trimmed_CHOA-063_S38_R2_001.fastq.gz'
-	# refGenomeFasta = 'H3N2_ref.fasta'
-	# minAmpliconLength = 50
-	# maxAmpliconLength = 350
-	# minVariantPhredScore = 30
-	# removeNTsFromAlignmentEnds = 3
-	# BWAmappingScore = 60
-	# minorVariantThreshold = 0.05
-	# majorVariantThreshold = 0.8
-	# majorIndelVariantThreshold = 0.8
-	# variant_caller = 'bcftools'
-	# minimum_read_depth = 10
+	samplename = 'CHOA-063_S38'
+	baseDir = '/data/flu_project/benchmarking_project/compare_caller/lofreq/sampleOutputs/CHOA-063_S38'
+	logDir = baseDir
+	R1 = 'fastp_trimmed_CHOA-063_S38_R1_001.fastq.gz'
+	R2 = 'fastp_trimmed_CHOA-063_S38_R2_001.fastq.gz'
+	refGenomeFasta = 'H3N2_ref.fasta'
+	minAmpliconLength = 50
+	maxAmpliconLength = 350
+	minVariantPhredScore = 30
+	removeNTsFromAlignmentEnds = 3
+	BWAmappingScore = 60
+	minorVariantThreshold = 0.05
+	majorVariantThreshold = 0.8
+	majorIndelVariantThreshold = 0.8
+	variant_caller = 'bcftools'
+	minimum_read_depth = 10
 
 	args = parser.parse_args()
 
@@ -247,7 +247,6 @@ if __name__ == '__main__':
 
 	logger.logger.info(f'Calling variants with {variant_caller}...\n')
 
-	# variant_caller = 'bbtools'
 	if variant_caller == 'bbtools':
 		call_Command(cmd=
 		f'callvariants.sh in={samplename}_genome.filt.qual.sorted.bam ref={refGenomeFasta} out={samplename}_allVariants.vcf shist={samplename}_variantQualityHisto.txt rarity=0 overwrite=t' #clearfilters
@@ -291,9 +290,7 @@ if __name__ == '__main__':
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
 
 
-	# variant_caller = 'lofreq'
 	if variant_caller == 'lofreq':
-
 		# add indel qualities to bam. save to new filename
 		call_Command(cmd=
 		f'lofreq indelqual --dindel -f {refGenomeFasta} --out {samplename}_genome.indels.filt.qual.sorted.bam {samplename}_genome.filt.qual.sorted.bam'
@@ -359,28 +356,42 @@ if __name__ == '__main__':
 		df_vcf = df_vcf[df_vcf['AF']>0.5]
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
 
+
+		# get segment names and sizes to add to vcf
+		segment_name_size = {}
+		for record in SeqIO.parse(refGenomeFasta,'fasta'):
+			segment_name_size[record.id] = len(str(record.seq))
+
 		# make vcf from filter
 		with open(f'{samplename}_lofreq.vcf', 'r') as infile:
 			with open(f'consensus_input.vcf','w') as outfile:
 				header_line = True
 				for l in infile:
 					if header_line == True:
-						outfile.write(l)
-						if l.find('#CHROM') > -1:
+						if l.find('#CHROM') == -1:
+							outfile.write(l)
+							if l.find('##reference=') > -1:
+								for k,v in segment_name_size.items():
+									outfile.write(f'##contig=<ID={k},length={v}>\n')
+							if l.find('Homopolymer') > -1:
+								outfile.write('##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">\n') #['##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">'] #https://github.com/CSB5/lofreq/blob/master/src/tools/scripts/lofreq2_add_fake_gt.py
+						else:
+							l = l.replace('\n','\tFORMAT\n')
+							outfile.write(l)
 							header_line = False
-				['##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">'] #https://github.com/CSB5/lofreq/blob/master/src/tools/scripts/lofreq2_add_fake_gt.py
+
 
 		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO']]
+		vcf_filtered['FORMAT'] = 'GT'
 		vcf_filtered.to_csv('consensus_vcf_table.txt',sep='\t',header=None,index=None)
 		os.system(f'cat consensus_vcf_table.txt >> consensus_input.vcf')
-		os.system(f'bcftools norm -f H3N2_ref.fasta -o consensus_input_norm.vcf consensus_input.vcf')
+
+		os.system('head -n 50 consensus_input.vcf')
+		os.system(f'bcftools norm -f {refGenomeFasta} -o consensus_input_norm.vcf consensus_input.vcf')
 		os.system(f'bgzip -c consensus_input.vcf > consensus_input.vcf.gz')
 		os.system(f'tabix consensus_input.vcf.gz')
-		os.system(f'bcftools consensus --mark-ins lc --mark-snv lc --mark-del lc -f H3N2_ref.fasta -o vcf_fasta.fasta consensus_input.vcf.gz')
+		os.system(f'bcftools consensus --mark-ins lc --mark-snv lc --mark-del lc -f {refGenomeFasta} -o bcftools_consensus.fasta consensus_input.vcf.gz')
 
-
-
-	# variant_caller = 'bcftools'
 	if variant_caller == 'bcftools':
 		# -A: count orphans
 		# -a: output all positions, including those with 0 depth
@@ -455,10 +466,10 @@ if __name__ == '__main__':
 		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO', 'FORMAT', 'OTHER']]
 		vcf_filtered.to_csv('consensus_vcf_table.txt',sep='\t',header=None,index=None)
 		os.system(f'cat consensus_vcf_table.txt >> consensus_input.vcf')
-		os.system(f'bcftools norm -f H3N2_ref.fasta -o consensus_input_norm.vcf consensus_input.vcf')
+		os.system(f'bcftools norm -f {refGenomeFasta} -o consensus_input_norm.vcf consensus_input.vcf')
 		os.system(f'bgzip -c consensus_input.vcf > consensus_input.vcf.gz')
 		os.system(f'tabix consensus_input.vcf.gz')
-		os.system(f'bcftools consensus --mark-ins lc --mark-snv lc --mark-del lc -f H3N2_ref.fasta -o bcftools_consensus.fasta consensus_input.vcf.gz')
+		os.system(f'bcftools consensus --mark-ins lc --mark-snv lc --mark-del lc -f {refGenomeFasta} -o bcftools_consensus.fasta consensus_input.vcf.gz')
 
 
 

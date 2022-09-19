@@ -63,38 +63,6 @@ class SequencingSample:
 		if os.path.exists(pjoin(directory,self.read2_filename)) == False:
 			raise ValueError(str(self.read2_filename)+' not found')
 
-	# def cleanup_OutputFiles(self, directory):
-	# 	'''
-	# 	Removes files after running pipeline that do not have a partial string match to intermediate_keep list
-	# 	intermediate: all intermediate files 
-	# 	none: no files removed
-	# 	'''
-	# 	curdir = os.getcwd()
-	# 	os.chdir(directory)
-
-	# 	keep = [
-	# 		'.consensus.fasta','consensusTable.csv','consensus.masked.fasta','variantTableRaw.csv',
-	# 		'variantTableMajor.csv','variantTable.csv','variantQualityHisto.txt','allVariants.vcf',
-	# 		'covstats.txt','basecov.txt','filt.qual.sorted.bam.bai','filt.qual.sorted.bam',
-	# 		'reference_ha_coverage','reference_coverage','combined_coverage_stats',
-	# 		'coverage_stats','fastp_stats',
-	# 		'nextclade_output','_ha','detect_variants_messages.txt','warnings.csv','.pdf'
-	# 	]
-	# 	# change so it doesn't remove folders
-	# 	to_remove = os.listdir(directory)
-
-	# 	for f in os.listdir(directory):
-	# 		for i in keep:
-	# 			if f.find(i) > -1:
-	# 				try:
-	# 					to_remove.remove(f)
-	# 				except:
-	# 					continue
-
-	# 	# [print(f) for f in to_remove if os.path.isdir(f)==False]
-	# 	[os.remove(f) for f in to_remove if os.path.isdir(f)==False]
-
-	# 	os.chdir(curdir)
 
 class RunLogger:
 	'''
