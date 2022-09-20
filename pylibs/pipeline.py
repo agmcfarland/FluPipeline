@@ -409,7 +409,7 @@ def flu_Pipeline(
 	else:
 		sample_logger.logger.info('Finished processing sample {} with warnings'.format(sample.samplename))
 
-	sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
+	sample_logger.logger.info('FluPipeline Time: {} (H:M:S)'.format(datetime.now()-start_run_timer))
 	#use print so the program talks more
 	print('Finished processing sample {}'.format(sample.samplename))
 	print('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))

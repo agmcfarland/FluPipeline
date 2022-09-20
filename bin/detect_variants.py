@@ -23,8 +23,8 @@ def check_Vcf(df_vcf):
 	'''
 	'''
 	if len(df_vcf) == 0:
-		raise Warning('No variants found')
 		remove_IntermediateFiles()
+		raise Warning('No variants found')
 		sys.exit()
 
 
@@ -472,7 +472,6 @@ if __name__ == '__main__':
 
 		if consensus_sequence == True:
 			consensus_Sequence(refGenomeFasta=refGenomeFasta, samplename=samplename, variant_caller=variant_caller)
-
 
 
 	remove_IntermediateFiles()

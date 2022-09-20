@@ -167,11 +167,10 @@ def run_FluPipeline(args):
 		'conda list --export > softwareVersions.txt',
 		logger_=run_logger,
 		shell_=True)
-		
 
 	## end run
 	run_logger.logger.info('Finished running FluPipeline\n')
-	run_logger.logger.info('Total time: {}\n'.format(datetime.now()-start_run_timer))
+	run_logger.logger.info('Total time: {} (H:M:S)\n'.format(datetime.now()-start_run_timer))
 	run_logger.logger.info('Run outputs stored in {}\n'.format(args.base_directory))	
 
 
