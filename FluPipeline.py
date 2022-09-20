@@ -261,8 +261,8 @@ def main(args=None):
 		os.system(f'python -m bin.summarize -h')
 		sys.exit()
 
-	if args.variant_caller != 'bcftools':
-		raise ValueError('only option bcftools is available for --variant_caller')
+	# if args.variant_caller != 'bcftools':
+	# 	raise ValueError('only option bcftools is available for --variant_caller')
 
 
 	##---Run FluPipline ---##	

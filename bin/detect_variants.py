@@ -13,14 +13,6 @@ import glob
 from pylibs.helper_functions import call_Command
 from pylibs.processing_classes import RunLogger
 
-def write_ConsensusSeq(filename, genome_consensus):
-	'''
-	'''
-	with open(filename, 'w') as outfile:
-		for chrom, seq in genome_consensus.items():
-			outfile.write(f'>{chrom}\n')
-			[outfile.write(i) if e%60!=0 else outfile.write(f'{i}\n') for e, i in enumerate(seq, 1)]
-			outfile.write('\n')
 
 def is_NaN(x):
 	'''
@@ -39,8 +31,6 @@ def check_Vcf(df_vcf):
 def remove_IntermediateFiles():
 	'''
 	'''
-	### Remove files
-	pass
 	# remove bam files
 	for f in glob.glob('*.bam'):
 		if f == f'{samplename}_genome.indels.filt.qual.sorted.bam':
@@ -64,8 +54,66 @@ def remove_IntermediateFiles():
 			os.remove(f)
 		elif f.endswith('.amb'):
 			os.remove(f)
+		elif f.endswith('_consensus_input.vcf.gz'):
+			os.remove(f)
+		elif f.endswith('_consensus_vcf_table.txt'):
+			os.remove(f)
 		else:
 			continue
+
+def consensus_Sequence(refGenomeFasta, samplename, variant_caller):
+	'''
+	Creates the vcf input file needed for bcftools consensus pipeline and then runs bcftools consensus pipeline
+	'''
+	if variant_caller in ['bcftools','bbtools']:
+		# make vcf from filter
+		with open(f'{samplename}_variants.vcf', 'r') as infile:
+			with open(f'{samplename}_consensus_input.vcf','w') as outfile:
+				header_line = True
+				for l in infile:
+					if header_line == True:
+						outfile.write(l)
+						if l.find('#CHROM') > -1:
+							header_line = False
+		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO', 'FORMAT', 'OTHER']]
+		vcf_filtered.to_csv(f'{samplename}_consensus_vcf_table.txt',sep='\t',header=None,index=None)
+
+	else:
+				# get segment names and sizes to add to vcf
+		segment_name_size = {}
+		for record in SeqIO.parse(refGenomeFasta,'fasta'):
+			segment_name_size[record.id] = len(str(record.seq))
+
+		# make vcf from filter
+		with open(f'{samplename}_variants.vcf', 'r') as infile:
+			with open(f'{samplename}_consensus_input.vcf','w') as outfile:
+				header_line = True
+				for l in infile:
+					if header_line == True:
+						if l.find('#CHROM') == -1:
+							outfile.write(l)
+							if l.find('##reference=') > -1:
+								for k,v in segment_name_size.items():
+									outfile.write(f'##contig=<ID={k},length={v}>\n')
+							if l.find('Homopolymer') > -1:
+								outfile.write('##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">\n') #['##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">'] #https://github.com/CSB5/lofreq/blob/master/src/tools/scripts/lofreq2_add_fake_gt.py
+						else:
+							# break
+							l = l.replace('\n',f'\tFORMAT\t{samplename}_genome.indels.filt.qual.sorted.bam\n')
+							outfile.write(l)
+							header_line = False
+
+		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO']]
+		vcf_filtered['FORMAT'] = 'GT'
+		vcf_filtered['FORMAT2'] = '.'
+		vcf_filtered.to_csv(f'{samplename}_consensus_vcf_table.txt',sep='\t',header=None,index=None)
+
+	# Run filtered VCF through bcftools consensus pipeline steps
+	os.system(f'cat {samplename}_consensus_vcf_table.txt >> {samplename}_consensus_input.vcf')
+	os.system(f'bcftools norm -f {refGenomeFasta} -o {samplename}_consensus_input_norm.vcf {samplename}_consensus_input.vcf')
+	os.system(f'bgzip -c {samplename}_consensus_input_norm.vcf > {samplename}_consensus_input_norm.vcf.gz')
+	os.system(f'tabix {samplename}_consensus_input_norm.vcf.gz')
+	os.system(f'bcftools consensus -f {refGenomeFasta} -o {samplename}_consensus_sequence.fasta {samplename}_consensus_input_norm.vcf.gz')
 
 
 if __name__ == '__main__':
@@ -94,9 +142,9 @@ if __name__ == '__main__':
 	# variant_caller = 'bcftools'
 
 	# ## OG ## 
-	## Troubleshooting inputs
-	# samplename = 'CHOA-063_S38'
-	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/lofreq/sampleOutputs/CHOA-063_S38'
+	# Troubleshooting inputs
+	# samplename = 'H3N2_del'
+	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/lofreq/sampleOutputs/H3N2_del'
 	# logDir = baseDir
 	# R1 = 'fastp_trimmed_CHOA-063_S38_R1_001.fastq.gz'
 	# R2 = 'fastp_trimmed_CHOA-063_S38_R2_001.fastq.gz'
@@ -109,7 +157,7 @@ if __name__ == '__main__':
 	# minorVariantThreshold = 0.05
 	# majorVariantThreshold = 0.8
 	# majorIndelVariantThreshold = 0.8
-	# variant_caller = 'bcftools'
+	# variant_caller = 'bbtools'
 	# minimum_read_depth = 10
 
 	args = parser.parse_args()
@@ -249,12 +297,12 @@ if __name__ == '__main__':
 
 	if variant_caller == 'bbtools':
 		call_Command(cmd=
-		f'callvariants.sh in={samplename}_genome.filt.qual.sorted.bam ref={refGenomeFasta} out={samplename}_allVariants.vcf shist={samplename}_variantQualityHisto.txt rarity=0 overwrite=t' #clearfilters
+		f'callvariants.sh in={samplename}_genome.filt.qual.sorted.bam ref={refGenomeFasta} out={samplename}_variants.vcf shist={samplename}_variantQualityHisto.txt rarity=0 overwrite=t' #clearfilters
 		,
 		logger_=logger,
 		shell_=True)
 
-		df_vcf = pd.read_csv(f'{samplename}_allVariants.vcf', sep='\t',comment='#',header=None,
+		df_vcf = pd.read_csv(f'{samplename}_variants.vcf', sep='\t',comment='#',header=None,
 			names=['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO','FORMAT','OTHER'])
 
 		check_Vcf(df_vcf = df_vcf)
@@ -274,20 +322,20 @@ if __name__ == '__main__':
 		df_vcf = pd.concat([df_vcf, vcf_info], axis=1)
 
 		df_vcf['AF'] = df_vcf['AF'].astype(float)
-
+		df_vcf['DP'] = df_vcf['DP'].astype(int)
 		df_vcf['QUAL'] = df_vcf['QUAL'].astype(float)
 
 		# write to file
 		df_vcf.to_csv(f'{samplename}_allVariants.csv', index=None)
 
-		# passing variants
-		df_vcf = df_vcf[(df_vcf['AF']>=minorVariantThreshold) & (df_vcf['QUAL']>=float(minVariantPhredScore))]
+		df_vcf = df_vcf[(df_vcf['AF']>=minorVariantThreshold) & (df_vcf['QUAL']>=float(minVariantPhredScore)) & (df_vcf['DP']>minimum_read_depth)]
 		df_vcf.to_csv(f'{samplename}_passingVariants.csv', index=None)
 
-		# major variants
 		df_vcf = df_vcf[df_vcf['AF']>0.5]
-		df
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
+
+		if consensus_sequence == True:
+			consensus_Sequence(refGenomeFasta=refGenomeFasta, samplename=samplename, variant_caller=variant_caller)
 
 
 	if variant_caller == 'lofreq':
@@ -307,13 +355,13 @@ if __name__ == '__main__':
 
 		# call snps 
 		call_Command(cmd=
-		f'lofreq call-parallel --pp-threads 2  -N --call-indels -f {refGenomeFasta} -o {samplename}_lofreq.vcf {samplename}_genome.indels.filt.qual.sorted.bam'
+		f'lofreq call-parallel --pp-threads 2  -N --call-indels -f {refGenomeFasta} -o {samplename}_variants.vcf {samplename}_genome.indels.filt.qual.sorted.bam'
 		,
 		logger_=logger,
 		shell_=True)
 
 		# Rework VCF into table with columns for specific INFO sections
-		df_vcf = pd.read_csv(f'{samplename}_lofreq.vcf', sep='\t',comment='#',header=None,
+		df_vcf = pd.read_csv(f'{samplename}_variants.vcf', sep='\t',comment='#',header=None,
 			names=['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO'])
 
 		check_Vcf(df_vcf = df_vcf)
@@ -356,41 +404,10 @@ if __name__ == '__main__':
 		df_vcf = df_vcf[df_vcf['AF']>0.5]
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
 
-
-		# get segment names and sizes to add to vcf
-		segment_name_size = {}
-		for record in SeqIO.parse(refGenomeFasta,'fasta'):
-			segment_name_size[record.id] = len(str(record.seq))
-
-		# make vcf from filter
-		with open(f'{samplename}_lofreq.vcf', 'r') as infile:
-			with open(f'consensus_input.vcf','w') as outfile:
-				header_line = True
-				for l in infile:
-					if header_line == True:
-						if l.find('#CHROM') == -1:
-							outfile.write(l)
-							if l.find('##reference=') > -1:
-								for k,v in segment_name_size.items():
-									outfile.write(f'##contig=<ID={k},length={v}>\n')
-							if l.find('Homopolymer') > -1:
-								outfile.write('##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">\n') #['##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">'] #https://github.com/CSB5/lofreq/blob/master/src/tools/scripts/lofreq2_add_fake_gt.py
-						else:
-							l = l.replace('\n','\tFORMAT\n')
-							outfile.write(l)
-							header_line = False
+		if consensus_sequence == True:
+			consensus_Sequence(refGenomeFasta=refGenomeFasta, samplename=samplename, variant_caller=variant_caller)
 
 
-		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO']]
-		vcf_filtered['FORMAT'] = 'GT'
-		vcf_filtered.to_csv('consensus_vcf_table.txt',sep='\t',header=None,index=None)
-		os.system(f'cat consensus_vcf_table.txt >> consensus_input.vcf')
-
-		os.system('head -n 50 consensus_input.vcf')
-		os.system(f'bcftools norm -f {refGenomeFasta} -o consensus_input_norm.vcf consensus_input.vcf')
-		os.system(f'bgzip -c consensus_input.vcf > consensus_input.vcf.gz')
-		os.system(f'tabix consensus_input.vcf.gz')
-		os.system(f'bcftools consensus --mark-ins lc --mark-snv lc --mark-del lc -f {refGenomeFasta} -o bcftools_consensus.fasta consensus_input.vcf.gz')
 
 	if variant_caller == 'bcftools':
 		# -A: count orphans
@@ -401,12 +418,12 @@ if __name__ == '__main__':
 		# -v variant sites only
 		# -p: variant if pvalue greater than
 		call_Command(cmd=
-		f'bcftools mpileup --annotate FORMAT/AD,FORMAT/ADF,FORMAT/ADR,FORMAT/DP,FORMAT/SP,INFO/AD,INFO/ADF,INFO/ADR -d 1000000 -Q 0 -f {refGenomeFasta} {samplename}_genome.filt.qual.sorted.bam | bcftools call -p 0.01 --ploidy 1 -m -v -Ov -o {samplename}_bcftools.vcf'
+		f'bcftools mpileup --annotate FORMAT/AD,FORMAT/ADF,FORMAT/ADR,FORMAT/DP,FORMAT/SP,INFO/AD,INFO/ADF,INFO/ADR --max-idepth 1000000 -d 1000000 -Q 0 -f {refGenomeFasta} {samplename}_genome.filt.qual.sorted.bam | bcftools call -p 0.01 --ploidy 1 -m -v -Ov -o {samplename}_variants.vcf'
 		,
 		logger_=logger,
 		shell_=True)
 
-		df_vcf = pd.read_csv(f'{samplename}_bcftools.vcf', sep='\t',comment='#',header=None,
+		df_vcf = pd.read_csv(f'{samplename}_variants.vcf', sep='\t',comment='#',header=None,
 			names=['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO', 'FORMAT', 'OTHER'])
 
 		info_dict = {}
@@ -453,82 +470,10 @@ if __name__ == '__main__':
 
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
 
-
-		# make vcf from filter
-		with open(f'{samplename}_bcftools.vcf', 'r') as infile:
-			with open(f'consensus_input.vcf','w') as outfile:
-				header_line = True
-				for l in infile:
-					if header_line == True:
-						outfile.write(l)
-						if l.find('#CHROM') > -1:
-							header_line = False
-		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO', 'FORMAT', 'OTHER']]
-		vcf_filtered.to_csv('consensus_vcf_table.txt',sep='\t',header=None,index=None)
-		os.system(f'cat consensus_vcf_table.txt >> consensus_input.vcf')
-		os.system(f'bcftools norm -f {refGenomeFasta} -o consensus_input_norm.vcf consensus_input.vcf')
-		os.system(f'bgzip -c consensus_input.vcf > consensus_input.vcf.gz')
-		os.system(f'tabix consensus_input.vcf.gz')
-		os.system(f'bcftools consensus --mark-ins lc --mark-snv lc --mark-del lc -f {refGenomeFasta} -o bcftools_consensus.fasta consensus_input.vcf.gz')
+		if consensus_sequence == True:
+			consensus_Sequence(refGenomeFasta=refGenomeFasta, samplename=samplename, variant_caller=variant_caller)
 
 
-
-	### Make consensus sequence ####
-
-	if consensus_sequence == True:
-		logger.logger.info('Writing consensus sequence...\n')
-		# make consensus sequence
-		df_vcf = pd.read_csv(f'{samplename}_majorVariants.csv')
-
-		df_reference = pd.DataFrame()
-		for record in SeqIO.parse(refGenomeFasta,'fasta'):
-			temp = pd.DataFrame([[i, e+1] for e, i in enumerate(str(record.seq))])
-			temp['CHROM'] = record.id
-			if len(df_reference) == 0:
-				df_reference = temp
-			else:
-				df_reference = pd.concat([df_reference, temp], ignore_index=True)
-
-		df_reference.columns = ['REF','POS', 'CHROM']
-		df_reference = df_reference[['CHROM','POS','REF']]
-
-		df_pileup = pd.read_csv(f'{samplename}_basecov.txt', sep='\t', names=['CHROM','POS','PILEUP_COV'], comment='#')
-		df_pileup['POS'] = df_pileup['POS']+1
-
-		df_reference = df_reference.merge(df_pileup, on=['CHROM', 'POS'])
-
-		df_reference = df_reference.merge(df_vcf[['CHROM','POS','REF','ALT','TYPE']], on=['CHROM','POS'], how='left')
-
-		chrom_order =  [i.split('_')[2] for i in df_reference['CHROM'].unique().tolist()]
-
-		df_reference['chrom_order'] = df_reference['CHROM'].apply(lambda x: x.split('_')[2])
-
-		df_reference = df_reference.sort_values(['chrom_order','POS'], ascending=[True, True])
-
-		chromosome_list = [i for i in df_reference['CHROM'].unique().tolist()]
-
-		genome_consensus = {'unmasked':{}, 'masked':{}}
-		for chromosome in chromosome_list:
-			consensus_seq = ''
-			masked_consensus_seq = ''
-			for e, row in df_reference[df_reference['CHROM']==chromosome].iterrows():
-				base = ''
-				if is_NaN(row.TYPE) == False:
-					if row.TYPE == 'SUB':
-						base = row.ALT
-				else:
-					base = row.REF_x
-				consensus_seq += base
-
-				if row.PILEUP_COV < minimum_read_depth:
-					base = 'N'
-				masked_consensus_seq += base
-
-			genome_consensus['unmasked'][chromosome] = consensus_seq
-			genome_consensus['masked'][chromosome] = masked_consensus_seq
-
-		write_ConsensusSeq(filename=f'{samplename}_consensus_sequence.fasta', genome_consensus=genome_consensus['unmasked'])
-		write_ConsensusSeq(filename=f'{samplename}_masked_consensus_sequence.fasta', genome_consensus=genome_consensus['masked'])
 
 	remove_IntermediateFiles()
 
