@@ -39,13 +39,14 @@ def flu_Pipeline(
 	base_quality,
 	no_deduplicate,
 	min_variant_frequency,
-	assembly,
-	variant_caller,
 	use_strain,
 	keep_trimmed_reads,
 	major_variant_frequency,
 	major_indel_frequency,
-	minimum_read_depth):
+	minimum_read_depth,
+	major_variant_caller,
+	intrahost_variant_caller
+	):
 	'''
 	Runs through all steps of the flu pipeline. 
 	'''
@@ -250,34 +251,7 @@ def flu_Pipeline(
 	# set new trimmed filenames
 	trimmed_r1 = 'fastp_trimmed_'+sample.read1_filename
 	trimmed_r2 = 'fastp_trimmed_'+sample.read2_filename
-
-
-	## ==================================assemble reads==============================================================
-	## ==============================================================================================================
-	if run_chunk == True:
-		try:
-			if assembly == True:
-				sample_logger.logger.info('Assembling reads')
-
-				# run spades
-				os.makedirs('assembly', exist_ok=True)
-				call_Command(cmd=
-					[
-					'spades.py',
-					'-1','{}'.format(pjoin(sample.dirpath,trimmed_r1)),
-					'-2','{}'.format(pjoin(sample.dirpath,trimmed_r2)),
-					'-o','{}/assembly'.format(sample.dirpath),
-					'-t','4',
-					'--phred-offset','33'
-					],logger_=sample_logger
-					)
-			else:
-				sample_logger.logger.info('Assembly option not selected')
-
-
-		except:
-			sample_logger.logger.exception('FluPipeline Error: failure at read assembly', exc_info=True)
-			run_chunk = False			
+	
 
 	## ==================================find variants===============================================================
 	## ==============================================================================================================
@@ -291,7 +265,7 @@ def flu_Pipeline(
 				'python', '-m', 'bin.detect_variants',
 				'--baseDir', '{}'.format(pjoin(sample.dirpath)),
 				'--logDir', '{}'.format(pjoin(baseDirectory,'sampleLogs')),
-				'--variant_caller', '{}'.format(pjoin(variant_caller)),
+				'--variant_caller', '{}'.format(pjoin(major_variant_caller)),
 				'--R1', '{}'.format(pjoin(sample.dirpath,trimmed_r1)),
 				'--R2', '{}'.format(pjoin(sample.dirpath,trimmed_r2)),
 				'--refGenomeFasta', '{}'.format(pjoin(referenceStrainsDir,reference_strain)),
@@ -377,7 +351,7 @@ def flu_Pipeline(
 				'python', '-m', 'bin.detect_variants',
 				'--baseDir', '{}'.format(pjoin(intrahost_var_directory)),
 				'--logDir', '{}'.format(pjoin(baseDirectory,'sampleLogs')),
-				'--variant_caller', '{}'.format(pjoin(variant_caller)),
+				'--variant_caller', '{}'.format(pjoin(intrahost_variant_caller)),
 				'--R1', '{}'.format(pjoin(sample.dirpath,trimmed_r1)),
 				'--R2', '{}'.format(pjoin(sample.dirpath,trimmed_r2)),
 				'--refGenomeFasta', '{}'.format(pjoin(sample.dirpath,ivar_input_fasta)),

@@ -79,7 +79,7 @@ def consensus_Sequence(refGenomeFasta, samplename, variant_caller):
 		vcf_filtered.to_csv(f'{samplename}_consensus_vcf_table.txt',sep='\t',header=None,index=None)
 
 	else:
-				# get segment names and sizes to add to vcf
+		# get segment names and sizes to add to vcf
 		segment_name_size = {}
 		for record in SeqIO.parse(refGenomeFasta,'fasta'):
 			segment_name_size[record.id] = len(str(record.seq))
@@ -121,14 +121,14 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(prog='detect_variants')
 	parser.add_argument('--baseDir', type=str, default=os.getcwd(), help='none', metavar='none')
 	parser.add_argument('--logDir', type=str, default=os.getcwd(), help='none', metavar='none')
-	parser.add_argument('--variant_caller', type=str, default=os.getcwd(), help='none', metavar='none')
+	parser.add_argument('--variant_caller', type=str, default='lofreq', help='none', metavar='none')
 	parser.add_argument('--R1', type=str, default=None, help='none', metavar='none')
 	parser.add_argument('--R2', type=str, default=None, help='none', metavar='none')
 	parser.add_argument('--refGenomeFasta', type=str, default=None, help='none', metavar='none')
 	parser.add_argument('--minAmpliconLength', type=int, default=50, help='none', metavar='none')
 	parser.add_argument('--maxAmpliconLength', type=int, default=350, help='none', metavar='none')
 	parser.add_argument('--removeNTsFromAlignmentEnds', type=int, default=3, help='none', metavar='none')
-	parser.add_argument('--BWAmappingScore', type=int, default=60, help='none', metavar='none')
+	parser.add_argument('--BWAmappingScore', type=int, default=10, help='none', metavar='none')
 	parser.add_argument('--minVariantPhredScore', type=int, default=20, help='none', metavar='none')
 	parser.add_argument('--majorIndelVariantThreshold', type=float, default=0.8, help='none', metavar='none')
 	parser.add_argument('--majorVariantThreshold', type=float, default=0.5, help='none', metavar='none')
@@ -136,6 +136,8 @@ if __name__ == '__main__':
 	parser.add_argument('--consensus_sequence', action='store_true', default=False, help='none')
 	parser.add_argument('--consensus_masking_threshold', type=int, default=1, help='none', metavar='none')
 	parser.add_argument('--minimum_read_depth', type=int, default=10, help='none', metavar='none')
+	parser.add_argument('--build_input_from', type=str, default='none', help='none', metavar='none')
+	parser.add_argument('--output_name', type=str, default='none', help='use in conjunction with --build_input_from', metavar='none')
 
 	## ADDED ##
 	# baseDir = '/data/flu_project/benchmarking_project/output'
@@ -143,12 +145,13 @@ if __name__ == '__main__':
 
 	# ## OG ## 
 	# Troubleshooting inputs
-	# samplename = 'H3N2_del'
-	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/lofreq/sampleOutputs/H3N2_del'
+	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/mccrone/bbtools/sampleOutputs/SRR6121517_1_S1'
+	# samplename = os.path.basename(baseDir)
 	# logDir = baseDir
-	# R1 = 'fastp_trimmed_CHOA-063_S38_R1_001.fastq.gz'
-	# R2 = 'fastp_trimmed_CHOA-063_S38_R2_001.fastq.gz'
-	# refGenomeFasta = 'H3N2_ref.fasta'
+	# R1 = f'fastp_trimmed_{samplename}_R1_001.fastq.gz'
+	# R2 = f'fastp_trimmed_{samplename}_R2_001.fastq.gz'
+	# # refGenomeFasta = 'H3N2_ref.fasta'
+	# refGenomeFasta = 'H1N1pdm_ref.fasta'
 	# minAmpliconLength = 50
 	# maxAmpliconLength = 350
 	# minVariantPhredScore = 30
@@ -159,6 +162,7 @@ if __name__ == '__main__':
 	# majorIndelVariantThreshold = 0.8
 	# variant_caller = 'bbtools'
 	# minimum_read_depth = 10
+	# os.chdir(baseDir)
 
 	args = parser.parse_args()
 
@@ -180,6 +184,23 @@ if __name__ == '__main__':
 	consensus_masking_threshold=args.consensus_masking_threshold
 	minimum_read_depth=args.minimum_read_depth
 
+	if args.build_input_from != 'none':
+		# build_input_from = '/data/flu_project/benchmarking_project/compare_caller/mccrone/bbtools/sampleOutputs/SRR6121517_1_S1'
+		# output_name = 'test'	
+		output_name = args.output_name
+		build_input_from = args.build_input_from
+		os.chdir(build_input_from)
+		R1 = glob.glob(pjoin(build_input_from,'*_R1_*'))[0]
+		R2 = glob.glob(pjoin(build_input_from,'*_R2_*'))[0]
+		refGenomeFasta = [pjoin(build_input_from,i) for i in os.listdir() if i.endswith('_consensus_sequence.fasta')][0]
+		baseDir = pjoin(build_input_from,output_name)
+		logDir = baseDir
+		if os.path.exists(baseDir):
+			shutil.rmtree(baseDir)
+
+	# Check inputs		
+	if os.path.exists(baseDir) == False:
+		os.makedirs(baseDir, exist_ok=True)
 
 	if os.path.exists(R1) == False:
 		raise ValueError(f'R1 does not exist:\n{R1}')
@@ -355,7 +376,7 @@ if __name__ == '__main__':
 
 		# call snps 
 		call_Command(cmd=
-		f'lofreq call-parallel --pp-threads 2  -N --call-indels -f {refGenomeFasta} -o {samplename}_variants.vcf {samplename}_genome.indels.filt.qual.sorted.bam'
+		f'lofreq call-parallel --pp-threads 2 --use-orphan -N --call-indels -f {refGenomeFasta} -o {samplename}_variants.vcf {samplename}_genome.indels.filt.qual.sorted.bam'
 		,
 		logger_=logger,
 		shell_=True)

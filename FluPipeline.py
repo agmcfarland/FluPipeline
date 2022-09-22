@@ -119,13 +119,13 @@ def run_FluPipeline(args):
 			args.base_quality,
 			args.no_deduplicate,
 			args.min_variant_frequency,
-			args.assembly,
-			args.variant_caller,
 			args.use_strain,
 			args.keep_trimmed_reads,
 			args.major_variant_frequency,
 			args.major_indel_frequency,
-			args.minimum_read_depth
+			args.minimum_read_depth,
+			args.major_variant_caller,
+			args.intrahost_variant_caller
 			])
 
 	run_logger.logger.info('Total samples to process: {}\n'.format(len(sample_submission))) # total samples ran
@@ -212,15 +212,15 @@ def main(args=None):
 	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [3]', metavar='')
 	parser.add_argument('--keep_trimmed_reads', action='store_true', default=False, help='keep trimmed reads used for analysis.  [False]')
 	
-	# assembly
-	parser.add_argument('--assembly', action='store_true', default=False, help='Do not assemble reads into a draft genome. [False]')
-
 	# read mapping
-	parser.add_argument('--min_read_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [3]', metavar='')
+	parser.add_argument('--min_read_mapping_score', type=int, default=10, help='keep reads that mapped above or equal to this MAPQ value. [10]', metavar='')
 	
-	# variant calling 
-	parser.add_argument('--variant_caller', type=str, default='bcftools', help='variant caller to use (bcftools, bbmap, lofreq). [bcftools]', metavar='')
-	parser.add_argument('--min_variant_phred_score', type=int, default=20, help='keep all variants above or equal to this phred-scaled value. [5]', metavar='')
+	# variant caller
+	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftoos','lofreq','bbtools'], help='variant caller to use (bcftools, bbmap, lofreq). [bcftools]', metavar='')
+	parser.add_argument('--intrahost_variant_caller', type=str, default='lofreq', choices=['bcftoos','lofreq','bbtools'], help='intra host variant caller to use (bcftools, bbmap, lofreq). [lofreq]', metavar='')
+	
+	# variant calling parameters
+	parser.add_argument('--min_variant_phred_score', type=int, default=20, help='keep all variants above or equal to this phred-scaled value. [20]', metavar='')
 	parser.add_argument('--min_variant_frequency', type=float, default=0.05, help='keep all variants with allele frequencies above or equal this value. [0.05]', metavar='')
 	parser.add_argument('--major_variant_frequency', type=float, default=0.5, help='keep all major variants with allele frequencies above or equal this value. [0.5]', metavar='')
 	parser.add_argument('--major_indel_frequency', type=float, default=0.8, help='keep all major indels with allele frequencies above or equal this value. [0.8]', metavar='')
