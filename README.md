@@ -77,11 +77,11 @@ usage: FluPipeline v0.5 [-h] [--base_directory] [--reference_directory]
                         [--no_deduplicate] [--remove_NTs_from_alignment_ends]
                         [--keep_trimmed_reads] [--min_read_mapping_score]
                         [--major_variant_caller] [--intrahost_variant_caller]
-                        [--min_variant_phred_score] [--min_variant_frequency]
-                        [--major_variant_frequency] [--major_indel_frequency]
-                        [--minimum_read_depth] [--consensus_masking_threshold]
-                        [--masked_nextclade] [--masked_ivar] [--runtest]
-                        [--testbin]
+                        [--single_pass] [--min_variant_phred_score]
+                        [--min_variant_frequency] [--major_variant_frequency]
+                        [--major_indel_frequency] [--minimum_read_depth]
+                        [--consensus_masking_threshold] [--masked_nextclade]
+                        [--masked_ivar] [--runtest] [--testbin]
 
 options:
   -h, --help            show this help message and exit
@@ -131,6 +131,8 @@ options:
   --intrahost_variant_caller
                         intra host variant caller to use (bcftools, bbmap,
                         lofreq). [lofreq]
+  --single_pass         only call variants one time (no variants from
+                        consensus sequence will be called). [False]
   --min_variant_phred_score
                         keep all variants above or equal to this phred-scaled
                         value. [20]
