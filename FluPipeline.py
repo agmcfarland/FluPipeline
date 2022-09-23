@@ -125,7 +125,8 @@ def run_FluPipeline(args):
 			args.major_indel_frequency,
 			args.minimum_read_depth,
 			args.major_variant_caller,
-			args.intrahost_variant_caller
+			args.intrahost_variant_caller,
+			args.single_pass
 			])
 
 	run_logger.logger.info('Total samples to process: {}\n'.format(len(sample_submission))) # total samples ran
@@ -216,9 +217,11 @@ def main(args=None):
 	parser.add_argument('--min_read_mapping_score', type=int, default=10, help='keep reads that mapped above or equal to this MAPQ value. [10]', metavar='')
 	
 	# variant caller
-	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftoos','lofreq','bbtools'], help='variant caller to use (bcftools, bbmap, lofreq). [bcftools]', metavar='')
-	parser.add_argument('--intrahost_variant_caller', type=str, default='lofreq', choices=['bcftoos','lofreq','bbtools'], help='intra host variant caller to use (bcftools, bbmap, lofreq). [lofreq]', metavar='')
+	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftoos','lofreq','bbtools', 'freebayes'], help='variant caller to use (bcftools, bbmap, lofreq). [bcftools]', metavar='')
+	parser.add_argument('--intrahost_variant_caller', type=str, default='lofreq', choices=['bcftoos','lofreq','bbtools', 'freebayes'], help='intra host variant caller to use (bcftools, bbmap, lofreq). [lofreq]', metavar='')
+	parser.add_argument('--single_pass', action='store_true', default=False, help='only call variants one time (no variants from consensus sequence will be called).  [False]')
 	
+
 	# variant calling parameters
 	parser.add_argument('--min_variant_phred_score', type=int, default=20, help='keep all variants above or equal to this phred-scaled value. [20]', metavar='')
 	parser.add_argument('--min_variant_frequency', type=float, default=0.05, help='keep all variants with allele frequencies above or equal this value. [0.05]', metavar='')

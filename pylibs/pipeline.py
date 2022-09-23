@@ -45,7 +45,8 @@ def flu_Pipeline(
 	major_indel_frequency,
 	minimum_read_depth,
 	major_variant_caller,
-	intrahost_variant_caller
+	intrahost_variant_caller,
+	single_pass
 	):
 	'''
 	Runs through all steps of the flu pipeline. 
@@ -337,40 +338,41 @@ def flu_Pipeline(
 	## ==================================Intra-host variant detection================================================
 	## ==============================================================================================================
 	if run_chunk == True:
-		try:
-			sample_logger.logger.info('Finding intrahost variants')
+		if single_pass == False:
+			try:
+				sample_logger.logger.info('Calling variants from consensus sequence')
 
-			if masked_ivar == True:
-				ivar_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
-			else:
-				ivar_input_fasta = sample.samplename+'_consensus_sequence.fasta'
+				if masked_ivar == True:
+					ivar_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
+				else:
+					ivar_input_fasta = sample.samplename+'_consensus_sequence.fasta'
 
-			os.chdir(softwareDir)
-			call_Command(cmd=
-				[
-				'python', '-m', 'bin.detect_variants',
-				'--baseDir', '{}'.format(pjoin(intrahost_var_directory)),
-				'--logDir', '{}'.format(pjoin(baseDirectory,'sampleLogs')),
-				'--variant_caller', '{}'.format(pjoin(intrahost_variant_caller)),
-				'--R1', '{}'.format(pjoin(sample.dirpath,trimmed_r1)),
-				'--R2', '{}'.format(pjoin(sample.dirpath,trimmed_r2)),
-				'--refGenomeFasta', '{}'.format(pjoin(sample.dirpath,ivar_input_fasta)),
-				'--minVariantPhredScore', '{}'.format(min_variant_phred_score),
-				'--removeNTsFromAlignmentEnds', '{}'.format(remove_NTs_from_alignment_ends),
-				'--BWAmappingScore', '{}'.format(min_read_mapping_score),
-				'--minorVariantThreshold', '{}'.format(min_variant_frequency),
-				'--consensus_masking_threshold', '{}'.format(consensus_masking_threshold),
-				'--majorIndelVariantThreshold', '{}'.format(major_variant_frequency),
-				'--majorVariantThreshold', '{}'.format(major_indel_frequency),
-				'--minimum_read_depth', '{}'.format(minimum_read_depth)
-				],logger_=sample_logger
-				)
-			os.chdir(sample.dirpath)
+				os.chdir(softwareDir)
+				call_Command(cmd=
+					[
+					'python', '-m', 'bin.detect_variants',
+					'--baseDir', '{}'.format(pjoin(intrahost_var_directory)),
+					'--logDir', '{}'.format(pjoin(baseDirectory,'sampleLogs')),
+					'--variant_caller', '{}'.format(pjoin(intrahost_variant_caller)),
+					'--R1', '{}'.format(pjoin(sample.dirpath,trimmed_r1)),
+					'--R2', '{}'.format(pjoin(sample.dirpath,trimmed_r2)),
+					'--refGenomeFasta', '{}'.format(pjoin(sample.dirpath,ivar_input_fasta)),
+					'--minVariantPhredScore', '{}'.format(min_variant_phred_score),
+					'--removeNTsFromAlignmentEnds', '{}'.format(remove_NTs_from_alignment_ends),
+					'--BWAmappingScore', '{}'.format(min_read_mapping_score),
+					'--minorVariantThreshold', '{}'.format(min_variant_frequency),
+					'--consensus_masking_threshold', '{}'.format(consensus_masking_threshold),
+					'--majorIndelVariantThreshold', '{}'.format(major_variant_frequency),
+					'--majorVariantThreshold', '{}'.format(major_indel_frequency),
+					'--minimum_read_depth', '{}'.format(minimum_read_depth)
+					],logger_=sample_logger
+					)
+				os.chdir(sample.dirpath)
 
-		except:
-			sample_logger.logger.exception('FluPipeline Error: failure at intrahost variant calling', exc_info=True)
-			sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
-			run_chunk = False
+			except:
+				sample_logger.logger.exception('FluPipeline Error: failure at intrahost variant calling', exc_info=True)
+				sample_logger.logger.info('FluPipeline Time: {}'.format(datetime.now()-start_run_timer))
+				run_chunk = False
 
 	# ==================================clean up and record run=====================================================
 	# ==============================================================================================================

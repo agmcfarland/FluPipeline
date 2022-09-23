@@ -65,7 +65,7 @@ def consensus_Sequence(refGenomeFasta, samplename, variant_caller):
 	'''
 	Creates the vcf input file needed for bcftools consensus pipeline and then runs bcftools consensus pipeline
 	'''
-	if variant_caller in ['bcftools','bbtools']:
+	if variant_caller in ['bcftools','bbtools','freebayes']:
 		# make vcf from filter
 		with open(f'{samplename}_variants.vcf', 'r') as infile:
 			with open(f'{samplename}_consensus_input.vcf','w') as outfile:
@@ -76,6 +76,7 @@ def consensus_Sequence(refGenomeFasta, samplename, variant_caller):
 						if l.find('#CHROM') > -1:
 							header_line = False
 		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO', 'FORMAT', 'OTHER']]
+		check_Vcf(df_vcf)
 		vcf_filtered.to_csv(f'{samplename}_consensus_vcf_table.txt',sep='\t',header=None,index=None)
 
 	else:
@@ -104,6 +105,7 @@ def consensus_Sequence(refGenomeFasta, samplename, variant_caller):
 							header_line = False
 
 		vcf_filtered = pd.read_csv(f'{samplename}_majorVariants.csv')[['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO']]
+		check_Vcf(df_vcf)
 		vcf_filtered['FORMAT'] = 'GT'
 		vcf_filtered['FORMAT2'] = '.'
 		vcf_filtered.to_csv(f'{samplename}_consensus_vcf_table.txt',sep='\t',header=None,index=None)
@@ -136,7 +138,7 @@ if __name__ == '__main__':
 	parser.add_argument('--consensus_sequence', action='store_true', default=False, help='none')
 	parser.add_argument('--consensus_masking_threshold', type=int, default=1, help='none', metavar='none')
 	parser.add_argument('--minimum_read_depth', type=int, default=10, help='none', metavar='none')
-	parser.add_argument('--build_input_from', type=str, default='none', help='none', metavar='none')
+	parser.add_argument('--build_input_from', type=str, default='none', help='build inputs for detect_variants automatically from a flupipeline sampleOutputs sample', metavar='none')
 	parser.add_argument('--output_name', type=str, default='none', help='use in conjunction with --build_input_from', metavar='none')
 
 	## ADDED ##
@@ -145,23 +147,24 @@ if __name__ == '__main__':
 
 	# ## OG ## 
 	# Troubleshooting inputs
-	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/mccrone/bbtools/sampleOutputs/SRR6121517_1_S1'
+	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/small/lofreq/sampleOutputs/CHOA-063_R_S40/CHOA-063_R_S40_ivar/test'
 	# samplename = os.path.basename(baseDir)
 	# logDir = baseDir
 	# R1 = f'fastp_trimmed_{samplename}_R1_001.fastq.gz'
 	# R2 = f'fastp_trimmed_{samplename}_R2_001.fastq.gz'
 	# # refGenomeFasta = 'H3N2_ref.fasta'
-	# refGenomeFasta = 'H1N1pdm_ref.fasta'
+	# refGenomeFasta = 'CHOA-063_R_S40_consensus_sequence.fasta'
 	# minAmpliconLength = 50
 	# maxAmpliconLength = 350
 	# minVariantPhredScore = 30
 	# removeNTsFromAlignmentEnds = 3
-	# BWAmappingScore = 60
+	# BWAmappingScore = 30
 	# minorVariantThreshold = 0.05
 	# majorVariantThreshold = 0.8
 	# majorIndelVariantThreshold = 0.8
-	# variant_caller = 'bbtools'
+	# variant_caller = 'freebayes'
 	# minimum_read_depth = 10
+	# os.chdir(baseDir)
 	# os.chdir(baseDir)
 
 	args = parser.parse_args()
@@ -488,6 +491,78 @@ if __name__ == '__main__':
 
 		# major variants
 		df_vcf = df_vcf[((df_vcf['TYPE']=='SUB')&(df_vcf['AF']>majorVariantThreshold))| ((df_vcf['TYPE']=='INDEL') & (df_vcf['AF']>majorIndelVariantThreshold))]
+
+		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
+
+		if consensus_sequence == True:
+			consensus_Sequence(refGenomeFasta=refGenomeFasta, samplename=samplename, variant_caller=variant_caller)
+
+
+	if variant_caller == 'freebayes':
+		call_Command(cmd=
+		f'freebayes -f {refGenomeFasta} --ploidy 100 -b {samplename}_genome.filt.qual.sorted.bam -v {samplename}_freebayes_variants.vcf'
+		,
+		logger_=logger,
+		shell_=True)
+
+		df_vcf = pd.read_csv(f'{samplename}_variants.vcf', sep='\t',comment='#',header=None,
+			names=['CHROM','POS','ID','REF','ALT','QUAL','FILTER','INFO', 'FORMAT', 'OTHER'])
+
+		check_Vcf(df_vcf = df_vcf)
+
+		df_info = pd.DataFrame()
+		for e, row in df_vcf.iterrows():
+			info = ';'+row.INFO
+			info_split  = info.split(';')[1:]
+			temp_dict = {}
+			for i in info_split:
+				temp_dict[i.split('=')[0]] = i.split('=')[1]
+
+			if temp_dict['CIGAR'].find(',') > -1:
+				n_alts = temp_dict['CIGAR'].count(',')+1 #number of different variants at position
+				for k, v in temp_dict.items():
+					new_item = v.split(',')
+					if len(new_item) != n_alts:
+						new_item = [v for z in range(n_alts)]
+					temp_dict[k] = new_item
+					df_temp = pd.DataFrame(temp_dict)
+			else:
+				# break
+				df_temp = pd.DataFrame([temp_dict])
+			if len(df_info) == 0:
+				df_info = df_temp
+			else:
+				df_info = pd.concat([df_info, df_temp])
+
+		df_vcf['ALT'] = df_vcf['ALT'].apply(lambda x: x.split(','))
+		df_vcf = df_vcf.explode('ALT')
+		df_vcf = df_vcf.reset_index()
+
+		df_info = df_info.reset_index()
+
+		df_vcf = pd.concat([df_vcf, df_info], axis=1)
+
+		df_vcf['TYPE'] = df_vcf['TYPE'].str.upper()
+		df_vcf['TYPE'] = df_vcf['TYPE'].str.replace('COMPLEX','INDEL')
+		df_vcf['TYPE'] = df_vcf['TYPE'].str.replace('SNP','SUB')
+
+		df_vcf['AF'] = df_vcf['AF'].astype(float)
+		df_vcf['DP'] = df_vcf['DP'].astype(float)
+		df_vcf['MQM'] = df_vcf['MQM'].astype(float)
+		df_vcf['AD'] = df_vcf['AF']*df_vcf['DP']
+
+		df_vcf['AF'] = df_vcf['AF'].astype(float)
+		df_vcf['QUAL'] = df_vcf['QUAL'].astype(float)
+
+		# write to file
+		df_vcf.to_csv(f'{samplename}_allVariants.csv', index=None)
+
+		# passing variants
+		df_vcf = df_vcf[(df_vcf['AF']>=minorVariantThreshold) & (df_vcf['QUAL']>=float(minVariantPhredScore)) & (df_vcf['DP']>minimum_read_depth) & (df_vcf['MQM']>=BWAmappingScore)]
+		df_vcf.to_csv(f'{samplename}_passingVariants.csv', index=None)
+
+		# major variants
+		df_vcf = df_vcf[((df_vcf['TYPE']=='SUB')&(df_vcf['AF']>majorVariantThreshold)) | ((df_vcf['TYPE'].isin(['INDEL','DEL','INS'])) & (df_vcf['AF']>majorIndelVariantThreshold))]
 
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
 
