@@ -8,7 +8,7 @@
 
 **Highlighted Features**
 
-- Detailed VCF tables in CSV format for several different variant allers
+- Detailed VCF tables in CSV format for several different variant callers
 - Custom reference strains can be added
 - Automatic thread selection selection to run samples in parallel
 - Downsample reads and run pipeline
