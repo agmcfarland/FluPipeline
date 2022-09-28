@@ -314,6 +314,13 @@ if __name__ == '__main__':
 	if len(pd.read_csv(f'{samplename}_covstats.txt', sep='\t')) == 0:
 		logger.logger.exception('FluPipeline Error: No reads pileup..\n')
 
+	# Pileup reads with samtools
+	call_Command(cmd=
+		f'samtools mpileup --count-orphans --max-depth 10000000 --fasta-ref {refGenomeFasta} --output {samplename}_mpileup.txt -a {samplename}_genome.filt.qual.sorted.bam'
+		,
+		logger_=logger,
+		shell_=True)
+
 
 	### Call variants ####
 
@@ -500,7 +507,7 @@ if __name__ == '__main__':
 
 	if variant_caller == 'freebayes':
 		call_Command(cmd=
-		f'freebayes -f {refGenomeFasta} --ploidy 100 -b {samplename}_genome.filt.qual.sorted.bam -v {samplename}_freebayes_variants.vcf'
+		f'freebayes -f {refGenomeFasta} --ploidy 100 -b {samplename}_genome.filt.qual.sorted.bam -v {samplename}_variants.vcf'
 		,
 		logger_=logger,
 		shell_=True)
