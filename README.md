@@ -57,7 +57,7 @@ Check how many samples have finished/are running/are errored out
 ```
 cd /data/FluPipeline
 
-python /bin/check_finished.py /path/to/base/directory
+python bin/check_finished.py /path/to/base/directory
 ```
 
 
