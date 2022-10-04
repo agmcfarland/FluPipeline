@@ -45,12 +45,22 @@ cd /data/FluPipeline
 
 python -m bin.detect_variants \
 --build_input_from /path/to/sampleOutputs/sample \
---output_name  \
+--output_name my_output_folder \
 --variant_caller lofreq \
 --BWAmappingScore 10 \
 --minVariantPhredScore 5 \
 --minimum_read_depth 1
 ```
+
+Check how many samples have finished/are running/are errored out
+
+```
+cd /data/FluPipeline
+
+python /bin/check_finished.py /path/to/base/directory
+```
+
+
 
 Get options for `detect_variants.py`
 

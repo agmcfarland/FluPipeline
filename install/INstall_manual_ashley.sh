@@ -37,7 +37,7 @@ yes | mamba install -c bioconda samtools=1.15.1
 
 yes | mamba install -c anaconda ipython
 
-mamba install -c bioconda freebayes=1.3.6
+yes | mamba install -c bioconda freebayes=1.3.6
 
 # check install is successful
 
@@ -52,3 +52,5 @@ callvariants.sh
 nextclade
 
 bwa
+
+freebayes
