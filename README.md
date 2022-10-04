@@ -59,7 +59,7 @@ python -m bin.detect_variants -h
 ```
 
 
-Check how many samples have finished/are running/are errored out
+Check how many samples have finished/are running/are errored out.
 
 ```
 cd /data/FluPipeline
