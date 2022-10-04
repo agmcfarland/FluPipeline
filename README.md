@@ -52,20 +52,19 @@ python -m bin.detect_variants \
 --minimum_read_depth 1
 ```
 
+Get options for `detect_variants.py`
+
+```
+python -m bin.detect_variants -h
+```
+
+
 Check how many samples have finished/are running/are errored out
 
 ```
 cd /data/FluPipeline
 
 python bin/check_finished.py /path/to/base/directory
-```
-
-
-
-Get options for `detect_variants.py`
-
-```
-python -m bin.detect_variants -h
 ```
 
 
