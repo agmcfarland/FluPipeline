@@ -41,8 +41,6 @@ for k, v in store_results.items():
 	print('Total:',len(v),'\n')
 
 
-
-
 store_results = {'finished':[],'unfinished':[],'error':[]}
 for f in glob.glob(sampleLogsDir+'/*.txt'):
 	if f.find('_ivar') > -1:
