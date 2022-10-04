@@ -45,7 +45,7 @@ cd /data/FluPipeline
 
 python -m bin.detect_variants \
 --build_input_from /path/to/sampleOutputs/sample \
---output_name  \
+--output_name  my_output_name\
 --variant_caller lofreq \
 --BWAmappingScore 10 \
 --minVariantPhredScore 5 \
