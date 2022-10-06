@@ -217,8 +217,8 @@ def main(args=None):
 	parser.add_argument('--min_read_mapping_score', type=int, default=10, help='keep reads that mapped above or equal to this MAPQ value. [10]', metavar='')
 	
 	# variant caller
-	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftoos','lofreq','bbtools', 'freebayes'], help='variant caller to use (bcftools, bbmap, lofreq). [bcftools]', metavar='')
-	parser.add_argument('--intrahost_variant_caller', type=str, default='lofreq', choices=['bcftoos','lofreq','bbtools', 'freebayes'], help='intra host variant caller to use (bcftools, bbmap, lofreq). [lofreq]', metavar='')
+	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='variant caller to use (bcftools, bbmap, lofreq, freebayes). [bcftools]', metavar='')
+	parser.add_argument('--intrahost_variant_caller', type=str, default='lofreq', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='intra host variant caller to use (bcftools, bbmap, lofreq, freebayes). [lofreq]', metavar='')
 	parser.add_argument('--single_pass', action='store_true', default=False, help='only call variants one time (no variants from consensus sequence will be called).  [False]')
 	
 
