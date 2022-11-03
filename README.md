@@ -77,13 +77,13 @@ python FluPipeline.py -h
 ```
 
 ```
-usage: FluPipeline v0.5 [-h] [--base_directory] [--reference_directory]
+usage: FluPipeline v0.6.0 [-h] [--base_directory] [--reference_directory]
                         [--sequence_directory] [--use_fasta] [--force]
                         [--force_base_directory]
                         [--keep_all_intermediate_files] [--threads]
                         [--max_mem_per_thread] [--strain_sample_depth]
                         [--downsample] [--use_strain] [--base_quality]
-                        [--no_deduplicate] [--remove_NTs_from_alignment_ends]
+                        [--keep_duplicates] [--remove_NTs_from_alignment_ends]
                         [--keep_trimmed_reads] [--min_read_mapping_score]
                         [--major_variant_caller] [--intrahost_variant_caller]
                         [--single_pass] [--min_variant_phred_score]
@@ -126,7 +126,7 @@ options:
   --use_strain          name of strain. No file extensions in name. [None]
   --base_quality        keep reads that have at least an average of this
                         phred-scaled value. [30]
-  --no_deduplicate      do not conduct read deduplication. [False]
+  --keep_duplicates      do not conduct read deduplication. [False]
   --remove_NTs_from_alignment_ends
                         remove this many bases from the left and right of each
                         read prior to mapping. [3]
