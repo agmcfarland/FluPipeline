@@ -117,7 +117,7 @@ def run_FluPipeline(args):
 			args.masked_nextclade,
 			args.masked_ivar,
 			args.base_quality,
-			args.no_deduplicate,
+			args.keep_duplicates,
 			args.min_variant_frequency,
 			args.use_strain,
 			args.keep_trimmed_reads,
@@ -209,7 +209,7 @@ def main(args=None):
 
 	# read processing 
 	parser.add_argument('--base_quality', type=int, default=30, help='keep reads that have at least an average of this phred-scaled value. [30]', metavar='')
-	parser.add_argument('--no_deduplicate',  action='store_true', default=False, help='do not conduct read deduplication.  [False]')
+	parser.add_argument('--keep_duplicates',  action='store_true', default=False, help='do not conduct read deduplication.  [False]')
 	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [3]', metavar='')
 	parser.add_argument('--keep_trimmed_reads', action='store_true', default=False, help='keep trimmed reads used for analysis.  [False]')
 	

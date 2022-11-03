@@ -37,7 +37,7 @@ def flu_Pipeline(
 	masked_nextclade,
 	masked_ivar,
 	base_quality,
-	no_deduplicate,
+	keep_duplicates,
 	min_variant_frequency,
 	use_strain,
 	keep_trimmed_reads,
@@ -122,51 +122,51 @@ def flu_Pipeline(
 		try:
 			sample_logger.logger.info('Assigning reference strain')
 
-			if no_deduplicate == False:
-				# read deduplication. quality, adaptor trimming with fastp
-				sample_logger.logger.info('Deduplicate reads, read trimming and quality scoring\n')
-				call_Command(cmd=
-					[
-					'fastp', 
-					'--in1', pjoin(sequenceDataDir,sample.read1_filename), #readfileR1
-					'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
-					'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
-					'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
-					'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
-					'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
-					'-q', str(base_quality),#, #quality score 30
-					'overwrite=True',
-					'--cut_front', #cut from front
-					'--cut_window_size', '4',#, #cut_window_size
-					'--cut_mean_quality', '20',
-					'--length_required', '50', #minimum read length
-					'--thread', '3',
-					'--dedup'
-					],
-					logger_=sample_logger)
+			# if no_deduplicate == False:
+			# 	# read deduplication. quality, adaptor trimming with fastp
+			# 	sample_logger.logger.info('Deduplicate reads, read trimming and quality scoring\n')
+			# 	call_Command(cmd=
+			# 		[
+			# 		'fastp', 
+			# 		'--in1', pjoin(sequenceDataDir,sample.read1_filename), #readfileR1
+			# 		'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
+			# 		'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
+			# 		'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
+			# 		'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
+			# 		'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
+			# 		'-q', str(base_quality),#, #quality score 30
+			# 		'overwrite=True',
+			# 		'--cut_front', #cut from front
+			# 		'--cut_window_size', '4',#, #cut_window_size
+			# 		'--cut_mean_quality', '20',
+			# 		'--length_required', '50', #minimum read length
+			# 		'--thread', '3',
+			# 		'--dedup'
+			# 		],
+			# 		logger_=sample_logger)
 
-			else :
-				# quality, adaptor trimming with fastp
-				sample_logger.logger.info('Read trimming and quality scoring\n')
-				call_Command(cmd=
-					[
-					'fastp', 
-					'--in1', pjoin(sequenceDataDir,sample
-					.read1_filename), #readfileR1
-					'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
-					'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
-					'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
-					'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
-					'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
-					'-q', str(base_quality),#, #quality score 30
-					'overwrite=True',
-					'--cut_front', #cut from front
-					'--cut_window_size', '4',#, #cut_window_size
-					'--cut_mean_quality', '20',
-					'--length_required', '50', #minimum read length
-					'--thread', '3'
-					],
-					logger_=sample_logger)
+			# else :
+			# quality, adaptor trimming with fastp
+			sample_logger.logger.info('Read trimming and quality scoring\n')
+			call_Command(cmd=
+				[
+				'fastp', 
+				'--in1', pjoin(sequenceDataDir,sample
+				.read1_filename), #readfileR1
+				'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
+				'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
+				'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
+				'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
+				'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
+				'-q', str(base_quality),#, #quality score 30
+				'overwrite=True',
+				'--cut_front', #cut from front
+				'--cut_window_size', '4',#, #cut_window_size
+				'--cut_mean_quality', '20',
+				'--length_required', '50', #minimum read length
+				'--thread', '3'
+				],
+				logger_=sample_logger)
 
 
 			if downsample != -1:
@@ -253,6 +253,11 @@ def flu_Pipeline(
 	trimmed_r1 = 'fastp_trimmed_'+sample.read1_filename
 	trimmed_r2 = 'fastp_trimmed_'+sample.read2_filename
 	
+	# set duplicate read flag
+	if keep_duplicates == True:
+		keep_duplicate_flag = '--keep_duplicates'
+	else:
+		keep_duplicate_flag = ''
 
 	## ==================================find variants===============================================================
 	## ==============================================================================================================

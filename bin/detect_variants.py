@@ -121,8 +121,8 @@ def consensus_Sequence(refGenomeFasta, samplename, variant_caller):
 if __name__ == '__main__':
 	args = sys.argv[1:]
 	parser = argparse.ArgumentParser(prog='detect_variants')
-	parser.add_argument('--baseDir', type=str, default=os.getcwd(), help='none', metavar='none')
-	parser.add_argument('--logDir', type=str, default=os.getcwd(), help='none', metavar='none')
+	parser.add_argument('--baseDir', type=str, default=pjoin(os.getcwd(),'output'), help='none', metavar='none')
+	parser.add_argument('--logDir', type=str, default=pjoin(os.getcwd(),'output'), help='none', metavar='none')
 	parser.add_argument('--variant_caller', type=str, default='lofreq', help='none', metavar='none')
 	parser.add_argument('--R1', type=str, default=None, help='none', metavar='none')
 	parser.add_argument('--R2', type=str, default=None, help='none', metavar='none')
@@ -138,6 +138,7 @@ if __name__ == '__main__':
 	parser.add_argument('--consensus_sequence', action='store_true', default=False, help='none')
 	parser.add_argument('--consensus_masking_threshold', type=int, default=1, help='none', metavar='none')
 	parser.add_argument('--minimum_read_depth', type=int, default=10, help='none', metavar='none')
+	parser.add_argument('--keep_duplicates', action='store_true', default=False, help='keep duplicate alignments. [remove duplicate read alignments]')
 	parser.add_argument('--build_input_from', type=str, default='none', help='build inputs for detect_variants automatically from a flupipeline sampleOutputs sample', metavar='none')
 	parser.add_argument('--output_name', type=str, default='none', help='use in conjunction with --build_input_from', metavar='none')
 
@@ -266,6 +267,7 @@ if __name__ == '__main__':
 		logger_=logger,
 		shell_=True)
 
+
 	# trim ends of alignments
 	# use trimBam command and then rename the output file to be suffixed with _genome.filt.bam
 	if removeNTsFromAlignmentEnds > 0:
@@ -290,19 +292,36 @@ if __name__ == '__main__':
 		sys.exit()
 	logger.logger.info(f'{lengthAlignedReadsIDs} reads aligned\n')
 
-	# Sort and index filtered genome alignment.
-	logger.logger.info(f'Sorting and and indexing genome alignment...\n')
-	call_Command(cmd=
-		f'samtools sort -o {samplename}_genome.filt.qual.sorted.bam {samplename}_genome.filt.qual.bam'
-		,
-		logger_=logger,
-		shell_=True)
+	# Remove duplicates with picard
+	if args.keep_duplicates == False:
+		print('removing duplicates')
+		call_Command(cmd=
+			f'picard SortSam I={samplename}_genome.filt.qual.bam O={samplename}_genome.filt.qual.sortedpicard.bam SO=coordinate'
+			,
+			logger_=logger,
+			shell_=True)
+
+		call_Command(cmd=
+			f'picard MarkDuplicates I={samplename}_genome.filt.qual.sortedpicard.bam M={samplename}_duplicate_histo.txt O={samplename}_genome.filt.qual.sorted.bam REMOVE_DUPLICATES=true'
+			,
+			logger_=logger,
+			shell_=True)
+
+	else:
+
+		# Sort and index filtered genome alignment.
+		logger.logger.info(f'Sorting and and indexing genome alignment...\n')
+		call_Command(cmd=
+			f'samtools sort -o {samplename}_genome.filt.qual.sorted.bam {samplename}_genome.filt.qual.bam'
+			,
+			logger_=logger,
+			shell_=True)
+
 	call_Command(cmd=
 		f'samtools index {samplename}_genome.filt.qual.sorted.bam'
 		,
 		logger_=logger,
 		shell_=True)
-
 
 	# Pileup reads. exit if reads failed to pileup.
 	logger.logger.info('Piling up reads to get coverage...\n')
@@ -321,14 +340,13 @@ if __name__ == '__main__':
 		logger_=logger,
 		shell_=True)
 
-
 	### Call variants ####
 
 	logger.logger.info(f'Calling variants with {variant_caller}...\n')
 
 	if variant_caller == 'bbtools':
 		call_Command(cmd=
-		f'callvariants.sh in={samplename}_genome.filt.qual.sorted.bam ref={refGenomeFasta} out={samplename}_variants.vcf shist={samplename}_variantQualityHisto.txt rarity=0 overwrite=t' #clearfilters
+		f'callvariants.sh in={samplename}_genome.filt.qual.sorted.bam ref={refGenomeFasta} out={samplename}_variants.vcf shist={samplename}_variantQualityHisto.txt rarity=0 overwrite=t clearfilters' #clearfilters
 		,
 		logger_=logger,
 		shell_=True)
