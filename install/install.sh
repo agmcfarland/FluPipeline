@@ -13,7 +13,7 @@ conda config --append channels bioconda
 conda config --append channels main
 conda config --append channels anaconda
 
-yes | mamba install -c conda-forge gsl
+yes | mamba install -c conda-forge gsl #needed to solve issuse with bcftools
 
 yes | mamba install -c bioconda bcftools=1.15.1
 
@@ -39,6 +39,8 @@ yes | mamba install -c anaconda ipython
 
 yes | mamba install -c bioconda freebayes=1.3.6
 
+yes | mamba install -c bioconda picard-slim=2.27.4
+
 # check install is successful
 
 bcftools
@@ -54,3 +56,5 @@ nextclade
 bwa
 
 freebayes
+
+picard
