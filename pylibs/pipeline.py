@@ -297,7 +297,8 @@ def flu_Pipeline(
 	if run_chunk == True:
 		try:
 			if masked_nextclade == True:
-				nextclade_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
+				# nextclade_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
+				nextclade_input_fasta = sample.samplename+'_consensus_sequence.fasta'
 			else:
 				nextclade_input_fasta = sample.samplename+'_consensus_sequence.fasta'
 
@@ -348,7 +349,8 @@ def flu_Pipeline(
 				sample_logger.logger.info('Calling variants from consensus sequence')
 
 				if masked_ivar == True:
-					ivar_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
+					# ivar_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
+					ivar_input_fasta = sample.samplename+'_consensus_sequence.fasta'
 				else:
 					ivar_input_fasta = sample.samplename+'_consensus_sequence.fasta'
 

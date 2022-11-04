@@ -51,7 +51,6 @@ def run_FluPipeline(args):
 	os.chdir(args.base_directory)
 	os.makedirs(pjoin(args.base_directory,'sampleLogs'), exist_ok=True)
 	os.makedirs(pjoin(args.base_directory,'sampleOutputs'), exist_ok=True)
-	os.makedirs(pjoin(args.base_directory,'sampleReports'), exist_ok=True)
 
 	## start up run logger
 	run_logger = RunLogger(directory=os.getcwd(),filename='runLog')

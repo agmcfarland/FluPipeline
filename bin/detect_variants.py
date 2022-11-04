@@ -292,8 +292,9 @@ if __name__ == '__main__':
 		sys.exit()
 	logger.logger.info(f'{lengthAlignedReadsIDs} reads aligned\n')
 
-	# Remove duplicates with picard
+	# sort reads
 	if args.keep_duplicates == False:
+		# Remove duplicates with picard
 		print('removing duplicates')
 		call_Command(cmd=
 			f'picard SortSam I={samplename}_genome.filt.qual.bam O={samplename}_genome.filt.qual.sortedpicard.bam SO=coordinate'
