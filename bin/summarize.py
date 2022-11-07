@@ -18,7 +18,7 @@ import json
 from pylibs.processing_classes import SequencingSample
 from pylibs.processing_functions import select_BestReference
 
-# pd.set_option('display.max_columns', None)
+pd.set_option('display.max_columns', None)
 
 
 def safe_ReadCSV(filepath, sep_=','):
@@ -55,6 +55,10 @@ if __name__ == '__main__':
 	sequenceDir = args.sequenceDir
 	use_strain = args.use_strain
 
+	# baseDir = '/data/Pipeline_output/033122_Output/033122_Output_LM'
+	# sequenceDir = '/data/Fastq/033122_Fastq/033122-Fastq_LM'
+	# use_strain = None
+
 	print('Creating summaries')
 
 	os.chdir(baseDir)
@@ -65,6 +69,8 @@ if __name__ == '__main__':
 		sample.get_DataFromReadPairs(read1_filename=s)
 		sample.check_ReadExistence(directory=sequenceDir)
 		sample.get_SampleDirPath(directory=baseDir)
+
+		print(sample.samplename)
 
 		sample_data = {}
 		# check errors in log
@@ -192,11 +198,19 @@ if __name__ == '__main__':
 			run_data[sample.samplename]['run_time'] = sample_data['run_time'].replace(' H:M:S','')
 		run_data[sample.samplename]['best_reference_strain'] = sample_data['reference_selection']['best_reference_strain']
 		run_data[sample.samplename]['reads_after_filtering'] = pd.DataFrame(sample_data['read_statistics'])['total_reads_after'].item()
+
 		df = pd.DataFrame(sample_data['coverage_statistics'])
-		run_data[sample.samplename]['segments_covered'] = len(df)
-		run_data[sample.samplename]['segments_covered_90'] = len(df[df['Covered_proportion'] >= .9])
-		run_data[sample.samplename]['avg_prop_coverage'] = round(df['Covered_proportion'].mean(),2)
-		run_data[sample.samplename]['avg_fold_coverage'] = round(df['Avg_fold'].mean(),2)
+
+		if len(df) > 0:
+			run_data[sample.samplename]['segments_covered'] = len(df)
+			run_data[sample.samplename]['segments_covered_90'] = len(df[df['Covered_proportion'] >= .9])
+			run_data[sample.samplename]['avg_prop_coverage'] = round(df['Covered_proportion'].mean(),2)
+			run_data[sample.samplename]['avg_fold_coverage'] = round(df['Avg_fold'].mean(),2)
+		else:
+			run_data[sample.samplename]['segments_covered'] = int(0)
+			run_data[sample.samplename]['segments_covered_90'] = float(0)
+			run_data[sample.samplename]['avg_prop_coverage'] = float(0)
+			run_data[sample.samplename]['avg_fold_coverage'] = float(0)
 
 		del df
 
