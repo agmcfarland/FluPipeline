@@ -7,7 +7,6 @@ import multiprocessing as mp
 from multiprocessing import Pool
 import pandas as pd
 import re
-import sqlite3 as sql
 import glob
 import shutil
 import subprocess
@@ -22,10 +21,11 @@ global script_path
 script_path = os.path.split(os.path.realpath(os.path.abspath(__file__)))[0]
 sys.path.append(script_path)
 from pylibs.processing_functions import *
-from pylibs.processing_classes import SequencingSample, RunLogger, ConsensusSeq
+from pylibs.processing_classes import SequencingSample, RunLogger
 from pylibs.pipeline import flu_Pipeline
 from pylibs.insilico_test import create_TestData
 from pylibs.helper_functions import automatic_ThreadUsage, call_Command
+from _version import __version__
 pd.set_option('display.max_columns', None)
 
 def run_FluPipeline(args):
@@ -43,22 +43,21 @@ def run_FluPipeline(args):
 		except:
 			pass
 
-	## make inputs for assemble.R
-	# assigning softwareDir as a copy of script_path for logical consistency with assemble.R inputs.
-	Rscript = 'Rscript'
+	if args.use_strain == 'None':
+		args.use_strain = None
 
 	## set up main directories
 	os.makedirs(args.base_directory, exist_ok=True)
 	os.chdir(args.base_directory)
 	os.makedirs(pjoin(args.base_directory,'sampleLogs'), exist_ok=True)
 	os.makedirs(pjoin(args.base_directory,'sampleOutputs'), exist_ok=True)
-	os.makedirs(pjoin(args.base_directory,'sampleReports'), exist_ok=True)
 
 	## start up run logger
 	run_logger = RunLogger(directory=os.getcwd(),filename='runLog')
 	run_logger.initialize_FileHandler()
 	run_logger.add_StreamHandler()
 	run_logger.logger.info('Starting FluPipeline...\n')
+	run_logger.logger.info(f'Version {__version__}\n')
 
 	## log computing resources available and requested
 	run_logger.logger.info('Total memory available: {}Gb\n'.format(round(psutil.virtual_memory()[0]/(1024.0**3)),2))
@@ -102,7 +101,6 @@ def run_FluPipeline(args):
 		# append sample run parameters to master run list
 		sample_submission.append([
 			args.base_directory,
-			Rscript,
 			script_path,
 			sample,
 			args.sequence_directory,
@@ -118,9 +116,16 @@ def run_FluPipeline(args):
 			args.masked_nextclade,
 			args.masked_ivar,
 			args.base_quality,
-			args.no_deduplicate,
+			args.keep_duplicates,
 			args.min_variant_frequency,
-			args.no_assembly
+			args.use_strain,
+			args.keep_trimmed_reads,
+			args.major_variant_frequency,
+			args.major_indel_frequency,
+			args.minimum_read_depth,
+			args.major_variant_caller,
+			args.intrahost_variant_caller,
+			args.single_pass
 			])
 
 	run_logger.logger.info('Total samples to process: {}\n'.format(len(sample_submission))) # total samples ran
@@ -147,33 +152,14 @@ def run_FluPipeline(args):
 	## end data processing--------------------------------------------------------------
 
 
-	## store run metadata
-	run_logger.logger.info('Storing run statistics in runStats.csv\n')
-	# gather run metadata from logfile in a list and then store as a pandas df
-	run_metadata = []
-	for s in glob.glob(pjoin(args.sequence_directory,'*_R1_*.fastq.gz')):
-		sample = SequencingSample()
-		sample.get_DataFromReadPairs(read1_filename=s)
-		with open(pjoin(os.getcwd(),'sampleLogs',sample.samplename+'.txt'),'r') as infile:
-			error_status = ''
-			time_ran = ''
-			for l in infile:
-				if l.find('FluPipeline Error:') > -1:
-					error_status = 'error'
-				if l.find('FluPipeline Time:') > -1:
-					time_ran = l[l.find('me: ')+4:].replace('\n','') #use 'me: ' as an anchor + 4 positions to extract just the time
-			run_metadata.append([datetime.now(),sample.samplename,error_status,time_ran,pjoin(args.sequence_directory,sample.read1_filename),pjoin(args.sequence_directory,sample.read2_filename)])
-	df_meta = pd.DataFrame(run_metadata)
-	df_meta.columns = ['date_time','sample','error_status','time_ran','read1_filepath','read2_filepath']
-
-	# save the run metadata to file. if there already is a file, the metadata get appeneded to it.
-	if os.path.exists('runStats.csv') == True:
-		df_meta1 = pd.read_csv('runStats.csv')
-		df_meta1 = df_meta1.append(df_meta)
-		df_meta1.to_csv('runStats.csv',index=None)
-	else:
-		df_meta.to_csv('runStats.csv',index=None)
-
+	## run reports
+	run_logger.logger.info('Creating sample reports and run report...\n')
+	os.chdir(script_path)
+	call_Command(cmd=
+		f'python -m bin.summarize --baseDir {args.base_directory} --sequenceDir {args.sequence_directory}',
+		logger_=run_logger,
+		shell_=True)
+	os.chdir(args.base_directory)
 
 	## write software versions
 	run_logger.logger.info('Recording software/package versions...\n')
@@ -181,29 +167,11 @@ def run_FluPipeline(args):
 		'conda list --export > softwareVersions.txt',
 		logger_=run_logger,
 		shell_=True)
-		
-
-	## make run report
-	run_logger.logger.info('Making run summary...\n')
-	call_Command(cmd=
-		[
-		'{}'.format(Rscript),
-		 '{}/report_runner.R'.format(script_path),
-		 '--softwareDir', '{}'.format(script_path),
-		 '--report_type', '{}'.format('run'),
-		 '--baseDir', '{}'.format(args.base_directory)
-		 ], logger_=run_logger)
-
-	run_logger.logger.info('Finished making run summary\n')
-
-	# copy sample reports pdfs to sampleReports directory
-	[shutil.copy(report, pjoin(args.base_directory,'sampleReports')) for report in glob.glob(pjoin(args.base_directory,'sampleOutputs','*','*.pdf'))]
-
 
 	## end run
 	run_logger.logger.info('Finished running FluPipeline\n')
-	run_logger.logger.info('Total time: {}\n'.format(datetime.now()-start_run_timer))
-	run_logger.logger.info('Run ouputs stored in {}\n'.format(args.base_directory))	
+	run_logger.logger.info('Total time: {} (H:M:S)\n'.format(datetime.now()-start_run_timer))
+	run_logger.logger.info('Run outputs stored in {}\n'.format(args.base_directory))	
 
 
 
@@ -215,14 +183,14 @@ def main(args=None):
 		args = sys.argv[1:]
 
 	# create parser
-	parser = argparse.ArgumentParser(prog = 'FluPipeline')
+	parser = argparse.ArgumentParser(prog = 'FluPipeline v'+ str(__version__))
 
 	# add arguments to parser
 	# main arguments
 	parser.add_argument('--base_directory',type=str ,default=pjoin(os.getcwd(),'FluPipeline_output'), help='directory that run will output data to [./FluPipeline_output]', metavar='')
 	parser.add_argument('--reference_directory',type=str ,default=pjoin(script_path,'references'), help='directory containing reference strain files (.gb or .fasta (see --use_fasta flag)) [script_path/references]', metavar='')
 	parser.add_argument('--sequence_directory',type=str ,default=None, help='directory containing fastq sequence files (.gz format) [None]', metavar='')
-	parser.add_argument('--use_fasta', action='store_true', default=False, help='fasta format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_name_1. [False]')
+	parser.add_argument('--use_fasta', action='store_true', default=False, help='fasta format: fasta file(s) contain all eight segments sequences. All segments must have a single name (only letters, numbers, and 3 underscores. At the end of the name there should be an underscore followed by the segment number. Example: an_example_1. [False]')
 
 	# remove files/folders
 	parser.add_argument('--force', action='store_true', default=False, help='overwrite existing sample files. [False]')
@@ -233,33 +201,42 @@ def main(args=None):
 	parser.add_argument('--threads',type=int, default=4, help='number of samples to process in paralell. one sample is one read pair [4]', metavar='')
 	parser.add_argument('--max_mem_per_thread', type=int, default=None, help='automatically determines the number of threads to use based on memory per thread supplied (in Gb) [None]', metavar='')
 
-	# number of reads to use
+	# strain detection
 	parser.add_argument('--strain_sample_depth', type=int, default=2000, help='number of random reads to use to determine strain assignment. [2000]', metavar='')
 	parser.add_argument('--downsample', type=int, default=-1, help='downsample all read files to these many reads. [-1 (no downsampling)]', metavar='')
-	
+	parser.add_argument('--use_strain', type=str, default=None, help='name of strain. No file extensions in name. [None]', metavar='')
+
 	# read processing 
 	parser.add_argument('--base_quality', type=int, default=30, help='keep reads that have at least an average of this phred-scaled value. [30]', metavar='')
-	parser.add_argument('--no_deduplicate',  action='store_true', default=False, help='do not conduct read deduplication.  [False]')
+	parser.add_argument('--keep_duplicates',  action='store_true', default=False, help='do not conduct read deduplication.  [False]')
 	parser.add_argument('--remove_NTs_from_alignment_ends', type=int, default=3, help='remove this many bases from the left and right of each read prior to mapping. [3]', metavar='')
+	parser.add_argument('--keep_trimmed_reads', action='store_true', default=False, help='keep trimmed reads used for analysis.  [False]')
 	
-	# assembly
-	parser.add_argument('--no_assembly', action='store_true', default=False, help='Do not assemble reads into a draft genome. [False]')
-
 	# read mapping
-	parser.add_argument('--min_read_mapping_score', type=int, default=30, help='keep reads that mapped above or eequal to this phred-scaled value. [3]', metavar='')
+	parser.add_argument('--min_read_mapping_score', type=int, default=10, help='keep reads that mapped above or equal to this MAPQ value. [10]', metavar='')
 	
-	# variant calling 
-	parser.add_argument('--min_variant_phred_score', type=int, default=5, help='keep all variants above or equal to this phred-scaled value. [5]', metavar='')
-	parser.add_argument('--min_variant_frequency', type=int, default=0.05, help='keep all variants with allele frequencies above or equal this value. [0.05]', metavar='')
+	# variant caller
+	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='variant caller to use (bcftools, bbmap, lofreq, freebayes). [bcftools]', metavar='')
+	parser.add_argument('--intrahost_variant_caller', type=str, default='lofreq', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='intra host variant caller to use (bcftools, bbmap, lofreq, freebayes). [lofreq]', metavar='')
+	parser.add_argument('--single_pass', action='store_true', default=False, help='only call variants one time (no variants from consensus sequence will be called).  [False]')
 	
+
+	# variant calling parameters
+	parser.add_argument('--min_variant_phred_score', type=int, default=20, help='keep all variants above or equal to this phred-scaled value. [20]', metavar='')
+	parser.add_argument('--min_variant_frequency', type=float, default=0.05, help='keep all variants with allele frequencies above or equal this value. [0.05]', metavar='')
+	parser.add_argument('--major_variant_frequency', type=float, default=0.5, help='keep all major variants with allele frequencies above or equal this value. [0.5]', metavar='')
+	parser.add_argument('--major_indel_frequency', type=float, default=0.8, help='keep all major indels with allele frequencies above or equal this value. [0.8]', metavar='')
+	parser.add_argument('--minimum_read_depth', type=int, default=10, help='Mask/ignore all bases and variants at or below this read depth. [10]', metavar='')
+
+
 	# consensus sequence generation and usage
-	parser.add_argument('--consensus_masking_threshold', type=int, default=0, help='replace any nucleotides in the consensus sequence with N if their depth falls below this number. [0]', metavar='')
+	parser.add_argument('--consensus_masking_threshold', type=int, default=1, help='replace any nucleotides in the consensus sequence with N if their depth falls below this number. [0]', metavar='')
 	parser.add_argument('--masked_nextclade', action='store_true', default=False, help='use the masked consensus sequence fasta file for nextclade clade assignment.  [False]')
 	parser.add_argument('--masked_ivar', action='store_true', default=False, help='use the masked consensus sequence fasta file as the reference genome for intrahost variation detection.  [False]')
 	
 	# run test
 	parser.add_argument('--runtest', action='store_true', default=False, help='run an in silico test to make sure FluPipeline is working correctly. [False]')
-
+	parser.add_argument('--testbin', action='store_true', default=False, help='test bin scripts. [False]')
 
 	# create args opbject with arguments
 	args = parser.parse_args()
@@ -279,6 +256,15 @@ def main(args=None):
 		args.force_base_directory = False
 		args.keep_all_intermediate_files = True
 		create_TestData(testDir=testDir, referenceStrainsDir=args.reference_directory)
+
+	if args.testbin == True:
+		# os.system(f'python -m bin.summarize --baseDir {args.base_directory} --sequenceDir {args.sequence_directory}')
+		os.system(f'python -m bin.summarize -h')
+		sys.exit()
+
+	# if args.variant_caller != 'bcftools':
+	# 	raise ValueError('only option bcftools is available for --variant_caller')
+
 
 	##---Run FluPipline ---##	
 	run_FluPipeline(args=args)
