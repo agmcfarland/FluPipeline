@@ -27,15 +27,13 @@ def flu_Pipeline(
 	sequenceDataDir,
 	referenceStrainsDir,
 	force_overwrite,
-	keep_all_intermediate_files,
 	strain_sample_depth,
 	downsample,
-	consensus_masking_threshold,
 	min_variant_phred_score,
 	remove_NTs_from_alignment_ends,
 	min_read_mapping_score,
-	masked_nextclade,
-	masked_ivar,
+	gap_open_penalty,
+	gap_extension_penalty,
 	base_quality,
 	keep_duplicates,
 	min_variant_frequency,
@@ -49,48 +47,8 @@ def flu_Pipeline(
 	single_pass
 	):
 	'''
-	Runs through all steps of the flu pipeline. 
+	Runs through all steps of FluPipeline for a single sample. 
 	'''
-
-# # ## troubleshooting inputs start ##
-# ## use this exact input for troubleshooting the pipeline
-# os.chdir('/data/flu_project/benchmarking_project/output')
-# Rscript = 'Rscript'
-# softwareDir = '/data/FluPipeline'
-# script_path = '/data/FluPipeline'
-# baseDirectory = '/data/flu_project/benchmarking_project/output'
-# # referenceStrainsDir = '/data/FluPipeline/references'
-# # sequenceDataDir = '/data/flu_project/benchmarking_project/data'
-# referenceStrainsDir = '/data/flu_project/benchmarking_project/data/mccrone/references'
-# sequenceDataDir = '/data/flu_project/benchmarking_project/data/mccrone/reads'
-# use_fasta = False
-# force_overwrite = True
-# force_base_directory = True
-# keep_all_intermediate_files = True
-# threads = 8
-# max_mem_per_thread = 4
-# strain_sample_depth = 2000
-# downsample = -1
-# base_quality = 30
-# no_deduplicate = False
-# remove_NTs_from_alignment_ends = 3
-# assembly = False
-# min_read_mapping_score = 30
-# min_variant_phred_score = 20
-# min_variant_frequency = 0.05
-# consensus_masking_threshold = 0
-# masked_nextclade = False
-# masked_ivar = False
-# runtest = False
-# variant_caller = 'bbtools'
-# detect_strain = True
-# use_strain = None
-
-# sample = SequencingSample()
-# sample.get_DataFromReadPairs(read1_filename=pjoin(sequenceDataDir,'SRR6121517_1_S1_R1_001.fastq.gz'))
-# sample.get_SampleDirPath(directory=baseDirectory)
-# sample.check_ReadExistence(directory=sequenceDataDir)
-## troubleshooting inputs end ##
 
 	## ==================================Prepare sample run directory================================================
 	## ==============================================================================================================
@@ -122,30 +80,6 @@ def flu_Pipeline(
 		try:
 			sample_logger.logger.info('Assigning reference strain')
 
-			# if no_deduplicate == False:
-			# 	# read deduplication. quality, adaptor trimming with fastp
-			# 	sample_logger.logger.info('Deduplicate reads, read trimming and quality scoring\n')
-			# 	call_Command(cmd=
-			# 		[
-			# 		'fastp', 
-			# 		'--in1', pjoin(sequenceDataDir,sample.read1_filename), #readfileR1
-			# 		'--in2', pjoin(sequenceDataDir,sample.read2_filename), #readfileR2
-			# 		'--out1', 'fastp_trimmed_{}'.format(sample.read1_filename), 
-			# 		'--out2', 'fastp_trimmed_{}'.format(sample.read2_filename),
-			# 		'-j', 'fastp_stats_{}.json'.format(sample.samplename), #json output
-			# 		'-h', 'fastp_stats_{}.html'.format(sample.samplename), #json output
-			# 		'-q', str(base_quality),#, #quality score 30
-			# 		'overwrite=True',
-			# 		'--cut_front', #cut from front
-			# 		'--cut_window_size', '4',#, #cut_window_size
-			# 		'--cut_mean_quality', '20',
-			# 		'--length_required', '50', #minimum read length
-			# 		'--thread', '3',
-			# 		'--dedup'
-			# 		],
-			# 		logger_=sample_logger)
-
-			# else :
 			# quality, adaptor trimming with fastp
 			sample_logger.logger.info('Read trimming and quality scoring\n')
 			call_Command(cmd=
@@ -280,7 +214,6 @@ def flu_Pipeline(
 				'--BWAmappingScore', '{}'.format(min_read_mapping_score),
 				'--minorVariantThreshold', '{}'.format(min_variant_frequency),
 				'--consensus_sequence',
-				'--consensus_masking_threshold', '{}'.format(consensus_masking_threshold),
 				'--majorIndelVariantThreshold', '{}'.format(major_variant_frequency),
 				'--majorVariantThreshold', '{}'.format(major_indel_frequency),
 				'--minimum_read_depth', '{}'.format(minimum_read_depth)
@@ -296,11 +229,8 @@ def flu_Pipeline(
 	## ==============================================================================================================
 	if run_chunk == True:
 		try:
-			if masked_nextclade == True:
-				# nextclade_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
-				nextclade_input_fasta = sample.samplename+'_consensus_sequence.fasta'
-			else:
-				nextclade_input_fasta = sample.samplename+'_consensus_sequence.fasta'
+
+			nextclade_input_fasta = sample.samplename + '_consensus_sequence.fasta'
 
 			# check whether the nextclade reference is available for the given reference strain used by the sample
 			nextclade_reference = reference_NextCladeLookUp(reference=reference_strain.replace('.fasta',''))
@@ -348,11 +278,7 @@ def flu_Pipeline(
 			try:
 				sample_logger.logger.info('Calling variants from consensus sequence')
 
-				if masked_ivar == True:
-					# ivar_input_fasta = sample.samplename+'_masked_consensus_sequence.fasta'
-					ivar_input_fasta = sample.samplename+'_consensus_sequence.fasta'
-				else:
-					ivar_input_fasta = sample.samplename+'_consensus_sequence.fasta'
+				ivar_input_fasta = sample.samplename+'_consensus_sequence.fasta'
 
 				os.chdir(softwareDir)
 				call_Command(cmd=
@@ -368,7 +294,6 @@ def flu_Pipeline(
 					'--removeNTsFromAlignmentEnds', '{}'.format(remove_NTs_from_alignment_ends),
 					'--BWAmappingScore', '{}'.format(min_read_mapping_score),
 					'--minorVariantThreshold', '{}'.format(min_variant_frequency),
-					'--consensus_masking_threshold', '{}'.format(consensus_masking_threshold),
 					'--majorIndelVariantThreshold', '{}'.format(major_variant_frequency),
 					'--majorVariantThreshold', '{}'.format(major_indel_frequency),
 					'--minimum_read_depth', '{}'.format(minimum_read_depth)

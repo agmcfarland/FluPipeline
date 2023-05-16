@@ -1,0 +1,6 @@
+Unnamed: 0,errors,run_time,best_reference_strain,reads_after_filtering,segments_covered,segments_covered_90,avg_prop_coverage,avg_fold_coverage
+H1N1_A_Brisbane_59_2007_snp,,0:00:57,H1N1_A_Brisbane_59_2007.fasta,196450,8,8,1.0,1959.2
+H1N1pdm_ref_snp,,0:00:57,H1N1pdm_ref.fasta,196512,8,8,1.0,1956.97
+H3N2_ref_snp,,0:00:56,H3N2_ref.fasta,196560,8,8,1.0,1958.53
+IBV_Victoria_ref_snp,,0:00:56,IBV_Victoria_ref.fasta,196812,8,8,1.0,1816.41
+IBV_Yamagata_ref_snp,,0:00:47,IBV_Yamagata_ref.fasta,196690,8,8,1.0,1862.28

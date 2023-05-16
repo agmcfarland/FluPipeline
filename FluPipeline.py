@@ -16,6 +16,7 @@ from Bio import SeqIO, SeqFeature
 import argparse
 import logging
 import psutil
+import tempfile
 
 global script_path
 script_path = os.path.split(os.path.realpath(os.path.abspath(__file__)))[0]
@@ -23,7 +24,7 @@ sys.path.append(script_path)
 from pylibs.processing_functions import *
 from pylibs.processing_classes import SequencingSample, RunLogger
 from pylibs.pipeline import flu_Pipeline
-from pylibs.insilico_test import create_TestData
+from pylibs.insilico_test import create_TestData, compare_TestResults
 from pylibs.helper_functions import automatic_ThreadUsage, call_Command
 from _version import __version__
 pd.set_option('display.max_columns', None)
@@ -100,32 +101,30 @@ def run_FluPipeline(args):
 
 		# append sample run parameters to master run list
 		sample_submission.append([
-			args.base_directory,
-			script_path,
-			sample,
-			args.sequence_directory,
-			args.reference_directory,
-			args.force,
-			args.keep_all_intermediate_files,
-			args.strain_sample_depth,
-			args.downsample,
-			args.consensus_masking_threshold,
-			args.min_variant_phred_score,
-			args.remove_NTs_from_alignment_ends,
-			args.min_read_mapping_score,
-			args.masked_nextclade,
-			args.masked_ivar,
-			args.base_quality,
-			args.keep_duplicates,
-			args.min_variant_frequency,
-			args.use_strain,
-			args.keep_trimmed_reads,
-			args.major_variant_frequency,
-			args.major_indel_frequency,
-			args.minimum_read_depth,
-			args.major_variant_caller,
-			args.intrahost_variant_caller,
-			args.single_pass
+			args.base_directory, #baseDirectory
+			script_path, #softwareDir
+			sample, #sample
+			args.sequence_directory, #sequenceDataDir
+			args.reference_directory, #referenceStrainsDir
+			args.force, #force_overwrite
+			args.strain_sample_depth, #strain_sample_depth
+			args.downsample, #downsample
+			args.min_variant_phred_score, #min_variant_phred_score
+			args.remove_NTs_from_alignment_ends, #remove_NTs_from_alignment_ends
+			args.min_read_mapping_score, #min_read_mapping_score
+			args.gap_open_penalty, #gap_open_penalty
+			args.gap_extension_penalty, #gap_extension_penalty
+			args.base_quality, #base_quality
+			args.keep_duplicates, #keep_duplicates
+			args.min_variant_frequency, #min_variant_frequency
+			args.use_strain, #use_strain
+			args.keep_trimmed_reads, #keep_trimmed_reads
+			args.major_variant_frequency, #major_variant_frequency
+			args.major_indel_frequency, #major_indel_frequency
+			args.minimum_read_depth, #minimum_read_depth
+			args.major_variant_caller, #major_variant_caller
+			args.intrahost_variant_caller, #intrahost_variant_caller
+			args.single_pass #single_pass
 			])
 
 	run_logger.logger.info('Total samples to process: {}\n'.format(len(sample_submission))) # total samples ran
@@ -175,7 +174,7 @@ def run_FluPipeline(args):
 
 
 
-def main(args=None):
+def main(args = None):
 	'''
 	Main function for parsing arguments
 	'''
@@ -195,7 +194,6 @@ def main(args=None):
 	# remove files/folders
 	parser.add_argument('--force', action='store_true', default=False, help='overwrite existing sample files. [False]')
 	parser.add_argument('--force_base_directory', action='store_true', default=False, help='overwrite existing directory. [False')
-	parser.add_argument('--keep_all_intermediate_files', action='store_true', default=False, help='remove intermediate files. [False]')
 
 	# parallel jobs
 	parser.add_argument('--threads',type=int, default=4, help='number of samples to process in paralell. one sample is one read pair [4]', metavar='')
@@ -214,6 +212,8 @@ def main(args=None):
 	
 	# read mapping
 	parser.add_argument('--min_read_mapping_score', type=int, default=10, help='keep reads that mapped above or equal to this MAPQ value. [10]', metavar='')
+	parser.add_argument('--gap_open_penalty', type=int, default=6, help='The gap open penalty used by BWA during alignment. [6]', metavar='')
+	parser.add_argument('--gap_extension_penalty', type=int, default=1, help='The gap extension penalty used by BWA during alignment. [1]', metavar='')
 	
 	# variant caller
 	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='variant caller to use (bcftools, bbmap, lofreq, freebayes). [bcftools]', metavar='')
@@ -228,15 +228,8 @@ def main(args=None):
 	parser.add_argument('--major_indel_frequency', type=float, default=0.8, help='keep all major indels with allele frequencies above or equal this value. [0.8]', metavar='')
 	parser.add_argument('--minimum_read_depth', type=int, default=10, help='Mask/ignore all bases and variants at or below this read depth. [10]', metavar='')
 
-
-	# consensus sequence generation and usage
-	parser.add_argument('--consensus_masking_threshold', type=int, default=1, help='replace any nucleotides in the consensus sequence with N if their depth falls below this number. [0]', metavar='')
-	parser.add_argument('--masked_nextclade', action='store_true', default=False, help='use the masked consensus sequence fasta file for nextclade clade assignment.  [False]')
-	parser.add_argument('--masked_ivar', action='store_true', default=False, help='use the masked consensus sequence fasta file as the reference genome for intrahost variation detection.  [False]')
-	
 	# run test
-	parser.add_argument('--runtest', action='store_true', default=False, help='run an in silico test to make sure FluPipeline is working correctly. [False]')
-	parser.add_argument('--testbin', action='store_true', default=False, help='test bin scripts. [False]')
+	parser.add_argument('--runtest', action='store_true', default=False, help='Run an in silico test to make sure FluPipeline is working correctly. [False]')
 
 	# create args opbject with arguments
 	args = parser.parse_args()
@@ -248,23 +241,19 @@ def main(args=None):
 
 	## create test data if --runtest argument was supplied
 	if args.runtest == True:
-		testDir =  pjoin(script_path,'run_test') #change script path to os.getcwd() in the future.
+		testDir =  tempfile.mkdtemp(dir = tempfile.gettempdir())
+		print(f'Outputting test to: {testDir}')
 		args.base_directory = pjoin(testDir,'output')
 		args.sequence_directory = pjoin(testDir,'data')
 		args.reference_directory = pjoin(script_path,'references')
 		args.force == True
-		args.force_base_directory = False
-		args.keep_all_intermediate_files = True
+		args.force_base_directory = True
+		args.keep_trimmed_reads = True
+		args.single_pass = True
 		create_TestData(testDir=testDir, referenceStrainsDir=args.reference_directory)
-
-	if args.testbin == True:
-		# os.system(f'python -m bin.summarize --baseDir {args.base_directory} --sequenceDir {args.sequence_directory}')
-		os.system(f'python -m bin.summarize -h')
-		sys.exit()
-
-	# if args.variant_caller != 'bcftools':
-	# 	raise ValueError('only option bcftools is available for --variant_caller')
-
+		run_FluPipeline(args=args)
+		compare_TestResults(existing_test_data_dir = pjoin(script_path, 'tests', 'data'), new_test_data_dir = pjoin(testDir, 'output'))
+		sys.exit()	
 
 	##---Run FluPipline ---##	
 	run_FluPipeline(args=args)

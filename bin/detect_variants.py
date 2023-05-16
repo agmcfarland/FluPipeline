@@ -126,71 +126,45 @@ if __name__ == '__main__':
 	parser.add_argument('--variant_caller', type=str, default='lofreq', help='none', metavar='none')
 	parser.add_argument('--R1', type=str, default=None, help='none', metavar='none')
 	parser.add_argument('--R2', type=str, default=None, help='none', metavar='none')
-	parser.add_argument('--refGenomeFasta', type=str, default=None, help='none', metavar='none')
+	parser.add_argument('--refGenomeFasta', type=str, default=None, help='Path to the reference genome fasta file.', metavar='none')
 	parser.add_argument('--minAmpliconLength', type=int, default=50, help='none', metavar='none')
 	parser.add_argument('--maxAmpliconLength', type=int, default=350, help='none', metavar='none')
 	parser.add_argument('--removeNTsFromAlignmentEnds', type=int, default=3, help='none', metavar='none')
 	parser.add_argument('--BWAmappingScore', type=int, default=10, help='none', metavar='none')
+	parser.add_argument('--gap_open_penalty', type=int, default=6, help='The gap open penalty used by BWA during alignment. [6]', metavar='')
+	parser.add_argument('--gap_extension_penalty', type=int, default=1, help='The gap extension penalty used by BWA during alignment. [1]', metavar='')
 	parser.add_argument('--minVariantPhredScore', type=int, default=20, help='none', metavar='none')
 	parser.add_argument('--majorIndelVariantThreshold', type=float, default=0.8, help='none', metavar='none')
 	parser.add_argument('--majorVariantThreshold', type=float, default=0.5, help='none', metavar='none')
 	parser.add_argument('--minorVariantThreshold', type=float, default=0.05, help='none', metavar='none')
 	parser.add_argument('--consensus_sequence', action='store_true', default=False, help='none')
-	parser.add_argument('--consensus_masking_threshold', type=int, default=1, help='none', metavar='none')
 	parser.add_argument('--minimum_read_depth', type=int, default=10, help='none', metavar='none')
 	parser.add_argument('--keep_duplicates', action='store_true', default=False, help='keep duplicate alignments. [remove duplicate read alignments]')
 	parser.add_argument('--build_input_from', type=str, default='none', help='build inputs for detect_variants automatically from a flupipeline sampleOutputs sample', metavar='none')
 	parser.add_argument('--output_name', type=str, default='none', help='use in conjunction with --build_input_from', metavar='none')
 
-	## ADDED ##
-	# baseDir = '/data/flu_project/benchmarking_project/output'
-	# variant_caller = 'bcftools'
-
-	# ## OG ## 
-	# Troubleshooting inputs
-	# baseDir = '/data/flu_project/benchmarking_project/compare_caller/small/lofreq/sampleOutputs/CHOA-063_R_S40/CHOA-063_R_S40_ivar/test'
-	# samplename = os.path.basename(baseDir)
-	# logDir = baseDir
-	# R1 = f'fastp_trimmed_{samplename}_R1_001.fastq.gz'
-	# R2 = f'fastp_trimmed_{samplename}_R2_001.fastq.gz'
-	# # refGenomeFasta = 'H3N2_ref.fasta'
-	# refGenomeFasta = 'CHOA-063_R_S40_consensus_sequence.fasta'
-	# minAmpliconLength = 50
-	# maxAmpliconLength = 350
-	# minVariantPhredScore = 30
-	# removeNTsFromAlignmentEnds = 3
-	# BWAmappingScore = 30
-	# minorVariantThreshold = 0.05
-	# majorVariantThreshold = 0.8
-	# majorIndelVariantThreshold = 0.8
-	# variant_caller = 'freebayes'
-	# minimum_read_depth = 10
-	# os.chdir(baseDir)
-	# os.chdir(baseDir)
-
 	args = parser.parse_args()
 
-	baseDir=args.baseDir
-	logDir=args.logDir
-	variant_caller=args.variant_caller
-	R1=args.R1
-	R2=args.R2
-	refGenomeFasta=args.refGenomeFasta
-	minAmpliconLength=args.minAmpliconLength
-	maxAmpliconLength=args.maxAmpliconLength
-	removeNTsFromAlignmentEnds=args.removeNTsFromAlignmentEnds
-	BWAmappingScore=args.BWAmappingScore
-	minVariantPhredScore=args.minVariantPhredScore
-	majorIndelVariantThreshold=args.majorIndelVariantThreshold
-	majorVariantThreshold=args.majorVariantThreshold
-	minorVariantThreshold=args.minorVariantThreshold
-	consensus_sequence=args.consensus_sequence
-	consensus_masking_threshold=args.consensus_masking_threshold
-	minimum_read_depth=args.minimum_read_depth
+	baseDir = args.baseDir
+	logDir = args.logDir
+	variant_caller = args.variant_caller
+	R1 = args.R1
+	R2 = args.R2
+	refGenomeFasta = args.refGenomeFasta
+	minAmpliconLength = args.minAmpliconLength
+	maxAmpliconLength = args.maxAmpliconLength
+	removeNTsFromAlignmentEnds = args.removeNTsFromAlignmentEnds
+	BWAmappingScore = args.BWAmappingScore
+	gap_open_penalty = args.gap_open_penalty
+	gap_extension_penalty = args.gap_extension_penalty
+	minVariantPhredScore = args.minVariantPhredScore
+	majorIndelVariantThreshold = args.majorIndelVariantThreshold
+	majorVariantThreshold = args.majorVariantThreshold
+	minorVariantThreshold = args.minorVariantThreshold
+	consensus_sequence = args.consensus_sequence
+	minimum_read_depth = args.minimum_read_depth
 
 	if args.build_input_from != 'none':
-		# build_input_from = '/data/flu_project/benchmarking_project/compare_caller/mccrone/bbtools/sampleOutputs/SRR6121517_1_S1'
-		# output_name = 'test'	
 		output_name = args.output_name
 		build_input_from = args.build_input_from
 		os.chdir(build_input_from)
@@ -247,7 +221,7 @@ if __name__ == '__main__':
 	# align reads to reference. make a sam file
 	logger.logger.info('Aligning reads...')
 	call_Command(cmd=
-		f'bwa mem -M {refGenomeFasta} {R1} {R2} > {samplename}_genome.sam'
+		f'bwa mem -O {gap_open_penalty} -E {gap_extension_penalty} -M {refGenomeFasta} {R1} {R2} > {samplename}_genome.sam'
 		,
 		logger_=logger,
 		shell_=True)
@@ -381,7 +355,7 @@ if __name__ == '__main__':
 		df_vcf = df_vcf[(df_vcf['AF']>=minorVariantThreshold) & (df_vcf['QUAL']>=float(minVariantPhredScore)) & (df_vcf['DP']>minimum_read_depth)]
 		df_vcf.to_csv(f'{samplename}_passingVariants.csv', index=None)
 
-		df_vcf = df_vcf[df_vcf['AF']>0.5]
+		df_vcf = df_vcf[df_vcf['AF']>majorVariantThreshold]
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
 
 		if consensus_sequence == True:
@@ -451,7 +425,7 @@ if __name__ == '__main__':
 		df_vcf = df_vcf[(df_vcf['AF']>=minorVariantThreshold) & (df_vcf['QUAL']>=float(minVariantPhredScore)) & (df_vcf['DP']>minimum_read_depth)]
 		df_vcf.to_csv(f'{samplename}_passingVariants.csv', index=None)
 
-		df_vcf = df_vcf[df_vcf['AF']>0.5]
+		df_vcf = df_vcf[df_vcf['AF']>majorVariantThreshold]
 		df_vcf.to_csv(f'{samplename}_majorVariants.csv', index=None)
 
 		if consensus_sequence == True:

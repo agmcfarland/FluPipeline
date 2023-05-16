@@ -87,11 +87,36 @@ def create_TestData(testDir, referenceStrainsDir):
 	run_logger.logger.info('Finished making test data\n')
 
 
-def compare_TestResults(): 
+def compare_TestResults(existing_test_data_dir, new_test_data_dir): 
 	'''
 	Compares the results of the test routine with those produced by the development version of FluPipeline
 	'''
-	pass
+	print('Comparing runtest results with existing results')
+	
+	df_existing_result = pd.read_csv(pjoin(existing_test_data_dir, 'runtest_runReport.csv'))
+
+	df_new_results = pd.read_csv(pjoin(new_test_data_dir, 'runReport.csv'))
+
+	for metric in ['best_reference_strain', 'segments_covered', 'segments_covered_90', 'avg_prop_coverage']:
+		try:
+			print(metric)
+			assert df_new_results[metric].unique().tolist() == df_existing_result[metric].unique().tolist()
+			print('Pass!')
+		except:
+
+			print('Mismatch:\n')
+			print('New:\n')
+			print(df_new_results[metric].unique())
+			print('Expected:\n')
+			print(df_existing_result[metric].unique())
+
+	print('Overall Results:\n')
+	print('New:\n')
+	print(df_new_results)
+	print('Expected:\n')
+	print(df_existing_result)
+
+
 
 
 ## script end

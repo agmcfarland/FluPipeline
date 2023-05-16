@@ -18,11 +18,11 @@ from pylibs.processing_classes import RunLogger
 if __name__ == '__main__':
 	args = sys.argv[1:]
 	parser = argparse.ArgumentParser(prog='best_reference')
-	parser.add_argument('--baseDir', type=str, default=os.getcwd(), help='none', metavar='none')
-	parser.add_argument('--logDir', type=str, default=os.getcwd(), help='none', metavar='none')
-	parser.add_argument('--referenceStrainsDir', type=str, default=None, help='none', metavar='none')
-	parser.add_argument('--R1', type=str, default=None, help='none', metavar='none')
-	parser.add_argument('--R2', type=str, default=None, help='none', metavar='none')
+	parser.add_argument('--baseDir', type=str, default=os.getcwd(), help='The directory to.', metavar='none')
+	parser.add_argument('--logDir', type=str, default=os.getcwd(), help='The directory to write the log file to.', metavar='none')
+	parser.add_argument('--referenceStrainsDir', type=str, default=None, help='Directory containing reference strains to identify the best reference.', metavar='none')
+	parser.add_argument('--R1', type=str, default=None, help='Path to the R1 read pair.', metavar='none')
+	parser.add_argument('--R2', type=str, default=None, help='Path to the R2 read pair.', metavar='none')
 
 	args = parser.parse_args()
 
@@ -53,9 +53,9 @@ if __name__ == '__main__':
 
 	# check for important data
 	if os.path.exists(R1) == False:
-		raise ValueError(f'R1 does not exist:]\n{R1}')
+		raise ValueError(f'R1 does not exist: {R1}')
 	if os.path.exists(R2) == False:
-		raise ValueError(f'R2 does not exist:\n{R2}')
+		raise ValueError(f'R2 does not exist: {R2}')
 
 
 	# calculate coverage for each reference file
@@ -186,13 +186,12 @@ if __name__ == '__main__':
 	df_ha['sample'] = samplename
 	df_ha.to_csv('reference_ha_coverage_{}.csv'.format(samplename), index=False)
 
-	# cleanup files
 	df = pd.read_csv('reference_ha_coverage_{}.csv'.format(samplename))
 
 	# the reference strains are sorted with the best match at the top. select the the first item in the reference column
 	reference_to_keep = df['reference'][0].replace('.fasta_coverage_stats.csv','')
 
-
+	# cleanup files
 	for f in os.listdir():
 		if f.find('fastp') > -1:
 			continue

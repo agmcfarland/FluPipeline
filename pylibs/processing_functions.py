@@ -58,7 +58,7 @@ def reference_NextCladeLookUp(reference):
 	return(refname)
 
 
-def select_BestReference(samplename, directory=os.getcwd()):
+def select_BestReference(samplename, directory = os.getcwd()):
 	'''
 	Selects the best reference from the output of summarize_ReferenceCoverage
 	(most segments, highest coverage, highest read depth). 
@@ -68,7 +68,7 @@ def select_BestReference(samplename, directory=os.getcwd()):
 	return(df.head(1)['reference'].item())
 
 
-if __name__=='__main__':
+if __name__== '__main__':
 	pass
 
 
