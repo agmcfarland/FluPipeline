@@ -23,7 +23,7 @@
 
 Enter `FluPipeline` directory and install/load environment.
 
-```
+```sh
 cd /path/to/FluPipeline
 
 conda env create --file /install/environment.yml
@@ -35,7 +35,7 @@ conda activate testenv
 
 Verify that expected outputs are created by `FluPipeline`.
 
-```
+```sh
 cd /path/to/FluPipeline
 
 python -m unittest tests.integration.test_detect_variants -v
@@ -47,9 +47,9 @@ python FluPipeline.py --runtest
 
 ## Example set up
 
-Simple skeleton code to run`FluPipeline` on a set of reads.
+Simple skeleton code to run`FluPipeline` on a set of reads:
 
-```
+```sh
 cd /path/to/FluPipeline
 
 python FluPipeline.py \
@@ -62,9 +62,31 @@ python FluPipeline.py \
 
 ## detect_variants
 
-Run a variant caller with different parameters on a specific sample. Useful if you want to try different settings/variant callers and compare while cutting down on computational load.
 
+`FluPipeline` is built around `detect_variants`. You can run `detect_variants` as you would any other program and supply it a read pair, an output directory, and a reference fasta.  Check out all the options:
+
+```sh
+python -m bin.detect_variants -h
 ```
+
+Simple skeleton code to run `detect_variants` on a read pair:
+
+```sh
+cd /path/to/FluPipeline
+
+python -m bin.detect_variants \
+--baseDir /path/to/output/directory \
+--logDir /path/to/output/directory \
+--variant_caller bbtools \
+--refGenomeFasta /path/to/reference/genome.fasta \
+--R1 /path/to/R1.fastq.gz \
+--R2 /path/to/R2.fastq.gz \
+--consensus_sequence
+```
+
+If you want to compare different settings/variant callers, one short cut is to take an existing sample out from FluPipeline and run the intra-host variant calling step with different parameters:
+
+```sh
 cd /path/to/FluPipeline
 
 python -m bin.detect_variants \
@@ -76,17 +98,11 @@ python -m bin.detect_variants \
 --minimum_read_depth 1
 ```
 
-`detect_variants.py` is the variant calling workhorse. You can supply reads, an output file, and a reference file. Check out all options by doing:
-
-```
-python -m bin.detect_variants -h
-```
-
 ## Monitor run
 
 In a different terminal, check how many samples have finished/are running/are errored out. Sometimes samples with poor sequencing depth will error out, but this will not stop FluPipeline from processing other samples.
 
-```
+```sh
 cd /path/to/FluPipeline
 
 python bin/check_finished.py /path/to/base/directory
@@ -97,13 +113,13 @@ python bin/check_finished.py /path/to/base/directory
 
 FluPipeline has many options, check them out below:
 
-```
+```sh
 cd /path/to/FluPipeline
 
 python FluPipeline.py -h
 ```
 
-```
+```md
 usage: FluPipeline v0.7.0 [-h] [--base_directory] [--reference_directory] [--sequence_directory] [--use_fasta] [--force] [--force_base_directory] [--threads] [--max_mem_per_thread] [--strain_sample_depth] [--downsample] [--use_strain]
                           [--base_quality] [--keep_duplicates] [--remove_NTs_from_alignment_ends] [--keep_trimmed_reads] [--min_read_mapping_score] [--gap_open_penalty] [--gap_extension_penalty] [--major_variant_caller]
                           [--intrahost_variant_caller] [--single_pass] [--min_variant_phred_score] [--min_variant_frequency] [--major_variant_frequency] [--major_indel_frequency] [--minimum_read_depth] [--runtest]
