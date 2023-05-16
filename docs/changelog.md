@@ -17,6 +17,11 @@
 
 - `runtest` now has `compare_TestResults` to validate the observed results with known results.
 
+- Added `gap_open_penalty` option.
+
+- Added `gap_extension_penalty` option.
+
+
 # 0.6.0
 
 - Added picard to remove duplicates at the alignment level
