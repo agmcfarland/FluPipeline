@@ -217,7 +217,7 @@ def main(args = None):
 	
 	# variant caller
 	parser.add_argument('--major_variant_caller', type=str, default='bcftools', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='variant caller to use (bcftools, bbmap, lofreq, freebayes). [bcftools]', metavar='')
-	parser.add_argument('--intrahost_variant_caller', type=str, default='lofreq', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='intra host variant caller to use (bcftools, bbmap, lofreq, freebayes). [lofreq]', metavar='')
+	parser.add_argument('--intrahost_variant_caller', type=str, default='bbtools', choices=['bcftools','lofreq','bbtools', 'freebayes'], help='intra host variant caller to use (bcftools, bbmap, lofreq, freebayes). [bbtools]', metavar='')
 	parser.add_argument('--single_pass', action='store_true', default=False, help='only call variants one time (no variants from consensus sequence will be called).  [False]')
 	
 

@@ -123,7 +123,7 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(prog='detect_variants')
 	parser.add_argument('--baseDir', type=str, default=pjoin(os.getcwd(),'output'), help='none', metavar='none')
 	parser.add_argument('--logDir', type=str, default=pjoin(os.getcwd(),'output'), help='none', metavar='none')
-	parser.add_argument('--variant_caller', type=str, default='lofreq', help='none', metavar='none')
+	parser.add_argument('--variant_caller', type=str, default='bbtools', help='none', metavar='none')
 	parser.add_argument('--R1', type=str, default=None, help='none', metavar='none')
 	parser.add_argument('--R2', type=str, default=None, help='none', metavar='none')
 	parser.add_argument('--refGenomeFasta', type=str, default=None, help='Path to the reference genome fasta file.', metavar='none')

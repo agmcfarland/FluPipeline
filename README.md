@@ -19,21 +19,39 @@
 
 ---
 
-## Example
+## Installation
 
-Enter `FluPipeline` directory and install/load environment
+Enter `FluPipeline` directory and install/load environment.
 
 ```
 cd /path/to/FluPipeline
 
-# conda env create --file /install/environment.yml
+conda env create --file /install/environment.yml
 
 conda activate testenv
 ```
 
-Run `FluPipeline` 
+## Test installation
+
+Verify that expected outputs are created by `FluPipeline`.
 
 ```
+cd /path/to/FluPipeline
+
+python -m unittest tests.integration.test_detect_variants -v
+
+python -m unittest tests.integration.test_best_reference -v
+
+python FluPipeline.py --runtest
+```
+
+## Example set up
+
+Skeleton to run`FluPipeline` on a set of reads.
+
+```
+cd /path/to/FluPipeline
+
 python FluPipeline.py \
 --base_directory /path/to/output \
 --sequence_directory /path/to/reads \
@@ -47,7 +65,7 @@ python FluPipeline.py \
 Run a variant caller with different parameters on a specific sample. Useful if you want to try different settings/variant callers and compare while cutting down on computational load.
 
 ```
-cd /data/FluPipeline
+cd /path/to/FluPipeline
 
 python -m bin.detect_variants \
 --build_input_from /path/to/sampleOutputs/sample \
@@ -80,6 +98,8 @@ python bin/check_finished.py /path/to/base/directory
 FluPipeline has many options, check them out below:
 
 ```
+cd /path/to/FluPipeline
+
 python FluPipeline.py -h
 ```
 
