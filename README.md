@@ -47,7 +47,7 @@ python FluPipeline.py --runtest
 
 ## Example set up
 
-Skeleton to run`FluPipeline` on a set of reads.
+Simple skeleton code to run`FluPipeline` on a set of reads.
 
 ```
 cd /path/to/FluPipeline
