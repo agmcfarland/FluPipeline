@@ -26,7 +26,7 @@ Enter `FluPipeline` directory and install/load environment.
 ```sh
 cd /path/to/FluPipeline
 
-conda env create --file /install/environment.yml
+conda env create --file install/environment.yml
 
 conda activate testenv
 ```
